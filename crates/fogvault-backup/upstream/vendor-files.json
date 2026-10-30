@@ -9,11 +9,15 @@
   },
   {
     "path": "vendor/age-0.11.5/Cargo.toml",
-    "sha256": "5e9faf8b5ce13525e7ea937b1bec38b57a61523463ac533ae4abb2c3c3232060"
+    "sha256": "69020b8cb33af6979edbb0aec17df353d09241e71b540f496f5df37d684b2352"
   },
   {
     "path": "vendor/age-0.11.5/Cargo.toml.orig",
     "sha256": "e4060e0806c93157376f2b0ac9273821e32795c5b6f7a275cb23b790b00ae0fe"
+  },
+  {
+    "path": "vendor/age-0.11.5/FOGVAULT-FORK.md",
+    "sha256": "fea4a5752191fae9b3861245c13d5789e9de75a630b0dd85cda8ef19218a5da7"
   },
   {
     "path": "vendor/age-0.11.5/LICENSE-APACHE",
@@ -69,7 +73,7 @@
   },
   {
     "path": "vendor/age-0.11.5/i18n.toml",
-    "sha256": "15dd0e6dc815c50c0cb6c5165b02dfe18927b64612adc06dd24947907f903cec"
+    "sha256": "a6de1cae1b89537cb623cc421f7800955646672ceb09170b482aa36bbe4d494d"
   },
   {
     "path": "vendor/age-0.11.5/src/cli_common/error.rs",
@@ -692,6 +696,50 @@
     "sha256": "4b346b583281df92659ae483ddd6650bd0dc830c671b46c5e7f99fc6625a7d5d"
   },
   {
+    "path": "vendor/i18n-config-0.4.8/.cargo_vcs_info.json",
+    "sha256": "fb077bb9c5d1c6bd9d26bc4c2c26595df4ab1bfd4f9be800daffc548212b3392"
+  },
+  {
+    "path": "vendor/i18n-config-0.4.8/.gitignore",
+    "sha256": "b821dfe599e6f75093a5ffe4162968da3be6c12ef46a8d8fbbd5c826cd80bc7f"
+  },
+  {
+    "path": "vendor/i18n-config-0.4.8/CHANGELOG.md",
+    "sha256": "d43722d4e4526cdd6263bf195e13dc22b73eb22fd45b792d4d5f297e59e4ff54"
+  },
+  {
+    "path": "vendor/i18n-config-0.4.8/Cargo.toml",
+    "sha256": "e775cb8a4d420bbadc81d0b2af838262e5bf72e69e67d5fe79d3a4fa74653306"
+  },
+  {
+    "path": "vendor/i18n-config-0.4.8/Cargo.toml.orig",
+    "sha256": "83619c9644c346a0c7b841220a01f97db4215a0df6280422e28de2d4f6128afb"
+  },
+  {
+    "path": "vendor/i18n-config-0.4.8/FOGVAULT-FORK.md",
+    "sha256": "ffa26ef97bdb7f43f7b5ee105ad49b4d8afa6bf46e815064a8474ecdfa1a4795"
+  },
+  {
+    "path": "vendor/i18n-config-0.4.8/LICENSE.txt",
+    "sha256": "a1d2bd09632724b23c62b05e2fd0dc26c5c9d21b409594cf7da1a1aba555f802"
+  },
+  {
+    "path": "vendor/i18n-config-0.4.8/README.md",
+    "sha256": "bdadc28dd4a62f5b8c7c4c759c7b3cf2b33181700563c3083f8515f1638c12f2"
+  },
+  {
+    "path": "vendor/i18n-config-0.4.8/src/fluent.rs",
+    "sha256": "fdf091a54559e437dd0ee0f2a291b2e18c42a7857e9bbecfd338b038b320f9f7"
+  },
+  {
+    "path": "vendor/i18n-config-0.4.8/src/gettext.rs",
+    "sha256": "3626b50f396f0a83e7d5aab702d4d18d078dff7620108db80ffa7ed9da0b5991"
+  },
+  {
+    "path": "vendor/i18n-config-0.4.8/src/lib.rs",
+    "sha256": "ef15a8dfac1b3798ff24b86349499d13a5ac032b18077f0784790340dfa4dc0c"
+  },
+  {
     "path": "vendor/i18n-embed-0.16.0/.cargo_vcs_info.json",
     "sha256": "a320d765d892fab6d4130331f08116e3472f1c34cfb9e3a193fee15d1324799c"
   },
@@ -705,11 +753,15 @@
   },
   {
     "path": "vendor/i18n-embed-0.16.0/Cargo.toml",
-    "sha256": "ae0acb2798897cb7636539fb19d3a4427184aaf6c30f278d5316bc5e1635dc48"
+    "sha256": "7083e5c26d6706f0fe29485a9264f8691d2ec5e8780159e9eaedea32dc8a79c1"
   },
   {
     "path": "vendor/i18n-embed-0.16.0/Cargo.toml.orig",
     "sha256": "d9d6ec1015f272abcdfda4f3c4441ddf14aaaf18e8c3507fb1650762daca1e05"
+  },
+  {
+    "path": "vendor/i18n-embed-0.16.0/FOGVAULT-FORK.md",
+    "sha256": "3a01a778c45fcec38516820ec28a192a586979d363b07832771f80080a3f5a2b"
   },
   {
     "path": "vendor/i18n-embed-0.16.0/LICENSE.txt",
@@ -757,11 +809,15 @@
   },
   {
     "path": "vendor/i18n-embed-fl-0.10.1/Cargo.toml",
-    "sha256": "ae6afb247d7a4bfa60d62218e4ea8e76c76e46efab8eed7e993809ee29db8528"
+    "sha256": "ecab2bd945555f0e3166835bf3d88370c34eb739e5699296cf4dca6b8b136210"
   },
   {
     "path": "vendor/i18n-embed-fl-0.10.1/Cargo.toml.orig",
     "sha256": "975a94c458ec2d9b84aa5e001394fda45aef9f88899623f89e4a9b41c4b195ae"
+  },
+  {
+    "path": "vendor/i18n-embed-fl-0.10.1/FOGVAULT-FORK.md",
+    "sha256": "26f5d459a758b98219e5abe5f294c0bdf898c358e8da29c4487beccbb3873804"
   },
   {
     "path": "vendor/i18n-embed-fl-0.10.1/LICENSE.txt",
@@ -797,11 +853,15 @@
   },
   {
     "path": "vendor/i18n-embed-impl-0.8.4/Cargo.toml",
-    "sha256": "b01344bb0cc6a4baac9f833826264618b74e850634aafc44e09ea1a3d196bb5e"
+    "sha256": "3fe3e25509d9446b2dc85bd95ba98a2ca6b65716d6d35a76c885021350896c1b"
   },
   {
     "path": "vendor/i18n-embed-impl-0.8.4/Cargo.toml.orig",
     "sha256": "6ca7b9df03a04635b849bd4c880ba8b22b95d0f9abdf821c9c0a26e42d405440"
+  },
+  {
+    "path": "vendor/i18n-embed-impl-0.8.4/FOGVAULT-FORK.md",
+    "sha256": "6d7a941e671c67ff5eff5902ce61ae26c95fd9cfa944d10fb29c1e144f2fdef2"
   },
   {
     "path": "vendor/i18n-embed-impl-0.8.4/LICENSE.txt",
@@ -814,45 +874,5 @@
   {
     "path": "vendor/i18n-embed-impl-0.8.4/src/lib.rs",
     "sha256": "b577ee79bb4d343ce1f5d78bb6c90f032c290d99cd95a814ff0bcb70ce4f7a6c"
-  },
-  {
-    "path": "vendor/i18n-config-0.4.8/.cargo_vcs_info.json",
-    "sha256": "fb077bb9c5d1c6bd9d26bc4c2c26595df4ab1bfd4f9be800daffc548212b3392"
-  },
-  {
-    "path": "vendor/i18n-config-0.4.8/.gitignore",
-    "sha256": "b821dfe599e6f75093a5ffe4162968da3be6c12ef46a8d8fbbd5c826cd80bc7f"
-  },
-  {
-    "path": "vendor/i18n-config-0.4.8/CHANGELOG.md",
-    "sha256": "d43722d4e4526cdd6263bf195e13dc22b73eb22fd45b792d4d5f297e59e4ff54"
-  },
-  {
-    "path": "vendor/i18n-config-0.4.8/Cargo.toml",
-    "sha256": "9666c6404e36db064c64ea7d6cb67438eaadacfad5b8483b193bbb48b11b8ef3"
-  },
-  {
-    "path": "vendor/i18n-config-0.4.8/Cargo.toml.orig",
-    "sha256": "83619c9644c346a0c7b841220a01f97db4215a0df6280422e28de2d4f6128afb"
-  },
-  {
-    "path": "vendor/i18n-config-0.4.8/LICENSE.txt",
-    "sha256": "a1d2bd09632724b23c62b05e2fd0dc26c5c9d21b409594cf7da1a1aba555f802"
-  },
-  {
-    "path": "vendor/i18n-config-0.4.8/README.md",
-    "sha256": "bdadc28dd4a62f5b8c7c4c759c7b3cf2b33181700563c3083f8515f1638c12f2"
-  },
-  {
-    "path": "vendor/i18n-config-0.4.8/src/fluent.rs",
-    "sha256": "fdf091a54559e437dd0ee0f2a291b2e18c42a7857e9bbecfd338b038b320f9f7"
-  },
-  {
-    "path": "vendor/i18n-config-0.4.8/src/gettext.rs",
-    "sha256": "3626b50f396f0a83e7d5aab702d4d18d078dff7620108db80ffa7ed9da0b5991"
-  },
-  {
-    "path": "vendor/i18n-config-0.4.8/src/lib.rs",
-    "sha256": "ef15a8dfac1b3798ff24b86349499d13a5ac032b18077f0784790340dfa4dc0c"
   }
 ]

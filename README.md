@@ -4,7 +4,7 @@ fogvault is an independent Rust vault for embedding in other software. Native
 Rust and browser integrations are equal-priority deliverables and share one
 Rust engine for keys, sessions, authenticated records and vault state.
 
-**Current status:** maintained implementation at unpublished version `0.0.0`.
+**Current status:** maintained implementation at unpublished `0.1.0` packaging candidate.
 APIs and saved bytes remain provisional. Independent security approval,
 physical-platform qualification and a supported production release are separate
 milestones. Read the [delivery and support contract](docs/maintained.md) before
@@ -41,7 +41,8 @@ cargo run --locked --manifest-path crates/fogvault-native/Cargo.toml --example n
 It proves create → unlock → save → lock → reopen → read without a datafog
 dependency. Real applications must establish the independently protected native
 control namespace described in the [native guide](crates/fogvault-native/README.md).
-Pin a reviewed commit when using a Git dependency.
+Pin a reviewed commit when using a Git dependency. The [registry packaging preflight](docs/packaging.md)
+builds and consumes the candidate archives locally without publication.
 
 ## Start with the browser SDK
 

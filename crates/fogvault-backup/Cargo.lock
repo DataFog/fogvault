@@ -13,30 +13,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "age"
-version = "0.11.5"
-dependencies = [
- "age-core",
- "base64",
- "bech32",
- "chacha20poly1305",
- "cookie-factory",
- "hmac",
- "i18n-embed",
- "i18n-embed-fl",
- "lazy_static",
- "nom",
- "pin-project",
- "rand",
- "rust-embed",
- "scrypt",
- "sha2 0.10.9",
- "subtle",
- "x25519-dalek",
- "zeroize",
-]
-
-[[package]]
 name = "age-core"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -317,13 +293,95 @@ dependencies = [
 ]
 
 [[package]]
-name = "fogvault-backup"
-version = "0.0.0"
+name = "fogvault-age"
+version = "0.11.5"
 dependencies = [
- "age",
+ "age-core",
+ "base64",
+ "bech32",
+ "chacha20poly1305",
+ "cookie-factory",
+ "fogvault-i18n-embed",
+ "fogvault-i18n-embed-fl",
+ "hmac",
+ "lazy_static",
+ "nom",
+ "pin-project",
+ "rand",
+ "rust-embed",
+ "scrypt",
+ "sha2 0.10.9",
+ "subtle",
+ "x25519-dalek",
+ "zeroize",
+]
+
+[[package]]
+name = "fogvault-backup"
+version = "0.1.0"
+dependencies = [
+ "fogvault-age",
  "getrandom",
  "sha2 0.11.1",
  "zeroize",
+]
+
+[[package]]
+name = "fogvault-i18n-config"
+version = "0.4.8"
+dependencies = [
+ "log",
+ "serde",
+ "serde_derive",
+ "thiserror 1.0.69",
+ "toml 1.1.8+spec-1.1.0",
+ "unic-langid",
+]
+
+[[package]]
+name = "fogvault-i18n-embed"
+version = "0.16.0"
+dependencies = [
+ "arc-swap",
+ "fluent",
+ "fluent-langneg",
+ "fluent-syntax",
+ "fogvault-i18n-embed-impl",
+ "intl-memoizer",
+ "log",
+ "parking_lot",
+ "rust-embed",
+ "thiserror 1.0.69",
+ "unic-langid",
+ "walkdir",
+]
+
+[[package]]
+name = "fogvault-i18n-embed-fl"
+version = "0.10.1"
+dependencies = [
+ "find-crate",
+ "fluent",
+ "fluent-syntax",
+ "fogvault-i18n-config",
+ "fogvault-i18n-embed",
+ "proc-macro-error3",
+ "proc-macro2",
+ "quote",
+ "strsim",
+ "syn 2.0.119",
+ "unic-langid",
+]
+
+[[package]]
+name = "fogvault-i18n-embed-impl"
+version = "0.8.4"
+dependencies = [
+ "find-crate",
+ "fogvault-i18n-config",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.119",
 ]
 
 [[package]]
@@ -462,64 +520,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "27f864f10dfb56725ce5ce5472bc52252c8f93a4ab86327122cebf62c5f59a17"
 dependencies = [
  "typenum",
-]
-
-[[package]]
-name = "i18n-config"
-version = "0.4.8"
-dependencies = [
- "log",
- "serde",
- "serde_derive",
- "thiserror 1.0.69",
- "toml 1.1.8+spec-1.1.0",
- "unic-langid",
-]
-
-[[package]]
-name = "i18n-embed"
-version = "0.16.0"
-dependencies = [
- "arc-swap",
- "fluent",
- "fluent-langneg",
- "fluent-syntax",
- "i18n-embed-impl",
- "intl-memoizer",
- "log",
- "parking_lot",
- "rust-embed",
- "thiserror 1.0.69",
- "unic-langid",
- "walkdir",
-]
-
-[[package]]
-name = "i18n-embed-fl"
-version = "0.10.1"
-dependencies = [
- "find-crate",
- "fluent",
- "fluent-syntax",
- "i18n-config",
- "i18n-embed",
- "proc-macro-error3",
- "proc-macro2",
- "quote",
- "strsim",
- "syn 2.0.119",
- "unic-langid",
-]
-
-[[package]]
-name = "i18n-embed-impl"
-version = "0.8.4"
-dependencies = [
- "find-crate",
- "i18n-config",
- "proc-macro2",
- "quote",
- "syn 2.0.119",
 ]
 
 [[package]]

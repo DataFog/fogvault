@@ -23,7 +23,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "age"
+name = "fogvault-age"
 version = "0.11.5"
 dependencies = [
  "age-core",
@@ -32,8 +32,8 @@ dependencies = [
  "chacha20poly1305 0.10.1",
  "cookie-factory",
  "hmac 0.12.1",
- "i18n-embed",
- "i18n-embed-fl",
+ "fogvault-i18n-embed",
+ "fogvault-i18n-embed-fl",
  "lazy_static",
  "nom",
  "pin-project",
@@ -485,7 +485,7 @@ dependencies = [
 
 [[package]]
 name = "fogvault"
-version = "0.0.0"
+version = "0.1.0"
 dependencies = [
  "argon2",
  "chacha20poly1305 0.11.0",
@@ -498,9 +498,9 @@ dependencies = [
 
 [[package]]
 name = "fogvault-backup"
-version = "0.0.0"
+version = "0.1.0"
 dependencies = [
- "age",
+ "fogvault-age",
  "getrandom 0.2.17",
  "sha2 0.11.1",
  "zeroize",
@@ -521,7 +521,7 @@ dependencies = [
 
 [[package]]
 name = "fogvault-native"
-version = "0.0.0"
+version = "0.1.0"
 dependencies = [
  "fogvault",
  "fogvault-backup",
@@ -699,7 +699,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "i18n-config"
+name = "fogvault-i18n-config"
 version = "0.4.8"
 dependencies = [
  "log",
@@ -711,14 +711,14 @@ dependencies = [
 ]
 
 [[package]]
-name = "i18n-embed"
+name = "fogvault-i18n-embed"
 version = "0.16.0"
 dependencies = [
  "arc-swap",
  "fluent",
  "fluent-langneg",
  "fluent-syntax",
- "i18n-embed-impl",
+ "fogvault-i18n-embed-impl",
  "intl-memoizer",
  "log",
  "parking_lot",
@@ -729,14 +729,14 @@ dependencies = [
 ]
 
 [[package]]
-name = "i18n-embed-fl"
+name = "fogvault-i18n-embed-fl"
 version = "0.10.1"
 dependencies = [
  "find-crate",
  "fluent",
  "fluent-syntax",
- "i18n-config",
- "i18n-embed",
+ "fogvault-i18n-config",
+ "fogvault-i18n-embed",
  "proc-macro-error3",
  "proc-macro2",
  "quote",
@@ -746,11 +746,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "i18n-embed-impl"
+name = "fogvault-i18n-embed-impl"
 version = "0.8.4"
 dependencies = [
  "find-crate",
- "i18n-config",
+ "fogvault-i18n-config",
  "proc-macro2",
  "quote",
  "syn 2.0.119",

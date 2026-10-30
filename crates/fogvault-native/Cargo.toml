@@ -1,9 +1,9 @@
 [package]
 name = "fogvault-native"
-version = "0.0.0"
+version = "0.1.0"
 edition = "2021"
 rust-version = "1.89"
-publish = false
+publish = ["crates-io"]
 license = "MIT"
 description = "Durable SQLite host adapter for the portable FogVault engine"
 repository = "https://github.com/DataFog/fogvault"
@@ -15,12 +15,12 @@ diagnostics = ["fogvault/experimental-codecs"]
 backup = ["dep:fogvault-backup"]
 
 [dependencies]
-fogvault = { path = "../fogvault" }
-fogvault-backup = { path = "../fogvault-backup", optional = true }
+fogvault = { path = "../fogvault", version = "=0.1.0" }
+fogvault-backup = { path = "../fogvault-backup", version = "=0.1.0", optional = true }
 zeroize = "=1.9.1"
 rusqlite = { version = "=0.40.2", default-features = false, features = ["bundled", "hooks"] }
 
 [dev-dependencies]
-fogvault = { path = "../fogvault", features = ["experimental-codecs"] }
+fogvault = { path = "../fogvault", version = "=0.1.0", features = ["experimental-codecs"] }
 tempfile = "3"
 getrandom = "=0.4.3"

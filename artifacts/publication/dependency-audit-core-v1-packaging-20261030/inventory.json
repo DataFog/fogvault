@@ -1,0 +1,565 @@
+{
+  "schema": "fogvault-dependency-audit-snapshot/v1",
+  "captured_utc": "2026-10-30T21:39:57.308621+00:00",
+  "scope": "exact actual locks plus upstream registry identity projection for renamed path forks",
+  "pass": true,
+  "tool": {
+    "path": "research/review-dependencies/cargo-audit-v0.22.2/bin/cargo-audit",
+    "sha256": "b4f48ca2b4b57bde3846f876dbcb6f72c056b27cc86d701413ecdc156f96dfcb"
+  },
+  "advisory_database": {
+    "revision": "ee1a49a2769a24a596afc1c20cb33748d2769586",
+    "tree": "af3eaf8699bc8040565a708da432e04f1f19407a",
+    "tracked_content_manifest_sha256": "0b10a7454c6dd40a226a4dbcbfa0e9a3e70a2662ec175afdfd2fabf1d4e6a09c",
+    "files": 1405
+  },
+  "locks": [
+    {
+      "name": "core",
+      "lockfile": "crates/fogvault/Cargo.lock",
+      "lock_sha256": "9431955d55e4a0b9fcd34a946cede5063a858d729d00461a72964b9b8a8f5f63",
+      "lock_package_count": 42,
+      "metadata_package_count": 30,
+      "upstream_projection": {
+        "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/core-upstream-projection.lock",
+        "sha256": "036c441ad3a517f389b4d596f3583b09b24c7b28b3175ff043ca3b9ffc1946f5",
+        "mappings": []
+      }
+    },
+    {
+      "name": "native",
+      "lockfile": "experiments/vault-prototype/Cargo.lock",
+      "lock_sha256": "2887a61e17cd809f3c842acaf508e3fb3f1c0bd28b1a610c6a04cf78c81da633",
+      "lock_package_count": 186,
+      "metadata_package_count": 186,
+      "upstream_projection": {
+        "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/native-upstream-projection.lock",
+        "sha256": "6dd3733560c8b92bc291684d2ec14f888aafbad3c00055ae29a359dfeb678c82",
+        "mappings": [
+          {
+            "actual_name": "fogvault-age",
+            "actual_version": "0.11.5",
+            "upstream_name": "age",
+            "upstream_version": "0.11.5",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-config",
+            "actual_version": "0.4.8",
+            "upstream_name": "i18n-config",
+            "upstream_version": "0.4.8",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-embed",
+            "actual_version": "0.16.0",
+            "upstream_name": "i18n-embed",
+            "upstream_version": "0.16.0",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-embed-fl",
+            "actual_version": "0.10.1",
+            "upstream_name": "i18n-embed-fl",
+            "upstream_version": "0.10.1",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-embed-impl",
+            "actual_version": "0.8.4",
+            "upstream_name": "i18n-embed-impl",
+            "upstream_version": "0.8.4",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          }
+        ]
+      }
+    },
+    {
+      "name": "browser",
+      "lockfile": "experiments/browser-prototype/Cargo.lock",
+      "lock_sha256": "5acd1300a2e01bec3b2ba8b41dc96d3761d7aec4b817c6cbf8caa90d90ed8c9e",
+      "lock_package_count": 161,
+      "metadata_package_count": 161,
+      "upstream_projection": {
+        "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/browser-upstream-projection.lock",
+        "sha256": "634c9c4e2879ede12dad2b9112a2de9fcf8558b64bf039331f9cc674c7c5bec4",
+        "mappings": [
+          {
+            "actual_name": "fogvault-age",
+            "actual_version": "0.11.5",
+            "upstream_name": "age",
+            "upstream_version": "0.11.5",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-config",
+            "actual_version": "0.4.8",
+            "upstream_name": "i18n-config",
+            "upstream_version": "0.4.8",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-embed",
+            "actual_version": "0.16.0",
+            "upstream_name": "i18n-embed",
+            "upstream_version": "0.16.0",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-embed-fl",
+            "actual_version": "0.10.1",
+            "upstream_name": "i18n-embed-fl",
+            "upstream_version": "0.10.1",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-embed-impl",
+            "actual_version": "0.8.4",
+            "upstream_name": "i18n-embed-impl",
+            "upstream_version": "0.8.4",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          }
+        ]
+      }
+    },
+    {
+      "name": "mobile",
+      "lockfile": "experiments/mobile-prototype/Cargo.lock",
+      "lock_sha256": "2e4ab8e47662cf3551e4cdd2ba7ece26581801694d45a7e4631b9ab9e4b04bff",
+      "lock_package_count": 31,
+      "metadata_package_count": 31,
+      "upstream_projection": {
+        "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/mobile-upstream-projection.lock",
+        "sha256": "65110cdec3dfc59ac58d1ca93bacafaa0e99c82289cf750f5a18558cc49e664c",
+        "mappings": []
+      }
+    },
+    {
+      "name": "native-package",
+      "lockfile": "crates/fogvault-native/Cargo.lock",
+      "lock_sha256": "caed9de03e9b1b874f14a59947701605942d6541a877cf688b828eab2faee41c",
+      "lock_package_count": 175,
+      "metadata_package_count": 175,
+      "upstream_projection": {
+        "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/native-package-upstream-projection.lock",
+        "sha256": "f93965bf043cb80e1719e0c83bb2c4fa4760ba3f075e4d2915df9530443f4673",
+        "mappings": [
+          {
+            "actual_name": "fogvault-age",
+            "actual_version": "0.11.5",
+            "upstream_name": "age",
+            "upstream_version": "0.11.5",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-config",
+            "actual_version": "0.4.8",
+            "upstream_name": "i18n-config",
+            "upstream_version": "0.4.8",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-embed",
+            "actual_version": "0.16.0",
+            "upstream_name": "i18n-embed",
+            "upstream_version": "0.16.0",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-embed-fl",
+            "actual_version": "0.10.1",
+            "upstream_name": "i18n-embed-fl",
+            "upstream_version": "0.10.1",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-embed-impl",
+            "actual_version": "0.8.4",
+            "upstream_name": "i18n-embed-impl",
+            "upstream_version": "0.8.4",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          }
+        ]
+      }
+    },
+    {
+      "name": "wasm-package",
+      "lockfile": "crates/fogvault-wasm/Cargo.lock",
+      "lock_sha256": "d4a1f89041149a2d89574baaa74e387134610670269ea9aaf3b06edd46a15408",
+      "lock_package_count": 161,
+      "metadata_package_count": 161,
+      "upstream_projection": {
+        "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/wasm-package-upstream-projection.lock",
+        "sha256": "eee7b01e39cb611303d2ddb130450fe69dbcfcbd7c81726ba3c5acbee37cc21a",
+        "mappings": [
+          {
+            "actual_name": "fogvault-age",
+            "actual_version": "0.11.5",
+            "upstream_name": "age",
+            "upstream_version": "0.11.5",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-config",
+            "actual_version": "0.4.8",
+            "upstream_name": "i18n-config",
+            "upstream_version": "0.4.8",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-embed",
+            "actual_version": "0.16.0",
+            "upstream_name": "i18n-embed",
+            "upstream_version": "0.16.0",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-embed-fl",
+            "actual_version": "0.10.1",
+            "upstream_name": "i18n-embed-fl",
+            "upstream_version": "0.10.1",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-embed-impl",
+            "actual_version": "0.8.4",
+            "upstream_name": "i18n-embed-impl",
+            "upstream_version": "0.8.4",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          }
+        ]
+      }
+    },
+    {
+      "name": "backup-package",
+      "lockfile": "crates/fogvault-backup/Cargo.lock",
+      "lock_sha256": "28522c559988c059d54d9b18a55eda4bb63b0dddada6e8554d2f8734c3565833",
+      "lock_package_count": 140,
+      "metadata_package_count": 140,
+      "upstream_projection": {
+        "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/backup-package-upstream-projection.lock",
+        "sha256": "497dc8034655170a9fc0bc8377cd990121bdfbacf983bbf34097148ae7058dcf",
+        "mappings": [
+          {
+            "actual_name": "fogvault-age",
+            "actual_version": "0.11.5",
+            "upstream_name": "age",
+            "upstream_version": "0.11.5",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-config",
+            "actual_version": "0.4.8",
+            "upstream_name": "i18n-config",
+            "upstream_version": "0.4.8",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-embed",
+            "actual_version": "0.16.0",
+            "upstream_name": "i18n-embed",
+            "upstream_version": "0.16.0",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-embed-fl",
+            "actual_version": "0.10.1",
+            "upstream_name": "i18n-embed-fl",
+            "upstream_version": "0.10.1",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          },
+          {
+            "actual_name": "fogvault-i18n-embed-impl",
+            "actual_version": "0.8.4",
+            "upstream_name": "i18n-embed-impl",
+            "upstream_version": "0.8.4",
+            "projected_source": "registry+https://github.com/rust-lang/crates.io-index"
+          }
+        ]
+      }
+    }
+  ],
+  "source_identity": {
+    "crates/fogvault/Cargo.toml": "2ee81c02748e37324327f68562930ef1e53b95965760d8509df54c3fa5a4ae51",
+    "crates/fogvault/Cargo.lock": "9431955d55e4a0b9fcd34a946cede5063a858d729d00461a72964b9b8a8f5f63",
+    "crates/fogvault-backup/vendor/age-0.11.5/Cargo.toml": "64dbf3f9331a7c2ded5960119617baa19bb32cd0705117ac66d7d376ee6c2c26",
+    "crates/fogvault-backup/Cargo.toml": "b0e45cac48d0e3ca1495946f319c3804b645f4f7afdcfe77d7261bad2d884a28",
+    "experiments/vault-prototype/Cargo.toml": "d67bbbce3af3fcad3f42a0ae4de87034494a866d8cc1ec69cf66ccb4b61ec965",
+    "crates/fogvault-backup/vendor/i18n-config-0.4.8/Cargo.toml": "3f4ffa659f115bd98311c587e5d6bca5141f88f4a4691fad87a19f03c77131e4",
+    "crates/fogvault-backup/vendor/i18n-embed-0.16.0/Cargo.toml": "b1de6f3733f1ae03d575092e82cb52c1d3c48d8b365d5d521760c877b2c70ebb",
+    "crates/fogvault-backup/vendor/i18n-embed-fl-0.10.1/Cargo.toml": "96e79e47bd91826044eca4b8895e2902ce73ae08cec0f03a24c974a0413cdaf9",
+    "crates/fogvault-backup/vendor/i18n-embed-impl-0.8.4/Cargo.toml": "f6170fcfb3add662ab089102599f32ecc511a23c9453c62b5e44cb0381fcdf2d",
+    "crates/fogvault-native/Cargo.toml": "4451786372d109252846497b28666f28a2328b3af95b2aca3638a1d0e81b1059",
+    "experiments/vault-prototype/Cargo.lock": "2887a61e17cd809f3c842acaf508e3fb3f1c0bd28b1a610c6a04cf78c81da633",
+    "experiments/browser-prototype/Cargo.toml": "568a95e108e145f9ec1b89f905ba9cb9f5cefd9f872cc55671923f9aee7c98d3",
+    "experiments/browser-prototype/Cargo.lock": "5acd1300a2e01bec3b2ba8b41dc96d3761d7aec4b817c6cbf8caa90d90ed8c9e",
+    "experiments/mobile-prototype/Cargo.toml": "935ef36e57e3cd4d2f6d1cb3352897f282c241ab43f53e4bb7dbede950639e18",
+    "experiments/mobile-prototype/Cargo.lock": "2e4ab8e47662cf3551e4cdd2ba7ece26581801694d45a7e4631b9ab9e4b04bff",
+    "crates/fogvault-native/Cargo.lock": "caed9de03e9b1b874f14a59947701605942d6541a877cf688b828eab2faee41c",
+    "crates/fogvault-wasm/Cargo.toml": "9f780cf2a7f31cc13366e55dfd19d615f3085cea15bc059705b3aa216eebda3d",
+    "crates/fogvault-wasm/Cargo.lock": "d4a1f89041149a2d89574baaa74e387134610670269ea9aaf3b06edd46a15408",
+    "crates/fogvault-backup/Cargo.lock": "28522c559988c059d54d9b18a55eda4bb63b0dddada6e8554d2f8734c3565833"
+  },
+  "previous_snapshot": "artifacts/publication/dependency-audit-maintained-20261030",
+  "artifacts": [
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/backup-package-cargo-metadata.json",
+      "bytes": 590163,
+      "sha256": "326b55d252c45c354e0384d8d9050cf3b3bd267dd1b2050b5a8a10d61355da01"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/backup-package-cargo-metadata.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/backup-package-upstream-projection.lock",
+      "bytes": 32569,
+      "sha256": "497dc8034655170a9fc0bc8377cd990121bdfbacf983bbf34097148ae7058dcf"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/backup-package-upstream.json",
+      "bytes": 314,
+      "sha256": "24106d11be083738821aa836c2c69b150548cf6fc469e14cae141c516eb7879f"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/backup-package-upstream.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/backup-package.json",
+      "bytes": 314,
+      "sha256": "24106d11be083738821aa836c2c69b150548cf6fc469e14cae141c516eb7879f"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/backup-package.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/browser-cargo-metadata.json",
+      "bytes": 671806,
+      "sha256": "f50441c8051a25f5118ae2719c8013cafae4edf0bb0cfc52a13609d821895da1"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/browser-cargo-metadata.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/browser-upstream-projection.lock",
+      "bytes": 37488,
+      "sha256": "634c9c4e2879ede12dad2b9112a2de9fcf8558b64bf039331f9cc674c7c5bec4"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/browser-upstream.json",
+      "bytes": 314,
+      "sha256": "a414b8438cc75347bb8a777e3d7eb7df70d242b6217fc24530aa12220d263c86"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/browser-upstream.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/browser.json",
+      "bytes": 314,
+      "sha256": "a414b8438cc75347bb8a777e3d7eb7df70d242b6217fc24530aa12220d263c86"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/browser.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/commands.json",
+      "bytes": 19246,
+      "sha256": "2f8a580c937c9ddabb94d95ecf9744aec0c5162193299caa68d2208c51927466"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/core-cargo-metadata.json",
+      "bytes": 107957,
+      "sha256": "6961253c8a65b18e4ca41013935942836e8cac1c4970b63efa4ff29654fb5d00"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/core-cargo-metadata.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/core-upstream-projection.lock",
+      "bytes": 9450,
+      "sha256": "036c441ad3a517f389b4d596f3583b09b24c7b28b3175ff043ca3b9ffc1946f5"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/core-upstream.json",
+      "bytes": 313,
+      "sha256": "23c23b4a9872c4a6c88b9911145cd6f028c8894a5d83049231454b2f63d9e1f4"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/core-upstream.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/core.json",
+      "bytes": 313,
+      "sha256": "23c23b4a9872c4a6c88b9911145cd6f028c8894a5d83049231454b2f63d9e1f4"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/core.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/metadata-commands.json",
+      "bytes": 3484,
+      "sha256": "e5a0ad3c98efda7d7b90fe4bbf6f0bb0da831935e3cf0d19c30f46d175d3a6c9"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/mobile-cargo-metadata.json",
+      "bytes": 110242,
+      "sha256": "5a8f5e009f3f70be8a9553fe518194ce705d64923141dbbe0f27692faf5914d2"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/mobile-cargo-metadata.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/mobile-upstream-projection.lock",
+      "bytes": 6735,
+      "sha256": "65110cdec3dfc59ac58d1ca93bacafaa0e99c82289cf750f5a18558cc49e664c"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/mobile-upstream.json",
+      "bytes": 313,
+      "sha256": "8acdb547cfd62150fec2ce0a01572c283cebdc77e48b949072c13c7536702b72"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/mobile-upstream.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/mobile.json",
+      "bytes": 313,
+      "sha256": "8acdb547cfd62150fec2ce0a01572c283cebdc77e48b949072c13c7536702b72"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/mobile.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/native-cargo-metadata.json",
+      "bytes": 795767,
+      "sha256": "784fc19b7c95aac0052ecb42b860c65ef85fec90d270708100db4e69e2901ee9"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/native-cargo-metadata.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/native-package-cargo-metadata.json",
+      "bytes": 735155,
+      "sha256": "8a5392768dc766a52da8c4cf76d0dcb499d849d6ab596d4cfa9b138e1b4b1ab6"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/native-package-cargo-metadata.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/native-package-upstream-projection.lock",
+      "bytes": 40564,
+      "sha256": "f93965bf043cb80e1719e0c83bb2c4fa4760ba3f075e4d2915df9530443f4673"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/native-package-upstream.json",
+      "bytes": 314,
+      "sha256": "bfd511b786e58c5549809cdd29c8df074efeed131ea5650955489598d3411de8"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/native-package-upstream.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/native-package.json",
+      "bytes": 314,
+      "sha256": "bfd511b786e58c5549809cdd29c8df074efeed131ea5650955489598d3411de8"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/native-package.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/native-upstream-projection.lock",
+      "bytes": 43045,
+      "sha256": "6dd3733560c8b92bc291684d2ec14f888aafbad3c00055ae29a359dfeb678c82"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/native-upstream.json",
+      "bytes": 314,
+      "sha256": "02119a6e39128f3425d381596d403528326f67402b471c3df63fc0ec0244cef6"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/native-upstream.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/native.json",
+      "bytes": 314,
+      "sha256": "02119a6e39128f3425d381596d403528326f67402b471c3df63fc0ec0244cef6"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/native.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/wasm-package-cargo-metadata.json",
+      "bytes": 671584,
+      "sha256": "2bda0354cbf35ca01168e3d3a18c6cde3a49ba27ecaa68916d58d3f83f0bf7d8"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/wasm-package-cargo-metadata.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/wasm-package-upstream-projection.lock",
+      "bytes": 37473,
+      "sha256": "eee7b01e39cb611303d2ddb130450fe69dbcfcbd7c81726ba3c5acbee37cc21a"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/wasm-package-upstream.json",
+      "bytes": 314,
+      "sha256": "a414b8438cc75347bb8a777e3d7eb7df70d242b6217fc24530aa12220d263c86"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/wasm-package-upstream.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/wasm-package.json",
+      "bytes": 314,
+      "sha256": "a414b8438cc75347bb8a777e3d7eb7df70d242b6217fc24530aa12220d263c86"
+    },
+    {
+      "path": "artifacts/publication/dependency-audit-core-v1-packaging-20261030/wasm-package.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "limitations": [
+    "Projected registry identity preserves upstream advisory matching; it does not prove fork source equivalence or security.",
+    "Pinned database only; no network refresh, suppressions, target filters, or unexecuted profile clearance."
+  ]
+}

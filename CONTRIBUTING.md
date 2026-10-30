@@ -45,6 +45,7 @@ Run the affected browser or extension profiles for those changes:
 python3 scripts/quality.py doctor --profile browser
 python3 scripts/quality.py check --profile browser
 python3 scripts/quality.py check --profile extensions
+python3 scripts/quality.py check --profile packaging
 ```
 
 CI invokes the same named profiles. The stable required gate reports a deliberate
@@ -127,8 +128,11 @@ A checker cannot prove that an entry or reason is truthful; reviewers assess it.
 
 ## Publication
 
-The current `0.0.0` packages are unpublished. This contribution setup does not
-publish a registry release or approve the design for production. Independent
-security review, physical-device/provider and power-loss qualification, final
-compatibility approval and registry dependency distribution remain separate
-release work. Preserve immutable published versions/tags when publication begins.
+The current `0.1.0` packages are unpublished candidates. The nonpublishing
+[packaging preflight](docs/packaging.md) proves the complete dependency graph
+through locally verified crate archives, a registry-only consumer and the actual
+browser tarball. Public registry availability and authorization remain unproven.
+This contribution setup does not upload a release or approve production use.
+Independent security review, physical-device/provider and power-loss qualification,
+and final compatibility approval remain separate release work. Preserve immutable
+published versions/tags when publication begins.
