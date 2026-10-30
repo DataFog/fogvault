@@ -7,6 +7,7 @@ import functools
 import hashlib
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import json
+import mimetypes
 import os
 from pathlib import Path
 import shutil
@@ -28,6 +29,12 @@ def identity():
 
 
 class Handler(SimpleHTTPRequestHandler):
+    # Windows registry MIME associations can override Python's JavaScript
+    # defaults. Module/Worker assets must have their actual web media types.
+    extensions_map = {**SimpleHTTPRequestHandler.extensions_map,
+                      ".mjs": "text/javascript", ".js": "text/javascript",
+                      ".wasm": "application/wasm", ".html": "text/html"}
+
     def log_message(self, *_):
         pass
 
@@ -90,7 +97,7 @@ def main():
             sessions.append(session)
             run(engine + "-open", [*cli, "--session", session, "open", url, "--browser", engine])
             output = run(engine + "-result", [*cli, "--session", session, "--raw", "run-code",
-                         "async page => await page.evaluate(() => window.fogvaultSdkDone)"])
+                         "async page => { await page.waitForFunction(() => !!window.fogvaultSdkDone, null, {timeout: 30000}); return await page.evaluate(() => window.fogvaultSdkDone); }"])
             result = json.loads(output)
             names = [case["id"] for case in result.get("cases", [])]
             if (result.get("schema") != contract["result_schema"] or result.get("pass") is not True
@@ -106,6 +113,10 @@ def main():
     finally:
         for session in sessions:
             try:
+                run("console-" + session, [*cli, "--session", session, "console"])
+            except (ValueError, OSError):
+                pass
+            try:
                 run("cleanup-" + session, [*cli, "--session", session, "close"])
             except (ValueError, OSError):
                 pass
@@ -115,6 +126,9 @@ def main():
     report = {"schema": "fogvault-browser-sdk-proof/v1", "pass": failure is None,
               "executed": True, "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
               "engines": engines, "commands": commands, "source_identity": before,
+              "http_mime": {suffix: {"system_default": mimetypes.guess_type("asset" + suffix)[0],
+                                     "served": Handler.extensions_map[suffix]}
+                            for suffix in (".mjs", ".js", ".wasm", ".html")},
               "error": failure, "independent_control": "unanchored",
               "limitations": ["Desktop browser SDK execution; not hardware-provider or physical power-loss qualification.",
                               "Extension packaging/lifecycle has a separate acceptance profile."]}

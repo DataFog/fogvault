@@ -1,9 +1,9 @@
 {
-  "baseline_report_sha256": "2f3db5a5b739cd142daf4e63ce4bc78528bed8ea7935fcbfd89d8a36abc19d51",
+  "baseline_report_sha256": "30b5eb147a1d6692d6b0cfb1a2eb909a561c81f72a09ce62f029353519cc978c",
   "changed_baseline_input_paths": [
     "scripts/verify-browser-sdk.py"
   ],
-  "content_identity_sha256": "098577333760974ac0912ff496ae3003bbca238b5faa5dd69749037b8a8c9ec8",
+  "content_identity_sha256": "4d3fb755a6755c92db671712276fb482d086d575cf1d6f61ea1b454231ccbbf5",
   "declared_public_overlays": [
     {
       "path": ".gitignore",
@@ -48,13 +48,13 @@
       "sha256": "44f1c611a4b7eb466789710e407df8fe0efbda83df945cba487e5ac82db67657"
     },
     {
-      "bytes": 4146,
+      "bytes": 4392,
       "executable": false,
       "path": ".github/workflows/maintained.yml",
       "reasons": [
         "maintained-native-browser-delivery"
       ],
-      "sha256": "ccf9b3c68cda916863b58f7194dab7b96a3e8891cc1c95dc466c84912fddff02"
+      "sha256": "aa453010e3b284df5a027f5fc2f36a0ecd6eb19ea92b8c13873c81256d0283a0"
     },
     {
       "bytes": 268597,
@@ -28148,13 +28148,13 @@
       "sha256": "c5ef20231ad111b71a46776ebd16e2c2feb68a6492573e279a2a6911d13097e6"
     },
     {
-      "bytes": 6163,
+      "bytes": 7059,
       "executable": false,
       "path": "scripts/verify-browser-sdk.py",
       "reasons": [
         "maintained-native-browser-delivery"
       ],
-      "sha256": "77c1ba9ac9cc3ca152ee3fac3e6608494cfb430f812a0f7651c39f399364bd3a"
+      "sha256": "b270ba376bcaf3bb738cd6ba0cb6cec6701adf64bc91cf62d91bc461bde5aa7a"
     },
     {
       "bytes": 7785,
@@ -34019,7 +34019,7 @@
     "Historical evidence never substitutes for fresh execution. Platform CI and production qualification are separate claims.",
     "MIT applies to first-party code. Third-party redistribution and dependency scope are documented separately."
   ],
-  "previous_capture_sha256": "033fe429d1342c83be6d290f31d8feb1c9451413962ff3074de557a331f49740",
+  "previous_capture_sha256": "f8322d09abb12cd321dae6545b0368eb09cb22d6d941ff24c694acd3e5f00ea8",
   "required_reference_checkout": {
     "git_metadata_copied": false,
     "path": "research/review-dependencies/advisory-db",
@@ -34029,5 +34029,5 @@
   },
   "schema": "fogvault-public-candidate-inputs/v1",
   "status": "maintained-candidate-not-production-qualified",
-  "total_bytes": 83634810
+  "total_bytes": 83635952
 }

@@ -2,7 +2,17 @@ name: Maintained native and browser packages
 on:
   push:
     branches: [main, staging]
+    paths-ignore:
+      - README.md
+      - PUBLIC-CHECKOUT-NOTES.md
+      - docs/**
+      - public-checkout-manifest.json
   pull_request:
+    paths-ignore:
+      - README.md
+      - PUBLIC-CHECKOUT-NOTES.md
+      - docs/**
+      - public-checkout-manifest.json
   workflow_dispatch:
 permissions:
   contents: read
