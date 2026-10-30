@@ -14,4 +14,6 @@
 
 ### Changed
 
+- Use lowercase fogvault and datafog product names in the repository overview.
+
 - Verify installed native and browser package candidates, and require shared quality and changelog checks through protected PRs.
