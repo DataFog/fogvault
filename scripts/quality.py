@@ -20,7 +20,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from evidence import artifact_identity, snapshot, tool_versions, write_report
 from delivery_inputs import archive_files, hashes, npm_command
 
-PROFILES = ("policy", "contract", "native", "browser", "extensions", "full")
+PROFILES = ("policy", "contract", "native", "browser", "extensions", "packaging", "full")
 DOC_FILES = {"README.md", "PUBLIC-CHECKOUT-NOTES.md", "public-checkout-manifest.json",
              "AGENTS.md", "CONTRIBUTING.md", "CHANGELOG.md", ".github/pull_request_template.md"}
 
@@ -63,7 +63,7 @@ def diagnose(profile, requirements=None, probe=None):
           version(python) >= version(required["python_minimum"]), "Install supported Python, then rerun this command.")
     git = run(["git", "--version"])
     admit("git", git, "available", git is not None, "Install Git and put it on PATH.")
-    rust_profiles = {"native", "browser", "extensions", "full"}
+    rust_profiles = {"native", "browser", "extensions", "packaging", "full"}
     if profile in rust_profiles:
         for tool in ("rustc", "cargo"):
             found = run([tool, "--version"])
@@ -73,16 +73,16 @@ def diagnose(profile, requirements=None, probe=None):
             found = run(tool)
             admit(tool[0] + ("-clippy" if "clippy" in tool else ""), found, "available", found is not None,
                   "rustup component add rustfmt clippy --toolchain " + required["rust"])
-    if profile in {"policy", "contract", "browser", "extensions", "full"}:
+    if profile in {"policy", "contract", "browser", "extensions", "packaging", "full"}:
         tool_pins = [("node", required["node"])]
-        if profile in {"browser", "extensions", "full"}:
+        if profile in {"browser", "extensions", "packaging", "full"}:
             tool_pins.append(("wasm-bindgen", required["wasm_bindgen"]))
         for tool, expected in tool_pins:
             found = run([tool, "--version"])
             repair = ("Install Node " + expected if tool == "node" else
                       "cargo install wasm-bindgen-cli --version " + expected + " --locked")
             admit(tool, found, expected, found is not None and version(found) == version(expected), repair)
-    if profile in {"browser", "extensions", "full"}:
+    if profile in {"browser", "extensions", "packaging", "full"}:
         # npm.cmd is a Windows batch shim. Its version is reported through Node.
         npm = shutil.which("npm.cmd" if os.name == "nt" else "npm")
         admit("npm", str(npm) if npm else None, "available with pinned Node", bool(npm), "Install the pinned Node distribution with npm.")
@@ -199,6 +199,11 @@ def check(profile, output_root, engines):
             command("packaged-extensions", [sys.executable, "scripts/verify-extensions.py", "--output", output], lambda _: v.validate_extension_file(output))
             if output.exists():
                 artifacts.append(artifact_identity(output))
+        elif profile == "packaging":
+            output = run_dir / "packaging.json"
+            command("registry-packaging", [sys.executable, "scripts/verify-packaging.py", "--output", output], lambda _: validate_packaging(output))
+            if output.exists():
+                artifacts.append(artifact_identity(output))
         elif profile == "full":
             command("full-verifier", [sys.executable, "scripts/verify-vault.py", "--with-feasibility", "--output-dir", run_dir / "full"], lambda _: validate_full_report(run_dir / "full", v))
     after = snapshot(ROOT)
@@ -242,6 +247,43 @@ def validate_native_candidate(path):
     if not isinstance(source, dict) or source.get("input_tree_sha256") != snapshot(ROOT)["input_tree_sha256"]:
         raise ValueError("native consumer proof does not identify current source inputs")
     return {"report": artifact_identity(path), "archive": actual, "cases": settings["required_candidate_cases"]}
+
+
+def validate_packaging(path):
+    report = json.loads(Path(path).read_text())
+    cases = {"eight-verified-archives", "registry-only-default-backup-consumer",
+             "beta3-create-unlock-save-lock-reopen-read", "browser-worker-wasm-package"}
+    if (report.get("schema") != "fogvault-registry-packaging/v1" or report.get("pass") is not True
+            or report.get("published") is not False or report.get("error") is not None
+            or set(report.get("cases", [])) != cases
+            or report.get("source", {}).get("input_tree_sha256") != snapshot(ROOT)["input_tree_sha256"]):
+        raise ValueError("packaging proof is failed, incomplete or stale")
+    artifacts = report.get("artifacts")
+    commands = report.get("commands")
+    if (not isinstance(artifacts, list) or len(artifacts) != 9 or not isinstance(commands, list)
+            or {row.get("id") for row in commands} != {"upstream-provenance", "advisory-origin-capture", "advisory-projection-tests", "workspace-lock-metadata", "batch-package", "registry-consumer", "registry-metadata", "browser-package"}
+            or len(commands) != 8):
+        raise ValueError("packaging proof omitted a candidate or execution")
+    expected_names = {"fogvault-0.1.0.crate", "fogvault-native-0.1.0.crate", "fogvault-backup-0.1.0.crate",
+                      "fogvault-age-0.11.5.crate", "fogvault-i18n-config-0.4.8.crate",
+                      "fogvault-i18n-embed-impl-0.8.4.crate", "fogvault-i18n-embed-0.16.0.crate",
+                      "fogvault-i18n-embed-fl-0.10.1.crate", "datafog-fogvault-browser-0.1.0.tgz"}
+    if {Path(row["path"]).name for row in artifacts} != expected_names:
+        raise ValueError("packaging proof duplicated or substituted a candidate")
+    if report.get("all_archive_registry_identities_in_approved_union") is not True:
+        raise ValueError("packaging proof lacks approved archive dependency identities")
+    if report.get("preserved_native_backend_registry_dependencies") != {"fogvault-native": 167, "fogvault-backup": 134}:
+        raise ValueError("packaging proof did not preserve the audited native/backend registry graph")
+    origins = report.get("registry_origin_projection", {})
+    if (report.get("advisory_capture") != {"audits_reexecuted": False, "captured_audits_validated": 14}
+            or {row["actual_name"] for row in origins.get("mappings", [])} != {"fogvault-age", "fogvault-i18n-config", "fogvault-i18n-embed", "fogvault-i18n-embed-impl", "fogvault-i18n-embed-fl"}):
+        raise ValueError("packaging proof lacks upstream advisory origin evidence")
+    for row in artifacts + [row["log"] for row in commands] + [origins["lock"]]:
+        if artifact_identity(Path(row["path"])) != row:
+            raise ValueError("packaging artifact or execution log changed")
+    if any(row.get("exit_code") != 0 or not row.get("command") for row in commands):
+        raise ValueError("packaging command did not pass")
+    return {"report": artifact_identity(Path(path)), "artifacts": artifacts, "cases": sorted(cases)}
 
 
 def validate_full_report(directory, v=None):
@@ -306,7 +348,7 @@ def plan(base, head="HEAD"):
 
 def gate(results):
     """A stable required result; no missing, cancelled or failed suite is green."""
-    if not isinstance(results, dict) or set(results) != {"plan", "contract", "native", "browser", "extensions"}:
+    if not isinstance(results, dict) or set(results) != {"plan", "contract", "native", "browser", "extensions", "packaging"}:
         raise ValueError("required profile results are missing or malformed")
     if any(not isinstance(value, dict) for value in results.values()):
         raise ValueError("quality profile results must be objects")
@@ -316,7 +358,7 @@ def gate(results):
     code = outputs.get("code") if isinstance(outputs, dict) else None
     if code not in ("true", "false"):
         raise ValueError("quality scope did not report a deliberate result")
-    for name in ("native", "browser", "extensions"):
+    for name in ("native", "browser", "extensions", "packaging"):
         expected = "success" if code == "true" else "skipped"
         if results[name].get("result") != expected:
             raise ValueError(name + " did not complete its required scope")

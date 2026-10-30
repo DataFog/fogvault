@@ -10,8 +10,10 @@
 # See Cargo.toml.orig for the original contents.
 
 [package]
+exclude = ["Cargo.toml.orig"]
+publish = ["crates-io"]
 edition = "2018"
-name = "i18n-embed-fl"
+name = "fogvault-i18n-embed-fl"
 version = "0.10.1"
 authors = ["Luke Frisken <l.frisken@gmail.com>"]
 build = false
@@ -20,31 +22,20 @@ autobins = false
 autoexamples = false
 autotests = false
 autobenches = false
-description = "Macro to perform compile time checks when using the i18n-embed crate and the fluent localization system"
-readme = "README.md"
+description = "FogVault backend-only fork of i18n-embed-fl; limited supported feature closure"
+readme = "FOGVAULT-FORK.md"
 categories = [
     "localization",
     "internationalization",
     "development-tools",
 ]
 license = "MIT"
-repository = "https://github.com/kellpossible/cargo-i18n/tree/master/i18n-embed-fl"
-
-[features]
-dashmap = ["dep:dashmap"]
+repository = "https://github.com/DataFog/fogvault"
 
 [lib]
 name = "i18n_embed_fl"
 path = "src/lib.rs"
 proc-macro = true
-
-[[test]]
-name = "fl_macro"
-path = "tests/fl_macro.rs"
-
-[dependencies.dashmap]
-version = "6.0"
-optional = true
 
 [dependencies.find-crate]
 version = "0.6"
@@ -56,12 +47,14 @@ version = "0.17"
 version = "0.12"
 
 [dependencies.i18n-config]
+package = "fogvault-i18n-config"
 path = "../i18n-config-0.4.8"
-version = "0.4.7"
+version = "=0.4.8"
 
 [dependencies.i18n-embed]
+package = "fogvault-i18n-embed"
 path = "../i18n-embed-0.16.0"
-version = "0.16.0"
+version = "=0.16.0"
 features = [
     "fluent-system",
     "filesystem-assets",
@@ -93,14 +86,10 @@ features = [
 [dependencies.unic-langid]
 version = "0.9"
 
-[dev-dependencies.doc-comment]
-version = "0.3"
+[package.metadata.fogvault-upstream]
+name = "i18n-embed-fl"
+version = "0.10.1"
+repository = "https://github.com/kellpossible/cargo-i18n"
 
-[dev-dependencies.env_logger]
-version = "0.11"
-
-[dev-dependencies.pretty_assertions]
-version = "1.4"
-
-[dev-dependencies.rust-embed]
-version = "8.0"
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ["cfg(fuzzing)", "cfg(feature, values(\"dashmap\"))"] }

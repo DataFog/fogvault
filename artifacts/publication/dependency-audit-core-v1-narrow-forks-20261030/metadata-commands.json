@@ -1,0 +1,114 @@
+[
+  {
+    "name": "core",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/local-only/fogvault-packaging/crates/fogvault/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "lock_sha256": "9431955d55e4a0b9fcd34a946cede5063a858d729d00461a72964b9b8a8f5f63",
+    "manifest_sha256": "2ee81c02748e37324327f68562930ef1e53b95965760d8509df54c3fa5a4ae51"
+  },
+  {
+    "name": "native",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/local-only/fogvault-packaging/experiments/vault-prototype/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "lock_sha256": "2887a61e17cd809f3c842acaf508e3fb3f1c0bd28b1a610c6a04cf78c81da633",
+    "manifest_sha256": "d67bbbce3af3fcad3f42a0ae4de87034494a866d8cc1ec69cf66ccb4b61ec965"
+  },
+  {
+    "name": "browser",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/local-only/fogvault-packaging/experiments/browser-prototype/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "lock_sha256": "5acd1300a2e01bec3b2ba8b41dc96d3761d7aec4b817c6cbf8caa90d90ed8c9e",
+    "manifest_sha256": "568a95e108e145f9ec1b89f905ba9cb9f5cefd9f872cc55671923f9aee7c98d3"
+  },
+  {
+    "name": "mobile",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/local-only/fogvault-packaging/experiments/mobile-prototype/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "lock_sha256": "2e4ab8e47662cf3551e4cdd2ba7ece26581801694d45a7e4631b9ab9e4b04bff",
+    "manifest_sha256": "935ef36e57e3cd4d2f6d1cb3352897f282c241ab43f53e4bb7dbede950639e18"
+  },
+  {
+    "name": "native-package",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/local-only/fogvault-packaging/crates/fogvault-native/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "lock_sha256": "caed9de03e9b1b874f14a59947701605942d6541a877cf688b828eab2faee41c",
+    "manifest_sha256": "4451786372d109252846497b28666f28a2328b3af95b2aca3638a1d0e81b1059"
+  },
+  {
+    "name": "wasm-package",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/local-only/fogvault-packaging/crates/fogvault-wasm/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "lock_sha256": "d4a1f89041149a2d89574baaa74e387134610670269ea9aaf3b06edd46a15408",
+    "manifest_sha256": "9f780cf2a7f31cc13366e55dfd19d615f3085cea15bc059705b3aa216eebda3d"
+  },
+  {
+    "name": "backup-package",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/local-only/fogvault-packaging/crates/fogvault-backup/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "lock_sha256": "28522c559988c059d54d9b18a55eda4bb63b0dddada6e8554d2f8734c3565833",
+    "manifest_sha256": "b0e45cac48d0e3ca1495946f319c3804b645f4f7afdcfe77d7261bad2d884a28"
+  }
+]

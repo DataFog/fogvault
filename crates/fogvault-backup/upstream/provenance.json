@@ -11,7 +11,8 @@
       "license": "MIT OR Apache-2.0",
       "omitted_archive_files": [
         "Cargo.lock"
-      ]
+      ],
+      "registry_name": "fogvault-age"
     },
     {
       "name": "i18n-embed",
@@ -22,7 +23,8 @@
       "license": "MIT",
       "omitted_archive_files": [
         "Cargo.lock"
-      ]
+      ],
+      "registry_name": "fogvault-i18n-embed"
     },
     {
       "name": "i18n-embed-fl",
@@ -33,7 +35,8 @@
       "license": "MIT",
       "omitted_archive_files": [
         "Cargo.lock"
-      ]
+      ],
+      "registry_name": "fogvault-i18n-embed-fl"
     },
     {
       "name": "i18n-embed-impl",
@@ -42,7 +45,8 @@
       "archive": "upstream/i18n-embed-impl-0.8.4.crate",
       "sha256": "0f2cc0e0523d1fe6fc2c6f66e5038624ea8091b3e7748b5e8e0c84b1698db6c2",
       "license": "MIT",
-      "omitted_archive_files": []
+      "omitted_archive_files": [],
+      "registry_name": "fogvault-i18n-embed-impl"
     },
     {
       "name": "i18n-config",
@@ -53,19 +57,35 @@
       "license": "MIT",
       "omitted_archive_files": [
         "Cargo.lock"
-      ]
+      ],
+      "registry_name": "fogvault-i18n-config"
     }
   ],
   "modified_files": [
     {
       "path": "vendor/age-0.11.5/Cargo.toml",
       "upstream_sha256": "19bcc511a81478078d08982fc8e1f5886888e3c1d797163cc2c070a87cd24d53",
-      "patched_sha256": "5e9faf8b5ce13525e7ea937b1bec38b57a61523463ac533ae4abb2c3c3232060"
+      "patched_sha256": "69020b8cb33af6979edbb0aec17df353d09241e71b540f496f5df37d684b2352"
+    },
+    {
+      "path": "vendor/age-0.11.5/i18n.toml",
+      "upstream_sha256": "15dd0e6dc815c50c0cb6c5165b02dfe18927b64612adc06dd24947907f903cec",
+      "patched_sha256": "a6de1cae1b89537cb623cc421f7800955646672ceb09170b482aa36bbe4d494d"
+    },
+    {
+      "path": "vendor/i18n-config-0.4.8/Cargo.toml",
+      "upstream_sha256": "529a33a471dd8d4c8f0b83e9678822f78d06eadf8a815734cdf6e2206065d463",
+      "patched_sha256": "e775cb8a4d420bbadc81d0b2af838262e5bf72e69e67d5fe79d3a4fa74653306"
+    },
+    {
+      "path": "vendor/i18n-config-0.4.8/src/lib.rs",
+      "upstream_sha256": "420cdf6a53cad0724c48960216d50c864c10747587b52add6764d4fdec378ecc",
+      "patched_sha256": "ef15a8dfac1b3798ff24b86349499d13a5ac032b18077f0784790340dfa4dc0c"
     },
     {
       "path": "vendor/i18n-embed-0.16.0/Cargo.toml",
       "upstream_sha256": "a091bcc66932620db01d2cacd606cc592384f3b37de05702547e84bdc2495730",
-      "patched_sha256": "ae0acb2798897cb7636539fb19d3a4427184aaf6c30f278d5316bc5e1635dc48"
+      "patched_sha256": "7083e5c26d6706f0fe29485a9264f8691d2ec5e8780159e9eaedea32dc8a79c1"
     },
     {
       "path": "vendor/i18n-embed-0.16.0/src/lib.rs",
@@ -75,22 +95,12 @@
     {
       "path": "vendor/i18n-embed-fl-0.10.1/Cargo.toml",
       "upstream_sha256": "d20a06299744ba029893156057979418dd730cf7deb7bd306ff34db2ef2c335d",
-      "patched_sha256": "ae6afb247d7a4bfa60d62218e4ea8e76c76e46efab8eed7e993809ee29db8528"
+      "patched_sha256": "ecab2bd945555f0e3166835bf3d88370c34eb739e5699296cf4dca6b8b136210"
     },
     {
       "path": "vendor/i18n-embed-impl-0.8.4/Cargo.toml",
       "upstream_sha256": "2f337dbf76d72f19bcb5212e49895e188b0c0d4cd064f6873a28209bd38dd6e3",
-      "patched_sha256": "b01344bb0cc6a4baac9f833826264618b74e850634aafc44e09ea1a3d196bb5e"
-    },
-    {
-      "path": "vendor/i18n-config-0.4.8/Cargo.toml",
-      "upstream_sha256": "529a33a471dd8d4c8f0b83e9678822f78d06eadf8a815734cdf6e2206065d463",
-      "patched_sha256": "9666c6404e36db064c64ea7d6cb67438eaadacfad5b8483b193bbb48b11b8ef3"
-    },
-    {
-      "path": "vendor/i18n-config-0.4.8/src/lib.rs",
-      "upstream_sha256": "420cdf6a53cad0724c48960216d50c864c10747587b52add6764d4fdec378ecc",
-      "patched_sha256": "ef15a8dfac1b3798ff24b86349499d13a5ac032b18077f0784790340dfa4dc0c"
+      "patched_sha256": "3fe3e25509d9446b2dc85bd95ba98a2ca6b65716d6d35a76c885021350896c1b"
     }
   ],
   "age_rust_sources_byte_identical": true,
@@ -104,5 +114,39 @@
       "vendor/age-0.11.5/LICENSE-MIT",
       "vendor/age-0.11.5/LICENSE-APACHE"
     ]
-  }
+  },
+  "packaging_corrections": {
+    "distinct_registry_names": true,
+    "upstream_versions_retained": true,
+    "rust_library_aliases_retained": true,
+    "age_localization_domain": "age",
+    "archive_excludes": [
+      "Cargo.toml.orig"
+    ],
+    "advisory_matching": "project distinct registry identities to original upstream names and versions",
+    "limited_feature_closure": "Only feature/dependency closure used by FogVault native and browser backup; upstream dev/bench/example targets and unused optional capabilities omitted from fork package metadata.",
+    "upstream_general_feature_parity": false
+  },
+  "added_files": [
+    {
+      "path": "vendor/age-0.11.5/FOGVAULT-FORK.md",
+      "sha256": "fea4a5752191fae9b3861245c13d5789e9de75a630b0dd85cda8ef19218a5da7"
+    },
+    {
+      "path": "vendor/i18n-embed-0.16.0/FOGVAULT-FORK.md",
+      "sha256": "3a01a778c45fcec38516820ec28a192a586979d363b07832771f80080a3f5a2b"
+    },
+    {
+      "path": "vendor/i18n-embed-fl-0.10.1/FOGVAULT-FORK.md",
+      "sha256": "26f5d459a758b98219e5abe5f294c0bdf898c358e8da29c4487beccbb3873804"
+    },
+    {
+      "path": "vendor/i18n-embed-impl-0.8.4/FOGVAULT-FORK.md",
+      "sha256": "6d7a941e671c67ff5eff5902ce61ae26c95fd9cfa944d10fb29c1e144f2fdef2"
+    },
+    {
+      "path": "vendor/i18n-config-0.4.8/FOGVAULT-FORK.md",
+      "sha256": "ffa26ef97bdb7f43f7b5ee105ad49b4d8afa6bf46e815064a8474ecdfa1a4795"
+    }
+  ]
 }

@@ -186,10 +186,42 @@ jobs:
           name: quality-extensions
           path: local-only/ci/extensions/
           if-no-files-found: error
+  packaging:
+    needs: plan
+    if: needs.plan.outputs.code == 'true'
+    name: Registry packaging preflight
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8
+        with:
+          toolchain: ${{ needs.plan.outputs.rust }}
+          components: rustfmt, clippy
+          targets: wasm32-unknown-unknown
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: ${{ needs.plan.outputs.node }}
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: ${{ needs.plan.outputs.python }}
+      - run: cargo install wasm-bindgen-cli --version ${{ needs.plan.outputs.bindgen }} --locked
+      - run: npm ci --ignore-scripts
+        working-directory: packages/browser
+      - run: python scripts/quality.py check --profile packaging --output-dir local-only/ci/packaging
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: quality-packaging
+          path: local-only/ci/packaging/
+          if-no-files-found: error
   quality:
     name: ${{ github.event_name == 'pull_request' && format('FogVault quality / {0}', github.base_ref) || 'Post-merge quality' }}
     if: always()
-    needs: [plan, contract, native, browser, extensions]
+    needs: [plan, contract, native, browser, extensions, packaging]
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
