@@ -1,7 +1,7 @@
 # Registry packaging candidate
 
 FogVault's initial package candidate is **0.1.0**, independently versioned from
-DataFog Core. This is unpublished metadata and local build evidence. It does not
+DataFog Core. Packaging checks establish local build evidence; they do not
 claim security approval or platform qualification. Core's published
 `=0.5.0-beta.3` regression remains unchanged; v1 coverage belongs in Core's own
 release checks.
