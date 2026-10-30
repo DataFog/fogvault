@@ -8,6 +8,8 @@
 
 ### Fixed
 
+- Write shared registry index caches atomically so concurrent package versions cannot fail a cold packaging check; retain reports and package archives in CI without build caches.
+
 - Bind required verification results to the PR target so push results cannot satisfy a broader promotion check.
 
 - Reject browser verification reports that claim success while required cases failed or did not execute.

@@ -12,6 +12,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 import tomllib
 import urllib.request
 
@@ -107,6 +108,7 @@ def seed_registry(registry, locks, candidate_registry):
     cache = ROOT / "local-only/quality-cache/registry-inputs"
     cache.mkdir(parents=True, exist_ok=True)
     cargo_home = Path(os.environ.get("CARGO_HOME", str(Path.home() / ".cargo")))
+    index_locks = {name: threading.Lock() for name, _ in packages}
 
     def fetch(item):
         (name, version), package = item
@@ -128,10 +130,20 @@ def seed_registry(registry, locks, candidate_registry):
         cached.write_bytes(data)
         destination.write_bytes(data)
         index_cache = cache / (name + ".index")
-        if not index_cache.exists():
-            with urllib.request.urlopen("https://index.crates.io/" + index_path(name), timeout=60) as response:
-                index_cache.write_bytes(response.read())
-        rows = [json.loads(line) for line in index_cache.read_bytes().splitlines()]
+        with index_locks[name]:
+            if not index_cache.exists():
+                staged = None
+                try:
+                    with urllib.request.urlopen("https://index.crates.io/" + index_path(name), timeout=60) as response:
+                        with tempfile.NamedTemporaryFile(dir=cache, prefix=name + "-", suffix=".index.tmp", delete=False) as temporary:
+                            staged = Path(temporary.name)
+                            temporary.write(response.read())
+                    # Other processes can share the cache, so publish only complete bytes.
+                    os.replace(staged, index_cache)
+                finally:
+                    if staged is not None:
+                        staged.unlink(missing_ok=True)
+            rows = [json.loads(line) for line in index_cache.read_bytes().splitlines()]
         row = next((row for row in rows if row["vers"] == version), None)
         if not row or row["cksum"] != package["checksum"]:
             raise ValueError("official index does not match locked archive: " + filename)
@@ -266,7 +278,7 @@ def main():
         report = {"schema": "fogvault-registry-packaging/v1", "pass": False,
                   "published": False, "error": str(error), "run": str(run_dir)}
     output.write_text(json.dumps(report, indent=2) + "\n")
-    print(json.dumps({"pass": report["pass"], "report": str(output)}))
+    print(json.dumps({"pass": report["pass"], "report": str(output), "error": report.get("error")}))
     return 0 if report["pass"] else 1
 
 

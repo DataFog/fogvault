@@ -216,7 +216,15 @@ jobs:
         if: always()
         with:
           name: quality-packaging
-          path: local-only/ci/packaging/
+          path: |
+            local-only/ci/packaging/**/report.json
+            local-only/ci/packaging/**/packaging.json
+            local-only/ci/packaging/**/*.log
+            local-only/ci/packaging/**/workspace/Cargo.lock
+            local-only/ci/packaging/**/workspace/target/package/*.crate
+            local-only/ci/packaging/**/browser/*.tgz
+            local-only/ci/packaging/**/consumer/Cargo.lock
+            local-only/ci/packaging/**/consumer/upstream-advisory-projection.lock
           if-no-files-found: error
   quality:
     name: ${{ github.event_name == 'pull_request' && format('FogVault quality / {0}', github.base_ref) || 'Post-merge quality' }}

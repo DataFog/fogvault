@@ -7,6 +7,7 @@ from pathlib import Path
 import sys
 import tarfile
 import tempfile
+import threading
 import unittest
 
 sys.dont_write_bytecode = True
@@ -17,6 +18,54 @@ SPEC.loader.exec_module(p)
 
 
 class PackagingChecks(unittest.TestCase):
+    def test_parallel_versions_cannot_read_a_partially_written_index_cache(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "candidate"
+            (source / "index").mkdir(parents=True)
+            home = root / "cargo-home"
+            cache = home / "registry/cache/test"
+            cache.mkdir(parents=True)
+            name = "fixture-crate"
+            entries, locks = [], ["version=4"]
+            for version in ("1.0.0", "2.0.0"):
+                data = version.encode()
+                checksum = p.digest(data)
+                (cache / f"{name}-{version}.crate").write_bytes(data)
+                entries.append({"name": name, "vers": version, "cksum": checksum})
+                locks.append('[[package]]\nname="' + name + '"\nversion="' + version + '"\nsource="' + p.REGISTRY + '"\nchecksum="' + checksum + '"')
+            lock = root / "Cargo.lock"
+            lock.write_text("\n".join(locks) + "\n")
+            payload = "\n".join(json.dumps(row) for row in entries).encode()
+            partial, read_partial = threading.Event(), threading.Event()
+            write_bytes, read_bytes = Path.write_bytes, Path.read_bytes
+            index = root / "local-only/quality-cache/registry-inputs/fixture-crate.index"
+
+            def interrupted_write(path, data):
+                if path == index:
+                    # The old implementation exposes this normal open/truncate
+                    # window to another version's worker before writing bytes.
+                    write_bytes(path, b"")
+                    partial.set()
+                    read_partial.wait(timeout=5)
+                return write_bytes(path, data)
+
+            def competing_read(path):
+                if path == cache / "fixture-crate-2.0.0.crate":
+                    partial.wait(timeout=1)
+                data = read_bytes(path)
+                if path == index and not data:
+                    read_partial.set()
+                return data
+
+            with mock.patch.object(p, "ROOT", root), \
+                 mock.patch.dict(p.os.environ, {"CARGO_HOME": str(home)}), \
+                 mock.patch.object(p.urllib.request, "urlopen", side_effect=lambda *_args, **_kwargs: io.BytesIO(payload)), \
+                 mock.patch.object(Path, "write_bytes", autospec=True, side_effect=interrupted_write), \
+                 mock.patch.object(Path, "read_bytes", autospec=True, side_effect=competing_read):
+                rows = p.seed_registry(root / "registry", [lock], source)
+            self.assertEqual({row["version"] for row in rows}, {"1.0.0", "2.0.0"})
+
     def test_archive_admission_requires_registry_metadata_and_notices(self):
         with tempfile.TemporaryDirectory() as directory:
             archive = Path(directory) / "candidate.crate"
