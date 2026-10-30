@@ -15,6 +15,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tarfile
 import tempfile
 import time
 import tomllib
@@ -23,6 +24,7 @@ import tomllib
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from source_inputs import maintained_sources
+from evidence import artifact_identity, git_identity, validate_browser_cases, write_report
 
 CONTRACT = ROOT / "conformance/vault-contract.json"
 CORE = ROOT / "crates/fogvault"
@@ -159,6 +161,12 @@ def behavior_evidence(checks: list[dict], contract: dict) -> dict:
 
 
 def complete_results(checks: list[dict], expected: list[str]) -> bool:
+    if (not isinstance(checks, list) or not isinstance(expected, list) or not expected
+            or any(not isinstance(name, str) or not name for name in expected)
+            or len(expected) != len(set(expected))
+            or any(not isinstance(check, dict) or not isinstance(check.get("id"), str)
+                   or not check["id"] for check in checks)):
+        return False
     return (
         len(checks) == len(expected)
         and {check["id"] for check in checks} == set(expected)
@@ -486,6 +494,7 @@ def verification_source_identity(manifest: Path, with_feasibility: bool = False)
     paths = [CONTRACT, manifest, manifest.parent / "Cargo.lock", Path(__file__), ROOT / "tests/verifier_checks.py", ROOT / "scripts/playwright-cli.sh", *core_source_paths(), *maintained_sources(ROOT)]
     paths.extend(sorted((ROOT / "conformance").rglob("*")))
     paths.extend(sorted((ROOT / "scripts").glob("*.py")))
+    paths.extend(sorted((ROOT / "tests").glob("*.py")))
     # The legacy-rejection test reads this retained synthetic database at runtime.
     # It is a fixed input, even though its historical path is under evidence/.
     paths.append(ROOT / "experiments/vault-prototype/evidence/PROTOTYPE-WIPE-ME.sqlite")
@@ -526,21 +535,63 @@ def validate_extension_file(path: Path) -> dict:
     return validate_feasibility_identity(report, {p.relative_to(ROOT).as_posix() for p in maintained_sources(ROOT)})
 
 
-def validate_sdk_file(path: Path) -> dict:
+def validate_sdk_file(path: Path, engines: list[str] | None = None) -> dict:
     report = json.loads(path.read_text())
     settings = json.loads((ROOT / "conformance/maintained-contract.json").read_text())["browser_sdk"]
-    if report.get("schema") != "fogvault-browser-sdk-proof/v1" or report.get("pass") is not True or report.get("executed") is not True:
+    if (not isinstance(report, dict) or report.get("schema") != "fogvault-browser-sdk-proof/v1"
+            or report.get("pass") is not True or report.get("executed") is not True):
         raise ValueError("maintained browser SDK did not execute successfully")
+    expected_engines = settings["required_engines"] if engines is None else engines
+    allowed_engines = set(settings["required_engines"] + settings.get("ci_additional_engines", []))
+    if (not isinstance(expected_engines, list) or not expected_engines
+            or any(not isinstance(name, str) for name in expected_engines)
+            or len(expected_engines) != len(set(expected_engines))
+            or not set(expected_engines) <= allowed_engines):
+        raise ValueError("SDK profile must name distinct supported browser engines")
     identity = validate_feasibility_identity(report, {p.relative_to(ROOT).as_posix() for p in maintained_sources(ROOT)})
-    engines = report.get("engines", [])
-    if [engine["name"] for engine in engines] != settings["required_engines"]:
+    reported_engines = report.get("engines")
+    if (not isinstance(reported_engines, list) or any(not isinstance(engine, dict) for engine in reported_engines)
+            or [engine.get("name") for engine in reported_engines] != expected_engines):
         raise ValueError("maintained SDK omitted a required browser engine")
-    for engine in engines:
-        result = engine["result"]
-        names = [case["id"] for case in result.get("cases", [])]
-        if result.get("pass") is not True or len(names) != len(set(names)) or set(names) != set(settings["required_cases"]):
-            raise ValueError("maintained SDK omitted a required behavior")
-    return {**identity, "engines": settings["required_engines"], "cases": settings["required_cases"]}
+    for engine in reported_engines:
+        validate_browser_cases(engine.get("result"), settings)
+    candidate = report.get("candidate")
+    if (not isinstance(candidate, dict)
+            or candidate.get("schema") != "fogvault-installed-browser-candidate/v1"
+            or candidate.get("typecheck_executed") is not True
+            or candidate.get("import_smoke_executed") is not True):
+        raise ValueError("maintained SDK must test the installed packed candidate and public types")
+    package = candidate.get("package")
+    if not isinstance(package, dict) or not isinstance(package.get("path"), str):
+        raise ValueError("maintained SDK omitted its packed artifact identity")
+    artifact = Path(package["path"])
+    if not artifact.is_absolute():
+        artifact = ROOT / artifact
+    actual = artifact_identity(artifact)
+    if (package.get("bytes") != actual["bytes"] or package.get("sha256") != actual["sha256"]
+            or candidate.get("package_sha256") != actual["sha256"]):
+        raise ValueError("maintained SDK packed artifact changed")
+    assets = candidate.get("installed_assets")
+    required_assets = {"dist/client.mjs", "dist/worker.mjs", "dist/index.d.ts",
+                       "dist/wasm/fogvault_wasm.js", "dist/wasm/fogvault_wasm_bg.wasm"}
+    if not isinstance(assets, dict) or not required_assets.issubset(assets):
+        raise ValueError("maintained SDK omitted installed entry/Worker/WASM/type assets")
+    try:
+        with tarfile.open(artifact, "r:gz") as archive:
+            names = [entry.name for entry in archive.getmembers()]
+            if len(names) != len(set(names)):
+                raise ValueError("packed SDK contains duplicate paths")
+            for relative in required_assets:
+                member = archive.getmember("package/" + relative)
+                if not member.isfile():
+                    raise ValueError("packed SDK asset is not an ordinary file")
+                with archive.extractfile(member) as source:
+                    if hashlib.file_digest(source, "sha256").hexdigest() != assets[relative]:
+                        raise ValueError("installed SDK asset does not match the packed candidate")
+    except (tarfile.TarError, KeyError, EOFError, OSError) as error:
+        raise ValueError("maintained SDK packed candidate is missing or malformed") from error
+    return {**identity, "engines": list(expected_engines), "cases": settings["required_cases"],
+            "candidate": actual}
 
 
 def require_stable_sources(before: dict[str, str], after: dict[str, str]) -> dict:
@@ -962,6 +1013,14 @@ def tool_version(command: list[str]) -> dict:
     return {"available": process.returncode == 0, "exit_code": process.returncode, "output": process.stdout.strip()}
 
 
+def required_checks(with_feasibility: bool = False) -> list[str]:
+    """The exact stage inventory consumed by the runner and its parent gate."""
+    expected_checks = ["verifier-tests", "consumer-pin", "core-boundary", "format-fixtures", "epoch-format-fixtures", "independent-epoch-decoder", "fresh-epoch-decoder", "access-format-fixtures", "password-vectors", "access-path-model", "export-payload", "export-backend-screening", "dependency-audit", "core-format", "format", "core-clippy", "clippy", "core-tests", "core-public-api", "native-tests", "maintained-native-format", "maintained-native-clippy", "maintained-native-api", "maintained-backup-format", "maintained-backup-clippy", "maintained-backup-tests", "maintained-wasm-format", "wasm-target", "maintained-wasm-clippy", "core-wasm-compile", "wasm-compile", "index-growth", "source-stability"]
+    if with_feasibility:
+        expected_checks = expected_checks[:-1] + ["resource-budgets", "browser-feasibility", "browser-sdk", "browser-extensions", "mobile-feasibility", "trusted-control-host", "source-stability"]
+    return expected_checks
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--json", action="store_true", help="print one machine-readable result instead of progress lines")
@@ -975,6 +1034,7 @@ def main() -> int:
     options.output_dir.mkdir(parents=True, exist_ok=True)
     run_dir = Path(tempfile.mkdtemp(prefix=datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ-"), dir=options.output_dir))
     started = time.perf_counter()
+    source_context = git_identity(ROOT)
     try:
         contract = load_contract()
         host_contract = None
@@ -983,16 +1043,14 @@ def main() -> int:
             if host_contract.get("schema") != "fogvault-host-feasibility-contract/v1":
                 raise ValueError("unsupported host feasibility contract")
     except (OSError, ValueError, KeyError, TypeError) as error:
-        result = {"schema": "fogvault-verifier/v1", "pass": False, "executed": False, "checks": [{"id": "behavior-contract", "required": True, "status": "fail", "message": str(error)}], "run_directory": str(run_dir)}
-        (run_dir / "report.json").write_text(json.dumps(result, indent=2) + "\n")
+        result = {"schema": "fogvault-verifier/v1", "pass": False, "executed": False, "checks": [{"id": "behavior-contract", "required": True, "status": "fail", "message": str(error)}], "run_directory": str(run_dir), "git": source_context}
+        write_report(run_dir / "report.json", result)
         print(json.dumps(result, indent=2) if options.json else f"FAIL behavior-contract: {error}\nReport: {run_dir / 'report.json'}")
         return 1
     verifier = Verifier(run_dir, contract, options.json)
     manifest = ROOT / contract["manifest"]
     core_manifest = ROOT / contract["core_manifest"]
-    expected_checks = ["verifier-tests", "consumer-pin", "core-boundary", "format-fixtures", "epoch-format-fixtures", "independent-epoch-decoder", "fresh-epoch-decoder", "access-format-fixtures", "password-vectors", "access-path-model", "export-payload", "export-backend-screening", "dependency-audit", "core-format", "format", "core-clippy", "clippy", "core-tests", "core-public-api", "native-tests", "maintained-native-format", "maintained-native-clippy", "maintained-native-api", "maintained-backup-tests", "wasm-target", "core-wasm-compile", "wasm-compile", "index-growth", "source-stability"]
-    if options.with_feasibility:
-        expected_checks = expected_checks[:-1] + ["resource-budgets", "browser-feasibility", "browser-sdk", "browser-extensions", "mobile-feasibility", "trusted-control-host", "source-stability"]
+    expected_checks = required_checks(options.with_feasibility)
     interrupted = None
     source_identity = verification_source_identity(manifest, options.with_feasibility)
     try:
@@ -1027,13 +1085,20 @@ def main() -> int:
         verifier.command("maintained-native-format", ["cargo", "fmt", "--manifest-path", str(native_manifest), "--check"])
         verifier.command("maintained-native-clippy", ["cargo", "clippy", "--locked", "--manifest-path", str(native_manifest), "--all-targets", "--all-features", "--", "-D", "warnings"])
         verifier.command("maintained-native-api", [sys.executable, str(ROOT / "scripts/verify-maintained-api.py")])
-        verifier.command("maintained-backup-tests", ["cargo", "test", "--locked", "--manifest-path", str(ROOT / "crates/fogvault-backup/Cargo.toml"), "--", "--test-threads=1"], lambda output: require_cases(output, contract["required_backup_cases"]))
+        backup_manifest = ROOT / "crates/fogvault-backup/Cargo.toml"
+        wasm_manifest = ROOT / "crates/fogvault-wasm/Cargo.toml"
+        verifier.command("maintained-backup-format", ["cargo", "fmt", "--manifest-path", str(backup_manifest), "--check"])
+        verifier.command("maintained-backup-clippy", ["cargo", "clippy", "--locked", "--manifest-path", str(backup_manifest), "--all-targets", "--all-features", "--", "-D", "warnings"])
+        verifier.command("maintained-backup-tests", ["cargo", "test", "--locked", "--manifest-path", str(backup_manifest), "--", "--test-threads=1"], lambda output: require_cases(output, contract["required_backup_cases"]))
+        verifier.command("maintained-wasm-format", ["cargo", "fmt", "--manifest-path", str(wasm_manifest), "--check"])
         target = contract["wasm_target"]
         target_check = verifier.command("wasm-target", ["rustup", "target", "list", "--installed"], lambda output: {"target": target} if target in output.splitlines() else (_ for _ in ()).throw(Unavailable(f"required compilation target not installed: {target}")))
         if target_check["status"] == "pass":
+            verifier.command("maintained-wasm-clippy", ["cargo", "clippy", "--locked", "--manifest-path", str(wasm_manifest), "--all-targets", "--all-features", "--target", target, "--", "-D", "warnings"])
             verifier.command("core-wasm-compile", ["cargo", "check", *core_base, "--lib", "--features", "web", "--target", target])
             verifier.command("wasm-compile", ["cargo", "check", *base, "--lib", "--no-default-features", "--features", "web", "--target", target])
         else:
+            verifier.record("maintained-wasm-clippy", "not-run", executed=False, message="required target unavailable; no automatic installation or silent skip")
             verifier.record("core-wasm-compile", "not-run", executed=False, message="required target unavailable; no automatic installation or silent skip")
             verifier.record("wasm-compile", "not-run", executed=False, message="required target unavailable; no automatic installation or silent skip")
         if options.benchmark_report:
@@ -1070,9 +1135,9 @@ def main() -> int:
     for identity in expected_checks:
         if identity not in present:
             verifier.record(identity, "not-run", executed=False, message=interrupted or "required check did not run")
-    result = {"schema": "fogvault-verifier/v1", "profile": host_contract["profile"] if host_contract else contract["profile"], "pass": complete_results(verifier.checks, expected_checks), "executed": True, "recorded_at_utc": datetime.now(timezone.utc).isoformat(), "duration_seconds": time.perf_counter() - started, "run_directory": str(run_dir), "environment": {"platform": platform.platform(), "python": sys.version, "rustc": tool_version(["rustc", "--version"]), "cargo": tool_version(["cargo", "--version"])}, "source_identity": source_identity, "behavior_evidence": behavior_evidence(verifier.checks, contract), "checks": verifier.checks, "unqualified_scopes": (host_contract or contract)["unqualified_scopes"]}
+    result = {"schema": "fogvault-verifier/v1", "profile": host_contract["profile"] if host_contract else contract["profile"], "pass": complete_results(verifier.checks, expected_checks), "executed": True, "recorded_at_utc": datetime.now(timezone.utc).isoformat(), "duration_seconds": time.perf_counter() - started, "run_directory": str(run_dir), "environment": {"platform": platform.platform(), "python": sys.version, "rustc": tool_version(["rustc", "--version"]), "cargo": tool_version(["cargo", "--version"])}, "git": source_context, "source_identity": source_identity, "behavior_evidence": behavior_evidence(verifier.checks, contract), "checks": verifier.checks, "unqualified_scopes": (host_contract or contract)["unqualified_scopes"]}
     report_path = run_dir / "report.json"
-    report_path.write_text(json.dumps(result, indent=2) + "\n")
+    write_report(report_path, result)
     if options.json:
         print(json.dumps(result, indent=2))
     else:

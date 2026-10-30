@@ -8,7 +8,13 @@
       "linux"
     ],
     "consumer_floor": "0.5.0-beta.3",
-    "exact_regression_pin": "=0.5.0-beta.3"
+    "exact_regression_pin": "=0.5.0-beta.3",
+    "required_candidate_cases": [
+      "native_archive_create_unlock_save_lock_reopen_read",
+      "default_native_consumer",
+      "archive_transitive_crypto_private",
+      "archive_fault_injection_private"
+    ]
   },
   "browser_sdk": {
     "package": "packages/browser",
