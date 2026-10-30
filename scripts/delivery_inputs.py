@@ -107,6 +107,8 @@ def browser_package(path: Path) -> dict[str, bytes]:
             or manifest.get("exports", {}).get(".") != {"types": "./dist/index.d.ts", "import": "./dist/client.mjs"}
             or manifest.get("exports", {}).get("./worker") != "./dist/worker.mjs"):
         raise ValueError("browser candidate public exports do not match the supported entry points")
+    if manifest.get("repository") != {"type": "git", "url": "git+https://github.com/DataFog/fogvault.git"}:
+        raise ValueError("browser candidate repository does not identify its FogVault source")
     return files
 
 

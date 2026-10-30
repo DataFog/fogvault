@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Identify the FogVault browser package's GitHub repository in its npm metadata so registry provenance and publishing configuration can match its source.
+
+## [0.1.0] - 2026-10-30
+
 ### Security
 
 - Keep ignored local credentials and stale generated files out of FogVault source and example archives.
