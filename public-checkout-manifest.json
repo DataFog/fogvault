@@ -1,7 +1,7 @@
 {
   "baseline_report_sha256": "db388f89b2af86672dcbcaeb07bc26519029e9c47bd323b47009638aabafb6e4",
   "changed_baseline_input_paths": [],
-  "content_identity_sha256": "235b06e3766ec90eb07b3ad1b4b5cda8ba861d650ced6b146620f8420fc8d841",
+  "content_identity_sha256": "438af115ec4a8595f05f440e7baa76f814676bcacae32053837484d71c3285b4",
   "declared_public_overlays": [
     {
       "path": ".gitignore",
@@ -4495,13 +4495,13 @@
       "sha256": "9a93ce2965326ff631da1872fe7d91c452463174c2359b635e760c767c301621"
     },
     {
-      "bytes": 9677,
+      "bytes": 10000,
       "executable": false,
       "path": "docs/maintained.md",
       "reasons": [
         "maintained-native-browser-delivery"
       ],
-      "sha256": "3dca0eda3701b52c31456d214ae1bc72662d0eb4dc31c0fdef5e326f24f72a41"
+      "sha256": "8d312b5785053a076ca16dacee82528bca05de20bc9ac606ba98a6b281faeed7"
     },
     {
       "bytes": 37957,
@@ -34017,7 +34017,7 @@
     "Historical evidence never substitutes for fresh execution. Platform CI and production qualification are separate claims.",
     "MIT applies to first-party code. Third-party redistribution and dependency scope are documented separately."
   ],
-  "previous_capture_sha256": "02bef3ed9f93fa27b54ff93cca65b5b0eadc9ae50a21f2f95f4574a469e96388",
+  "previous_capture_sha256": "c11ab158e71a28272a78517ed9c02c4a876ee6f2cb82860b399b39324381b7bf",
   "required_reference_checkout": {
     "git_metadata_copied": false,
     "path": "research/review-dependencies/advisory-db",
@@ -34027,5 +34027,5 @@
   },
   "schema": "fogvault-public-candidate-inputs/v1",
   "status": "maintained-candidate-not-production-qualified",
-  "total_bytes": 83637399
+  "total_bytes": 83637722
 }

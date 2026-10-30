@@ -114,21 +114,25 @@ replacement is a different workflow and retains existing record revisions.
 
 | Delivery target | Verified engineering evidence | Remaining qualification |
 | --- | --- | --- |
-| Native Windows, macOS and Linux | All three [native CI jobs passed](https://github.com/DataFog/fogvault/actions/runs/41035670849): Core, maintained/retained adapter tests, backup and private-API probes. | Physical-device/provider and power-loss qualification. |
+| Native Windows, macOS and Linux | All three [native CI jobs passed](https://github.com/DataFog/fogvault/actions/runs/41036629415): Core, maintained/retained adapter tests, backup and private-API probes. | Physical-device/provider and power-loss qualification. |
 | Website SDK: Chrome, Firefox and Edge | All three [browser CI jobs passed](https://github.com/DataFog/fogvault/actions/runs/41036629415), with every one of the 22 required SDK cases and matching source hashes. | Physical-device budgets and supported-version floors. |
 | Chromium MV3 and Firefox extensions | Both actual unpacked/temporary-extension CI tests passed with zero skips/flakes. | Signed store installation is a separate claim. |
 | Safari/WebKit | Existing regression profile retained. | Additional qualification is deferred. |
 
 The complete local verifier passed all 35 required stages and 226 named required
 behavior cases on commit `fbfd2be36469b76367cdb093f443d278e7a219e5`.
-Native CI evidence above uses `f16c4f0bda91fc3a31c0f12b717f8d2f5932c226`;
-the intervening commit changes only test HTTP serving, CI triggers and the source
-inventory, with no vault/package implementation changes. The browser reports
+All seven jobs in the final CI run passed on that same implementation revision.
+The earlier run at `f16c4f0bda91fc3a31c0f12b717f8d2f5932c226` is retained with
+its Edge startup failure. The intervening commit changes only test HTTP serving,
+CI triggers and the source inventory, with no vault/package implementation changes. The browser reports
 capture source hashes and actual browser user agents. Edge testing confirmed
 Windows' default `.mjs` media type was `text/plain`; the test server now sets
 explicit JavaScript/WASM media types rather than inheriting registry settings.
 The complete verifier report SHA256 is
 `db388f89b2af86672dcbcaeb07bc26519029e9c47bd323b47009638aabafb6e4`.
+The native package also built with its declared minimum Rust 1.89 and default
+features. Independent consumers passed both clean source-archive extraction and
+installation directly from the public Git repository.
 
 The [workflow](../.github/workflows/maintained.yml) names the exact CI images and
 toolchain. A local pass cannot substitute for another OS/browser. Supported
