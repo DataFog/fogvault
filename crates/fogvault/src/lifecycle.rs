@@ -8,16 +8,24 @@ use crate::{
 use std::fmt;
 use zeroize::Zeroizing;
 mod access;
+mod async_provider;
+pub use async_provider::{
+    AsyncAccessSetup, AsyncCreation, AsyncProtectiveAccess, AsyncUnlock, ProviderCancellation,
+    ProviderReply, ProviderRequest,
+};
 mod control;
 mod credentials;
 mod protective;
 mod records;
 mod revocation;
 pub use credentials::{CredentialDraft, CredentialPlan, CredentialReceipt};
-pub use protective::{ProtectivePlan, ProtectiveSource, ProtectiveTransition, TransitionStore};
+pub use protective::{
+    ProtectivePlan, ProtectiveSource, ProtectiveTransition, TransitionStore,
+    UnanchoredProtectiveControl,
+};
 pub use records::{DeleteDraft, DeletePlan, RecordCursor, RecordPage};
 use revocation::PublicationAuthority;
-pub use revocation::{RevocationHandle, RevocationReceipt, WorkGuard};
+pub use revocation::{RevocationHandle, RevocationReceipt, ScopedRevocationHandle, WorkGuard};
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub struct SessionToken {
@@ -393,6 +401,10 @@ impl Engine {
         } else {
             Phase::Ready
         }
+    }
+    /// Trusted host admission policy; contains no derived keys or credentials.
+    pub fn kdf_policy(&self) -> &KdfPolicy {
+        &self.kdf_policy
     }
     pub fn kdf_profile(&self) -> KdfProfile {
         self.descriptor.kdf_profile()

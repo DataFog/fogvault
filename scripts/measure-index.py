@@ -18,6 +18,9 @@ import time
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from source_inputs import maintained_sources
+
 MANIFEST = ROOT / "experiments/vault-prototype/Cargo.toml"
 CORE = ROOT / "crates/fogvault"
 
@@ -27,10 +30,11 @@ def source_identity() -> dict[str, str]:
                *sorted((MANIFEST.parent / "src").rglob("*.rs")),
                CORE / "Cargo.toml", CORE / "Cargo.lock", *sorted((CORE / "src").rglob("*.rs")),
                *sorted((CORE / "tests").rglob("*.rs")), *sorted((CORE / "examples").rglob("*.rs"))]
+    sources.extend(maintained_sources(ROOT))
     result = {}
     for path in sources:
         with path.open("rb") as stream:
-            result[str(path.relative_to(ROOT))] = hashlib.file_digest(stream, "sha256").hexdigest()
+            result[path.relative_to(ROOT).as_posix()] = hashlib.file_digest(stream, "sha256").hexdigest()
     return dict(sorted(result.items()))
 
 

@@ -1,0 +1,26 @@
+[package]
+name = "fogvault-native"
+version = "0.0.0"
+edition = "2021"
+rust-version = "1.89"
+publish = false
+license = "MIT"
+description = "Durable SQLite host adapter for the portable FogVault engine"
+repository = "https://github.com/DataFog/fogvault"
+readme = "README.md"
+
+[features]
+default = ["backup"]
+diagnostics = ["fogvault/experimental-codecs"]
+backup = ["dep:fogvault-backup"]
+
+[dependencies]
+fogvault = { path = "../fogvault" }
+fogvault-backup = { path = "../fogvault-backup", optional = true }
+zeroize = "=1.9.1"
+rusqlite = { version = "=0.40.2", default-features = false, features = ["bundled", "hooks"] }
+
+[dev-dependencies]
+fogvault = { path = "../fogvault", features = ["experimental-codecs"] }
+tempfile = "3"
+getrandom = "=0.4.3"

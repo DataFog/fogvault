@@ -8,7 +8,7 @@ description = "Disposable FogVault candidate-design experiment; not a production
 
 [features]
 default = ["native"]
-native = ["dep:rusqlite"]
+native = ["dep:rusqlite", "dep:fogvault-native"]
 web = ["fogvault/web"]
 
 [dependencies]
@@ -16,6 +16,7 @@ fogvault = { path = "../../crates/fogvault", features = ["experimental-codecs"] 
 zeroize = "=1.9.1"
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+fogvault-native = { path = "../../crates/fogvault-native", features = ["diagnostics"], optional = true }
 rusqlite = { version = "=0.40.2", default-features = false, features = ["bundled", "hooks"], optional = true }
 
 [dev-dependencies]

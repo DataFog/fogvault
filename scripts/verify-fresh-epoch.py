@@ -76,7 +76,7 @@ def main():
     def identity():
         paths = [Path(__file__), MANIFEST, HELPER, RECIPE, CAPTURE, PROVENANCE, *files]
         paths.extend(path for path in PROVENANCE.parent.rglob("*") if path.is_file())
-        return {str(path.relative_to(ROOT)): h.file_sha(path) for path in sorted(set(paths))}
+        return {path.relative_to(ROOT).as_posix(): h.file_sha(path) for path in sorted(set(paths))}
 
     def check(name, action):
         try:

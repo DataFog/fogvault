@@ -1,13 +1,9 @@
-//! Disposable native adapter and compatibility fixtures for the shared portable core.
+//! Compatibility harness for the maintained portable core and native adapter.
 pub use fogvault::experimental::{crypto, format, index};
 pub use fogvault::{CommitReceipt, Error, Limits, RecordId, Result, SecretRecord, SessionToken};
 #[cfg(all(feature = "native", not(target_arch = "wasm32")))]
-mod native;
-#[cfg(all(feature = "native", not(target_arch = "wasm32")))]
-pub use native::NativeHost;
-#[cfg(all(feature = "native", not(target_arch = "wasm32")))]
-pub use native::{
-    AuditReport, CommitFault, CreationReceipt, OperationMetrics, PreparedCreation, Vault,
+pub use fogvault_native::{
+    AuditReport, CommitFault, ControlPublicationGuard, CreationReceipt,
+    DiagnosticHost as NativeHost, DiagnosticVault as Vault, OperationMetrics, PreparedCreation,
+    ProtectedControlSqliteStore,
 };
-#[cfg(all(feature = "native", not(target_arch = "wasm32")))]
-pub use native::{ControlPublicationGuard, ProtectedControlSqliteStore};

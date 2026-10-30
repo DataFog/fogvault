@@ -389,7 +389,7 @@ def identities():
              ROOT / "spec/protective-transition.md", ROOT / "spec/format-profile-review.md"]
     files.extend(FIXTURES / name for name in FILE_LIMITS)
     files.extend(path for path in PROVENANCE.parent.rglob("*") if path.is_file())
-    return {str(path.relative_to(ROOT)): file_sha(path) for path in sorted(set(files))}
+    return {path.relative_to(ROOT).as_posix(): file_sha(path) for path in sorted(set(files))}
 
 
 def flip(data, position):

@@ -21,6 +21,9 @@ import tomllib
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from source_inputs import maintained_sources
+
 CONTRACT = ROOT / "conformance/vault-contract.json"
 CORE = ROOT / "crates/fogvault"
 PROFILE = "disposable-vault-native-and-portable-compile"
@@ -47,7 +50,7 @@ def load_contract(path: Path = CONTRACT) -> dict:
         raise ValueError("unsupported behavior-contract schema")
     if contract.get("profile") != PROFILE:
         raise ValueError("unsupported behavior-contract profile")
-    fields = ("required_core_cases", "required_native_cases", "required_fixture_cases")
+    fields = ("required_core_cases", "required_native_cases", "required_fixture_cases", "required_backup_cases")
     for field in fields:
         names = contract.get(field)
         if not isinstance(names, list) or not names or any(not isinstance(name, str) or not name for name in names):
@@ -146,6 +149,8 @@ def behavior_evidence(checks: list[dict], contract: dict) -> dict:
     """Retain every named behavior when primitive tests move to their own crate."""
     by_id = {check["id"]: check for check in checks}
     groups = {"core-tests": contract["required_core_cases"], "native-tests": contract["required_native_cases"] + contract["required_fixture_cases"]}
+    if contract.get("required_backup_cases"):
+        groups["maintained-backup-tests"] = contract["required_backup_cases"]
     evidence = {}
     for identity, required in groups.items():
         observed = set(by_id.get(identity, {}).get("evidence", {}).get("executed_cases", []))
@@ -187,7 +192,7 @@ def validate_format_vectors(path: Path) -> dict:
         if sha256(fixture) != case["sha256_hex"]:
             raise ValueError(f"{identity} binary fixture digest differs from its reviewed digest")
     # Rust's independent fixture consumer must also execute in native-tests.
-    return {"file": str(path.relative_to(ROOT)), "sha256": sha256(path), "case_ids": sorted(identities), "scope": "fixture structure and identity; implementation comparison is a required Rust behavior case"}
+    return {"file": path.relative_to(ROOT).as_posix(), "sha256": sha256(path), "case_ids": sorted(identities), "scope": "fixture structure and identity; implementation comparison is a required Rust behavior case"}
 
 
 def validate_epoch_vectors(path: Path) -> dict:
@@ -211,7 +216,7 @@ def validate_epoch_vectors(path: Path) -> dict:
         or int.from_bytes(record[24:32], "big") != data["record_revision"]
         or int.from_bytes(record[32:40], "big") != data["root_epoch"]):
         raise ValueError("epoch fixture header/manifest mismatch")
-    return {"file": str(path.relative_to(ROOT)), "sha256": sha256(path), "files": len(files),
+    return {"file": path.relative_to(ROOT).as_posix(), "sha256": sha256(path), "files": len(files),
             "scope": "fixed fixture identity/header; real decoding and rejection required in core-tests; not independent cryptographic approval"}
 
 
@@ -326,7 +331,7 @@ def validate_password_vectors(path: Path, projection: Path, settings: dict) -> d
         raise ValueError("cross-host password lifecycle vectors changed")
     if projection.read_text() != "".join(rows):
         raise ValueError("Rust password-vector projection differs from shared JSON")
-    return {"fixture": str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path), "sha256": sha256(path), "projection_sha256": sha256(projection), "groups": groups, "distinct_text_pairs": pairs, "scope": "exact credential encoding; no password-strength or platform qualification"}
+    return {"fixture": path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else str(path), "sha256": sha256(path), "projection_sha256": sha256(projection), "groups": groups, "distinct_text_pairs": pairs, "scope": "exact credential encoding; no password-strength or platform qualification"}
 
 
 def validate_growth_report(report: dict, contract: dict) -> dict:
@@ -471,14 +476,14 @@ def core_source_paths() -> list[Path]:
 
 
 def growth_source_identity(manifest: Path) -> dict[str, str]:
-    paths = [manifest, manifest.parent / "Cargo.lock", ROOT / "scripts/measure-index.py", *core_source_paths()]
+    paths = [manifest, manifest.parent / "Cargo.lock", ROOT / "scripts/measure-index.py", *core_source_paths(), *maintained_sources(ROOT)]
     for directory in ("src", "examples", "benches"):
         paths.extend(sorted((manifest.parent / directory).rglob("*.rs")))
-    return {str(path.relative_to(ROOT)): sha256(path) for path in paths}
+    return {path.relative_to(ROOT).as_posix(): sha256(path) for path in paths}
 
 
 def verification_source_identity(manifest: Path, with_feasibility: bool = False) -> dict[str, str]:
-    paths = [CONTRACT, manifest, manifest.parent / "Cargo.lock", Path(__file__), ROOT / "tests/verifier_checks.py", ROOT / "scripts/playwright-cli.sh", *core_source_paths()]
+    paths = [CONTRACT, manifest, manifest.parent / "Cargo.lock", Path(__file__), ROOT / "tests/verifier_checks.py", ROOT / "scripts/playwright-cli.sh", *core_source_paths(), *maintained_sources(ROOT)]
     paths.extend(sorted((ROOT / "conformance").rglob("*")))
     paths.extend(sorted((ROOT / "scripts").glob("*.py")))
     # The legacy-rejection test reads this retained synthetic database at runtime.
@@ -494,7 +499,7 @@ def verification_source_identity(manifest: Path, with_feasibility: bool = False)
     if with_feasibility:
         for name in ("browser-prototype", "mobile-prototype"):
             paths.extend(host_source_paths(ROOT / "experiments" / name))
-    return {str(path.relative_to(ROOT)): sha256(path) for path in sorted(set(paths)) if path.is_file()}
+    return {path.relative_to(ROOT).as_posix(): sha256(path) for path in sorted(set(paths)) if path.is_file()}
 
 
 def host_source_paths(directory: Path) -> list[Path]:
@@ -506,6 +511,36 @@ def host_source_paths(directory: Path) -> list[Path]:
             if path.suffix in {".rs", ".js", ".mjs", ".html", ".c", ".h", ".swift", ".py"} or name in {"Cargo.toml", "Cargo.lock", "package.json", "package-lock.json"}:
                 paths.append(path)
     return paths
+
+
+def validate_extension_file(path: Path) -> dict:
+    report = json.loads(path.read_text())
+    if report.get("schema") != "fogvault-extension-proof/v1" or report.get("pass") is not True or report.get("executed") is not True:
+        raise ValueError("packaged browser extension acceptance failed")
+    stats = report["stats"]
+    if stats.get("expected") != 2 or any(stats.get(key, 1) for key in ("unexpected", "skipped", "flaky")):
+        raise ValueError("extension proof omitted, skipped or failed a required host")
+    raw = Path(report["playwright_report"])
+    if sha256(raw) != report["playwright_sha256"]:
+        raise ValueError("extension raw evidence changed")
+    return validate_feasibility_identity(report, {p.relative_to(ROOT).as_posix() for p in maintained_sources(ROOT)})
+
+
+def validate_sdk_file(path: Path) -> dict:
+    report = json.loads(path.read_text())
+    settings = json.loads((ROOT / "conformance/maintained-contract.json").read_text())["browser_sdk"]
+    if report.get("schema") != "fogvault-browser-sdk-proof/v1" or report.get("pass") is not True or report.get("executed") is not True:
+        raise ValueError("maintained browser SDK did not execute successfully")
+    identity = validate_feasibility_identity(report, {p.relative_to(ROOT).as_posix() for p in maintained_sources(ROOT)})
+    engines = report.get("engines", [])
+    if [engine["name"] for engine in engines] != settings["required_engines"]:
+        raise ValueError("maintained SDK omitted a required browser engine")
+    for engine in engines:
+        result = engine["result"]
+        names = [case["id"] for case in result.get("cases", [])]
+        if result.get("pass") is not True or len(names) != len(set(names)) or set(names) != set(settings["required_cases"]):
+            raise ValueError("maintained SDK omitted a required behavior")
+    return {**identity, "engines": settings["required_engines"], "cases": settings["required_cases"]}
 
 
 def require_stable_sources(before: dict[str, str], after: dict[str, str]) -> dict:
@@ -549,7 +584,7 @@ def validate_access_file(path: Path, contract: dict) -> dict:
     if not isinstance(ids, list) or len(ids) != len(required) or set(ids) != set(required):
         raise ValueError("the access-path case inventory differs from executed evidence")
     sources = [ROOT / expected["definition"], ROOT / "scripts/verify-access-paths.py"]
-    identity = {str(source.relative_to(ROOT)): sha256(source) for source in sources}
+    identity = {source.relative_to(ROOT).as_posix(): sha256(source) for source in sources}
     if report.get("source_identity") != identity:
         raise ValueError("the access-path model inputs differ from the current definition/checker")
     return {"report": str(path), "sha256": sha256(path), "scope": report["scope"], "crypto_or_provider_execution": False, "truth_table_combinations": count, "executed_cases": required, "source_identity": identity}
@@ -572,8 +607,8 @@ def validate_feasibility_identity(report: dict, required: set[str]) -> dict:
 
 
 def portable_identity_paths(manifest: Path) -> set[str]:
-    paths = [manifest, manifest.parent / "Cargo.lock", *sorted((manifest.parent / "src").rglob("*.rs")), *core_source_paths()]
-    return {str(path.relative_to(ROOT)) for path in paths}
+    paths = [manifest, manifest.parent / "Cargo.lock", *sorted((manifest.parent / "src").rglob("*.rs")), *core_source_paths(), *maintained_sources(ROOT)]
+    return {path.relative_to(ROOT).as_posix() for path in paths}
 
 
 def validate_status_cases(cases: list[dict], required: list[str]) -> dict:
@@ -794,7 +829,7 @@ def validate_browser_report(report: dict, contract: dict, manifest: Path) -> dic
     if report.get("schema") != "fogvault-browser-feasibility/v1" or report.get("pass") is not True:
         raise ValueError("browser feasibility did not pass its declared scope")
     project = ROOT / "experiments/browser-prototype"
-    required = portable_identity_paths(manifest) | {str(path.relative_to(ROOT)) for path in host_source_paths(project)} | {"scripts/verify-browser.py", "conformance/password-vectors.json"}
+    required = portable_identity_paths(manifest) | {path.relative_to(ROOT).as_posix() for path in host_source_paths(project)} | {"scripts/verify-browser.py", "conformance/password-vectors.json"}
     identity = validate_feasibility_identity(report, required)
     engines = report.get("engines", [])
     names = [engine.get("name") for engine in engines]
@@ -858,7 +893,7 @@ def validate_mobile_report(report: dict, contract: dict, manifest: Path) -> dict
     if report.get("schema") != "fogvault-mobile-feasibility/v1" or report.get("pass") is not True:
         raise ValueError("mobile feasibility did not pass its declared scope")
     project = ROOT / "experiments/mobile-prototype"
-    required = portable_identity_paths(manifest) | {str(path.relative_to(ROOT)) for path in host_source_paths(project)} | {"scripts/verify-mobile.py", "conformance/password-vectors.json"}
+    required = portable_identity_paths(manifest) | {path.relative_to(ROOT).as_posix() for path in host_source_paths(project)} | {"scripts/verify-mobile.py", "conformance/password-vectors.json"}
     identity = validate_feasibility_identity(report, required)
     validate_status_cases(report.get("checks"), contract["mobile"]["checks"])
     targets = report.get("targets", [])
@@ -955,9 +990,9 @@ def main() -> int:
     verifier = Verifier(run_dir, contract, options.json)
     manifest = ROOT / contract["manifest"]
     core_manifest = ROOT / contract["core_manifest"]
-    expected_checks = ["verifier-tests", "consumer-pin", "core-boundary", "format-fixtures", "epoch-format-fixtures", "independent-epoch-decoder", "fresh-epoch-decoder", "access-format-fixtures", "password-vectors", "access-path-model", "export-payload", "export-backend-screening", "dependency-audit", "core-format", "format", "core-clippy", "clippy", "core-tests", "core-public-api", "native-tests", "wasm-target", "core-wasm-compile", "wasm-compile", "index-growth", "source-stability"]
+    expected_checks = ["verifier-tests", "consumer-pin", "core-boundary", "format-fixtures", "epoch-format-fixtures", "independent-epoch-decoder", "fresh-epoch-decoder", "access-format-fixtures", "password-vectors", "access-path-model", "export-payload", "export-backend-screening", "dependency-audit", "core-format", "format", "core-clippy", "clippy", "core-tests", "core-public-api", "native-tests", "maintained-native-format", "maintained-native-clippy", "maintained-native-api", "maintained-backup-tests", "wasm-target", "core-wasm-compile", "wasm-compile", "index-growth", "source-stability"]
     if options.with_feasibility:
-        expected_checks = expected_checks[:-1] + ["resource-budgets", "browser-feasibility", "mobile-feasibility", "trusted-control-host", "source-stability"]
+        expected_checks = expected_checks[:-1] + ["resource-budgets", "browser-feasibility", "browser-sdk", "browser-extensions", "mobile-feasibility", "trusted-control-host", "source-stability"]
     interrupted = None
     source_identity = verification_source_identity(manifest, options.with_feasibility)
     try:
@@ -987,7 +1022,12 @@ def main() -> int:
         verifier.command("core-tests", ["cargo", "test", *core_base, "--tests", "--", "--test-threads=1"], lambda output: require_cases(output, contract["required_core_cases"]))
         verifier.command("core-public-api", ["cargo", "test", *core_base, "--doc"], require_private_api_doctests)
         required_cases = contract["required_native_cases"] + contract["required_fixture_cases"]
-        verifier.command("native-tests", ["cargo", "test", *base, "--all-features", "--", "--test-threads=1"], lambda output: require_cases(output, required_cases))
+        verifier.command("native-tests", [sys.executable, str(ROOT / "scripts/run-native-tests.py")], lambda output: require_cases(output, required_cases))
+        native_manifest = ROOT / "crates/fogvault-native/Cargo.toml"
+        verifier.command("maintained-native-format", ["cargo", "fmt", "--manifest-path", str(native_manifest), "--check"])
+        verifier.command("maintained-native-clippy", ["cargo", "clippy", "--locked", "--manifest-path", str(native_manifest), "--all-targets", "--all-features", "--", "-D", "warnings"])
+        verifier.command("maintained-native-api", [sys.executable, str(ROOT / "scripts/verify-maintained-api.py")])
+        verifier.command("maintained-backup-tests", ["cargo", "test", "--locked", "--manifest-path", str(ROOT / "crates/fogvault-backup/Cargo.toml"), "--", "--test-threads=1"], lambda output: require_cases(output, contract["required_backup_cases"]))
         target = contract["wasm_target"]
         target_check = verifier.command("wasm-target", ["rustup", "target", "list", "--installed"], lambda output: {"target": target} if target in output.splitlines() else (_ for _ in ()).throw(Unavailable(f"required compilation target not installed: {target}")))
         if target_check["status"] == "pass":
@@ -1010,6 +1050,12 @@ def main() -> int:
                 output = run_dir / (identity + ".json")
                 command = [argument.replace("{python}", sys.executable).replace("{output}", str(output)) for argument in host_contract[section]["command"]]
                 verifier.command(identity, command, lambda _, identity=identity, output=output: validate_host_file(output, identity, host_contract, manifest))
+            sdk_output = run_dir / "browser-sdk.json"
+            verifier.command("browser-sdk", [sys.executable, str(ROOT / "scripts/verify-browser-sdk.py"), "--output", str(sdk_output)],
+                             lambda _: validate_sdk_file(sdk_output))
+            extension_output = run_dir / "browser-extensions.json"
+            verifier.command("browser-extensions", [sys.executable, str(ROOT / "scripts/verify-extensions.py"), "--output", str(extension_output)],
+                             lambda _: validate_extension_file(extension_output))
             settings = contract["trusted_control_host"]
             output = run_dir / "trusted-control-host.json"
             command = [argument.replace("{python}", sys.executable).replace("{output}", str(output)) for argument in settings["command"]]

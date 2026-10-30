@@ -24,6 +24,24 @@ mod index;
 mod kdf;
 mod lifecycle;
 mod password;
+
+/// Nonsecret storage reconciliation helpers. These manipulate public authenticated
+/// index bytes and hashes, never root keys, key wrapping or record cryptography.
+/// A host must still validate authority through `Engine` before publication.
+pub mod storage {
+    pub use crate::format::Entry;
+    pub use crate::index::{
+        lookup, node_hash, remove, upsert, AuditCursor, Change, Lookup, Removal,
+    };
+
+    pub fn digest(bytes: &[u8]) -> [u8; 32] {
+        crate::crypto::digest(bytes)
+    }
+    pub fn random_identifier() -> core::result::Result<[u8; 16], crate::CryptoError> {
+        crate::crypto::random()
+    }
+}
+
 pub use access::*;
 pub use budget::{WorkBudget, WorkReservation, WorkUsage};
 pub use control::*;

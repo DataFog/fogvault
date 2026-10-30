@@ -99,6 +99,21 @@ impl std::fmt::Debug for RevocationHandle {
     }
 }
 
+/// Cancellation authority scoped to one captured generation. A stale async
+/// provider callback cannot revoke a later unlock's generation.
+#[derive(Clone)]
+pub struct ScopedRevocationHandle(Arc<Generation>);
+impl ScopedRevocationHandle {
+    pub fn revoke(&self) {
+        self.0.revoked.store(true, Ordering::SeqCst);
+    }
+}
+impl std::fmt::Debug for ScopedRevocationHandle {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str("ScopedRevocationHandle([captured generation only])")
+    }
+}
+
 /// A receipt is tied to the revoked generation; a new unlock cannot reset it.
 #[derive(Clone)]
 pub struct RevocationReceipt {
@@ -148,6 +163,9 @@ impl WorkGuard {
         let guard = Self { generation };
         guard.check()?;
         Ok(guard)
+    }
+    pub fn revocation_handle(&self) -> ScopedRevocationHandle {
+        ScopedRevocationHandle(self.generation.clone())
     }
     pub fn check(&self) -> Result<()> {
         if self.generation.revoked.load(Ordering::SeqCst) {

@@ -1,0 +1,135 @@
+{
+  "schema": "fogvault-wasm-missing-package-notices/v1",
+  "scope": "Retained upstream notices and explicit license declarations missing from published crate archives",
+  "packages": [
+    {
+      "package": "age-core",
+      "version": "0.11.0",
+      "vcs_revision": "17446612f865c705e44fe392d9d41dd102fed137",
+      "files": [
+        {
+          "path": "notices/age-core-0.11.0/LICENSE-MIT",
+          "url": "https://raw.githubusercontent.com/str4d/rage/17446612f865c705e44fe392d9d41dd102fed137/LICENSE-MIT",
+          "upstream_sha256": "fe56c030c2d8c3404a37fe711cebb27ebea13d0aacf7e3524db4198335ad8cd1",
+          "sha256": "fe56c030c2d8c3404a37fe711cebb27ebea13d0aacf7e3524db4198335ad8cd1",
+          "bytes": 1077,
+          "transformation": null
+        },
+        {
+          "path": "notices/age-core-0.11.0/LICENSE-APACHE",
+          "url": "https://raw.githubusercontent.com/str4d/rage/17446612f865c705e44fe392d9d41dd102fed137/LICENSE-APACHE",
+          "upstream_sha256": "3708458dee7f359ac6c9c5558023ed481be87e5372c43ebd7f2ca7ad23c12026",
+          "sha256": "3708458dee7f359ac6c9c5558023ed481be87e5372c43ebd7f2ca7ad23c12026",
+          "bytes": 10848,
+          "transformation": null
+        }
+      ]
+    },
+    {
+      "package": "bech32",
+      "version": "0.9.1",
+      "vcs_revision": "d12513f1e3768a7f2a2e1b4d650139eb92a4ae9b",
+      "files": [
+        {
+          "path": "notices/bech32-0.9.1/LICENSE-HEADER.txt",
+          "url": "https://raw.githubusercontent.com/rust-bitcoin/rust-bech32/d12513f1e3768a7f2a2e1b4d650139eb92a4ae9b/src/lib.rs",
+          "upstream_sha256": "8a4efd91229148ea1e86234c9513628910a7419a3c8a6500e8ce18149b8f3a85",
+          "sha256": "74375f18b087dc11b0d356d423601acf4bcfc2bc86ac95dc72336d362f869f0d",
+          "bytes": 1109,
+          "transformation": "leading full license/copyright comment only"
+        }
+      ]
+    },
+    {
+      "package": "cookie-factory",
+      "version": "0.3.3",
+      "vcs_revision": "d36b805dbd7dd65f2df947235c5bcc573afe2c76",
+      "files": [
+        {
+          "path": "notices/cookie-factory-0.3.3/MIT.txt",
+          "url": "https://raw.githubusercontent.com/rust-bakery/cookie-factory/d36b805dbd7dd65f2df947235c5bcc573afe2c76/LICENSES/MIT.txt",
+          "upstream_sha256": "d09216dc1ea5f273997667935a8d6514d80f00b89fb6954ecc3a43e0a6e360de",
+          "sha256": "d09216dc1ea5f273997667935a8d6514d80f00b89fb6954ecc3a43e0a6e360de",
+          "bytes": 1065,
+          "transformation": null
+        }
+      ]
+    },
+    {
+      "package": "fluent-langneg",
+      "version": "0.13.1",
+      "vcs_revision": "7fdc590466ea63ca2367ac10fb1b881fe561f1a8",
+      "files": [
+        {
+          "path": "notices/fluent-langneg-0.13.1/LICENSE-MIT",
+          "url": "https://raw.githubusercontent.com/projectfluent/fluent-langneg-rs/7fdc590466ea63ca2367ac10fb1b881fe561f1a8/LICENSE-MIT",
+          "upstream_sha256": "016fcc02048817d628b04b140c54db290fd9d29a5e8a55b77871194e810716ac",
+          "sha256": "016fcc02048817d628b04b140c54db290fd9d29a5e8a55b77871194e810716ac",
+          "bytes": 1053,
+          "transformation": null
+        },
+        {
+          "path": "notices/fluent-langneg-0.13.1/LICENSE-APACHE",
+          "url": "https://raw.githubusercontent.com/projectfluent/fluent-langneg-rs/7fdc590466ea63ca2367ac10fb1b881fe561f1a8/LICENSE-APACHE",
+          "upstream_sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+          "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+          "bytes": 11357,
+          "transformation": null
+        }
+      ]
+    },
+    {
+      "package": "intl_pluralrules",
+      "version": "7.0.2",
+      "vcs_revision": "d0715d5b7cca72e228d6e6c4de154bd30dfdd06a",
+      "files": [
+        {
+          "path": "notices/intl_pluralrules-7.0.2/LICENSE-MIT",
+          "url": "https://raw.githubusercontent.com/zbraniecki/pluralrules/d0715d5b7cca72e228d6e6c4de154bd30dfdd06a/intl_pluralrules/LICENSE-MIT",
+          "upstream_sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "bytes": 1023,
+          "transformation": null
+        },
+        {
+          "path": "notices/intl_pluralrules-7.0.2/LICENSE-APACHE",
+          "url": "https://raw.githubusercontent.com/zbraniecki/pluralrules/d0715d5b7cca72e228d6e6c4de154bd30dfdd06a/intl_pluralrules/LICENSE-APACHE",
+          "upstream_sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+          "bytes": 9723,
+          "transformation": null
+        }
+      ]
+    },
+    {
+      "package": "io_tee",
+      "version": "0.1.1",
+      "vcs_revision": "8a7adecebf3429cbc58a0368751d1851dfaf58ed",
+      "files": [
+        {
+          "path": "notices/io_tee-0.1.1/UPSTREAM-LICENSE-DECLARATION.md",
+          "url": "https://raw.githubusercontent.com/TheOnlyMrCat/io_tee/8a7adecebf3429cbc58a0368751d1851dfaf58ed/README.md",
+          "upstream_sha256": "0ba20a4b5d8188a85014c5f6d52b5407aec2077986c05f6ba686f9899b767b95",
+          "sha256": "0ba20a4b5d8188a85014c5f6d52b5407aec2077986c05f6ba686f9899b767b95",
+          "bytes": 774,
+          "transformation": null
+        },
+        {
+          "path": "notices/io_tee-0.1.1/UPSTREAM-PACKAGE.toml",
+          "url": "https://raw.githubusercontent.com/TheOnlyMrCat/io_tee/8a7adecebf3429cbc58a0368751d1851dfaf58ed/Cargo.toml",
+          "upstream_sha256": "9556395f55b7c67a6041f84553c7c27b3ab3fe5505769f4f1003a7b0988f2586",
+          "sha256": "9556395f55b7c67a6041f84553c7c27b3ab3fe5505769f4f1003a7b0988f2586",
+          "bytes": 248,
+          "transformation": null
+        },
+        {
+          "path": "notices/io_tee-0.1.1/LICENSE-APACHE",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358,
+          "selected_alternative": "Apache-2.0 from explicit upstream declaration; no copyright notice invented"
+        }
+      ]
+    }
+  ]
+}

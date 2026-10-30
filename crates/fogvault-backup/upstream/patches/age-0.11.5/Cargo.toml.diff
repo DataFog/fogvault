@@ -1,0 +1,35 @@
+--- upstream/age-0.11.5/Cargo.toml
++++ vendor/age-0.11.5/Cargo.toml
+@@ -159,11 +159,13 @@
+ version = "0.12"
+ 
+ [dependencies.i18n-embed]
+-version = "0.15"
++path = "../i18n-embed-0.16.0"
++version = "0.16"
+ features = ["fluent-system"]
+ 
+ [dependencies.i18n-embed-fl]
+-version = "0.9"
++path = "../i18n-embed-fl-0.10.1"
++version = "0.10.1"
+ 
+ [dependencies.is-terminal]
+ version = "0.4"
+@@ -245,7 +247,8 @@
+ version = "0.4"
+ 
+ [dev-dependencies.i18n-embed]
+-version = "0.15"
++path = "../i18n-embed-0.16.0"
++version = "0.16"
+ features = [
+     "fluent-system",
+     "desktop-requester",
+@@ -281,3 +284,6 @@
+     "criterion",
+     "flamegraph",
+ ]
++
++[lints.rust]
++unexpected_cfgs = { level = "warn", check-cfg = ["cfg(fuzzing)"] }

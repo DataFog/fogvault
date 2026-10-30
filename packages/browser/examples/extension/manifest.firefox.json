@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "FogVault SDK example",
+  "version": "0.0.0",
+  "description": "Synthetic vault integration in a privileged extension page",
+  "background": {"scripts": ["background.js"]},
+  "action": {"default_title": "Open FogVault example"},
+  "browser_specific_settings": {"gecko": {"id": "fogvault-example@datafog.io"}},
+  "content_security_policy": {"extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"}
+}

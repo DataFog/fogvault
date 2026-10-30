@@ -15,9 +15,9 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-EVIDENCE = "artifacts/publication/dependency-audit-20261030-mit"
+EVIDENCE = "artifacts/publication/dependency-audit-maintained-20261030"
 INVENTORY = f"{EVIDENCE}/inventory.json"
-INVENTORY_SHA = "946ca6ed7b4add99221930643573a0ba5c616633d8a250e8b522f980df897f1b"
+INVENTORY_SHA = "9c510df09e569bd115af1ddc928a2f99aa309251eab315dd70c226e7db5eba98"
 DB_CONTENT_MANIFEST = "artifacts/review-readiness/dependency-audit/advisory-db-files.json"
 TOOL = "research/review-dependencies/cargo-audit-v0.22.2/bin/cargo-audit"
 TOOL_SHA = "b4f48ca2b4b57bde3846f876dbcb6f72c056b27cc86d701413ecdc156f96dfcb"
@@ -31,6 +31,9 @@ LOCKS = (
     ("native", "experiments/vault-prototype"),
     ("browser", "experiments/browser-prototype"),
     ("mobile", "experiments/mobile-prototype"),
+    ("native-package", "crates/fogvault-native"),
+    ("wasm-package", "crates/fogvault-wasm"),
+    ("backup-package", "crates/fogvault-backup"),
 )
 REQUIRED_CASE_IDS = (
     "dependency-tool-identity",
@@ -41,6 +44,9 @@ REQUIRED_CASE_IDS = (
     "dependency-native-fresh-audit",
     "dependency-browser-fresh-audit",
     "dependency-mobile-fresh-audit",
+    "dependency-native-package-fresh-audit",
+    "dependency-wasm-package-fresh-audit",
+    "dependency-backup-package-fresh-audit",
     "dependency-input-stability",
 )
 
@@ -190,7 +196,7 @@ def execute() -> dict:
                        lock_rows[name]["lock_package_count"])
         source_paths.update((lock, manifest))
     before = {path: sha(repo_file(path)) for path in sorted(source_paths)}
-    passed("dependency-current-locks-and-manifests", locks=4, unchanged=True)
+    passed("dependency-current-locks-and-manifests", locks=len(LOCKS), unchanged=True)
 
     audits = {}
     for name, directory in LOCKS:

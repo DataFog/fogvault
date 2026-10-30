@@ -34,7 +34,7 @@ impl KeyProvider for GuardedProvider<'_> {
 }
 
 impl Engine {
-    fn setup_intent(
+    pub(super) fn setup_intent(
         kind: u8,
         profile: AccessProfile,
         devices: &[ProviderIdentity],
@@ -193,12 +193,26 @@ impl Engine {
                 &kdf_policy,
             )?
         };
+        let engine = Self::finish_created_access(
+            access, &root, limits, kdf_policy, admission, authority, &work,
+        )?;
+        Ok((engine, key))
+    }
+    pub(super) fn finish_created_access(
+        access: format::AccessDescriptor,
+        root: &[u8; 32],
+        limits: Limits,
+        kdf_policy: KdfPolicy,
+        admission: AccessAdmission,
+        authority: PublicationAuthority,
+        work: &WorkGuard,
+    ) -> Result<Self> {
         work.check()?;
         let descriptor = access.descriptor();
-        let keys = Self::derive(&root, &descriptor)?;
+        let keys = Self::derive(root, &descriptor)?;
         let head = Self::empty_head()?;
         let head_bytes = head.encode(&descriptor, &keys.head);
-        authority.retain_keys(&work)?;
+        authority.retain_keys(work)?;
         let engine = Self {
             descriptor,
             head,
@@ -214,7 +228,7 @@ impl Engine {
             access_admission: Some(admission),
             recovery_candidate: false,
         };
-        Ok((engine, key))
+        Ok(engine)
     }
     /// Open only the maintained content-three profile under explicit host admission.
     pub fn open_with_access(
@@ -334,7 +348,7 @@ impl Engine {
         input.extend_from_slice(&descriptor.hash());
         Ok(crypto::mac(&self.raw_keys()?.operation, &input))
     }
-    fn access_draft(
+    pub(super) fn access_draft(
         &self,
         descriptor: Option<Descriptor>,
         intent: &[u8],

@@ -1,0 +1,108 @@
+{
+  "schema": "fogvault-age-backend-source-provenance/v1",
+  "selected_backend": "age 0.11.5 with localized non-cryptographic dependency corrections",
+  "packages": [
+    {
+      "name": "age",
+      "version": "0.11.5",
+      "source_url": "https://static.crates.io/crates/age/age-0.11.5.crate",
+      "archive": "upstream/age-0.11.5.crate",
+      "sha256": "047a482d1843edf1ce76ada63183698144030fe1191bd5ddba6e41e164e0bc43",
+      "license": "MIT OR Apache-2.0",
+      "omitted_archive_files": [
+        "Cargo.lock"
+      ]
+    },
+    {
+      "name": "i18n-embed",
+      "version": "0.16.0",
+      "source_url": "https://static.crates.io/crates/i18n-embed/i18n-embed-0.16.0.crate",
+      "archive": "upstream/i18n-embed-0.16.0.crate",
+      "sha256": "a217bbb075dcaefb292efa78897fc0678245ca67f265d12c351e42268fcb0305",
+      "license": "MIT",
+      "omitted_archive_files": [
+        "Cargo.lock"
+      ]
+    },
+    {
+      "name": "i18n-embed-fl",
+      "version": "0.10.1",
+      "source_url": "https://static.crates.io/crates/i18n-embed-fl/i18n-embed-fl-0.10.1.crate",
+      "archive": "upstream/i18n-embed-fl-0.10.1.crate",
+      "sha256": "602e6bd30c3db2749e13e38b363a3d98d9d41de1d8de7a79c31bb69e45b47cda",
+      "license": "MIT",
+      "omitted_archive_files": [
+        "Cargo.lock"
+      ]
+    },
+    {
+      "name": "i18n-embed-impl",
+      "version": "0.8.4",
+      "source_url": "https://static.crates.io/crates/i18n-embed-impl/i18n-embed-impl-0.8.4.crate",
+      "archive": "upstream/i18n-embed-impl-0.8.4.crate",
+      "sha256": "0f2cc0e0523d1fe6fc2c6f66e5038624ea8091b3e7748b5e8e0c84b1698db6c2",
+      "license": "MIT",
+      "omitted_archive_files": []
+    },
+    {
+      "name": "i18n-config",
+      "version": "0.4.8",
+      "source_url": "https://static.crates.io/crates/i18n-config/i18n-config-0.4.8.crate",
+      "archive": "upstream/i18n-config-0.4.8.crate",
+      "sha256": "3e06b90c8a0d252e203c94344b21e35a30f3a3a85dc7db5af8f8df9f3e0c63ef",
+      "license": "MIT",
+      "omitted_archive_files": [
+        "Cargo.lock"
+      ]
+    }
+  ],
+  "modified_files": [
+    {
+      "path": "vendor/age-0.11.5/Cargo.toml",
+      "upstream_sha256": "19bcc511a81478078d08982fc8e1f5886888e3c1d797163cc2c070a87cd24d53",
+      "patched_sha256": "5e9faf8b5ce13525e7ea937b1bec38b57a61523463ac533ae4abb2c3c3232060"
+    },
+    {
+      "path": "vendor/i18n-embed-0.16.0/Cargo.toml",
+      "upstream_sha256": "a091bcc66932620db01d2cacd606cc592384f3b37de05702547e84bdc2495730",
+      "patched_sha256": "ae0acb2798897cb7636539fb19d3a4427184aaf6c30f278d5316bc5e1635dc48"
+    },
+    {
+      "path": "vendor/i18n-embed-0.16.0/src/lib.rs",
+      "upstream_sha256": "0fe478a199e2a58825f770daf9393f58c64db557e911db2a97bdc533cd80268a",
+      "patched_sha256": "33db5fde43db6081181a2c370f9562c413851872899af59b0eaf952811c8d8ef"
+    },
+    {
+      "path": "vendor/i18n-embed-fl-0.10.1/Cargo.toml",
+      "upstream_sha256": "d20a06299744ba029893156057979418dd730cf7deb7bd306ff34db2ef2c335d",
+      "patched_sha256": "ae6afb247d7a4bfa60d62218e4ea8e76c76e46efab8eed7e993809ee29db8528"
+    },
+    {
+      "path": "vendor/i18n-embed-impl-0.8.4/Cargo.toml",
+      "upstream_sha256": "2f337dbf76d72f19bcb5212e49895e188b0c0d4cd064f6873a28209bd38dd6e3",
+      "patched_sha256": "b01344bb0cc6a4baac9f833826264618b74e850634aafc44e09ea1a3d196bb5e"
+    },
+    {
+      "path": "vendor/i18n-config-0.4.8/Cargo.toml",
+      "upstream_sha256": "529a33a471dd8d4c8f0b83e9678822f78d06eadf8a815734cdf6e2206065d463",
+      "patched_sha256": "9666c6404e36db064c64ea7d6cb67438eaadacfad5b8483b193bbb48b11b8ef3"
+    },
+    {
+      "path": "vendor/i18n-config-0.4.8/src/lib.rs",
+      "upstream_sha256": "420cdf6a53cad0724c48960216d50c864c10747587b52add6764d4fdec378ecc",
+      "patched_sha256": "ef15a8dfac1b3798ff24b86349499d13a5ac032b18077f0784790340dfa4dc0c"
+    }
+  ],
+  "age_rust_sources_byte_identical": true,
+  "crypto_construction_modified": false,
+  "advisory_suppressions": false,
+  "new_backend_security_approval": false,
+  "registry_publication_requires_upstream_or_distinct_fork_packages": true,
+  "license_supplement": {
+    "upstream_commit": "7f29934dc58e058e7a588ac3a9a7e946198a73a7",
+    "files": [
+      "vendor/age-0.11.5/LICENSE-MIT",
+      "vendor/age-0.11.5/LICENSE-APACHE"
+    ]
+  }
+}

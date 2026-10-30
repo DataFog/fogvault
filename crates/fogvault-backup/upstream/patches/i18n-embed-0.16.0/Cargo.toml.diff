@@ -1,0 +1,10 @@
+--- upstream/i18n-embed-0.16.0/Cargo.toml
++++ vendor/i18n-embed-0.16.0/Cargo.toml
+@@ -99,6 +99,7 @@
+ optional = true
+ 
+ [dependencies.i18n-embed-impl]
++path = "../i18n-embed-impl-0.8.4"
+ version = "0.8.4"
+ optional = true
+ 

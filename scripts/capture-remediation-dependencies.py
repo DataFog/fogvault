@@ -16,9 +16,11 @@ import tomllib
 ROOT = Path(__file__).resolve().parents[1]
 TOOL = ROOT / "research/review-dependencies/cargo-audit-v0.22.2/bin/cargo-audit"
 DATABASE = ROOT / "research/review-dependencies/advisory-db"
-BASELINE = ROOT / "artifacts/review-readiness/dependency-audit/inventory.json"
+BASELINE = ROOT / "artifacts/publication/dependency-audit-20261030-mit/inventory.json"
 PACKAGES = [("core", "crates/fogvault"), ("native", "experiments/vault-prototype"),
-            ("browser", "experiments/browser-prototype"), ("mobile", "experiments/mobile-prototype")]
+            ("browser", "experiments/browser-prototype"), ("mobile", "experiments/mobile-prototype"),
+            ("native-package", "crates/fogvault-native"), ("wasm-package", "crates/fogvault-wasm"),
+            ("backup-package", "crates/fogvault-backup")]
 
 def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -69,7 +71,7 @@ def main() -> None:
         (output / f"{name}.stderr.txt").write_text(result.stderr)
         audit = json.loads(result.stdout)
         all_ok &= result.returncode == 0
-        commands.append({"name": name, "lockfile": str(lock.relative_to(ROOT)),
+        commands.append({"name": name, "lockfile": lock.relative_to(ROOT).as_posix(),
             "lock_sha256_before": before, "lock_sha256_after": sha(lock), "command": command,
             "started_utc": started, "completed_utc": datetime.now(timezone.utc).isoformat(),
             "exit_code": result.returncode})
@@ -84,13 +86,13 @@ def main() -> None:
                 | {"license": available.get("license") if available else None,
                    "metadata_resolved": available is not None,
                    "resolved_features": available["resolved_features"] if available else None})
-        locks.append({"name": name, "lockfile": str(lock.relative_to(ROOT)), "lock_sha256": before,
+        locks.append({"name": name, "lockfile": lock.relative_to(ROOT).as_posix(), "lock_sha256": before,
             "lock_package_count": len(locked), "metadata_package_count": len(packages),
             "all_locked_packages": rows, "vulnerabilities": audit.get("vulnerabilities"),
             "warnings": audit.get("warnings")})
     for name, value in [("commands.json", commands), ("metadata-commands.json", metadata_commands)]:
         (output / name).write_text(json.dumps(value, indent=2) + "\n")
-    artifacts = [{"path": str(path.relative_to(ROOT)), "bytes": path.stat().st_size, "sha256": sha(path)}
+    artifacts = [{"path": path.relative_to(ROOT).as_posix(), "bytes": path.stat().st_size, "sha256": sha(path)}
                  for path in sorted(output.iterdir()) if path.is_file()]
     inventory = {"schema": "fogvault-dependency-audit-snapshot/v1",
         "captured_utc": datetime.now(timezone.utc).isoformat(),
@@ -98,7 +100,7 @@ def main() -> None:
         "tool": baseline["tool"], "advisory_database": baseline["advisory_database"],
         "host": {"platform": platform.system(), "release": platform.release(), "machine": platform.machine()},
         "locks": locks, "artifacts": artifacts, "pass": all_ok,
-        "previous_snapshot": str(BASELINE.relative_to(ROOT)),
+        "previous_snapshot": BASELINE.relative_to(ROOT).as_posix(),
         "limitations": ["No audit suppressions or target filters; warnings denied; findings are retained.",
             "Metadata can resolve fewer packages than the lock. Missing licenses are not clearance.",
             "No unknown-vulnerability, source/side-channel, C/JS/OS, cryptographic or production approval.",

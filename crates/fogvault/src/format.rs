@@ -10,7 +10,7 @@ use crate::{
     Error, Limits, RecordId, Result,
 };
 mod access;
-pub(crate) use access::AccessDescriptor;
+pub(crate) use access::{AccessDescriptor, PendingDevice, PendingUnlock};
 #[cfg(any(test, feature = "experimental-codecs"))]
 mod rotation;
 #[cfg(any(test, feature = "experimental-codecs"))]

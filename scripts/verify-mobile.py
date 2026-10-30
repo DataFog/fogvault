@@ -16,6 +16,9 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from source_inputs import maintained_sources
+
 CRATE = ROOT / "experiments/mobile-prototype"
 MANIFEST = CRATE / "Cargo.toml"
 PROTOTYPE = ROOT / "experiments/vault-prototype"
@@ -53,7 +56,8 @@ def source_identity() -> dict[str, str]:
     paths.extend(sorted((CRATE / "src").rglob("*.rs")))
     paths.extend(sorted(CRATE.glob("*.c")))
     paths.extend(sorted(CRATE.glob("*.h")))
-    return {str(path.relative_to(ROOT)): digest(path) for path in sorted(set(paths))}
+    paths.extend(maintained_sources(ROOT))
+    return {path.relative_to(ROOT).as_posix(): digest(path) for path in sorted(set(paths))}
 
 
 def password_vectors() -> dict:
@@ -290,7 +294,7 @@ def main() -> int:
         "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
         "duration_seconds": time.perf_counter() - started,
         "source_identity": identity,
-        "password_vectors": {"fixture": str(PASSWORD_VECTORS.relative_to(ROOT)), "sha256": digest(PASSWORD_VECTORS),
+        "password_vectors": {"fixture": PASSWORD_VECTORS.relative_to(ROOT).as_posix(), "sha256": digest(PASSWORD_VECTORS),
                              "generated_header": artifact(vector_header),
                              "groups": {case: [vector["id"] for vector in vectors[group]] for case, group in VECTOR_CASES.items()}},
         "targets": targets,

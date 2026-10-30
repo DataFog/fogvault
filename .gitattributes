@@ -1,0 +1,3 @@
+# Fixed vectors, vendored-source provenance and audit hashes are byte contracts.
+# Preserve versioned bytes exactly on Windows, macOS and Linux.
+* -text

@@ -63,6 +63,48 @@ pub struct ProtectivePlan {
     pub index_root: Option<crate::NodeHash>,
     pub record_count: u64,
 }
+/// Logical protective-operation control for an explicitly unanchored host.
+/// This is NOT a trusted freshness anchor. A browser may restore an older valid
+/// whole database without detection. Hosts still must atomically compare the
+/// complete source descriptor/head and publish the exact complete target graph.
+/// No `TrustedControlStore` implementation or independence is implied.
+pub struct UnanchoredProtectiveControl {
+    state: ControlState,
+}
+impl UnanchoredProtectiveControl {
+    pub fn authorize_submission(
+        &self,
+        transition: &ProtectiveTransition,
+        plan: &ProtectivePlan,
+    ) -> Result<Self> {
+        transition.check_control(&self.state)?;
+        if transition.plan()? != *plan {
+            return Err(Error::Conflict);
+        }
+        Ok(Self {
+            state: self.state.authorize_submission(plan.target_snapshot())?,
+        })
+    }
+    /// Call only after the host's actual atomic target publication completed.
+    /// The resulting receipt makes no independent rollback-resistance claim.
+    pub fn confirm_target(
+        &self,
+        transition: &ProtectiveTransition,
+        plan: &ProtectivePlan,
+    ) -> Result<Self> {
+        transition.check_control(&self.state)?;
+        if transition.plan()? != *plan
+            || self.state.pending().and_then(|intent| intent.submission())
+                != Some(plan.target_snapshot())
+        {
+            return Err(Error::Conflict);
+        }
+        Ok(Self {
+            state: self.state.confirm_target(plan.target_snapshot())?,
+        })
+    }
+}
+
 impl ProtectivePlan {
     pub fn key_effect(&self) -> crate::KeyEffect {
         crate::KeyEffect::FreshRootAndContentKeys
@@ -139,7 +181,7 @@ impl Engine {
         })
     }
 
-    fn protective_source_session(&self) -> Result<SessionToken> {
+    pub(super) fn protective_source_session(&self) -> Result<SessionToken> {
         self.raw_keys()?;
         self.ensure_known_outcome()?;
         if self.audit.is_some() || self.pending.is_some() || self.initializing {
@@ -337,10 +379,58 @@ impl Engine {
             &admission,
             &self.kdf_policy,
         )?;
+        Ok((
+            self.finish_protective_access(target, &new_root, admission, request, session, work)?,
+            key,
+        ))
+    }
+
+    /// Common synchronous/cooperative handoff. Source authority and all epochs
+    /// are rechecked after external provider work, before a planner is returned.
+    pub(super) fn finish_protective_access(
+        &self,
+        target: format::AccessDescriptor,
+        new_root: &[u8; 32],
+        admission: AccessAdmission,
+        request: [u8; 16],
+        session: SessionToken,
+        work: WorkGuard,
+    ) -> Result<ProtectiveTransition> {
+        work.check()?;
+        if self.protective_source_session()? != session || self.head.request_id == request {
+            return Err(Error::Conflict);
+        }
+        self.head
+            .generation
+            .checked_add(1)
+            .ok_or(Error::ResourceLimit)?;
+        let target_policy_epoch = target.info().policy_epoch;
         let target_descriptor = target.epoch_content()?.descriptor();
+        let expected_epoch = self
+            .descriptor
+            .root_epoch()
+            .checked_add(1)
+            .ok_or(Error::ResourceLimit)?;
+        let expected_policy = if self.descriptor.credential_format_id() == 3 {
+            self.access_info()?
+                .policy_epoch
+                .checked_add(1)
+                .ok_or(Error::ResourceLimit)?
+        } else {
+            1
+        };
+        if target_descriptor.vault_id != self.vault_id()
+            || target_descriptor.root_epoch() != expected_epoch
+            || target_policy_epoch != expected_policy
+        {
+            return Err(Error::Conflict);
+        }
         target_descriptor.envelope_limit(self.limits)?;
-        let target_keys = Self::derive(&new_root, &target_descriptor)?;
-        let staging_key = crypto::derive(&new_root, &self.vault_id(), STAGING_DOMAIN)?;
+        let target_keys = Self::derive(new_root, &target_descriptor)?;
+        if crypto::tags_match(&target_keys.wrapping, &self.raw_keys()?.wrapping) {
+            return Err(Error::Integrity);
+        }
+        let staging_key = crypto::derive(new_root, &self.vault_id(), STAGING_DOMAIN)?;
         let commitment = ProtectiveTransition::binding(
             &self.descriptor,
             &self.head_bytes,
@@ -352,27 +442,24 @@ impl Engine {
             nonce: crypto::random()?,
         };
         work.check()?;
-        Ok((
-            ProtectiveTransition {
-                source_descriptor: self.descriptor.clone(),
-                source_head: self.head.clone(),
-                source_head_bytes: self.head_bytes.clone(),
-                source_session: session,
-                work,
-                target_descriptor,
-                target_keys,
-                staging_key,
-                target_session,
-                admission,
-                request,
-                commitment,
-                processed: 0,
-                last_id: None,
-                target_root: None,
-                limits: self.limits,
-            },
-            key,
-        ))
+        Ok(ProtectiveTransition {
+            source_descriptor: self.descriptor.clone(),
+            source_head: self.head.clone(),
+            source_head_bytes: self.head_bytes.clone(),
+            source_session: session,
+            work,
+            target_descriptor,
+            target_keys,
+            staging_key,
+            target_session,
+            admission,
+            request,
+            commitment,
+            processed: 0,
+            last_id: None,
+            target_root: None,
+            limits: self.limits,
+        })
     }
 
     /// Caller must have persisted this exact submission authorization to the
@@ -455,6 +542,71 @@ impl Engine {
             session: transition.target_session,
             key_effect: crate::KeyEffect::FreshRootAndContentKeys,
         })
+    }
+}
+
+impl Engine {
+    /// Explicit unanchored-host counterpart; all private plan/owner/revocation
+    /// checks are shared with independently anchored publication.
+    pub fn authorize_unanchored_protective_submission(
+        &mut self,
+        transition: &ProtectiveTransition,
+        plan: &ProtectivePlan,
+        control: &UnanchoredProtectiveControl,
+    ) -> Result<()> {
+        self.authorize_protective_submission(transition, plan, &control.state)
+    }
+    pub fn confirm_unanchored_protective_transition(
+        &mut self,
+        transition: ProtectiveTransition,
+        control: &UnanchoredProtectiveControl,
+        descriptor: &[u8],
+        head: &[u8],
+    ) -> Result<CredentialReceipt> {
+        self.confirm_protective_transition(transition, &control.state, descriptor, head)
+    }
+}
+
+impl ProtectiveTransition {
+    /// Start local operation control, never an independently trusted anchor.
+    pub fn unanchored_control(&self, source: &Engine) -> Result<UnanchoredProtectiveControl> {
+        self.check_source(source)?;
+        let state =
+            ControlState::register(source.vault_id(), crypto::random()?, self.source_snapshot())
+                .prepare(
+                    ControlOperation::ProtectiveTransition,
+                    self.request,
+                    self.target_descriptor_digest(),
+                    self.owner_commitment(),
+                )?;
+        Ok(UnanchoredProtectiveControl { state })
+    }
+    #[allow(clippy::too_many_arguments)]
+    pub fn transform_unanchored_record<S: NodeStore + ?Sized>(
+        &mut self,
+        source: &Engine,
+        proof: &VerifiedRecord,
+        stored_revision: u64,
+        envelope: &[u8],
+        target_nodes: &mut S,
+        control: &UnanchoredProtectiveControl,
+    ) -> Result<Vec<u8>> {
+        self.transform_record(
+            source,
+            proof,
+            stored_revision,
+            envelope,
+            target_nodes,
+            &control.state,
+        )
+    }
+    pub fn finish_unanchored<S: TransitionStore + ?Sized>(
+        &self,
+        source: &Engine,
+        store: &mut S,
+        control: &UnanchoredProtectiveControl,
+    ) -> Result<ProtectivePlan> {
+        self.finish(source, store, &control.state)
     }
 }
 
@@ -648,6 +800,18 @@ impl ProtectiveTransition {
             index_root: self.target_root,
             record_count: self.source_head.count,
         })
+    }
+    /// Re-audit the opaque owner's complete encrypted target, including after
+    /// submission has made the source session uncertain. This grants no source
+    /// or publication authority; final confirmation still binds the exact
+    /// pending operation and source. Hosts must fence publication separately.
+    pub fn verify_staged_target<S: TransitionStore + ?Sized>(
+        &self,
+        store: &mut S,
+    ) -> Result<ProtectivePlan> {
+        self.work.check()?;
+        self.audit_target(store)?;
+        self.plan()
     }
     pub fn finish<S: TransitionStore + ?Sized>(
         &self,
@@ -2290,5 +2454,123 @@ mod tests {
                 .as_slice(),
             &[1; 8]
         );
+    }
+    #[test]
+    fn unanchored_protection_preserves_exact_owner_target_and_plaintext() {
+        let (mut engine, _) = Engine::create_with_access(
+            PASSWORD,
+            limits(),
+            KdfPolicy::baseline(),
+            admission(),
+            AccessProfile::Portable,
+            &[],
+            true,
+            &mut Provider,
+        )
+        .unwrap();
+        engine.activate_created().unwrap();
+        let mut source = Memory::default();
+        for n in 1..=2 {
+            let plan = engine
+                .prepare_save(&mut source, [n; 16], None, b"label", &[n; 8], [n; 16], None)
+                .unwrap();
+            source.rows.insert([n; 16], (plan.revision, plan.envelope));
+            engine.confirm_commit(&plan.head_bytes).unwrap();
+        }
+        let (mut transition, _) = engine
+            .draft_protective_transition(
+                ProtectiveSource::Access(AccessPath::Password(PASSWORD)),
+                PASSWORD,
+                AccessProfile::Portable,
+                &[],
+                true,
+                &mut Provider,
+                admission(),
+                REQUEST,
+            )
+            .unwrap();
+        let control = transition.unanchored_control(&engine).unwrap();
+        let mut stage = Memory::default();
+        for n in 1..=2 {
+            let proof = engine.lookup(&mut source, &[n; 16]).unwrap();
+            let (revision, body) = &source.rows[&[n; 16]];
+            let next = transition
+                .transform_unanchored_record(
+                    &engine,
+                    proof.entry().unwrap(),
+                    *revision,
+                    body,
+                    &mut stage,
+                    &control,
+                )
+                .unwrap();
+            stage.rows.insert([n; 16], (*revision, next));
+        }
+        let plan = transition
+            .finish_unanchored(&engine, &mut stage, &control)
+            .unwrap();
+        assert!(control.confirm_target(&transition, &plan).is_err());
+        let mut substituted = plan.clone();
+        substituted.head_bytes[0] ^= 1;
+        assert!(control
+            .authorize_submission(&transition, &substituted)
+            .is_err());
+        let submitted = control.authorize_submission(&transition, &plan).unwrap();
+        engine
+            .authorize_unanchored_protective_submission(&transition, &plan, &submitted)
+            .unwrap();
+        let completed = submitted.confirm_target(&transition, &plan).unwrap();
+        let receipt = engine
+            .confirm_unanchored_protective_transition(
+                transition,
+                &completed,
+                &plan.descriptor_bytes,
+                &plan.head_bytes,
+            )
+            .unwrap();
+        assert_eq!(
+            receipt.key_effect,
+            crate::KeyEffect::FreshRootAndContentKeys
+        );
+        for n in 1..=2 {
+            assert_ne!(source.rows[&[n; 16]].1, stage.rows[&[n; 16]].1);
+            let proof = engine.lookup(&mut stage, &[n; 16]).unwrap();
+            assert_eq!(
+                engine
+                    .read_verified(proof.entry().unwrap(), 1, &stage.rows[&[n; 16]].1)
+                    .unwrap()
+                    .payload
+                    .as_slice(),
+                &[n; 8]
+            );
+        }
+    }
+
+    #[test]
+    fn unanchored_protection_cannot_cross_owners_or_survive_lock() {
+        let (mut engine, mut source, _) = source();
+        let (mut first, _, _) = prepare(&engine);
+        let (second, _, _) = prepare(&engine);
+        let control = first.unanchored_control(&engine).unwrap();
+        let mut stage = Memory::default();
+        assert!(matches!(
+            second.finish_unanchored(&engine, &mut stage, &control),
+            Err(Error::Conflict)
+        ));
+        let proof = engine.lookup(&mut source, &[1; 16]).unwrap();
+        engine.lock();
+        let (revision, envelope) = &source.rows[&[1; 16]];
+        assert!(first
+            .transform_unanchored_record(
+                &engine,
+                proof.entry().unwrap(),
+                *revision,
+                envelope,
+                &mut stage,
+                &control
+            )
+            .is_err());
+        assert!(stage.rows.is_empty());
+        assert!(stage.nodes.is_empty());
     }
 }

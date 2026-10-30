@@ -256,7 +256,7 @@ def expected_paths(profile: str, materials: set[str], recovery: bool) -> set[str
 
 
 def source_identity() -> dict[str, str]:
-    return {str(path.relative_to(ROOT)): hashlib.sha256(path.read_bytes()).hexdigest()
+    return {path.relative_to(ROOT).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
             for path in (CONTRACT, Path(__file__).resolve())}
 
 

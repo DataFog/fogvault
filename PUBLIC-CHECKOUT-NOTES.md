@@ -1,66 +1,69 @@
-# Public candidate checkout
+# Public checkout and verification inputs
 
-This is a curated, experimental source tree. FogVault's original code is
-licensed under the [MIT License](LICENSE); third-party material retains its own
-terms. This checkout is an engineering baseline, not a supported release.
+This curated tree contains the maintained native/browser implementations and the
+regression harnesses that exercise the shared Rust engine. The package entry is
+[README.md](README.md); support and feature semantics are in
+[the delivery contract](docs/maintained.md).
 
-The public entry is [README.md](README.md). The maintained package remains the
-next engineering stage; this checkout preserves its tested candidate baseline.
+## Included material
 
-## What is included
-
-- Portable Rust core, prototype adapters/bindings, tests and unchanged Cargo locks.
+- The portable engine, maintained native/WASM/browser/backup packages, examples,
+  tests and locked dependency graphs.
 - Synthetic conformance fixtures, including intentionally public test keys.
-- The retained synthetic P1 SQLite fixture used only to prove legacy rejection;
-  its historical `evidence/` path is an exact exception, not a published run log.
-- DataFog Core `0.5.0-beta.3` as the minimum integration baseline, with the exact
-  published `=0.5.0-beta.3` development/test consumer pin retained for that floor.
-  DataFog Core v1 is planned as a separate test target; it is not yet verified.
-- Selected audit, decoder and interoperability inputs required by the full verifier.
-- Separate third-party notices. FogVault's MIT license does not relicense these.
+- The retained synthetic P1 SQLite fixture used only to prove legacy rejection.
+  Its historical `evidence/` path is an exact exception, not a published run log.
+- Exact published DataFog Core `=0.5.0-beta.3` development/test coverage for the
+  minimum integration baseline. Core v1 is not yet verified.
+- Selected audit, decoder, interoperability and vendored-source provenance inputs.
+- Separate third-party notices; FogVault's MIT license does not relicense them.
 
-The bundled audit/interoperability executables are the pinned **macOS arm64**
-verification tools. They are not product runtime dependencies or portable release
-binaries. This tree does not claim the full profile works on every development
-host. The historical dependency audit is pinned to its October 29, 2026 database;
-it does not replace a current advisory check before release.
-
-Private reviewer attachments, full reference repositories, tracker exports,
-historical verifier runs, large review ZIPs and build caches are excluded. Existing
-selected audit metadata retains historical host paths because those bytes are
-pinned evidence. The age download provenance omits the expired signed redirect;
-its canonical public URL and archive/executable digests remain intact. The public
-manifest records presentation/provenance overlays separately from original inputs.
+Private reviewer attachments, full reference repositories, tracker exports, old
+verifier runs, large review ZIPs and build caches stay outside the public file set.
+Selected historical audit metadata retains its original host paths because its
+bytes are pinned evidence. The age download provenance omits an expired signed
+redirect while retaining the canonical public URL and archive/executable digests.
 
 The two retained `spec/` notes are historical construction inputs to independent
-checks, not a complete current product specification. Their private cross-links
-are rendered as reference paths; current creation and API behavior are described
-in the root/core READMEs and exercised by the tests.
+checks. They are not the current complete product specification. Private cross-
+links are rendered as reference paths. Use current package guides, tests and
+[delivery scope](docs/maintained.md) for present behavior.
 
-## Reproduce the full profile
+## Full local verification
 
-Use the same documented development-host prerequisites as the root README. The
-decoder additionally needs Python `cryptography` with Argon2id support and an
-installed discoverable libsodium. The pinned browser CLI wrapper uses Node/npm
-and `@playwright/cli@0.1.22`; no Codex installation is needed. Browser binaries and
-the required Xcode/simulator and Rust targets must already be installed.
+The full profile requires Rust/Cargo, configured WASM/iOS/Android targets,
+Python with `cryptography` Argon2id support, discoverable libsodium, Node/npm,
+`wasm-bindgen 0.2.127`, the pinned browser tools and installed browser binaries.
+Its simulator checks require macOS/Xcode and an installed iOS simulator runtime.
+The bundled audit/age executables target Apple arm64 and are verification tools,
+not product runtime binaries.
 
 ```sh
 python3 scripts/bootstrap-reference-db.py
 CARGO_PROFILE_TEST_OPT_LEVEL=2 python3 -u scripts/verify-vault.py --with-feasibility
 ```
 
-The explicit bootstrap fetches the public RustSec commit into ignored
-`local-only/verifier-tools/` state. It does not create a nested repository in the
-vendored advisory files. The audit itself never fetches and still checks the
-exact commit, tree, complete content manifest and pinned executable. Cargo/npm
-may fetch their normal dependencies. This is not an offline dependency bundle.
+The explicit bootstrap fetches the pinned public RustSec commit into ignored
+`local-only/verifier-tools/` state. The vendored advisory files have no nested Git
+repository. Audit runners do not fetch, suppress findings or silently skip a
+missing required capability. Cargo/npm may fetch normal dependencies; this is
+not an offline dependency bundle.
 
-A fresh successful report is the proof for this tree. Copied historical audit
-snapshots are inputs, not substitutes for execution. Missing required targets or
-tools fail explicitly. Resource thresholds, case inventories and security
-assertions have not been relaxed for publication.
+Named case inventories and before/after source identities guard behavior drift.
+Fresh executed reports are the proof for their exact inputs; historical audit
+snapshots are inputs, not substitutes for execution. An unavailable mandatory
+host/tool fails the declared profile.
 
-`public-checkout-manifest.json` inventories the prepared inputs and their hashes.
-Generated evidence, build outputs, local tools and `.git` state are not published
-inputs. Check the manifest before committing the first public tree.
+The [CI workflow](.github/workflows/maintained.yml) separately names the native
+and browser targets. Windows/Linux/Edge results remain pending until those jobs
+execute successfully. Packaged extension automation uses bundled Chromium and
+a temporary Firefox add-on; it does not prove signed store-install behavior.
+Additional WebKit qualification remains deferred while existing regressions run.
+
+The [dependency scope](docs/dependency-scope.md) distinguishes the new maintained
+backup backend from the retained rejected experiment and records the development-
+tool advisory. No passing profile is a production security or certification claim.
+
+`public-checkout-manifest.json` records a captured public input set and hashes.
+Its capture status is historical; Git history identifies publication. It must be
+regenerated for a new public tree. Generated evidence, builds, local tool state
+and `.git` files remain excluded from source publication.

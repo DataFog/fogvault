@@ -1,0 +1,11 @@
+--- upstream/i18n-embed-0.16.0/src/lib.rs
++++ vendor/i18n-embed-0.16.0/src/lib.rs
+@@ -457,7 +457,7 @@
+ };
+ 
+ use fluent_langneg::{negotiate_languages, NegotiationStrategy};
+-use log::{debug, error};
++use log::debug;
+ use thiserror::Error;
+ 
+ pub use unic_langid;

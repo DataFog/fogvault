@@ -14,6 +14,34 @@ struct DeviceSlot {
     protected_seed: Vec<u8>,
     root_wrapper: Vec<u8>,
 }
+/// One exact seed/slot allocation shared by synchronous and cooperative providers.
+/// The root and password key never leave their enclosing owner.
+pub(crate) struct PendingDevice {
+    slot: DeviceSlot,
+    seed: Zeroizing<[u8; 32]>,
+}
+impl PendingDevice {
+    pub(crate) fn seed(&self) -> &[u8; 32] {
+        &self.seed
+    }
+    pub(crate) fn protected_seed(&self) -> &[u8] {
+        &self.slot.protected_seed
+    }
+}
+
+pub(crate) struct PendingUnlock {
+    slot: DeviceSlot,
+    inner: Zeroizing<Vec<u8>>,
+}
+impl PendingUnlock {
+    pub(crate) fn context(&self, access: &AccessDescriptor) -> ProviderContext {
+        access.device_context(&self.slot)
+    }
+    pub(crate) fn protected_seed(&self) -> &[u8] {
+        &self.slot.protected_seed
+    }
+}
+
 #[derive(Clone, Debug)]
 struct RecoverySlot {
     id: [u8; 16],
@@ -139,33 +167,66 @@ impl AccessDescriptor {
         match path {
             AccessPath::Password(password) => self.unlock_password(password, policy),
             AccessPath::Device { slot_id, password } => {
-                let slot = self
+                let identity = self
                     .devices
                     .iter()
                     .find(|slot| &slot.id == slot_id)
-                    .ok_or(Error::NotFound)?;
-                admission.provider(slot.identity)?;
-                if provider.capability_kind(&slot.identity)
-                    != crate::access::ProviderCapabilityKind::NonExportableOperation
-                {
-                    return Err(Error::UnsupportedCapability);
-                }
-                let inner = if self.profile == AccessProfile::PasswordAndDevice {
-                    let password = password.ok_or(Error::UnsupportedCapability)?;
-                    let key = self.password_key(password, policy)?;
-                    crypto::open(&key, &self.outer_aad(slot), &slot.root_wrapper)?
-                } else if self.profile == AccessProfile::PasswordOrDevice {
-                    Zeroizing::new(slot.root_wrapper.clone())
-                } else {
-                    return Err(Error::UnsupportedCapability);
-                };
+                    .ok_or(Error::NotFound)?
+                    .identity;
+                let pending = self.prepare_unlock_device(
+                    *slot_id,
+                    *password,
+                    provider.capability_kind(&identity),
+                    admission,
+                    policy,
+                )?;
                 let seed = provider
-                    .unwrap_seed(&self.device_context(slot), &slot.protected_seed)
+                    .unwrap_seed(&pending.context(self), pending.protected_seed())
                     .map_err(Error::Provider)?;
-                let key = crypto::derive(&seed, &self.vault_id, &self.device_aad(slot))?;
-                Self::root(crypto::open(&key, &self.device_aad(slot), &inner)?)
+                self.finish_unlock_device(pending, &seed)
             }
         }
+    }
+    pub(crate) fn prepare_unlock_device(
+        &self,
+        slot_id: [u8; 16],
+        password: Option<&[u8]>,
+        capability: crate::ProviderCapabilityKind,
+        admission: &AccessAdmission,
+        policy: &KdfPolicy,
+    ) -> Result<PendingUnlock> {
+        admission.profile(self.profile)?;
+        let slot = self
+            .devices
+            .iter()
+            .find(|slot| slot.id == slot_id)
+            .ok_or(Error::NotFound)?;
+        admission.provider(slot.identity)?;
+        if capability != crate::ProviderCapabilityKind::NonExportableOperation {
+            return Err(Error::UnsupportedCapability);
+        }
+        let inner = if self.profile == AccessProfile::PasswordAndDevice {
+            let password = password.ok_or(Error::UnsupportedCapability)?;
+            let key = self.password_key(password, policy)?;
+            crypto::open(&key, &self.outer_aad(slot), &slot.root_wrapper)?
+        } else if self.profile == AccessProfile::PasswordOrDevice {
+            Zeroizing::new(slot.root_wrapper.clone())
+        } else {
+            return Err(Error::UnsupportedCapability);
+        };
+        Ok(PendingUnlock {
+            slot: slot.clone(),
+            inner,
+        })
+    }
+    pub(crate) fn finish_unlock_device(
+        &self,
+        pending: PendingUnlock,
+        seed: &[u8; 32],
+    ) -> Result<Zeroizing<[u8; 32]>> {
+        let aad = self.device_aad(&pending.slot);
+        let key = crypto::derive(seed, &self.vault_id, &aad)?;
+        Self::root(crypto::open(&key, &aad, &pending.inner)?)
     }
     pub(crate) fn recover(&self, key: &RecoveryKey) -> Result<Zeroizing<[u8; 32]>> {
         let slot = self.recovery.as_ref().ok_or(Error::UnsupportedCapability)?;
@@ -261,6 +322,34 @@ impl AccessDescriptor {
         admission: &AccessAdmission,
         policy: &KdfPolicy,
     ) -> Result<(Self, Option<RecoveryKey>)> {
+        let (mut value, password_key) = Self::prepare_new(
+            content_format,
+            vault_id,
+            root_epoch,
+            policy_epoch,
+            root,
+            password,
+            kdf,
+            profile,
+            identities,
+            recovery,
+            admission,
+            policy,
+        )?;
+        for identity in identities {
+            value.add_device(root, &password_key, *identity, provider, admission)?;
+        }
+        let recovery_key = value.finish_new(root, recovery, admission, policy)?;
+        Ok((value, recovery_key))
+    }
+    pub(crate) fn admit_new(
+        kdf: KdfProfile,
+        profile: AccessProfile,
+        identities: &[ProviderIdentity],
+        recovery: bool,
+        admission: &AccessAdmission,
+        policy: &KdfPolicy,
+    ) -> Result<()> {
         admission.profile(profile)?;
         policy.admit(kdf)?;
         if identities.len() > admission.max_device_slots
@@ -297,6 +386,24 @@ impl AccessDescriptor {
         for identity in identities {
             admission.provider(*identity)?;
         }
+        Ok(())
+    }
+    #[allow(clippy::too_many_arguments)]
+    pub(crate) fn prepare_new(
+        content_format: u16,
+        vault_id: [u8; 16],
+        root_epoch: u64,
+        policy_epoch: u64,
+        root: &[u8; 32],
+        password: &[u8],
+        kdf: KdfProfile,
+        profile: AccessProfile,
+        identities: &[ProviderIdentity],
+        recovery: bool,
+        admission: &AccessAdmission,
+        policy: &KdfPolicy,
+    ) -> Result<(Self, Zeroizing<[u8; 32]>)> {
+        Self::admit_new(kdf, profile, identities, recovery, admission, policy)?;
         let mut value = Self {
             vault_id,
             root_epoch,
@@ -319,37 +426,83 @@ impl AccessDescriptor {
                 root,
             )?;
         }
-        for identity in identities {
-            value.add_device(root, &password_key, *identity, provider, admission)?;
-        }
-        let recovery_key = if recovery {
-            Some(value.set_recovery(root)?)
+        Ok((value, password_key))
+    }
+    pub(crate) fn finish_new(
+        &mut self,
+        root: &[u8; 32],
+        recovery: bool,
+        admission: &AccessAdmission,
+        policy: &KdfPolicy,
+    ) -> Result<Option<RecoveryKey>> {
+        let key = if recovery {
+            Some(self.set_recovery(root)?)
         } else {
             None
         };
-        value.admit(admission, policy)?;
-        Ok((value, recovery_key))
+        self.admit(admission, policy)?;
+        Ok(key)
     }
-    fn add_device(
-        &mut self,
-        root: &[u8; 32],
-        password_key: &[u8; 32],
+    pub(crate) fn prepare_enrollment(
+        &self,
+        password: Option<&[u8]>,
         identity: ProviderIdentity,
-        provider: &mut dyn KeyProvider,
         admission: &AccessAdmission,
-    ) -> Result<()> {
-        admission.provider(identity)?;
-        if provider.capability_kind(&identity)
-            != crate::access::ProviderCapabilityKind::NonExportableOperation
-        {
+        policy: &KdfPolicy,
+    ) -> Result<(Self, Zeroizing<[u8; 32]>)> {
+        if self.profile == AccessProfile::Portable {
             return Err(Error::UnsupportedCapability);
         }
+        self.admit(admission, policy)?;
+        admission.provider(identity)?;
         if self.devices.len() >= admission.max_device_slots
             || self.devices.iter().any(|slot| slot.identity == identity)
         {
             return Err(Error::Conflict);
         }
-        let mut slot = DeviceSlot {
+        let per = 64usize
+            .checked_add(admission.max_provider_blob_bytes)
+            .and_then(|n| {
+                n.checked_add(if self.profile == AccessProfile::PasswordAndDevice {
+                    112
+                } else {
+                    72
+                })
+            })
+            .ok_or(Error::ResourceLimit)?;
+        if self
+            .encode()
+            .len()
+            .checked_add(per)
+            .ok_or(Error::ResourceLimit)?
+            > admission.max_descriptor_bytes
+        {
+            return Err(Error::ResourceLimit);
+        }
+        let mut next = self.clone();
+        next.policy_epoch = next
+            .policy_epoch
+            .checked_add(1)
+            .ok_or(Error::ResourceLimit)?;
+        let key = if self.profile == AccessProfile::PasswordAndDevice {
+            self.password_key(password.ok_or(Error::UnsupportedCapability)?, policy)?
+        } else {
+            Zeroizing::new([0; 32])
+        };
+        Ok((next, key))
+    }
+    pub(crate) fn prepare_device(
+        &self,
+        identity: ProviderIdentity,
+        admission: &AccessAdmission,
+    ) -> Result<PendingDevice> {
+        admission.provider(identity)?;
+        if self.devices.len() >= admission.max_device_slots
+            || self.devices.iter().any(|slot| slot.identity == identity)
+        {
+            return Err(Error::Conflict);
+        }
+        let slot = DeviceSlot {
             id: crypto::random()?,
             revision: 1,
             identity,
@@ -363,17 +516,32 @@ impl AccessDescriptor {
             return Err(Error::Conflict);
         }
         let seed = Zeroizing::new(crypto::random::<32>()?);
-        let context = self.device_context(&slot);
-        slot.protected_seed = provider
-            .wrap_seed(&context, &seed)
-            .map_err(Error::Provider)?;
-        if slot.protected_seed.len() > admission.max_provider_blob_bytes {
+        Ok(PendingDevice { slot, seed })
+    }
+    pub(crate) fn pending_context(&self, pending: &PendingDevice) -> ProviderContext {
+        self.device_context(&pending.slot)
+    }
+    pub(crate) fn admit_wrapped_seed(
+        &self,
+        pending: &mut PendingDevice,
+        wrapped: Vec<u8>,
+        admission: &AccessAdmission,
+    ) -> Result<()> {
+        if wrapped.len() > admission.max_provider_blob_bytes {
             return Err(Error::ResourceLimit);
         }
-        let proof = provider
-            .unwrap_seed(&context, &slot.protected_seed)
-            .map_err(Error::Provider)?;
-        if !crypto::tags_match(&seed, &proof) {
+        pending.slot.protected_seed = wrapped;
+        Ok(())
+    }
+    pub(crate) fn finish_device(
+        &mut self,
+        pending: PendingDevice,
+        root: &[u8; 32],
+        password_key: &[u8; 32],
+        proof: &[u8; 32],
+    ) -> Result<()> {
+        let PendingDevice { mut slot, seed } = pending;
+        if !crypto::tags_match(&seed, proof) {
             return Err(Error::Integrity);
         }
         let aad = self.device_aad(&slot);
@@ -387,6 +555,31 @@ impl AccessDescriptor {
         self.devices.push(slot);
         self.devices.sort_by_key(|slot| slot.id);
         Ok(())
+    }
+    fn add_device(
+        &mut self,
+        root: &[u8; 32],
+        password_key: &[u8; 32],
+        identity: ProviderIdentity,
+        provider: &mut dyn KeyProvider,
+        admission: &AccessAdmission,
+    ) -> Result<()> {
+        admission.provider(identity)?;
+        if provider.capability_kind(&identity)
+            != crate::ProviderCapabilityKind::NonExportableOperation
+        {
+            return Err(Error::UnsupportedCapability);
+        }
+        let mut pending = self.prepare_device(identity, admission)?;
+        let context = self.pending_context(&pending);
+        let wrapped = provider
+            .wrap_seed(&context, pending.seed())
+            .map_err(Error::Provider)?;
+        self.admit_wrapped_seed(&mut pending, wrapped, admission)?;
+        let proof = provider
+            .unwrap_seed(&context, pending.protected_seed())
+            .map_err(Error::Provider)?;
+        self.finish_device(pending, root, password_key, &proof)
     }
     fn set_recovery(&mut self, root: &[u8; 32]) -> Result<RecoveryKey> {
         let key = RecoveryKey::generate(self.vault_id, self.root_epoch)?;

@@ -1,0 +1,15 @@
+--- upstream/i18n-config-0.4.8/Cargo.toml
++++ vendor/i18n-config-0.4.8/Cargo.toml
+@@ -43,8 +43,10 @@
+ name = "i18n_config"
+ path = "src/lib.rs"
+ 
+-[dependencies.basic-toml]
+-version = "0.1"
++[dependencies.toml]
++version = "=1.1.8"
++default-features = false
++features = ["parse", "serde"]
+ 
+ [dependencies.log]
+ version = "0.4"

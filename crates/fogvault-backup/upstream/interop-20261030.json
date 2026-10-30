@@ -1,0 +1,13 @@
+{
+  "pass": true,
+  "schema": "fogvault-maintained-age-interop/v1",
+  "go_version": "v1.3.2",
+  "go_sha256": "4012dfc2725883beafb710894af4f599b7a94f8c8e0f51f02cc96ab8df33915e",
+  "rust_to_go": true,
+  "go_to_rust": true,
+  "payload_sha256": "e02704b357f57a46b631937e7fef1c530450c8f7a469e05c8349757389413c09",
+  "ciphertext_rust_sha256": "d66a3b50bb1eef4f5022ad76c2449f73fa8a7fe24286eb909036c6f788cbf466",
+  "ciphertext_go_sha256": "93c9e7c4e5cc643d94fcd9d14734ae5c78afcec72669bd648ec883961f279cda",
+  "plaintext_or_private_key_files": false,
+  "scope": "single pinned Apple-arm64 interoperability run; not whole-platform qualification"
+}

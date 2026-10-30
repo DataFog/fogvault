@@ -1,0 +1,10 @@
+--- upstream/i18n-embed-impl-0.8.4/Cargo.toml
++++ vendor/i18n-embed-impl-0.8.4/Cargo.toml
+@@ -45,6 +45,7 @@
+ optional = true
+ 
+ [dependencies.i18n-config]
++path = "../i18n-config-0.4.8"
+ version = "0.4.7"
+ optional = true
+ 

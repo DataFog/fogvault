@@ -5,7 +5,12 @@ edition = "2021"
 publish = false
 license = "MIT"
 
+[features]
+default = ["diagnostics"]
+diagnostics = []
+
 [lib]
+path = "../../crates/fogvault-wasm/src/lib.rs"
 crate-type = ["cdylib"]
 
 [dependencies]
@@ -13,3 +18,5 @@ fogvault = { path = "../../crates/fogvault", default-features = false, features 
 wasm-bindgen = "=0.2.127"
 js-sys = "=0.3.104"
 zeroize = "=1.9.1"
+sha2 = "=0.11.1"
+fogvault-backup = { path = "../../crates/fogvault-backup" }

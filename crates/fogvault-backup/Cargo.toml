@@ -1,0 +1,15 @@
+[package]
+name = "fogvault-backup"
+version = "0.0.0"
+edition = "2021"
+publish = false
+license = "MIT"
+description = "Bounded streaming age/v1 FogVault snapshot export and encrypted import staging"
+
+[dependencies]
+age = { path = "vendor/age-0.11.5", version = "=0.11.5", default-features = false }
+sha2 = "=0.11.1"
+zeroize = "=1.9.1"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+getrandom = { version = "=0.2.17", features = ["js"] }

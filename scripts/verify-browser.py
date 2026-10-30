@@ -18,6 +18,9 @@ import time
 import uuid
 
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from source_inputs import maintained_sources
+
 PROJECT=ROOT/'experiments/browser-prototype'
 MANIFEST=PROJECT/'Cargo.toml'
 CORE=ROOT/'crates/fogvault'
@@ -31,7 +34,8 @@ def source_identity():
     paths.extend(sorted((PROJECT/'web').rglob('*')))
     paths.extend(sorted((ROOT/'experiments/vault-prototype/src').rglob('*.rs')))
     paths.extend([CORE/'Cargo.toml',CORE/'Cargo.lock',*sorted((CORE/'src').rglob('*.rs')),*sorted((CORE/'tests').rglob('*.rs')),*sorted((CORE/'examples').rglob('*.rs'))])
-    return {str(p.relative_to(ROOT)):sha(p) for p in sorted(set(paths)) if p.is_file()}
+    paths.extend(maintained_sources(ROOT))
+    return {p.relative_to(ROOT).as_posix():sha(p) for p in sorted(set(paths)) if p.is_file()}
 
 class Handler(SimpleHTTPRequestHandler):
     def log_message(self,*args):pass
@@ -70,7 +74,7 @@ def main():
         wasm=Path(metadata['target_directory'])/'wasm32-unknown-unknown/release/fogvault_browser_feasibility.wasm'
         run('generate-bindings',['wasm-bindgen',wasm,'--target','web','--out-dir',PROJECT/'pkg'])
         for p in sorted((PROJECT/'pkg').glob('*')):
-            if p.is_file():artifacts.append({'path':str(p.relative_to(ROOT)),'sha256':sha(p),'bytes':p.stat().st_size})
+            if p.is_file():artifacts.append({'path':p.relative_to(ROOT).as_posix(),'sha256':sha(p),'bytes':p.stat().st_size})
         if source_identity()!=identity:raise RuntimeError('browser input sources changed during build')
         server=ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Handler,directory=str(ROOT)))
         thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()

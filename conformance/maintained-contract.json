@@ -1,0 +1,55 @@
+{
+  "schema": "fogvault-maintained-delivery-contract/v1",
+  "native": {
+    "manifest": "crates/fogvault-native/Cargo.toml",
+    "os": [
+      "windows",
+      "macos",
+      "linux"
+    ],
+    "consumer_floor": "0.5.0-beta.3",
+    "exact_regression_pin": "=0.5.0-beta.3"
+  },
+  "browser_sdk": {
+    "package": "packages/browser",
+    "required_engines": [
+      "chrome",
+      "firefox"
+    ],
+    "ci_additional_engines": [
+      "msedge"
+    ],
+    "result_schema": "fogvault-browser-sdk-acceptance/v1",
+    "required_cases": [
+      "sdk_create_save_lock_reopen_read",
+      "sdk_password_change_and_kdf_upgrade_survive_restart",
+      "sdk_same_request_retry_returns_original_receipt",
+      "sdk_competing_owner_cannot_refresh_stale_intent",
+      "sdk_paged_inventory_and_delete_are_complete",
+      "sdk_lock_terminates_actual_worker_kdf_before_authority_publication",
+      "sdk_owner_recovery_reencrypts_every_record_and_survives_reopen",
+      "sdk_protective_staging_rejection_preserves_source_vault",
+      "sdk_recovery_reply_loss_reports_unknown_and_reopens_exact_target",
+      "sdk_age_export_and_completed_fresh_restore_preserve_records",
+      "sdk_backup_authentication_failures_never_create_a_target",
+      "sdk_backup_restore_never_overwrites_an_existing_vault",
+      "sdk_async_or_and_device_profiles_use_core_and_require_declared_factors",
+      "sdk_async_provider_failures_cannot_publish_read_authority",
+      "sdk_lock_cancels_async_provider_and_discards_late_completion",
+      "sdk_async_access_setup_and_explicit_maintenance_preserve_record_ciphertext",
+      "sdk_named_lost_device_replacement_excludes_old_identity_and_changes_all_ciphertexts",
+      "sdk_factor_required_recovery_builds_explicit_new_device_graph",
+      "sdk_factor_required_password_and_kdf_maintenance_preserve_slots_recovery_and_content",
+      "sdk_async_enrollment_preserves_existing_slots_and_recovery_with_old_device_offline",
+      "binding_provider_replies_are_bounded_before_wasm_copy_and_phase_checked",
+      "sdk_configuration_and_credentials_reject_before_transport"
+    ],
+    "extension_hosts": [
+      "chromium-mv3",
+      "firefox-webextension"
+    ],
+    "independent_control": "unanchored-offline"
+  },
+  "webkit_additional_qualification_deferred": true,
+  "production_security_approval": false
+}

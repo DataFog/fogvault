@@ -21,6 +21,9 @@ import tempfile
 import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from source_inputs import maintained_sources
+
 PROJECT = ROOT / "experiments/export-prototype"
 MANIFEST = PROJECT / "Cargo.toml"
 GO = ROOT / "research/review-dependencies/age-v1.3.2/bin/age"
@@ -52,7 +55,8 @@ def identities() -> dict:
     for directory in (PROJECT / "src", PROJECT / "tests", PROJECT / "provenance"):
         files.extend(p for p in directory.rglob("*") if p.is_file())
     files.extend((ROOT / "conformance").glob("export-vectors*"))
-    return {str(p.relative_to(ROOT)): sha(p) for p in sorted(set(files))}
+    files.extend(maintained_sources(ROOT))
+    return {p.relative_to(ROOT).as_posix(): sha(p) for p in sorted(set(files))}
 
 
 def require(value, message):

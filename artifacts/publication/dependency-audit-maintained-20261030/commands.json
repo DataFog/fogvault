@@ -1,0 +1,149 @@
+[
+  {
+    "name": "core",
+    "lockfile": "crates/fogvault/Cargo.lock",
+    "lock_sha256_before": "1baba4cbf4ae96ba5d966b0add00a1e0283fb36b6708c8da52ad044769d9532d",
+    "lock_sha256_after": "1baba4cbf4ae96ba5d966b0add00a1e0283fb36b6708c8da52ad044769d9532d",
+    "command": [
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/research/review-dependencies/cargo-audit-v0.22.2/bin/cargo-audit",
+      "audit",
+      "--json",
+      "--deny",
+      "warnings",
+      "--no-fetch",
+      "--db",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/research/review-dependencies/advisory-db",
+      "--file",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/crates/fogvault/Cargo.lock"
+    ],
+    "started_utc": "2026-10-30T08:43:24.393241+00:00",
+    "completed_utc": "2026-10-30T08:43:24.595237+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "native",
+    "lockfile": "experiments/vault-prototype/Cargo.lock",
+    "lock_sha256_before": "801b045d634306a1711b5bc317d4744b951da024d44b96fc721c9cadfecb0f14",
+    "lock_sha256_after": "801b045d634306a1711b5bc317d4744b951da024d44b96fc721c9cadfecb0f14",
+    "command": [
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/research/review-dependencies/cargo-audit-v0.22.2/bin/cargo-audit",
+      "audit",
+      "--json",
+      "--deny",
+      "warnings",
+      "--no-fetch",
+      "--db",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/research/review-dependencies/advisory-db",
+      "--file",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/experiments/vault-prototype/Cargo.lock"
+    ],
+    "started_utc": "2026-10-30T08:43:24.669164+00:00",
+    "completed_utc": "2026-10-30T08:43:24.759915+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "browser",
+    "lockfile": "experiments/browser-prototype/Cargo.lock",
+    "lock_sha256_before": "9154e2e1067f799e299b038a9707f317663a20130c87ca6f9c4fd49e7d0e949f",
+    "lock_sha256_after": "9154e2e1067f799e299b038a9707f317663a20130c87ca6f9c4fd49e7d0e949f",
+    "command": [
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/research/review-dependencies/cargo-audit-v0.22.2/bin/cargo-audit",
+      "audit",
+      "--json",
+      "--deny",
+      "warnings",
+      "--no-fetch",
+      "--db",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/research/review-dependencies/advisory-db",
+      "--file",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/experiments/browser-prototype/Cargo.lock"
+    ],
+    "started_utc": "2026-10-30T08:43:24.824259+00:00",
+    "completed_utc": "2026-10-30T08:43:24.909870+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "mobile",
+    "lockfile": "experiments/mobile-prototype/Cargo.lock",
+    "lock_sha256_before": "6fc19c5c74dcd1abfadf2abb6c26c6ae19925957f69aa24d99a37fef2e516bd5",
+    "lock_sha256_after": "6fc19c5c74dcd1abfadf2abb6c26c6ae19925957f69aa24d99a37fef2e516bd5",
+    "command": [
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/research/review-dependencies/cargo-audit-v0.22.2/bin/cargo-audit",
+      "audit",
+      "--json",
+      "--deny",
+      "warnings",
+      "--no-fetch",
+      "--db",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/research/review-dependencies/advisory-db",
+      "--file",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/experiments/mobile-prototype/Cargo.lock"
+    ],
+    "started_utc": "2026-10-30T08:43:24.938107+00:00",
+    "completed_utc": "2026-10-30T08:43:25.007368+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "native-package",
+    "lockfile": "crates/fogvault-native/Cargo.lock",
+    "lock_sha256_before": "efda9a71ece13d4da6fa183f2f59f763dab68e5609f8a4705570b8bb41f7d830",
+    "lock_sha256_after": "efda9a71ece13d4da6fa183f2f59f763dab68e5609f8a4705570b8bb41f7d830",
+    "command": [
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/research/review-dependencies/cargo-audit-v0.22.2/bin/cargo-audit",
+      "audit",
+      "--json",
+      "--deny",
+      "warnings",
+      "--no-fetch",
+      "--db",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/research/review-dependencies/advisory-db",
+      "--file",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/crates/fogvault-native/Cargo.lock"
+    ],
+    "started_utc": "2026-10-30T08:43:25.082584+00:00",
+    "completed_utc": "2026-10-30T08:43:25.174870+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "wasm-package",
+    "lockfile": "crates/fogvault-wasm/Cargo.lock",
+    "lock_sha256_before": "f0ad3bdf41c18304f0e01d1bf3b2e59ad9d9e1cba63e3d36c042519d46218303",
+    "lock_sha256_after": "f0ad3bdf41c18304f0e01d1bf3b2e59ad9d9e1cba63e3d36c042519d46218303",
+    "command": [
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/research/review-dependencies/cargo-audit-v0.22.2/bin/cargo-audit",
+      "audit",
+      "--json",
+      "--deny",
+      "warnings",
+      "--no-fetch",
+      "--db",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/research/review-dependencies/advisory-db",
+      "--file",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/crates/fogvault-wasm/Cargo.lock"
+    ],
+    "started_utc": "2026-10-30T08:43:25.232146+00:00",
+    "completed_utc": "2026-10-30T08:43:25.320627+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "backup-package",
+    "lockfile": "crates/fogvault-backup/Cargo.lock",
+    "lock_sha256_before": "c7f4718581ce4ea181e46ebae94c64e8e6aa0e4a8fa669bf344e9e1f8d17ff44",
+    "lock_sha256_after": "c7f4718581ce4ea181e46ebae94c64e8e6aa0e4a8fa669bf344e9e1f8d17ff44",
+    "command": [
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/research/review-dependencies/cargo-audit-v0.22.2/bin/cargo-audit",
+      "audit",
+      "--json",
+      "--deny",
+      "warnings",
+      "--no-fetch",
+      "--db",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/research/review-dependencies/advisory-db",
+      "--file",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/crates/fogvault-backup/Cargo.lock"
+    ],
+    "started_utc": "2026-10-30T08:43:25.388777+00:00",
+    "completed_utc": "2026-10-30T08:43:25.475181+00:00",
+    "exit_code": 0
+  }
+]

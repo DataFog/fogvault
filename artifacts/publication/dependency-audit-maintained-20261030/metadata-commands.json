@@ -1,0 +1,128 @@
+[
+  {
+    "name": "core",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/crates/fogvault/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "package_count": 30,
+    "manifest_sha256": "e26b64cb708d70f86534d0ef10e366c7bf94641e873a3695199fe604f1d264c5",
+    "lock_sha256": "1baba4cbf4ae96ba5d966b0add00a1e0283fb36b6708c8da52ad044769d9532d",
+    "metadata_sha256": "773f6e920f94a43597e50dcf96f0d503e3640f43412626167b3f5abe21d175cb"
+  },
+  {
+    "name": "native",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/experiments/vault-prototype/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "package_count": 186,
+    "manifest_sha256": "d67bbbce3af3fcad3f42a0ae4de87034494a866d8cc1ec69cf66ccb4b61ec965",
+    "lock_sha256": "801b045d634306a1711b5bc317d4744b951da024d44b96fc721c9cadfecb0f14",
+    "metadata_sha256": "c43a896ac89542f2c82e3777eac5d14ba98e5188b1f9f7afe652efb5f6b15bcd"
+  },
+  {
+    "name": "browser",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/experiments/browser-prototype/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "package_count": 161,
+    "manifest_sha256": "568a95e108e145f9ec1b89f905ba9cb9f5cefd9f872cc55671923f9aee7c98d3",
+    "lock_sha256": "9154e2e1067f799e299b038a9707f317663a20130c87ca6f9c4fd49e7d0e949f",
+    "metadata_sha256": "3c52e80c423c6c91cc4a349a5c63864cc9b6c848bdd3209071cc14ef7027a80f"
+  },
+  {
+    "name": "mobile",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/experiments/mobile-prototype/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "package_count": 31,
+    "manifest_sha256": "935ef36e57e3cd4d2f6d1cb3352897f282c241ab43f53e4bb7dbede950639e18",
+    "lock_sha256": "6fc19c5c74dcd1abfadf2abb6c26c6ae19925957f69aa24d99a37fef2e516bd5",
+    "metadata_sha256": "349c148e935d66b0ecbf29ed2de60bac6a5c8603f0c73627b4765fab83a43c1c"
+  },
+  {
+    "name": "native-package",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/crates/fogvault-native/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "package_count": 175,
+    "manifest_sha256": "a6fed59e527739e8605331a65d56a98f9c682f09673bd1e154b1045abcb0c4e6",
+    "lock_sha256": "efda9a71ece13d4da6fa183f2f59f763dab68e5609f8a4705570b8bb41f7d830",
+    "metadata_sha256": "7be2460410bb5fe22ad890282ae55f046d2e96751a79cd5e799b2647eb8b5220"
+  },
+  {
+    "name": "wasm-package",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/crates/fogvault-wasm/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "package_count": 161,
+    "manifest_sha256": "690ddb49e3876924921508a98782668f5d9912a8513ea7c1c4f601c595bbc2e5",
+    "lock_sha256": "f0ad3bdf41c18304f0e01d1bf3b2e59ad9d9e1cba63e3d36c042519d46218303",
+    "metadata_sha256": "4acb9ec14d00935df2a18982bba39888a6e59fa21b5fd8eb07abed4f6963c010"
+  },
+  {
+    "name": "backup-package",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/local-only/public-checkout/crates/fogvault-backup/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "package_count": 140,
+    "manifest_sha256": "8f85bc9f821b6dc184bdcf92aa6b04912ba9c5b48119eec2240a6fa87ffd478b",
+    "lock_sha256": "c7f4718581ce4ea181e46ebae94c64e8e6aa0e4a8fa669bf344e9e1f8d17ff44",
+    "metadata_sha256": "b906006621aa6fe46c2929c1794f269de15db696429ce042726de172d5d48d53"
+  }
+]

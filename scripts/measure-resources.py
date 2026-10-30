@@ -19,6 +19,9 @@ import tempfile
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from source_inputs import maintained_sources
+
 MANIFEST = ROOT / "experiments/vault-prototype/Cargo.toml"
 CORE = ROOT / "crates/fogvault"
 CONSUMER_SOURCE = ROOT / "research/consumer/datafog-core-0.5.0-beta.3/published-source/src/workspace.rs"
@@ -36,7 +39,8 @@ def source_identity() -> dict[str, str]:
              *sorted((MANIFEST.parent / "src").rglob("*.rs")),
              CORE / "Cargo.toml", CORE / "Cargo.lock", *sorted((CORE / "src").rglob("*.rs")),
              *sorted((CORE / "tests").rglob("*.rs")), *sorted((CORE / "examples").rglob("*.rs"))]
-    return {str(path.relative_to(ROOT)): digest(path) for path in sorted(paths)}
+    paths.extend(maintained_sources(ROOT))
+    return {path.relative_to(ROOT).as_posix(): digest(path) for path in sorted(paths)}
 
 
 def consumer_limit() -> dict:
@@ -48,7 +52,7 @@ def consumer_limit() -> dict:
     if size != 16 * 1024 * 1024:
         raise ValueError("the consumer bundle bound differs from the benchmark's reviewed mirror")
     return {"bytes": size, "expression": " * ".join(match.groups()),
-            "source": str(CONSUMER_SOURCE.relative_to(ROOT)),
+            "source": CONSUMER_SOURCE.relative_to(ROOT).as_posix(),
             "source_line": source[:match.start()].count("\n") + 1,
             "source_sha256": digest(CONSUMER_SOURCE), "version": "0.5.0-beta.3"}
 

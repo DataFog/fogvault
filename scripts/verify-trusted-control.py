@@ -20,10 +20,14 @@ import re
 import shutil
 import sqlite3
 import subprocess
+import sys
 import tempfile
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from source_inputs import maintained_sources
+
 FIXTURE = "native::control::proof::native_control_process_fixture"
 REGISTRATION = bytes([0x43]) * 16
 
@@ -54,19 +58,20 @@ def main() -> int:
               ROOT / "crates/fogvault/Cargo.toml", ROOT / "crates/fogvault/Cargo.lock",
               ROOT / "experiments/vault-prototype/Cargo.toml", ROOT / "experiments/vault-prototype/Cargo.lock",
               Path(__file__).resolve()]
-    report["source_identity"] = {str(p.relative_to(ROOT)): digest(p) for p in inputs}
+    inputs.extend(maintained_sources(ROOT))
+    report["source_identity"] = {p.relative_to(ROOT).as_posix(): digest(p) for p in inputs}
     children: list[subprocess.Popen] = []
     temporary_root: Path | None = None
     try:
         command = ["cargo", "test", "--offline", "--locked", "--manifest-path",
-                   str(ROOT / "experiments/vault-prototype/Cargo.toml"), "--lib", "--no-run", "--message-format=json"]
+                   str(ROOT / "crates/fogvault-native/Cargo.toml"), "--features", "diagnostics", "--lib", "--no-run", "--message-format=json"]
         build = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=60)
         (logs / "build.log").write_text(build.stdout + build.stderr)
         if build.returncode:
             raise RuntimeError("control fixture build failed; see build.log")
         artifacts = [json.loads(line) for line in build.stdout.splitlines() if line.startswith("{")]
         executables = [a["executable"] for a in artifacts if a.get("reason") == "compiler-artifact"
-                       and a.get("target", {}).get("name") == "fogvault_disposable_prototype"
+                       and a.get("target", {}).get("name") == "fogvault_native"
                        and a.get("profile", {}).get("test") and a.get("executable")]
         if len(executables) != 1:
             raise RuntimeError("exact native fixture executable missing or ambiguous")
@@ -369,7 +374,7 @@ def main() -> int:
         report["temporary_namespace_removed"]=cleanup
         report["external_control_storage_subprocesses"]=False
         report["keychain_operations"]=False
-        report["sources_stable"] = all(p.is_file() and digest(p) == report["source_identity"][str(p.relative_to(ROOT))] for p in inputs)
+        report["sources_stable"] = all(p.is_file() and digest(p) == report["source_identity"][p.relative_to(ROOT).as_posix()] for p in inputs)
         report["executed_case_ids"]=[case["id"]for case in report["cases"]]
         report["pass"] = bool(report["pass"] and cleanup and report["sources_stable"])
         report["logs"] = {str(p): digest(p) for p in sorted(logs.iterdir()) if p.is_file()}

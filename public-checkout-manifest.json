@@ -1,29 +1,18 @@
 {
-  "baseline_report_sha256": "7e28894bfa917d93bd50d401ebae39190966214a28e3277e780531cb8457bef0",
+  "baseline_report_sha256": "2f3db5a5b739cd142daf4e63ce4bc78528bed8ea7935fcbfd89d8a36abc19d51",
   "changed_baseline_input_paths": [
-    "conformance/vault-contract.json",
-    "crates/fogvault/Cargo.toml",
-    "experiments/browser-prototype/Cargo.toml",
-    "experiments/export-prototype/Cargo.toml",
-    "experiments/mobile-prototype/Cargo.toml",
-    "experiments/vault-prototype/Cargo.toml",
-    "research/review-dependencies/age-v1.3.2/provenance.json",
-    "scripts/verify-browser.py",
-    "scripts/verify-dependency-audit.py",
-    "scripts/verify-vault.py",
-    "spec/format-profile-review.md",
-    "spec/protective-transition.md"
+    "scripts/verify-browser-sdk.py"
   ],
-  "content_identity_sha256": "1774db39378f4a533b948928c80eb6cdbe076cf91a3962b2c36ed6c1c4d7ceaf",
+  "content_identity_sha256": "098577333760974ac0912ff496ae3003bbca238b5faa5dd69749037b8a8c9ec8",
   "declared_public_overlays": [
     {
       "path": ".gitignore",
-      "public_sha256": "5bea822d8ab6f17842536d9822fe3ee71c03c7eba8714f3c16c5766daf91797f",
+      "public_sha256": "fe1188257b1874e0aea1744979bfa974a0d9abacfe4bb8683e599e73c3d1486f",
       "workspace_sha256": "2a128fa53d70a8b51d20d6a3169d6889e07e6d5d4f3a6fcbe4ceae32f9423367"
     },
     {
       "path": "README.md",
-      "public_sha256": "246ac5dc743c04ab645e722e5c26fb63b825ba514f0d807cf52352510b2b7a7a",
+      "public_sha256": "ea095337325530784b142e295a0ed34efe5330170245343fd6422e784598d9f1",
       "workspace_sha256": "d26c5c82e4df55159c70bc5985e57405c085efc5a7fe230f9e6867d9d8100dc7"
     },
     {
@@ -47,16 +36,34 @@
       "workspace_sha256": "456ec020264d018fdb69b36b0db45ef43870088c2cfdb9f59fecb630b54954d9"
     }
   ],
-  "file_count": 3143,
+  "file_count": 3490,
   "files": [
     {
-      "bytes": 264913,
+      "bytes": 153,
+      "executable": false,
+      "path": ".gitattributes",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "44f1c611a4b7eb466789710e407df8fe0efbda83df945cba487e5ac82db67657"
+    },
+    {
+      "bytes": 4146,
+      "executable": false,
+      "path": ".github/workflows/maintained.yml",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "ccf9b3c68cda916863b58f7194dab7b96a3e8891cc1c95dc466c84912fddff02"
+    },
+    {
+      "bytes": 268597,
       "executable": false,
       "path": ".gitignore",
       "reasons": [
         "generated-exact-public-input-allowlist"
       ],
-      "sha256": "5bea822d8ab6f17842536d9822fe3ee71c03c7eba8714f3c16c5766daf91797f"
+      "sha256": "fe1188257b1874e0aea1744979bfa974a0d9abacfe4bb8683e599e73c3d1486f"
     },
     {
       "bytes": 1064,
@@ -68,23 +75,23 @@
       "sha256": "ce1ff3fa2e2167f504b4c9b6ca3875cecc7e69ce072b4e1dcf61028781fa75bc"
     },
     {
-      "bytes": 3801,
+      "bytes": 3862,
       "executable": false,
       "path": "PUBLIC-CHECKOUT-NOTES.md",
       "reasons": [
         "public-presentation"
       ],
-      "sha256": "05b7934441dfe6fa7d2e7aace0f08373abdd679c07b67edba2933972252ce9b7"
+      "sha256": "705183be1ff7ce28c8215e3987fdfc1bebcd1b81e0ed797da22d5e84aa50e2b3"
     },
     {
-      "bytes": 4905,
+      "bytes": 5031,
       "executable": false,
       "path": "README.md",
       "reasons": [
         "public-presentation",
         "reviewed-public-presentation-overlay"
       ],
-      "sha256": "246ac5dc743c04ab645e722e5c26fb63b825ba514f0d807cf52352510b2b7a7a"
+      "sha256": "ea095337325530784b142e295a0ed34efe5330170245343fd6422e784598d9f1"
     },
     {
       "bytes": 5349,
@@ -310,6 +317,348 @@
       "path": "artifacts/publication/dependency-audit-20261030-mit/native.stderr.txt",
       "reasons": [
         "current-contract-input:dependency_audit"
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 589028,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/backup-package-cargo-metadata.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b906006621aa6fe46c2929c1794f269de15db696429ce042726de172d5d48d53"
+    },
+    {
+      "bytes": 0,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/backup-package-cargo-metadata.stderr.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 63009,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/backup-package-packages.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "d9ccd772d95a77247c3ff4f5d6240a05ab79cad0c5001c05afa444eba5305909"
+    },
+    {
+      "bytes": 314,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/backup-package.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "24106d11be083738821aa836c2c69b150548cf6fc469e14cae141c516eb7879f"
+    },
+    {
+      "bytes": 0,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/backup-package.stderr.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 670302,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/browser-cargo-metadata.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3c52e80c423c6c91cc4a349a5c63864cc9b6c848bdd3209071cc14ef7027a80f"
+    },
+    {
+      "bytes": 0,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/browser-cargo-metadata.stderr.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 72088,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/browser-packages.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "c32370a060b37bd964231723719a7363f321573781b1aab8c77229ed2f08e5bf"
+    },
+    {
+      "bytes": 314,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/browser.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a414b8438cc75347bb8a777e3d7eb7df70d242b6217fc24530aa12220d263c86"
+    },
+    {
+      "bytes": 0,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/browser.stderr.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 6335,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/commands.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "16a2b08fefcd86dc1049fe7919b618de4388d9402f6970541a4bac901d2d8637"
+    },
+    {
+      "bytes": 107600,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/core-cargo-metadata.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "773f6e920f94a43597e50dcf96f0d503e3640f43412626167b3f5abe21d175cb"
+    },
+    {
+      "bytes": 0,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/core-cargo-metadata.stderr.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 12954,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/core-packages.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "ab5d0622c52a152486b1f98339e287bdbcd4c7595d8a448f5b7f132c7a54e898"
+    },
+    {
+      "bytes": 313,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/core.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "23c23b4a9872c4a6c88b9911145cd6f028c8894a5d83049231454b2f63d9e1f4"
+    },
+    {
+      "bytes": 0,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/core.stderr.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 366570,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/inventory.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "9c510df09e569bd115af1ddc928a2f99aa309251eab315dd70c226e7db5eba98"
+    },
+    {
+      "bytes": 4280,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/metadata-commands.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "2617cfbbd67bacb08ff409b66bbb1d17e6ced91d040bf6be0abbb00a256ee72c"
+    },
+    {
+      "bytes": 109864,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/mobile-cargo-metadata.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "349c148e935d66b0ecbf29ed2de60bac6a5c8603f0c73627b4765fab83a43c1c"
+    },
+    {
+      "bytes": 0,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/mobile-cargo-metadata.stderr.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 13385,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/mobile-packages.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "cbb7c9f1e79c9a6b9f369fd26a852859f2027a3f0217ab2772119d016269c8ed"
+    },
+    {
+      "bytes": 313,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/mobile.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "8acdb547cfd62150fec2ce0a01572c283cebdc77e48b949072c13c7536702b72"
+    },
+    {
+      "bytes": 0,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/mobile.stderr.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 793893,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/native-cargo-metadata.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "c43a896ac89542f2c82e3777eac5d14ba98e5188b1f9f7afe652efb5f6b15bcd"
+    },
+    {
+      "bytes": 0,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/native-cargo-metadata.stderr.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 733365,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/native-package-cargo-metadata.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "7be2460410bb5fe22ad890282ae55f046d2e96751a79cd5e799b2647eb8b5220"
+    },
+    {
+      "bytes": 0,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/native-package-cargo-metadata.stderr.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 78760,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/native-package-packages.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "2b1d4c3b50db0773e6e771666715919ed8f06e3dc71878ced900245d81d10028"
+    },
+    {
+      "bytes": 314,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/native-package.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "bfd511b786e58c5549809cdd29c8df074efeed131ea5650955489598d3411de8"
+    },
+    {
+      "bytes": 0,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/native-package.stderr.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 84646,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/native-packages.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "4670656ca1acfdd8d56553ff1d1fba5b29851e90c9148f98c6c475fdd5a57759"
+    },
+    {
+      "bytes": 314,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/native.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "02119a6e39128f3425d381596d403528326f67402b471c3df63fc0ec0244cef6"
+    },
+    {
+      "bytes": 0,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/native.stderr.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 670037,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/wasm-package-cargo-metadata.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "4acb9ec14d00935df2a18982bba39888a6e59fa21b5fd8eb07abed4f6963c010"
+    },
+    {
+      "bytes": 0,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/wasm-package-cargo-metadata.stderr.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 72005,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/wasm-package-packages.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "864fb796c7e5032ed4928b52483c974430e737f89e170c6be71e9db80c35111b"
+    },
+    {
+      "bytes": 314,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/wasm-package.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a414b8438cc75347bb8a777e3d7eb7df70d242b6217fc24530aa12220d263c86"
+    },
+    {
+      "bytes": 0,
+      "executable": false,
+      "path": "artifacts/publication/dependency-audit-maintained-20261030/wasm-package.stderr.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
       ],
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -1171,6 +1520,15 @@
       "sha256": "7356383ae4a042b3528cea38a71bd8903ac5cd9cff3a8a60580e4134c948be4e"
     },
     {
+      "bytes": 2322,
+      "executable": false,
+      "path": "conformance/maintained-contract.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e930c3af1913c10e995fc0d25b1a9675d1f0239b8209361ff051fcc2f817f15a"
+    },
+    {
       "bytes": 4679,
       "executable": false,
       "path": "conformance/password-vectors.json",
@@ -1201,14 +1559,14 @@
       "sha256": "2c0f67d5e481c7b13554eabbe07f40899a78708e71227041cfa39adcc5435d36"
     },
     {
-      "bytes": 246962,
+      "bytes": 252053,
       "executable": false,
       "path": "conformance/vault-contract.json",
       "reasons": [
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "edfaf3af63b50d6ccbd8f822bf5fac1e35b17ec6d1c81cf650f304b9fbfc9839"
+      "sha256": "3b02866d74414a3212c1b57e325c05050c8f435ec6ebb0d4757950bec66d460b"
     },
     {
       "bytes": 130,
@@ -1311,6 +1669,2427 @@
       "sha256": "02bed822538f0726b33f523ea50ae0965c2345f77a6f0ca32a1135a5c84b3538"
     },
     {
+      "bytes": 32934,
+      "executable": false,
+      "path": "crates/fogvault-backup/Cargo.lock",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "c7f4718581ce4ea181e46ebae94c64e8e6aa0e4a8fa669bf344e9e1f8d17ff44"
+    },
+    {
+      "bytes": 441,
+      "executable": false,
+      "path": "crates/fogvault-backup/Cargo.toml",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "8f85bc9f821b6dc184bdcf92aa6b04912ba9c5b48119eec2240a6fa87ffd478b"
+    },
+    {
+      "bytes": 3175,
+      "executable": false,
+      "path": "crates/fogvault-backup/examples/interop.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "1f0a789217555154d0c87bb7edb714ce73ea62f863f3ff9666c59f4174d0195d"
+    },
+    {
+      "bytes": 17251,
+      "executable": false,
+      "path": "crates/fogvault-backup/src/lib.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "437c6d6ab5cf8558cf6ccca3e6f57e710499df8d9972d0bd6ab91ab6a62b11a5"
+    },
+    {
+      "bytes": 12118,
+      "executable": false,
+      "path": "crates/fogvault-backup/src/payload.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "036b3dbc877f402be32ea92c1ae9e885a1692d773833f2f56b16c5fd1f0d54b1"
+    },
+    {
+      "bytes": 14897,
+      "executable": false,
+      "path": "crates/fogvault-backup/tests/contracts.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a148cefa764b22916b4e5cfeca6d58a457dbc4f8111625c229eedab1dd4c9453"
+    },
+    {
+      "bytes": 2532,
+      "executable": false,
+      "path": "crates/fogvault-backup/tests/interop.py",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "360eef6b49c97898883032e92a396b0a56d3fdd02b5a55dd5eca4f5a80e2c7ef"
+    },
+    {
+      "bytes": 157177,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/age-0.11.5.crate",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "047a482d1843edf1ce76ada63183698144030fe1191bd5ddba6e41e164e0bc43"
+    },
+    {
+      "bytes": 314,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/audit-20261030.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "24106d11be083738821aa836c2c69b150548cf6fc469e14cae141c516eb7879f"
+    },
+    {
+      "bytes": 9082,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/i18n-config-0.4.8.crate",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3e06b90c8a0d252e203c94344b21e35a30f3a3a85dc7db5af8f8df9f3e0c63ef"
+    },
+    {
+      "bytes": 37661,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/i18n-embed-0.16.0.crate",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a217bbb075dcaefb292efa78897fc0678245ca67f265d12c351e42268fcb0305"
+    },
+    {
+      "bytes": 18820,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/i18n-embed-fl-0.10.1.crate",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "602e6bd30c3db2749e13e38b363a3d98d9d41de1d8de7a79c31bb69e45b47cda"
+    },
+    {
+      "bytes": 4830,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/i18n-embed-impl-0.8.4.crate",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "0f2cc0e0523d1fe6fc2c6f66e5038624ea8091b3e7748b5e8e0c84b1698db6c2"
+    },
+    {
+      "bytes": 638,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/interop-20261030.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "ae7d58a78c5c6a5829fbf07d829324dbd67e3035907965f4cf90bef7221753e5"
+    },
+    {
+      "bytes": 727,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/patches/age-0.11.5/Cargo.toml.diff",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "10be7aa7ae967be55d7012b6d54c0688f9113b238c6a1b6134103a2da6a46ea5"
+    },
+    {
+      "bytes": 327,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/patches/i18n-config-0.4.8/Cargo.toml.diff",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "ac3374a45c322086c5e88e33db23c0bf8ca5a3332f9198ebc4b9e96b164a83b2"
+    },
+    {
+      "bytes": 2253,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/patches/i18n-config-0.4.8/src/lib.rs.diff",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3c19c52854f5c9948a7729b57159a62b2031e26e8332d9c72bccccf0d9970997"
+    },
+    {
+      "bytes": 224,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/patches/i18n-embed-0.16.0/Cargo.toml.diff",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3f344893d352a377e5d129f3ba18a323a65e6fec7bc08c95e4e9e5f4067b7711"
+    },
+    {
+      "bytes": 263,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/patches/i18n-embed-0.16.0/src/lib.rs.diff",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "5d85805593ff743f0bd5d8632d45fa92a1bd9734f08b555da9ad3388ba9d5f5d"
+    },
+    {
+      "bytes": 321,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/patches/i18n-embed-fl-0.10.1/Cargo.toml.diff",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "eb4fd2a9f66c7fcf197b81d9c067283e74a66e0233d4c936e7078d1423c70746"
+    },
+    {
+      "bytes": 224,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/patches/i18n-embed-impl-0.8.4/Cargo.toml.diff",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3bab3f5dd4635b763f1faf792f79762de5f1f3f71cf8b6f2b11ec707d390c799"
+    },
+    {
+      "bytes": 4276,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/provenance.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "663e9b3022e4dfffa9b7562fabee00b4b46fb6ca54078a9049e0bd8c009b1f58"
+    },
+    {
+      "bytes": 2569,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/rejected-age-0.12.1-audit.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "cf419861390acf67dcce53f12e306e11a28263a888f11f47109c1c9322d9b8ff"
+    },
+    {
+      "bytes": 38125,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/rejected-age-0.12.1.lock",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "f8be3b119b3077345b6ab6e58e1f7867a0f88ead9e4123bfc004035113598346"
+    },
+    {
+      "bytes": 33696,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/vendor-files.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "d2c17a124f50c5d6f0dee85eb3577a16234ee68b29352109738a3f603c32cae3"
+    },
+    {
+      "bytes": 1780,
+      "executable": false,
+      "path": "crates/fogvault-backup/upstream/verify.py",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "5955ba830fb959c914fd6f6efec6d8409e17d6f58e77e888fe6f20894ab102ab"
+    },
+    {
+      "bytes": 97,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/.cargo_vcs_info.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "66eb57bf4f27c0c15b7bec31a43d14eca5f8a7c6451be9ca19b551ffe913aecb"
+    },
+    {
+      "bytes": 26814,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/CHANGELOG.md",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "326578994a6210083ca571af559352376041111aad9d1a626b881cd05cae3cb3"
+    },
+    {
+      "bytes": 4866,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/Cargo.toml",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "5e9faf8b5ce13525e7ea937b1bec38b57a61523463ac533ae4abb2c3c3232060"
+    },
+    {
+      "bytes": 3632,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/Cargo.toml.orig",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e4060e0806c93157376f2b0ac9273821e32795c5b6f7a275cb23b790b00ae0fe"
+    },
+    {
+      "bytes": 10848,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/LICENSE-APACHE",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3708458dee7f359ac6c9c5558023ed481be87e5372c43ebd7f2ca7ad23c12026"
+    },
+    {
+      "bytes": 1077,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/LICENSE-MIT",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "fe56c030c2d8c3404a37fe711cebb27ebea13d0aacf7e3524db4198335ad8cd1"
+    },
+    {
+      "bytes": 2726,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/README.md",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "2ae2b86f674ad38d33c6160a84e6722c2ec24fe1398dcdac58dd9f8499f5328a"
+    },
+    {
+      "bytes": 13116,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/assets/bip39-english.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "2f5eed53a4727b4bf8880d8f3f199efc90e58503646d9ff8eff3a2ed3b24dbda"
+    },
+    {
+      "bytes": 1280,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/benches/parser.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "283bea2d7def9d4ee370bbb32871999a038727afd59d413370db2c1eac0f4898"
+    },
+    {
+      "bytes": 2879,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/benches/throughput.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "443960843dfe160f7df3742b555b516a2bf01cd814b30ebf4741ea606005d53f"
+    },
+    {
+      "bytes": 58,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/i18n.toml",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "15dd0e6dc815c50c0cb6c5165b02dfe18927b64612adc06dd24947907f903cec"
+    },
+    {
+      "bytes": 7540,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/i18n/en-US/age.ftl",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "1f6d1aecff43abce08067f17665819276ccf6ed6911fab041c6626b9d8b073fd"
+    },
+    {
+      "bytes": 3885,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/i18n/es-AR/age.ftl",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "07773077c8a1a4908e2efa9d08547424d268955aaab97f225f2382ca3c09574d"
+    },
+    {
+      "bytes": 7637,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/i18n/fr/age.ftl",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3d08c21d605930f2fafcb06d435150499394f374479b3d4dc6def0f40a9fe5ee"
+    },
+    {
+      "bytes": 7347,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/i18n/it/age.ftl",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "1b1bb8c4468bef76964aba6d3e01ad462b3801f14ef67852e8531b1beec3bc2d"
+    },
+    {
+      "bytes": 10863,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/i18n/ru/age.ftl",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "cf660f96722ed39854f39bfef5daf5756003c2155777e64a653897e60a2f3ef4"
+    },
+    {
+      "bytes": 3465,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/i18n/zh-CN/age.ftl",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "9396a38cda1be84c95c2fe1d93917c883e383688ec32f82560f4526756bc45b7"
+    },
+    {
+      "bytes": 3465,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/i18n/zh-TW/age.ftl",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "f172c2244f8a253d85bae5cf5802fde3d516af7b445192c22f3df50a49efe72b"
+    },
+    {
+      "bytes": 7037,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/cli_common.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a6193ecbd7cd5eb85a841b78b84a1beb46419e9fd4f4ad7b82a0a642fa419321"
+    },
+    {
+      "bytes": 4400,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/cli_common/error.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "f77b629b7ffa1baa7df6495ffde49be76b4266a0612faa05c7fa9bfc0fadf47d"
+    },
+    {
+      "bytes": 14733,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/cli_common/file_io.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "cf2db9500e56ab6cbfa044c8b9ef581101eeb82ec50974e9c1bf1c144101ffa7"
+    },
+    {
+      "bytes": 10527,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/cli_common/identities.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b5160d9ea5291ce9254e2584864c64259b66bba3f4b0547b5718fb63995a23ca"
+    },
+    {
+      "bytes": 6886,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/cli_common/recipients.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b6e2e10782d5eb489abfe583fb61abeaf50272644dfcb62f6c883fc2b5b659b9"
+    },
+    {
+      "bytes": 11275,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/encrypted.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "abf9950d6df50532c9bb89e76cf4e0965f0fe57e5df3b54dc587e1fdb0912ef2"
+    },
+    {
+      "bytes": 15431,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/error.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "c189e34d5cd2e277b3f28a417e6fc885927fe31b91e03211bc402b1171f92c02"
+    },
+    {
+      "bytes": 15583,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/format.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "48b6d814988e129c59f22044fe619543a0540ba1275635cde10c1682a8ece1e4"
+    },
+    {
+      "bytes": 3126,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/i18n.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b2edbe4f27d3cf936f4dd0ef978f49fdc53f847c889dfbe939d43be726812f04"
+    },
+    {
+      "bytes": 12674,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/identity.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "da94ea3c510bdf5bb64427333ed517e0dd12f8c9957533ff6f5905ac71f66260"
+    },
+    {
+      "bytes": 1029,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/keys.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e4389d6b0ccb68b7a7ff7743e7a3fdd028278826d103822dbd1d4bee14ed00aa"
+    },
+    {
+      "bytes": 16349,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/lib.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b5f91667f4621e1d6dfbbaaea66da4418e2d6bf1c3e055ab1450fd2d494d472e"
+    },
+    {
+      "bytes": 30130,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/plugin.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "2fca6f9c5a8d90eb0d949140ec36d0a2d1a850c56893215e7b647be2230c5744"
+    },
+    {
+      "bytes": 1941,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/primitives.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "2255c5acd404c19837789e4ec30683aa9be60d346095631c1198664f211ceb80"
+    },
+    {
+      "bytes": 56584,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/primitives/armor.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "ac534eb5a45bb33acff78548059f61b49742de48ffce7309e2510b94b1198062"
+    },
+    {
+      "bytes": 37467,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/primitives/stream.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "db2630c06f768328332ee48ed760ad92018403a06cc88b6d6ee09591a2cdbe16"
+    },
+    {
+      "bytes": 20708,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/protocol.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "af5cac5a499903b67c2c1a09b9dfa82f1f1796e5f7b0e88991214e0f8f7ff016"
+    },
+    {
+      "bytes": 9803,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/scrypt.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "84349fb711dfe8ab91e98438f4b9b447d70c9c634b18ebbf0d5ac242e96aa578"
+    },
+    {
+      "bytes": 3711,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/simple.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a18d35d7f1436daa45084605ca2b71ad28005f38696bcecf1453c684b67ee7de"
+    },
+    {
+      "bytes": 21585,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/ssh.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "f7ca57022a04460ba6187f51b1dbeac81b4cb8ac178f4a543192af24cb641b1c"
+    },
+    {
+      "bytes": 22391,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/ssh/identity.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3cf28cde039c3c3b2453b00498dd636dd28453ff53eccca0f778fbaca8cb248f"
+    },
+    {
+      "bytes": 11536,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/ssh/recipient.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "6eefe8608348559e4282ad85f58894356f41dc5a45df027b668725f268cbca39"
+    },
+    {
+      "bytes": 7621,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/util.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "f3a9aea0d2f60f773526484a696829b6b80ad65a4d3fb1e9c751b40b4e578c57"
+    },
+    {
+      "bytes": 9937,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/src/x25519.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "dab5b130abe2f7f45f16a46fcf12ffeb85ceee039f2b95957a4e46d75fdc24a6"
+    },
+    {
+      "bytes": 2186,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/test_vectors.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "99fd056ebaf7e43f40bc7ad88472753a2f1b6d8768cfaa57695f25aee2adaae7"
+    },
+    {
+      "bytes": 240,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/empty_recipient_body.age",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "7290145730c231de73dd6f64a9ecd2ae0175558f8b81fce2f30c693d7b2195bc"
+    },
+    {
+      "bytes": 411,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/empty_recipient_body_key.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "4c9e0d218a9371bf430e43e85bdea3e4a92f99d9b5a865a40103999307e674c4"
+    },
+    {
+      "bytes": 258,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/fail_large_filekey_scrypt.age",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "240201621cf4b88b8440a4b9bbecdfb91bbd4b35c74ebbbac0bb51f709b9e21f"
+    },
+    {
+      "bytes": 59,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/fail_large_filekey_scrypt_password.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "4fd2dd07a62131b23ae86477cd3b3cdedf8df5e4de6beffa8c4285630f126b3b"
+    },
+    {
+      "bytes": 277,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/fail_large_filekey_x25519.age",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "0a064c25935e39d6a1b0efca3e68ccb1dbe3f3f8457b5f34a65df1b21cfb48d6"
+    },
+    {
+      "bytes": 189,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/fail_large_filekey_x25519_key.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "f4c68a38ffc2c9c1ce2ba213123d6551e424a1a73fb8b9303bc2b26d75c7d5dc"
+    },
+    {
+      "bytes": 577,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "143390373f44a0876267946c2475718c8f3081e6e3a7264d6f50b4d19be18d1a"
+    },
+    {
+      "bytes": 644,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_crlf",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "6efd94649ebdbf9160244ec8bb3d5e91c282c587bc8c6341d7165fdcbe4f3803"
+    },
+    {
+      "bytes": 148,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_empty",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "278f248467f28b73ad014a8a01f7ee1ff8bcb3b023a5581c96a680e45e4f721c"
+    },
+    {
+      "bytes": 558,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_empty_last_line",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "d361b243d0de22aa9589c52e7531b264dfee0e6d1ab5f6d931968081f3f2f7aa"
+    },
+    {
+      "bytes": 510,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_empty_line_begin",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "66aef276d5364eabed6ac0d0313c3bfb0ab87ce68cc931596e1ec221cb2a29dd"
+    },
+    {
+      "bytes": 510,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_empty_line_end",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "f9aea870ee3b7e2475a43589dde16c59d46dc7a1eed9ac4d876a4f4bc190cd5c"
+    },
+    {
+      "bytes": 514,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_eol_between_padding",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "ed825f35dfb2a7c962391127e00268b30c3e61bd9f3b125fe196eba1f6fd38b2"
+    },
+    {
+      "bytes": 625,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_full_last_line",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "7f9b635738342446df1a48741de5a2ef418e0dfb599533e89db7a295a3ceb8c3"
+    },
+    {
+      "bytes": 997,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_garbage_encoded",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "d19d779dd80289de5e536448a881381eeb52f72306bab407445ce125060a5dfe"
+    },
+    {
+      "bytes": 517,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_garbage_leading",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "946479eb1273f11f7e03e40375f95e89538fc198dad8310c7e5d853b64ddd4c2"
+    },
+    {
+      "bytes": 517,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_garbage_trailing",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "f66944d46216ffcc8665180c178a276fb15f9434613fea6c0bbb54ee9236322e"
+    },
+    {
+      "bytes": 571,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_header_crlf",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "4902ad1ab7166b2e67bf7bb08a7f6eaa9ed11d2bd6972f20ff90ba127cc4e07f"
+    },
+    {
+      "bytes": 536,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_headers",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "615ec012c252bff1e80fb0e5ae1db3efae3d1f86001357f575c010ad183cff8c"
+    },
+    {
+      "bytes": 509,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_invalid_character_header",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "138ceae902d220c2d3398db18b44027121c4f41c3ab1688096da078e955ca800"
+    },
+    {
+      "bytes": 509,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_invalid_character_payload",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "f4fbaacbbb7ce773dae478eefe89cbef2e4a947e29eec376ab72f32e4e4f0222"
+    },
+    {
+      "bytes": 505,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_long_line",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "7cb52912cfb1fd457c129dc18c9e12992efac0be56d6ab20cc4406de3b23a40b"
+    },
+    {
+      "bytes": 509,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_lowercase",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "dc28d479184bf4058262a775a82996c3e9db54df79f9123da146a723efb36871"
+    },
+    {
+      "bytes": 476,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_no_end_line",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "16a73f88b52a001b7b18d2fda09fa24e5e6dc7c93b9a1fe74ad76991376ba5a2"
+    },
+    {
+      "bytes": 632,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_no_eol",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "efcbf0ffa50942288002f77df164c14511e3e1b9edff0735f5c0caeb16de8140"
+    },
+    {
+      "bytes": 504,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_no_match",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "606726f4602a61701db2673bb1cc852d4fcc45b856c93b25ef537b8a3a315f3e"
+    },
+    {
+      "bytes": 540,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_no_padding",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "61d5d8eb465bc20e77bc75e9e694c2dc64a19d93293be6ba381a5cef06271adf"
+    },
+    {
+      "bytes": 542,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_not_canonical",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "78c42e6ce93716c4cba5a1dd22edf784f98e1b31cc7817048b1f00c28232af80"
+    },
+    {
+      "bytes": 516,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_pgp_checksum",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "8613af6b578b12e7dae8e322cc76edbd68787387a0e7ec97ce249fa40d5e7430"
+    },
+    {
+      "bytes": 509,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_short_line",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "1ca9911ad7bf7800cac018e9aa920c4cab615100c045f21890b62563f2c3d466"
+    },
+    {
+      "bytes": 511,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_whitespace_begin",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "2692853eb6fdf493cb55a104788b6194e610517a80fe371937d13c0922dae10b"
+    },
+    {
+      "bytes": 511,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_whitespace_end",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "fba5203e7716b6fae2e9bc9f2730d660d86e4d00e81ec02b98694888b10ab126"
+    },
+    {
+      "bytes": 510,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_whitespace_eol",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "2794ed81154208cb727d5997baddc87389c1c165979955425807ce615a1cf10b"
+    },
+    {
+      "bytes": 510,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_whitespace_last_line",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "22a0da87359934b0a0b4e7fe5b22565b27e3a9547c0d35b5ed83cb79f8ecaa0d"
+    },
+    {
+      "bytes": 510,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_whitespace_line_start",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a1f1868e5ff1bb6588170f4f240e89f9ebcfa24d68d798598cf83a692769e77c"
+    },
+    {
+      "bytes": 653,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_whitespace_outside",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "7e30b2e48f33c2c2ab499cc17ce2535d8f93f6fd149451f8ac5300edd58e9364"
+    },
+    {
+      "bytes": 515,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/armor_wrong_type",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "dbf0320506439302d9ee276008a18d40d4a4e4d28bb2e0514b4d244fc167a23c"
+    },
+    {
+      "bytes": 67,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/empty",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "898891448a35f6db9b70878db483a0a1f514b98d94d881f3cce668e00a4c3de7"
+    },
+    {
+      "bytes": 416,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/header_crlf",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a152ced12c1a52249d218b43b19d34267f9cd712113cc2e8098c92e267702c3d"
+    },
+    {
+      "bytes": 353,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/hmac_bad",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "07b287717c1cac4e99b0389d9aa7f94efddd6e3f5faa95963684f4d0abca3561"
+    },
+    {
+      "bytes": 356,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/hmac_extra_space",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "f98b62cd56628b844a46c75eac9e14aed54ab96ac37f4d273800c5ab58a18dc5"
+    },
+    {
+      "bytes": 358,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/hmac_garbage",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "0e2bcfc4d98bc286a01b9f3a69a71ed50b481f2ee0a20416ea7c1613cdaed10a"
+    },
+    {
+      "bytes": 312,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/hmac_missing",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "40503e56cf692a67c295d95e0c3f02a350c26398016e9f0d59723f7476721b13"
+    },
+    {
+      "bytes": 354,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/hmac_no_space",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "6497b5cb51a58b4382d7e9419afacfd70df82d5e1ea36564c5da0e5ccfa300ad"
+    },
+    {
+      "bytes": 413,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/hmac_not_canonical",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "215c684fb5926db5a833de5b01d6b138b58f5838378d1e2b1859c4f9c9e4c81a"
+    },
+    {
+      "bytes": 356,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/hmac_trailing_space",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "daf7151c8a5f6f48af641f4e0b3cdb41cb5876dbe0e4f6f24a3a4d0a452f7eb6"
+    },
+    {
+      "bytes": 316,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/hmac_truncated",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "574748f519eddde3f8f7fd4eef8691d393d726d63b322e8c67f2377ea39b0841"
+    },
+    {
+      "bytes": 340,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "4eedf64d8e648634bfe3345bc45ee71b1cee5dab32b90211fb1c3a61a1eda15e"
+    },
+    {
+      "bytes": 508,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_and_x25519",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b7d9a55b3d9a990fdbc6589ff56be66c83274235e6ffc4bc9b16a5d722ec896c"
+    },
+    {
+      "bytes": 358,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_bad_tag",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "45f0fb65f887dec449f12c65bb532ccf12e5dc9a7d4c39085dfb6636f3f0ba7f"
+    },
+    {
+      "bytes": 425,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_double",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "4e077d31f798a2b2be806f745ee2fa0896a3876b1154dac49ffa9ed3f78a6a08"
+    },
+    {
+      "bytes": 335,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_extra_argument",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "08e55082ccc699783624a4c22ba3870bd811be8db9936ae9b65b213974c39742"
+    },
+    {
+      "bytes": 377,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_long_file_key",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "619178c5678bd897701acf8bc04419663d0f1da6b2ca90ebf4ee963b8eed74f5"
+    },
+    {
+      "bytes": 264,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_no_match",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "d250b7a8bd09804576e211223d7ca982148dd5ad9792c7b5299b7529ca84a7b9"
+    },
+    {
+      "bytes": 332,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_not_canonical_body",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "7fe6d2ddf6ec83fcb7e66e9cc1c5e98269c1843db7e3ba89b19f8a47b09cc8de"
+    },
+    {
+      "bytes": 273,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_not_canonical_salt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "6cd09483286de4be9c881e079c87db684aace4538218c0fbe3092d751339a76e"
+    },
+    {
+      "bytes": 278,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_salt_long",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "03a02da288669bfdbe89d448a8d168bfdaf2735ca20069def0858bc7a9df6628"
+    },
+    {
+      "bytes": 250,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_salt_missing",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "8e934a32e7b435f494f018f4a3c4c9b612cc478aad5e79d9e0305364ed360dbb"
+    },
+    {
+      "bytes": 267,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_salt_short",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "cba4cb2c682bc1c1ce2b7a1a8c4d024b352b9e0c2a03d80590e8e0be958cd5fb"
+    },
+    {
+      "bytes": 267,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_uppercase",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "ae3055bc7568594c7dcf506d9c1599d8df7f9e699152358be35fcb20cf8a8087"
+    },
+    {
+      "bytes": 342,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_work_factor_23",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "d2cc2863cd0fedb99265871b8cea654d41997de37f660699fbc4d8d3c5391770"
+    },
+    {
+      "bytes": 274,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_work_factor_hex",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "701f161e64f6a43c9c34b22890d84911eb9b4135296c197ecf1fa625d6d9cd1f"
+    },
+    {
+      "bytes": 277,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_work_factor_leading_garbage",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3d3e86bc8c40a3b4341d4f7a674e7bacccb6d480088cce066c4869403ec5e8ce"
+    },
+    {
+      "bytes": 274,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_work_factor_leading_plus",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "fc8699a2263765b5e38f0435941f3a8578c3acb81091137bf2068f0f34bc7046"
+    },
+    {
+      "bytes": 274,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_work_factor_leading_zero_decimal",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "4d76c4758cfaf4a89d41902e2d0dfe5be6137bf7ea17f549f15b31ef23115f3f"
+    },
+    {
+      "bytes": 274,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_work_factor_leading_zero_octal",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "c1a94feeab19a89f7d4c2f72ec5039b2ea88f4854da32d1e82f3da75d55fcb25"
+    },
+    {
+      "bytes": 270,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_work_factor_missing",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e60129370690a5c33f9831535608133da7be1ed17071511340fababd76abb21a"
+    },
+    {
+      "bytes": 274,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_work_factor_negative",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a89a9d5f038666b226ec188f815f043a6517794fa1d01c1ddca385f0fbe69bf1"
+    },
+    {
+      "bytes": 290,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_work_factor_overflow",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "532fdb8afca25916c724da9b991569340752068cc8d47fa26c643331e133ec7e"
+    },
+    {
+      "bytes": 277,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_work_factor_trailing_garbage",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3d3e86bc8c40a3b4341d4f7a674e7bacccb6d480088cce066c4869403ec5e8ce"
+    },
+    {
+      "bytes": 267,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_work_factor_wrong",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "565290c68accd2b94dbcf434927049d4fcfc8ab8fe169a6c33e546606e5cf65c"
+    },
+    {
+      "bytes": 272,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/scrypt_work_factor_zero",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "bdac47d76667aa0f14270df58573b873c806ea838b2e026d62789287f0413239"
+    },
+    {
+      "bytes": 366,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stanza_bad_start",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e2ba22a45e0913065e920629ba6f6a06e04169e2fe5f49579c769893e46d71de"
+    },
+    {
+      "bytes": 435,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stanza_base64_padding",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "7bf0dbb73084606ab26cd7a06b9fccc09b6f57b9cdd4b646f8b7e00c2402334e"
+    },
+    {
+      "bytes": 376,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stanza_empty_argument",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "89ea531b7224b5e6dac6b55cb365e990c7a8caa6bba31840a19bb2f74e078497"
+    },
+    {
+      "bytes": 432,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stanza_empty_body",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "2c2fd1650f43d4d347bfbd729b05bff56e0ba30dfebc0625d461b42c12bb2552"
+    },
+    {
+      "bytes": 563,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stanza_empty_last_line",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "f5760b7b3d27ac60c4390adab63f2387fec9a472dc71d68a94031e28174b6f14"
+    },
+    {
+      "bytes": 369,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stanza_invalid_character",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "fc50cb20219d50837086cb295832a28a52feca62e142cca3b4aeda3ead50e954"
+    },
+    {
+      "bytes": 482,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stanza_long_line",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "488be43646e7668cdc1db3260e0f84fd7b71ee40d797d22530d237b8c90d37b7"
+    },
+    {
+      "bytes": 433,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stanza_missing_body",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "2eb67c8cb24fcbd9dc37b9853ae1ddc0dac40ac17be8f7893909921a7bfefb2c"
+    },
+    {
+      "bytes": 484,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stanza_missing_final_line",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "4dbbba0f136f577469141a5010e8ea474c9c532ab66187e63b6aac9bd23bc52a"
+    },
+    {
+      "bytes": 474,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stanza_multiple_short_lines",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e5146580aadb6942543acfb975ef2964f4a8a5eb2fd770c40d7da7b4a95f8834"
+    },
+    {
+      "bytes": 359,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stanza_no_arguments",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "730062e37e6fa0c0e1de5f8cee90662f61da99b7bb1a4996847a68afefaf8a1f"
+    },
+    {
+      "bytes": 434,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stanza_not_canonical",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e2516017cdfa589e9ebc18c1646664d375c56e6f594191ae814da614add0a9f4"
+    },
+    {
+      "bytes": 430,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stanza_spurious_cr",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "0a58d23cc4398edf6a16c034c4a61da2e2006e4010377654ad50017468baa39d"
+    },
+    {
+      "bytes": 536,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stanza_valid_characters",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "115085567f8719b20e0903973873c20acae854b48975567f73cd15d29bd93a4d"
+    },
+    {
+      "bytes": 22123,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_257_chunks",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3ffc51d9314c11f84d049ad627d031ab8407abc1199df29144861fc6c4da92b8"
+    },
+    {
+      "bytes": 22187,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_257_chunks_full",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "c55d0a954b0b25f13874734e25ca863a19e1b695af8dad5e3853176fbe2298c2"
+    },
+    {
+      "bytes": 22213,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_258_chunks",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "0aff2b07b9cb6575863aa6b03ea78e40a49dc17ffa3bcb452a74c5bc7cd46ea6"
+    },
+    {
+      "bytes": 430,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_bad_tag",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b302d219368735ca621d8237a49906831b0aa0f6116c05a1863aba18c421d9fe"
+    },
+    {
+      "bytes": 587,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_bad_tag_second_chunk",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "2763f46ed2ad05eace35a23084f14493b4593e03a85f8cbe15c4e608e2aaa324"
+    },
+    {
+      "bytes": 654,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_bad_tag_second_chunk_full",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "30e7a10c2725ff919e5d471be8022084485cc9eb447ab86bd7f7a6a3fb9dab08"
+    },
+    {
+      "bytes": 419,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_empty_payload",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "c04491b616be7f9c72f0dfaaf2b0b7ff0a6a716d0afd37d96b1dfc1800367762"
+    },
+    {
+      "bytes": 662,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_last_chunk_empty",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "4810c276566fe9977021a15b4e739bea2319ad5ddf0847f1dfba6fc1556d582a"
+    },
+    {
+      "bytes": 557,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_last_chunk_full",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "2dd3be61247bc2284cdac2df1cce6a18db0e00574157f19439e3c228245bfccd"
+    },
+    {
+      "bytes": 647,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_last_chunk_full_second",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "51008a18664460b97c6c621d71da607b09960141d08286a6b82e7a6818cc9efa"
+    },
+    {
+      "bytes": 414,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_missing_tag",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "51f96aba6a55c0c7634490a0b76ac53cfef383c44130f01de0b20cf0cad5ffcc"
+    },
+    {
+      "bytes": 411,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_no_chunks",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "506e93c795d1cab3cec64d6789f7fe45be545f10bff0b8a4d35d2472c58b5bd1"
+    },
+    {
+      "bytes": 428,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_no_final",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "22221d2161e2d579479f11a02061d30fa2004c3e55f256e3e7c33c4b1b8cf4b7"
+    },
+    {
+      "bytes": 563,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_no_final_full",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "23bce401fd7f428fa4b24d45c5054fef4cf3462a69047193032a17a2a043604c"
+    },
+    {
+      "bytes": 587,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_no_final_two_chunks",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "0e1b1ae57c213c738f8ecb5367bd65d894e7ce78208cdee1ffef51d220d9d222"
+    },
+    {
+      "bytes": 656,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_no_final_two_chunks_full",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "060b80ffaf5ae85aae6cf13cfcf0210927ab87cd63b03c20799d1c304261f27d"
+    },
+    {
+      "bytes": 320,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_no_nonce",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "c849c71e932e72e87c576610ce2321ca80bd6500920c34c65230296c9fb7bcad"
+    },
+    {
+      "bytes": 423,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_short_chunk",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "0c7b3c918f717c8fc047143ddcd244937a94aa3d9d81115fbb7c429991656d5b"
+    },
+    {
+      "bytes": 332,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_short_nonce",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "89ac7c59680477968325e3e0ffb67973743ad63c42d601685f7d7513a6c2ff32"
+    },
+    {
+      "bytes": 581,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_short_second_chunk",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "6c719858e51bb460ce192bebff1e9a60c62296976c6a616b84a8b0dd1aae951e"
+    },
+    {
+      "bytes": 737,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_three_chunks",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "65228acff4093f43666daca36557be239315153dfce50730ff7a7c79fbbb7d9c"
+    },
+    {
+      "bytes": 593,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_trailing_garbage_long",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a019543f7c6d36a193e2f84ee348735e9e964f8785fdd5219e9cadef51211fc9"
+    },
+    {
+      "bytes": 582,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_trailing_garbage_short",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "42ab8680743ba4bdae15a991ce53a6ecac747d269cced7ebc85f7e3ceaec5a01"
+    },
+    {
+      "bytes": 647,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_two_chunks",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "51008a18664460b97c6c621d71da607b09960141d08286a6b82e7a6818cc9efa"
+    },
+    {
+      "bytes": 590,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_two_final_chunks",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "f29f4769f00b3e07fdf510b15e961d45b82137e86fe0282bb5e53a82a82ee1fa"
+    },
+    {
+      "bytes": 655,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_two_final_chunks_full",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "faacbff4a2d17dad128ec4f2e527411a613ed304c45798edc7d7a37b70b14306"
+    },
+    {
+      "bytes": 678,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_two_final_chunks_second",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "10d2df215cb75721451d956dacd8e48aa67889dc16d651eb03fa0eee9db29ee2"
+    },
+    {
+      "bytes": 445,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/stream_two_final_chunks_short",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "481f70693cce27ae33a9ab1b5721dee652d218703efc0c37078c9e066cae24a3"
+    },
+    {
+      "bytes": 358,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/version_unsupported",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a13d6b218009563a1190ae5a19184a7325238903ec68d4ffe8593497ef4d7523"
+    },
+    {
+      "bytes": 422,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/x25519",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b8ae31af64f6a16718233844b77f117663753157c57238c8a30f0cdb4f1f434a"
+    },
+    {
+      "bytes": 440,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/x25519_bad_tag",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "fb1a75b536696818855ec4ef82fabbd81cdf726a480565e88cc19152c7530c37"
+    },
+    {
+      "bytes": 419,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/x25519_extra_argument",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "ae66b80fa68a9d08cbeea61c1cfa9489c27531e24939d7fdc33e93c877fde5ba"
+    },
+    {
+      "bytes": 444,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/x25519_grease",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "9d7f37bae2cc3932b8675e60efc9e27d56f902d6c1bab2a74d8452c39fc88f9e"
+    },
+    {
+      "bytes": 457,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/x25519_identity",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b74d781e4e5ca702923d68aac000102e557d3b9faf707c388ec128a6aae6dd7a"
+    },
+    {
+      "bytes": 459,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/x25519_long_file_key",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "5196f3a6181304fbe3f34247f86a13b3bacd6c87d76e5e479c1d0aea211cdc52"
+    },
+    {
+      "bytes": 414,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/x25519_long_share",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3ed95619171b724a7af89d6d87478989fac2a4c2cb02221d26377b4a14e2841b"
+    },
+    {
+      "bytes": 456,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/x25519_low_order",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "050745ff5f2d5981849852cb437e721579dd8fd84cefe7d687eb5b6addb4be07"
+    },
+    {
+      "bytes": 411,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/x25519_lowercase",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e5d37db1970674982e5e6fd526bf173378fe003082beaa363e152470d1a62853"
+    },
+    {
+      "bytes": 520,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/x25519_multiple_recipients",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "4fa8ea5b02b3d8415f041a0f7f62c28b1d3b1ae4128b90ab42ef8ac114d2870a"
+    },
+    {
+      "bytes": 349,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/x25519_no_match",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "106bf9a30497a59beda392a70e58b85d03c314ff305101dcbdafd66a77f3be77"
+    },
+    {
+      "bytes": 414,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/x25519_not_canonical_body",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b58c0df974726a612334934f3251c59de07bc437eb76ae310bfb439e4959eb18"
+    },
+    {
+      "bytes": 414,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/x25519_not_canonical_share",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "d7c5157679bdaffc2b141c7efa56346225be19131f9f33c499c00f55ec532d1d"
+    },
+    {
+      "bytes": 412,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testdata/testkit/x25519_short_share",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "2ab19ad9c1554db0598acb4de1ef731b42cc77f2ab855cbc4191e5be50ae2759"
+    },
+    {
+      "bytes": 31577,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/age-0.11.5/tests/testkit.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "4b346b583281df92659ae483ddd6650bd0dc830c671b46c5e7f99fc6625a7d5d"
+    },
+    {
+      "bytes": 105,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-config-0.4.8/.cargo_vcs_info.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "fb077bb9c5d1c6bd9d26bc4c2c26595df4ab1bfd4f9be800daffc548212b3392"
+    },
+    {
+      "bytes": 37,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-config-0.4.8/.gitignore",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b821dfe599e6f75093a5ffe4162968da3be6c12ef46a8d8fbbd5c826cd80bc7f"
+    },
+    {
+      "bytes": 2402,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-config-0.4.8/CHANGELOG.md",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "d43722d4e4526cdd6263bf195e13dc22b73eb22fd45b792d4d5f297e59e4ff54"
+    },
+    {
+      "bytes": 1529,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-config-0.4.8/Cargo.toml",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "9666c6404e36db064c64ea7d6cb67438eaadacfad5b8483b193bbb48b11b8ef3"
+    },
+    {
+      "bytes": 875,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-config-0.4.8/Cargo.toml.orig",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "83619c9644c346a0c7b841220a01f97db4215a0df6280422e28de2d4f6128afb"
+    },
+    {
+      "bytes": 1072,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-config-0.4.8/LICENSE.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a1d2bd09632724b23c62b05e2fd0dc26c5c9d21b409594cf7da1a1aba555f802"
+    },
+    {
+      "bytes": 796,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-config-0.4.8/README.md",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "bdadc28dd4a62f5b8c7c4c759c7b3cf2b33181700563c3083f8515f1638c12f2"
+    },
+    {
+      "bytes": 691,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-config-0.4.8/src/fluent.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "fdf091a54559e437dd0ee0f2a291b2e18c42a7857e9bbecfd338b038b320f9f7"
+    },
+    {
+      "bytes": 4286,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-config-0.4.8/src/gettext.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3626b50f396f0a83e7d5aab702d4d18d078dff7620108db80ffa7ed9da0b5991"
+    },
+    {
+      "bytes": 14695,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-config-0.4.8/src/lib.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "ef15a8dfac1b3798ff24b86349499d13a5ac032b18077f0784790340dfa4dc0c"
+    },
+    {
+      "bytes": 104,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-0.16.0/.cargo_vcs_info.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a320d765d892fab6d4130331f08116e3472f1c34cfb9e3a193fee15d1324799c"
+    },
+    {
+      "bytes": 46,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-0.16.0/.gitignore",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "0cb77613fcbd27b0a8ce09a32456b6c7e00ea70db1cff009ce19a7c39684fdbb"
+    },
+    {
+      "bytes": 16281,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-0.16.0/CHANGELOG.md",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "65762264688c0c24ba3a332ef637e775c0f08b2aa0522f044e72a7fdb5a5b9a6"
+    },
+    {
+      "bytes": 3112,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-0.16.0/Cargo.toml",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "ae0acb2798897cb7636539fb19d3a4427184aaf6c30f278d5316bc5e1635dc48"
+    },
+    {
+      "bytes": 2075,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-0.16.0/Cargo.toml.orig",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "d9d6ec1015f272abcdfda4f3c4441ddf14aaaf18e8c3507fb1650762daca1e05"
+    },
+    {
+      "bytes": 1072,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-0.16.0/LICENSE.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a1d2bd09632724b23c62b05e2fd0dc26c5c9d21b409594cf7da1a1aba555f802"
+    },
+    {
+      "bytes": 5433,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-0.16.0/README.md",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "809c572a38a8c6f8f606f843b83c5a74aec9f8a19f14042598f8f863a9ba781b"
+    },
+    {
+      "bytes": 11539,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-0.16.0/src/assets.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "8840e1f258b86ddeb7f1300e186b6b9c7b49db7bcb0af6579c366d0fa88974a2"
+    },
+    {
+      "bytes": 23386,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-0.16.0/src/fluent.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a77fd9fe61a2ac985af0951f1528000db445caa321bc06ded204b2fb13634822"
+    },
+    {
+      "bytes": 4588,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-0.16.0/src/gettext.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "1d332f8479f6d50db520b7b4821b6a1165bb93c58948e9a81efd6d901289340f"
+    },
+    {
+      "bytes": 28687,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-0.16.0/src/lib.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "33db5fde43db6081181a2c370f9562c413851872899af59b0eaf952811c8d8ef"
+    },
+    {
+      "bytes": 13744,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-0.16.0/src/requester.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "511cc7e8c786d91206c27d018a4350a1b50d2fa09cf4e8a5b06943316c197657"
+    },
+    {
+      "bytes": 206,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-0.16.0/src/util.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "854a6a95d99a6077039cd0f66ff5a331b610a513b12bd206a5234bd6964e246b"
+    },
+    {
+      "bytes": 13190,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-0.16.0/tests/loader.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "16c089f37253de6ab8e34e7a2aa7849df308a79c27dd451b9eafed00cc80b870"
+    },
+    {
+      "bytes": 107,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-fl-0.10.1/.cargo_vcs_info.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "6f5c270772e44ff9487bdedf5ce76ba8e2c1640d602109a769970cac95f1318f"
+    },
+    {
+      "bytes": 5636,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-fl-0.10.1/CHANGELOG.md",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "1fb5c7df488c11138d3e8bad37c298cef08e59d2febcd5e7283c078ded1e78fb"
+    },
+    {
+      "bytes": 2141,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-fl-0.10.1/Cargo.toml",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "ae6afb247d7a4bfa60d62218e4ea8e76c76e46efab8eed7e993809ee29db8528"
+    },
+    {
+      "bytes": 1241,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-fl-0.10.1/Cargo.toml.orig",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "975a94c458ec2d9b84aa5e001394fda45aef9f88899623f89e4a9b41c4b195ae"
+    },
+    {
+      "bytes": 1072,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-fl-0.10.1/LICENSE.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a1d2bd09632724b23c62b05e2fd0dc26c5c9d21b409594cf7da1a1aba555f802"
+    },
+    {
+      "bytes": 3285,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-fl-0.10.1/README.md",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b246b0dc91671551564029838d8731729c34f0374106d8b49d702dcf95db1543"
+    },
+    {
+      "bytes": 459,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-fl-0.10.1/i18n.toml",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "db3fbe9721702cc3e9f56163df1fd4f88c6000d001047bfd80b90c284f88775e"
+    },
+    {
+      "bytes": 514,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-fl-0.10.1/i18n/en-US/i18n_embed_fl.ftl",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b208b01c09fee5acf34ad4416530e872bc17936a0a3f0ae9cfc0cb15e7943b4a"
+    },
+    {
+      "bytes": 31627,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-fl-0.10.1/src/lib.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "816aab22ef803ae376aa27818d9cd85daf71ba09ce57e3385a48401893d6e107"
+    },
+    {
+      "bytes": 4148,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-fl-0.10.1/tests/fl_macro.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "0f46b7a17b6109631026c74754afea68d31477d6432d5b0c3659eef557ce709b"
+    },
+    {
+      "bytes": 120,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-impl-0.8.4/.cargo_vcs_info.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "21c2a26d87673ba136841296f3936de7041152b038fb270d3a7e2ad51578beb5"
+    },
+    {
+      "bytes": 37,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-impl-0.8.4/.gitignore",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b821dfe599e6f75093a5ffe4162968da3be6c12ef46a8d8fbbd5c826cd80bc7f"
+    },
+    {
+      "bytes": 1713,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-impl-0.8.4/Cargo.toml",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b01344bb0cc6a4baac9f833826264618b74e850634aafc44e09ea1a3d196bb5e"
+    },
+    {
+      "bytes": 1018,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-impl-0.8.4/Cargo.toml.orig",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "6ca7b9df03a04635b849bd4c880ba8b22b95d0f9abdf821c9c0a26e42d405440"
+    },
+    {
+      "bytes": 1072,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-impl-0.8.4/LICENSE.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a1d2bd09632724b23c62b05e2fd0dc26c5c9d21b409594cf7da1a1aba555f802"
+    },
+    {
+      "bytes": 5439,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-impl-0.8.4/README.md",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "92201bb8474269c30fa26621f22066e32a7927fb3c73b70ad260f387ad84bd34"
+    },
+    {
+      "bytes": 5351,
+      "executable": false,
+      "path": "crates/fogvault-backup/vendor/i18n-embed-impl-0.8.4/src/lib.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b577ee79bb4d343ce1f5d78bb6c90f032c290d99cd95a814ff0bcb70ce4f7a6c"
+    },
+    {
+      "bytes": 41070,
+      "executable": false,
+      "path": "crates/fogvault-native/Cargo.lock",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "efda9a71ece13d4da6fa183f2f59f763dab68e5609f8a4705570b8bb41f7d830"
+    },
+    {
+      "bytes": 746,
+      "executable": false,
+      "path": "crates/fogvault-native/Cargo.toml",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a6fed59e527739e8605331a65d56a98f9c682f09673bd1e154b1045abcb0c4e6"
+    },
+    {
+      "bytes": 1064,
+      "executable": false,
+      "path": "crates/fogvault-native/LICENSE",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "ce1ff3fa2e2167f504b4c9b6ca3875cecc7e69ce072b4e1dcf61028781fa75bc"
+    },
+    {
+      "bytes": 5522,
+      "executable": false,
+      "path": "crates/fogvault-native/README.md",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "72e9bb44903677ddc3a7b3adad508f80e6f5ec734f7362fb26ac298acd359fcf"
+    },
+    {
+      "bytes": 1540,
+      "executable": false,
+      "path": "crates/fogvault-native/examples/native_vault.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "6778c8175668dd253f3d92ca7c8fac7493a892b50c01281b2282a279a0fbe906"
+    },
+    {
+      "bytes": 13320,
+      "executable": false,
+      "path": "crates/fogvault-native/src/facade.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "c95add7a5128873ecba1a525d878d90ed86117bd1db9a845b7c3d08219c1bb40"
+    },
+    {
+      "bytes": 3365,
+      "executable": false,
+      "path": "crates/fogvault-native/src/facade_backup.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "56ab1101d1adfa0be6e7b01ff7b6b62d6dfb47c1dd101adfa9bd2fb6ff4aafda"
+    },
+    {
+      "bytes": 1515,
+      "executable": false,
+      "path": "crates/fogvault-native/src/lib.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "9d5bca87f83004b1e5c775d7f050616932453e9bb624bfd56778ca94ba2b6cb9"
+    },
+    {
+      "bytes": 35904,
+      "executable": false,
+      "path": "crates/fogvault-native/src/native.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3a8b66aa41a3038815e43743d881644433aba34b926a1fe00d7b546c71cab2e3"
+    },
+    {
+      "bytes": 18475,
+      "executable": false,
+      "path": "crates/fogvault-native/src/native/access.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "aa7d9a4201b274c1170b7af2f40e6ef19ee41f1b7ce7527f9ae5204e00d25d62"
+    },
+    {
+      "bytes": 20110,
+      "executable": false,
+      "path": "crates/fogvault-native/src/native/backup.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "c7d33731744bc0429ed383b656e02402fadca46ff1e4ba3cfe99eb933e4385f3"
+    },
+    {
+      "bytes": 3999,
+      "executable": false,
+      "path": "crates/fogvault-native/src/native/capacity_tests.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "6a6c7257dfb1eafca5c391ea07e77a9bce74e5bae2de55e38f368622ccf0fa43"
+    },
+    {
+      "bytes": 15089,
+      "executable": false,
+      "path": "crates/fogvault-native/src/native/control.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "22082c4618470315e8a6867ad4e21137759392f6844275a782100a03eb98bb11"
+    },
+    {
+      "bytes": 37092,
+      "executable": false,
+      "path": "crates/fogvault-native/src/native/control_proof.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "dff470dc36fd0396a3b877d7b03f8bdcede42137e22acd232a51148c4b4aef4b"
+    },
+    {
+      "bytes": 945,
+      "executable": false,
+      "path": "crates/fogvault-native/src/native/durability.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "eab7f869327e4c7090a12bc5d00199d0906942920a161403f7126bf8cd011ec8"
+    },
+    {
+      "bytes": 47808,
+      "executable": false,
+      "path": "crates/fogvault-native/src/native/protective.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "d377656f4e70aece856d5b95b868c0921458ffd46756a2e780514b609af519bf"
+    },
+    {
+      "bytes": 9737,
+      "executable": false,
+      "path": "crates/fogvault-native/src/native/records.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b8278adcf2986173705fdca823093a36ad75b25e67b1786d587908a2afa39dc8"
+    },
+    {
+      "bytes": 52496,
+      "executable": false,
+      "path": "crates/fogvault-native/src/native/registered.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "1de50436e12436b553512b3c761ba2fc1d6efb710550b3fdd3e13dca2097ca2f"
+    },
+    {
+      "bytes": 9436,
+      "executable": false,
+      "path": "crates/fogvault-native/src/native/registered_process_tests.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "306560362a516e44f04245f5fc03e133f855eb50316f47f52def52217520589a"
+    },
+    {
+      "bytes": 12202,
+      "executable": false,
+      "path": "crates/fogvault-native/src/native/schema.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "9c1814cd403b346561796e85fc9c7ff285a28b4540b286f94aa6413112b9608f"
+    },
+    {
+      "bytes": 42757,
+      "executable": false,
+      "path": "crates/fogvault-native/src/native/transactions.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "c9e1562b153bbb20a52d69c82aa619da86fbb935d510be640f6a6c54629729fa"
+    },
+    {
+      "bytes": 10160,
+      "executable": false,
+      "path": "crates/fogvault-native/tests/backup.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "595019b74c80ab912192c8a203875fb8e8dbd1979b74adc6ceed7da3fe03628d"
+    },
+    {
+      "bytes": 21055,
+      "executable": false,
+      "path": "crates/fogvault-native/tests/maintained.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3cfe06e2984033ea210f68bdd0a6c50dbf30b320fee45407222f31b4ed5c12b7"
+    },
+    {
+      "bytes": 37942,
+      "executable": false,
+      "path": "crates/fogvault-wasm/Cargo.lock",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "f0ad3bdf41c18304f0e01d1bf3b2e59ad9d9e1cba63e3d36c042519d46218303"
+    },
+    {
+      "bytes": 471,
+      "executable": false,
+      "path": "crates/fogvault-wasm/Cargo.toml",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "690ddb49e3876924921508a98782668f5d9912a8513ea7c1c4f601c595bbc2e5"
+    },
+    {
+      "bytes": 14177,
+      "executable": false,
+      "path": "crates/fogvault-wasm/src/backup.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e65763d60532e87b2c79604d0182bb9b9fa3bf9e1590d727331365a05b51c5c8"
+    },
+    {
+      "bytes": 35853,
+      "executable": false,
+      "path": "crates/fogvault-wasm/src/lib.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "62cc45e9ca8fc97750077c7f3f84cc71940125b1ea4c44ecf5d6f9cb1e622cdc"
+    },
+    {
+      "bytes": 14488,
+      "executable": false,
+      "path": "crates/fogvault-wasm/src/protective.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "29f277c7dfea7363dcdaaccf54429e41a58475c2a904fe56b9b86cff3e0168c1"
+    },
+    {
+      "bytes": 29134,
+      "executable": false,
+      "path": "crates/fogvault-wasm/src/provider.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "048164fef0dfc7543e056c5b5fdf25d8f793db9cf61d635a27cb219384a04a9e"
+    },
+    {
       "bytes": 9707,
       "executable": false,
       "path": "crates/fogvault/Cargo.lock",
@@ -1398,7 +4177,7 @@
       "sha256": "2e80937f3fe604d75bd37442a5da49637093ecfdd542f5243dfc2382b3abc7cc"
     },
     {
-      "bytes": 38545,
+      "bytes": 38577,
       "executable": false,
       "path": "crates/fogvault/src/format.rs",
       "reasons": [
@@ -1406,10 +4185,10 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "b0109fb68fb3f8da1c49c9cc9263d9c2a23fe355cd1c045330f9d52ad0d88b83"
+      "sha256": "1eb0acaed9784cd4369c877e5d771315578e5dbe6a9b8ba7a47b3b6a4c87ba3f"
     },
     {
-      "bytes": 31983,
+      "bytes": 37784,
       "executable": false,
       "path": "crates/fogvault/src/format/access.rs",
       "reasons": [
@@ -1417,7 +4196,7 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "4a82f208fb5bd2aaf62e348adbe4bcad7b7fe814dc0c651e70d62dfcb6e1a980"
+      "sha256": "d0d000cac3f0e255cd702efa5ec5dbc269dedadbe63c65a498315d1fe9a0e0df"
     },
     {
       "bytes": 5701,
@@ -1453,7 +4232,7 @@
       "sha256": "07b1bc06376f7361d7be5f1d787ce1c7d61be776b613a0324a631db946123731"
     },
     {
-      "bytes": 6425,
+      "bytes": 7056,
       "executable": false,
       "path": "crates/fogvault/src/lib.rs",
       "reasons": [
@@ -1461,10 +4240,10 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "821da1c371d451a4f834efa9f947c65cb061b4153449d9358318bd7f32e13b34"
+      "sha256": "9cff2a1c315dc9ae784bb809a16ccba984018002ed9882ac686c70be310936e1"
     },
     {
-      "bytes": 35772,
+      "bytes": 36172,
       "executable": false,
       "path": "crates/fogvault/src/lifecycle.rs",
       "reasons": [
@@ -1472,10 +4251,10 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "81d0d755a33d9fd7961ae13ec25c96c8b79166cc263d6058f1d93cec5731c7f1"
+      "sha256": "9e1f5bc509a65fba78d6430aff751d69d201fd1a2fb7c01653b6871932da78f2"
     },
     {
-      "bytes": 28802,
+      "bytes": 29275,
       "executable": false,
       "path": "crates/fogvault/src/lifecycle/access.rs",
       "reasons": [
@@ -1483,7 +4262,16 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "287c6c848369216e5f65337631834cd0365086187063e75bf8a20f1be883f81c"
+      "sha256": "08108cfe932fb333e0b5423882623320f1146f93720f5d064ec1aced29dde524"
+    },
+    {
+      "bytes": 44395,
+      "executable": false,
+      "path": "crates/fogvault/src/lifecycle/async_provider.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3c961c795ee3e44d7736a02b034207a114d580febbaf75ad81113b2e16fd0d68"
     },
     {
       "bytes": 10382,
@@ -1507,7 +4295,7 @@
       "sha256": "c79785ae1fff940492d982b26186636ba4eaad50a0eb5e0c83a6daa670bf7862"
     },
     {
-      "bytes": 83505,
+      "bytes": 93781,
       "executable": false,
       "path": "crates/fogvault/src/lifecycle/protective.rs",
       "reasons": [
@@ -1515,7 +4303,7 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "911217d76bdf1e1f38a5f9586178e386b288230dc757925624dd57451c7cb49c"
+      "sha256": "6222aae227ed5807c3d92ba154aa2cf524681b3cb2930d2fbea4d941606a941f"
     },
     {
       "bytes": 11688,
@@ -1529,7 +4317,7 @@
       "sha256": "3eccb2121916a189ed7b0dac4587bc271e1139f8e057c00e1e9abc6a9c76c6d9"
     },
     {
-      "bytes": 5533,
+      "bytes": 6194,
       "executable": false,
       "path": "crates/fogvault/src/lifecycle/revocation.rs",
       "reasons": [
@@ -1537,7 +4325,7 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "b6a74a1dfe361f49618780a465bdf50662398095eedccce4312e4cefef03353b"
+      "sha256": "61014f8b872481f407ff8960658c33f676328291cf5d667189e7b250064b43a8"
     },
     {
       "bytes": 762,
@@ -1579,6 +4367,15 @@
         "existing-full-verifier-input"
       ],
       "sha256": "f8d4d20f2af8f7061cdf01bf1c39f36dc3c51f534a0cabad30abd8a8c410919c"
+    },
+    {
+      "bytes": 38962,
+      "executable": false,
+      "path": "crates/fogvault/tests/async_provider.rs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e595c12a20d8f7d08a8207a23c570224fc7efb5c3ee47aae2c8f855c152b0e66"
     },
     {
       "bytes": 14627,
@@ -1691,7 +4488,25 @@
       "sha256": "0f376a54549947bdd6baf197746c0b46423f2a4158db591d3556022f0e6fb7a8"
     },
     {
-      "bytes": 10931,
+      "bytes": 4459,
+      "executable": false,
+      "path": "docs/dependency-scope.md",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a9faad1efcca152bc876aa6cc9e3b8b749d6db4eaf0d38d5616dbb1b72101fd7"
+    },
+    {
+      "bytes": 8959,
+      "executable": false,
+      "path": "docs/maintained.md",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "88075a4085492004e3c351c0944a747626af44f548eb4b5216e2133c50390ee5"
+    },
+    {
+      "bytes": 37957,
       "executable": false,
       "path": "experiments/browser-prototype/Cargo.lock",
       "reasons": [
@@ -1699,10 +4514,10 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "95a942cc2d996550137e726cccfdef1cd260eb800c875effb63c512ad20ccb6a"
+      "sha256": "9154e2e1067f799e299b038a9707f317663a20130c87ca6f9c4fd49e7d0e949f"
     },
     {
-      "bytes": 319,
+      "bytes": 498,
       "executable": false,
       "path": "experiments/browser-prototype/Cargo.toml",
       "reasons": [
@@ -1710,27 +4525,27 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "ed258a81a0f79cba7a910dfc26ff33756f0684b6dbb006a23a1bef2398eea90d"
+      "sha256": "568a95e108e145f9ec1b89f905ba9cb9f5cefd9f872cc55671923f9aee7c98d3"
     },
     {
-      "bytes": 33123,
+      "bytes": 149,
       "executable": false,
       "path": "experiments/browser-prototype/src/lib.rs",
       "reasons": [
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "5398670d7f5ff1b38ed02d40f6ca4c090e8fb0fc07bfab03484ef6cec627e736"
+      "sha256": "e65eaf13e7e5d4d036fee76505b25e891b9dfa3bb063b0f5856aa9eafe303460"
     },
     {
-      "bytes": 9428,
+      "bytes": 130,
       "executable": false,
       "path": "experiments/browser-prototype/web/idb.mjs",
       "reasons": [
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "56489a0347b38804a99c849d1dcaf2ab1e0ae401fbed27d9ea3f7c8b38630a87"
+      "sha256": "fdb8372f6c9f261fec87df3606d94a14cdd144e326c50aaf7d6070f762e61d02"
     },
     {
       "bytes": 282,
@@ -1753,14 +4568,14 @@
       "sha256": "3f8c0385f7e2d1b0302ce2ea76bea86facfbf0ef41021dd0ddb6c228c4617ef4"
     },
     {
-      "bytes": 2307,
+      "bytes": 135,
       "executable": false,
       "path": "experiments/browser-prototype/web/password.mjs",
       "reasons": [
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "da46bf8cadc3c783209ef4f75e58a054add3a384c390ce579cb7895fff053afe"
+      "sha256": "83a208de478e5a2e9a43358be414eb54d355ae995237e1f092fe7746c077a5d7"
     },
     {
       "bytes": 88852,
@@ -1773,14 +4588,14 @@
       "sha256": "75f203af4ca5afd1b17cfccfb896a4222c2a74779a6f8cd861aa151436b76fc5"
     },
     {
-      "bytes": 42268,
+      "bytes": 448,
       "executable": false,
       "path": "experiments/browser-prototype/web/worker.mjs",
       "reasons": [
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "06290bbb394e6636a31c2178a09ae683cb41f5fa2faa00ff0a0fdc8576abaae3"
+      "sha256": "69ae091f775d63c62b2cdb8bb85d241be6b4ea9828c54652aefa93841479fe16"
     },
     {
       "bytes": 32791,
@@ -10260,7 +13075,7 @@
       "sha256": "84fc4403a83b56dd2cd7495ca427f744dd05e7c5fd836511197ef22c86c4ea94"
     },
     {
-      "bytes": 19280,
+      "bytes": 43597,
       "executable": false,
       "path": "experiments/vault-prototype/Cargo.lock",
       "reasons": [
@@ -10269,10 +13084,10 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "cfc53e7bbea4926053d8a8058a287289708858be2b894ae6363881454ca6b31a"
+      "sha256": "801b045d634306a1711b5bc317d4744b951da024d44b96fc721c9cadfecb0f14"
     },
     {
-      "bytes": 785,
+      "bytes": 913,
       "executable": false,
       "path": "experiments/vault-prototype/Cargo.toml",
       "reasons": [
@@ -10281,7 +13096,7 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "8122991ae9747752e8f42fded65ca17c3dc25f4907bd9b2b2076b0ad9a941357"
+      "sha256": "d67bbbce3af3fcad3f42a0ae4de87034494a866d8cc1ec69cf66ccb4b61ec965"
     },
     {
       "bytes": 16384,
@@ -10315,7 +13130,7 @@
       "sha256": "badf563a3b84ac17f03de00e0d83aa5fdba6c995ef9e6bf8f25a7c221613a9be"
     },
     {
-      "bytes": 707,
+      "bytes": 524,
       "executable": false,
       "path": "experiments/vault-prototype/src/lib.rs",
       "reasons": [
@@ -10323,7 +13138,7 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "5c046e215a6e48d028b28f728de8407bff62852d7f0461d5e2ad0c153ca1a97f"
+      "sha256": "763a9ed76f64ce3230d41ced85796876542bb6db5ad13c9cef83f88c282cee0e"
     },
     {
       "bytes": 3240,
@@ -10335,113 +13150,6 @@
         "existing-full-verifier-input"
       ],
       "sha256": "bb83267666dfd9eb945937f8998a312480faaa16051a685bfd9c7d465770464b"
-    },
-    {
-      "bytes": 35204,
-      "executable": false,
-      "path": "experiments/vault-prototype/src/native.rs",
-      "reasons": [
-        "current-contract-input:trusted_control_host",
-        "current-first-party-tree",
-        "existing-full-verifier-input"
-      ],
-      "sha256": "f316d6cdf915deb07f411e0ba7463f4e08f2863a16fd29bbcd98f7a47f54c0f0"
-    },
-    {
-      "bytes": 17992,
-      "executable": false,
-      "path": "experiments/vault-prototype/src/native/access.rs",
-      "reasons": [
-        "current-contract-input:trusted_control_host",
-        "current-first-party-tree",
-        "existing-full-verifier-input"
-      ],
-      "sha256": "03b3a8c8f20418315271b846784887df9b2641bc6b8fd4e7d831337caea33544"
-    },
-    {
-      "bytes": 3999,
-      "executable": false,
-      "path": "experiments/vault-prototype/src/native/capacity_tests.rs",
-      "reasons": [
-        "current-contract-input:trusted_control_host",
-        "current-first-party-tree",
-        "existing-full-verifier-input"
-      ],
-      "sha256": "6a6c7257dfb1eafca5c391ea07e77a9bce74e5bae2de55e38f368622ccf0fa43"
-    },
-    {
-      "bytes": 15100,
-      "executable": false,
-      "path": "experiments/vault-prototype/src/native/control.rs",
-      "reasons": [
-        "current-contract-input:trusted_control_host",
-        "current-first-party-tree",
-        "existing-full-verifier-input"
-      ],
-      "sha256": "202a7235d9f3b35d89b504d938b72a311d6b71e0a4b5583e2e25713f755cff28"
-    },
-    {
-      "bytes": 37043,
-      "executable": false,
-      "path": "experiments/vault-prototype/src/native/control_proof.rs",
-      "reasons": [
-        "current-contract-input:trusted_control_host",
-        "current-first-party-tree",
-        "existing-full-verifier-input"
-      ],
-      "sha256": "903ea86ae662fd58a3bdf2c1a233e50ef4a6b1a9008e233640dd7e128d48d443"
-    },
-    {
-      "bytes": 9737,
-      "executable": false,
-      "path": "experiments/vault-prototype/src/native/records.rs",
-      "reasons": [
-        "current-contract-input:trusted_control_host",
-        "current-first-party-tree",
-        "existing-full-verifier-input"
-      ],
-      "sha256": "b8278adcf2986173705fdca823093a36ad75b25e67b1786d587908a2afa39dc8"
-    },
-    {
-      "bytes": 52330,
-      "executable": false,
-      "path": "experiments/vault-prototype/src/native/registered.rs",
-      "reasons": [
-        "current-first-party-tree",
-        "existing-full-verifier-input"
-      ],
-      "sha256": "c8e4b00e91601321cc4678a9b898beb3c8e2e629dc8e32e23e6ec7aa41aa4a6b"
-    },
-    {
-      "bytes": 9436,
-      "executable": false,
-      "path": "experiments/vault-prototype/src/native/registered_process_tests.rs",
-      "reasons": [
-        "current-first-party-tree",
-        "existing-full-verifier-input"
-      ],
-      "sha256": "306560362a516e44f04245f5fc03e133f855eb50316f47f52def52217520589a"
-    },
-    {
-      "bytes": 12202,
-      "executable": false,
-      "path": "experiments/vault-prototype/src/native/schema.rs",
-      "reasons": [
-        "current-contract-input:trusted_control_host",
-        "current-first-party-tree",
-        "existing-full-verifier-input"
-      ],
-      "sha256": "9c1814cd403b346561796e85fc9c7ff285a28b4540b286f94aa6413112b9608f"
-    },
-    {
-      "bytes": 42663,
-      "executable": false,
-      "path": "experiments/vault-prototype/src/native/transactions.rs",
-      "reasons": [
-        "current-first-party-tree",
-        "existing-full-verifier-input"
-      ],
-      "sha256": "a957904a3469f592ba83348a6cc56d29f1cda59e2c5151051d10cae21fa02301"
     },
     {
       "bytes": 16294,
@@ -10593,6 +13301,339 @@
         "existing-full-verifier-input"
       ],
       "sha256": "60741e97c081191d8e5ce5fc8b70e55e0a35db7680436f501159354bc634311f"
+    },
+    {
+      "bytes": 11979,
+      "executable": false,
+      "path": "packages/browser/README.md",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "a9107b75a0056ec01ddcce3925f64b34b487e797bb734fb0c1c071d558927e83"
+    },
+    {
+      "bytes": 399,
+      "executable": false,
+      "path": "packages/browser/examples/extension/background.js",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "96deb11d6cbec31109b118408494175401e4e0e7fcdd3145ae7c56b9baeae6e2"
+    },
+    {
+      "bytes": 1611,
+      "executable": false,
+      "path": "packages/browser/examples/extension/main.mjs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "1916c200c0c044416ecd5ff650ced53f24c376730a07e73bd651cf4ca1d5ccc6"
+    },
+    {
+      "bytes": 381,
+      "executable": false,
+      "path": "packages/browser/examples/extension/manifest.chrome.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "295f582ed702e5d2a8332d840b36ccf0fa8628c3d7d4dd95b6f57e84e7300a61"
+    },
+    {
+      "bytes": 457,
+      "executable": false,
+      "path": "packages/browser/examples/extension/manifest.firefox.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "165df3e46069ea36d97dc5ab7304236d898ecbb7b969a45cc43634b2d353b3fd"
+    },
+    {
+      "bytes": 630,
+      "executable": false,
+      "path": "packages/browser/examples/extension/vault.html",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "910d82e8658604c418a1d8e092d74de50d985e05761ba10c1a60f09fff39dbba"
+    },
+    {
+      "bytes": 783,
+      "executable": false,
+      "path": "packages/browser/examples/website/index.html",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "19ce4a8a033324d04fb5ff1fcac7540db1968dcebc09e4582975abba9cf246f8"
+    },
+    {
+      "bytes": 1607,
+      "executable": false,
+      "path": "packages/browser/examples/website/main.mjs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "2383f10d41170e15fa307a6511f524fea85ab2520cb72302e3d463748e66422f"
+    },
+    {
+      "bytes": 10848,
+      "executable": false,
+      "path": "packages/browser/notices/age-core-0.11.0/LICENSE-APACHE",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "3708458dee7f359ac6c9c5558023ed481be87e5372c43ebd7f2ca7ad23c12026"
+    },
+    {
+      "bytes": 1077,
+      "executable": false,
+      "path": "packages/browser/notices/age-core-0.11.0/LICENSE-MIT",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "fe56c030c2d8c3404a37fe711cebb27ebea13d0aacf7e3524db4198335ad8cd1"
+    },
+    {
+      "bytes": 1109,
+      "executable": false,
+      "path": "packages/browser/notices/bech32-0.9.1/LICENSE-HEADER.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "74375f18b087dc11b0d356d423601acf4bcfc2bc86ac95dc72336d362f869f0d"
+    },
+    {
+      "bytes": 1065,
+      "executable": false,
+      "path": "packages/browser/notices/cookie-factory-0.3.3/MIT.txt",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "d09216dc1ea5f273997667935a8d6514d80f00b89fb6954ecc3a43e0a6e360de"
+    },
+    {
+      "bytes": 11357,
+      "executable": false,
+      "path": "packages/browser/notices/fluent-langneg-0.13.1/LICENSE-APACHE",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+    },
+    {
+      "bytes": 1053,
+      "executable": false,
+      "path": "packages/browser/notices/fluent-langneg-0.13.1/LICENSE-MIT",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "016fcc02048817d628b04b140c54db290fd9d29a5e8a55b77871194e810716ac"
+    },
+    {
+      "bytes": 9723,
+      "executable": false,
+      "path": "packages/browser/notices/intl_pluralrules-7.0.2/LICENSE-APACHE",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a"
+    },
+    {
+      "bytes": 1023,
+      "executable": false,
+      "path": "packages/browser/notices/intl_pluralrules-7.0.2/LICENSE-MIT",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+    },
+    {
+      "bytes": 11358,
+      "executable": false,
+      "path": "packages/browser/notices/io_tee-0.1.1/LICENSE-APACHE",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "bytes": 774,
+      "executable": false,
+      "path": "packages/browser/notices/io_tee-0.1.1/UPSTREAM-LICENSE-DECLARATION.md",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "0ba20a4b5d8188a85014c5f6d52b5407aec2077986c05f6ba686f9899b767b95"
+    },
+    {
+      "bytes": 248,
+      "executable": false,
+      "path": "packages/browser/notices/io_tee-0.1.1/UPSTREAM-PACKAGE.toml",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "9556395f55b7c67a6041f84553c7c27b3ab3fe5505769f4f1003a7b0988f2586"
+    },
+    {
+      "bytes": 6182,
+      "executable": false,
+      "path": "packages/browser/notices/provenance.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "25b158bfa3db0766919bba20ac46c64b4cb397bf04f2295802fdd2839fec0ead"
+    },
+    {
+      "bytes": 161575,
+      "executable": false,
+      "path": "packages/browser/package-lock.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "6c99b9f8f0834d1bafc57ed619bcd8fee9389ab2e4edd444addb3da0b2d18b2c"
+    },
+    {
+      "bytes": 952,
+      "executable": false,
+      "path": "packages/browser/package.json",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "95250cd4833604a214abadbddbab7dc65f20e0d399f94f2d5fec207fbe5ff332"
+    },
+    {
+      "bytes": 961,
+      "executable": false,
+      "path": "packages/browser/scripts/build-examples.mjs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "461e3eea9b53cea1b43729feda1225d4aee9120111e813fc3332e9d5d063e493"
+    },
+    {
+      "bytes": 1819,
+      "executable": false,
+      "path": "packages/browser/scripts/build.mjs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "446582bd4c2e08e5266fea4abcf8ec90a19c96abd9ada4fd9bc45c75c55d8128"
+    },
+    {
+      "bytes": 4975,
+      "executable": false,
+      "path": "packages/browser/scripts/collect-notices.mjs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "7acdf8660f792ddc2a4c46bded928b47b663e4b57724b341bc0436aced508161"
+    },
+    {
+      "bytes": 25762,
+      "executable": false,
+      "path": "packages/browser/src/client.mjs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "39e5e3617f39d9b147b280994ff4979d001d8a98d8d5bd4c918d7fa2cbf69498"
+    },
+    {
+      "bytes": 5095,
+      "executable": false,
+      "path": "packages/browser/src/configuration.mjs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "e0d65d3f6312d9f0c46e10d194a7560cc7aa650e0b13eefd3f04ed46c72a8bb0"
+    },
+    {
+      "bytes": 9577,
+      "executable": false,
+      "path": "packages/browser/src/idb.mjs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "7b01290afe1f6f234e8246658e5a673064cc44269c770b0d999f3dd04f44e3b4"
+    },
+    {
+      "bytes": 7576,
+      "executable": false,
+      "path": "packages/browser/src/index.d.ts",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "09f12e7706191de7bf302f19c8c80565bc35fc760e7bb95c547e4e4352baa93f"
+    },
+    {
+      "bytes": 3242,
+      "executable": false,
+      "path": "packages/browser/src/password.mjs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "8501e4f1939aace619974fa78e230645b6bb65b5e4650abd50174bb053eda24b"
+    },
+    {
+      "bytes": 60627,
+      "executable": false,
+      "path": "packages/browser/src/worker-runtime.mjs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "f48b8214b3d04352d7de7f4247abf05b08ef4151d732dcb9be2a0f644003dbf3"
+    },
+    {
+      "bytes": 945,
+      "executable": false,
+      "path": "packages/browser/src/worker.mjs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "bb0f36792dd6877361700dff29358c574e961c281e8fb829ce447efd252618ff"
+    },
+    {
+      "bytes": 194,
+      "executable": false,
+      "path": "packages/browser/test/browser.html",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "7750bc474e7e8adf18af2c268da17b65dccc7c3e602728db6511730a6e9fa2d8"
+    },
+    {
+      "bytes": 36362,
+      "executable": false,
+      "path": "packages/browser/test/browser.mjs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "77bffe794a81ad3493da2da8d1c1c6cb5639af11e868a61f0549ddc3edead0ba"
+    },
+    {
+      "bytes": 6644,
+      "executable": false,
+      "path": "packages/browser/test/client.test.mjs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "19002f4b4168dd9f294797f57b8793efd3404a48dab3d74052c221f050ae94d6"
+    },
+    {
+      "bytes": 6987,
+      "executable": false,
+      "path": "packages/browser/test/extensions.spec.mjs",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "eff716f3dfe2635c9fbba67f2195c084a14e5fb88e4c7c6eca7f17df8ec9b6cf"
+    },
+    {
+      "bytes": 1703,
+      "executable": false,
+      "path": "packages/browser/test/types.ts",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "11e2f6934e0121fbdf21c38474bca081609450ab0608d66a1e6113ac6c0dd1b1"
     },
     {
       "bytes": 51189,
@@ -25021,7 +28062,16 @@
       "sha256": "37155c9f70bfe0825cbf927f9553b4e329f8d9811abc70be3065a7263b94af89"
     },
     {
-      "bytes": 6814,
+      "bytes": 4685,
+      "executable": false,
+      "path": "scripts/build-delivery.py",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "6dcad3f6715fdd7afeab0236b0c9991377a22e1b6b8261d5a12d0f7fd1269b30"
+    },
+    {
+      "bytes": 7004,
       "executable": false,
       "path": "scripts/capture-remediation-dependencies.py",
       "reasons": [
@@ -25029,27 +28079,27 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "2a786624e1afaf62a681bce2f8948f2de2da4fbd753c6bc38bf55b3e66582d98"
+      "sha256": "8c89ff7e020f5e4e4e3478850edbbc6b8d964161941827a1868ed1209315caeb"
     },
     {
-      "bytes": 13348,
+      "bytes": 13487,
       "executable": false,
       "path": "scripts/measure-index.py",
       "reasons": [
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "86966c439b8370ea7be6c17647ae312165fa503e8604dfc254243aa10e143063"
+      "sha256": "e97057bdba060260dbce8ccaa57cdcee98301bcae21908d0df8f8f6402f0935b"
     },
     {
-      "bytes": 15294,
+      "bytes": 15437,
       "executable": false,
       "path": "scripts/measure-resources.py",
       "reasons": [
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "a28bc46651b5527a4e19f9c331d3c671d5c1ee870756759621fb617fe0e9704b"
+      "sha256": "6e637a81902e9ef4bdef284886e85106c7a2cbe363dcee36ee33469b31457d82"
     },
     {
       "bytes": 186,
@@ -25070,27 +28120,54 @@
       "sha256": "a2889b230098ce930bf0fc223c1001b55c1ac33c7bbd104938151ddf1bd40c4e"
     },
     {
-      "bytes": 27810,
+      "bytes": 755,
+      "executable": false,
+      "path": "scripts/run-native-tests.py",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "d07096e8f9b7f0e4c6b8ea7df39020ca37d2d9092cb035d04397ad33e9cb8b98"
+    },
+    {
+      "bytes": 1225,
+      "executable": false,
+      "path": "scripts/source_inputs.py",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "4c098f6d76337358ada8fc10e6bfc155ae0d6d213d49bd23def72a8ac2a75dbb"
+    },
+    {
+      "bytes": 27816,
       "executable": false,
       "path": "scripts/verify-access-paths.py",
       "reasons": [
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "591c02ad20ac4e92b1887f14715fa239c328057c43fb8ef251621e195c45618b"
+      "sha256": "c5ef20231ad111b71a46776ebd16e2c2feb68a6492573e279a2a6911d13097e6"
     },
     {
-      "bytes": 7642,
+      "bytes": 6163,
+      "executable": false,
+      "path": "scripts/verify-browser-sdk.py",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "77c1ba9ac9cc3ca152ee3fac3e6608494cfb430f812a0f7651c39f399364bd3a"
+    },
+    {
+      "bytes": 7785,
       "executable": false,
       "path": "scripts/verify-browser.py",
       "reasons": [
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "5f159abee818a6f25a996f8c8d8dbdf70677a893196b85a26c68911ec4b14d86"
+      "sha256": "14f5c33454c49205c69d6160fc606ce322e6d04e1b2d5a5fd85e92307a752ac7"
     },
     {
-      "bytes": 12786,
+      "bytes": 13081,
       "executable": false,
       "path": "scripts/verify-dependency-audit.py",
       "reasons": [
@@ -25098,10 +28175,10 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "060705c10bf05d83f6444f526c7b388cc6db0bbba78cd4d1b743279f9c652dc1"
+      "sha256": "e96e8ba6e444f466074d40ffe593c07f093f4d4a5b54369dc9ecc4f02648bc99"
     },
     {
-      "bytes": 28943,
+      "bytes": 28949,
       "executable": false,
       "path": "scripts/verify-epoch-independent.py",
       "reasons": [
@@ -25110,7 +28187,7 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "ded65d605059675918d159aff4ba561b54c37a35af5ec09c8c3d62f2b0d9b78f"
+      "sha256": "2473e13d7512afcca2b8310192741db4d4c632f2e9e772f647bad0b28c6754e9"
     },
     {
       "bytes": 29720,
@@ -25135,7 +28212,16 @@
       "sha256": "2fa21c0852a13adaad09b92a9e27a1230db6883bd13d9ad0d572e77215919f1c"
     },
     {
-      "bytes": 11879,
+      "bytes": 2840,
+      "executable": false,
+      "path": "scripts/verify-extensions.py",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "8b4c81026c4fafaa7aeb3024c8c47176d86e4a027c892da0f7c9898cb26eaac7"
+    },
+    {
+      "bytes": 11885,
       "executable": false,
       "path": "scripts/verify-fresh-epoch.py",
       "reasons": [
@@ -25143,17 +28229,26 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "edf146a27b5b014ac98a0af55cfad44692fa4103d5cf8f5d898d6a382ef5a37a"
+      "sha256": "2c9533e5c5c9db8c4fc7d477215c3fc7564d44e54289de23af625c2941d46ecd"
     },
     {
-      "bytes": 19319,
+      "bytes": 1994,
+      "executable": false,
+      "path": "scripts/verify-maintained-api.py",
+      "reasons": [
+        "maintained-native-browser-delivery"
+      ],
+      "sha256": "45504f6373b1c6eb3bddc2608ab84174021c5c9b9d1f0f486184634ce12ab53a"
+    },
+    {
+      "bytes": 19462,
       "executable": false,
       "path": "scripts/verify-mobile.py",
       "reasons": [
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "8330081df15ed0505dbc4b141d41075c38bdb1baf6501e11f2dd297588c62d78"
+      "sha256": "1b8907a77f4b977fd8bac723f848d4c4d4d95165514be2b0e5999d647b6be425"
     },
     {
       "bytes": 15756,
@@ -25166,7 +28261,7 @@
       "sha256": "72c199e4696c8c1a6bdd3703084254ffc3a2f256d5b139c084dccd6b7c4c2964"
     },
     {
-      "bytes": 13313,
+      "bytes": 13450,
       "executable": false,
       "path": "scripts/verify-rust-export.py",
       "reasons": [
@@ -25174,10 +28269,10 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "2ccbe021ff606e2cddd2e5ce0c1fa5c5919c561b1c434e6cd6644be77d669654"
+      "sha256": "c6b47792d0da41ba7a37cc2152d5906ad1d6801884105cf8b96660956e20e4e0"
     },
     {
-      "bytes": 23530,
+      "bytes": 23695,
       "executable": false,
       "path": "scripts/verify-trusted-control.py",
       "reasons": [
@@ -25185,17 +28280,17 @@
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "a79fb494a22f1c46783ec3a2bedd75231529145298e3b511ed17f170781683aa"
+      "sha256": "212a50c122c5b05553eb471954d0b2424d48f7a91d3934ddeecb0d9693900008"
     },
     {
-      "bytes": 75949,
+      "bytes": 79701,
       "executable": true,
       "path": "scripts/verify-vault.py",
       "reasons": [
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "4e4c3b13c8e66da8e7c77bdc3888a871e6c87c7af2647f06b8eed1a725642fb4"
+      "sha256": "1ff65e9f6663360794d43e0fc9956276dce5d21886432879d65de6cac83a5d1a"
     },
     {
       "bytes": 40119,
@@ -30919,11 +34014,12 @@
     }
   ],
   "notes": [
-    "Selected historical verifier baselines are inputs, never substitutes for fresh execution.",
-    "No .git metadata, reviewer attachments, unrelated reference repositories, build outputs or old verifier runs are copied.",
-    "Pinned native verification tools target the existing Apple arm64 profile, not arbitrary hosts.",
-    "First-party license selection and third-party redistribution review are separate publication decisions."
+    "Captured public source tree excludes this self-referential manifest, build output, local tools, reviewer attachments and private research.",
+    "The baseline report passed all 35 required stages; changed_baseline_input_paths explicitly records subsequent edits.",
+    "Historical evidence never substitutes for fresh execution. Platform CI and production qualification are separate claims.",
+    "MIT applies to first-party code. Third-party redistribution and dependency scope are documented separately."
   ],
+  "previous_capture_sha256": "033fe429d1342c83be6d290f31d8feb1c9451413962ff3074de557a331f49740",
   "required_reference_checkout": {
     "git_metadata_copied": false,
     "path": "research/review-dependencies/advisory-db",
@@ -30932,6 +34028,6 @@
     "url": "https://github.com/RustSec/advisory-db.git"
   },
   "schema": "fogvault-public-candidate-inputs/v1",
-  "status": "prepared-not-published-or-production-qualified",
-  "total_bytes": 77124285
+  "status": "maintained-candidate-not-production-qualified",
+  "total_bytes": 83634810
 }

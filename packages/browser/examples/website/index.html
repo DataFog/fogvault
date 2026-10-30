@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FogVault website example</title>
+<style>body{font:18px system-ui;max-width:44rem;margin:3rem auto;padding:0 1rem}label,button{display:block;margin:1rem 0}input{font:inherit}pre{white-space:pre-wrap}</style>
+<h1>FogVault website example</h1>
+<p>This example stores an encrypted synthetic record in this origin's IndexedDB.</p>
+<label>Password <input id="password" type="password" autocomplete="new-password"></label>
+<button id="create">Create and save synthetic record</button>
+<button id="read">Reopen and read</button>
+<button id="lock">Lock</button>
+<pre id="status" role="status">Locked</pre>
+<script type="module" src="./main.mjs"></script>
+</html>
