@@ -11,6 +11,11 @@ Start focused work from `staging` and send its PR to `staging`. Promote tested
 actual parent branch. The branch prefix is not a security or correctness rule;
 use an existing convention, or `codex/<purpose>` for a new agent branch.
 
+PR merges can add branch history even when the files match. Before the next
+staging PR after a promotion, merge the latest `main` into the feature branch.
+That keeps the next promotion up to date without pushing directly to a protected
+branch. Branch synchronization follows the same PR and check rules.
+
 Protected branches require a PR, passing required checks and resolved review
 conversations. A second person's approval is optional under the current owner
 policy. Checks apply to bot PRs as well. Do not bypass protection, force push or
