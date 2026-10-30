@@ -1,0 +1,10 @@
+{
+  "schema": "fogvault-quality-toolchains/v1",
+  "rust": "1.94.1",
+  "rust_minimum": "1.89.0",
+  "python_minimum": "3.11.0",
+  "python_ci": "3.14",
+  "node": "25.8.2",
+  "wasm_bindgen": "0.2.127",
+  "playwright_cli": "0.1.22"
+}

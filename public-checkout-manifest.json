@@ -1,7 +1,18 @@
 {
   "baseline_report_sha256": "db388f89b2af86672dcbcaeb07bc26519029e9c47bd323b47009638aabafb6e4",
-  "changed_baseline_input_paths": [],
-  "content_identity_sha256": "438af115ec4a8595f05f440e7baa76f814676bcacae32053837484d71c3285b4",
+  "changed_baseline_input_paths": [
+    "conformance/maintained-contract.json",
+    "packages/browser/package-lock.json",
+    "packages/browser/package.json",
+    "packages/browser/scripts/build-examples.mjs",
+    "packages/browser/scripts/build.mjs",
+    "scripts/build-delivery.py",
+    "scripts/playwright-cli.sh",
+    "scripts/verify-browser-sdk.py",
+    "scripts/verify-vault.py",
+    "tests/verifier_checks.py"
+  ],
+  "content_identity_sha256": "9d773d637737361620e32a0719427c1156bb16d2f5e3c170804e8c9c70f27530",
   "declared_public_overlays": [
     {
       "path": ".gitignore",
@@ -10,7 +21,7 @@
     },
     {
       "path": "README.md",
-      "public_sha256": "ea095337325530784b142e295a0ed34efe5330170245343fd6422e784598d9f1",
+      "public_sha256": "9419ad5cbf3e1c5f8710dfa5138842803dfdef9e2807b49f34a5ced3e268f522",
       "workspace_sha256": "d26c5c82e4df55159c70bc5985e57405c085efc5a7fe230f9e6867d9d8100dc7"
     },
     {
@@ -34,7 +45,7 @@
       "workspace_sha256": "456ec020264d018fdb69b36b0db45ef43870088c2cfdb9f59fecb630b54954d9"
     }
   ],
-  "file_count": 3490,
+  "file_count": 3505,
   "files": [
     {
       "bytes": 153,
@@ -46,13 +57,31 @@
       "sha256": "44f1c611a4b7eb466789710e407df8fe0efbda83df945cba487e5ac82db67657"
     },
     {
-      "bytes": 4392,
+      "bytes": 776,
+      "executable": false,
+      "path": ".github/pull_request_template.md",
+      "reasons": [
+        "repository-quality-contract"
+      ],
+      "sha256": "dd57777c8bfd8018815fa16d24d486b392b7f238658e4ef1f0f49d0b10351a3b"
+    },
+    {
+      "bytes": 1580,
+      "executable": false,
+      "path": ".github/workflows/changelog.yml",
+      "reasons": [
+        "repository-quality-contract"
+      ],
+      "sha256": "63ca6d2bbb81b6f2ba19fea58b02f7ae505e33858fbaf1d1d5810900aa0fc0cc"
+    },
+    {
+      "bytes": 8642,
       "executable": false,
       "path": ".github/workflows/maintained.yml",
       "reasons": [
         "maintained-native-browser-delivery"
       ],
-      "sha256": "aa453010e3b284df5a027f5fc2f36a0ecd6eb19ea92b8c13873c81256d0283a0"
+      "sha256": "777529525f37f958dadcfaaa6a6a86809894f76a16f149fd635e3734a6f0cc86"
     },
     {
       "bytes": 268597,
@@ -64,6 +93,33 @@
       "sha256": "fe1188257b1874e0aea1744979bfa974a0d9abacfe4bb8683e599e73c3d1486f"
     },
     {
+      "bytes": 2441,
+      "executable": false,
+      "path": "AGENTS.md",
+      "reasons": [
+        "repository-quality-contract"
+      ],
+      "sha256": "53a49c7b1d588274519318e3f18b6b05503ef31a77ab63056f772ec8f42da884"
+    },
+    {
+      "bytes": 408,
+      "executable": false,
+      "path": "CHANGELOG.md",
+      "reasons": [
+        "repository-quality-contract"
+      ],
+      "sha256": "e7398d70e9843e8f212fff18e6f7c46d1d3fffe7bfd182f28d633a33ed33ef7e"
+    },
+    {
+      "bytes": 6276,
+      "executable": false,
+      "path": "CONTRIBUTING.md",
+      "reasons": [
+        "repository-quality-contract"
+      ],
+      "sha256": "937c80f409bd5f8990c97a8947796723546fd11310b146053f8a195abfa51a29"
+    },
+    {
       "bytes": 1064,
       "executable": false,
       "path": "LICENSE",
@@ -73,23 +129,23 @@
       "sha256": "ce1ff3fa2e2167f504b4c9b6ca3875cecc7e69ce072b4e1dcf61028781fa75bc"
     },
     {
-      "bytes": 3995,
+      "bytes": 5144,
       "executable": false,
       "path": "PUBLIC-CHECKOUT-NOTES.md",
       "reasons": [
         "public-presentation"
       ],
-      "sha256": "5d9aa7c842b56e563e9a872014c20f9e8dac90923fe9f40926a5c937b7f27827"
+      "sha256": "155163331bb35070696488ecfdbff5d316f3ac1f49f1323567674158aeb106f2"
     },
     {
-      "bytes": 5031,
+      "bytes": 5670,
       "executable": false,
       "path": "README.md",
       "reasons": [
         "public-presentation",
         "reviewed-public-presentation-overlay"
       ],
-      "sha256": "ea095337325530784b142e295a0ed34efe5330170245343fd6422e784598d9f1"
+      "sha256": "9419ad5cbf3e1c5f8710dfa5138842803dfdef9e2807b49f34a5ced3e268f522"
     },
     {
       "bytes": 5349,
@@ -1518,13 +1574,13 @@
       "sha256": "7356383ae4a042b3528cea38a71bd8903ac5cd9cff3a8a60580e4134c948be4e"
     },
     {
-      "bytes": 2322,
+      "bytes": 2539,
       "executable": false,
       "path": "conformance/maintained-contract.json",
       "reasons": [
         "maintained-native-browser-delivery"
       ],
-      "sha256": "e930c3af1913c10e995fc0d25b1a9675d1f0239b8209361ff051fcc2f817f15a"
+      "sha256": "965db670b64fdd48b1a68d5412bd1295e707783ffc55ab22fe5b908f6c442f6e"
     },
     {
       "bytes": 4679,
@@ -1555,6 +1611,15 @@
         "existing-full-verifier-input"
       ],
       "sha256": "2c0f67d5e481c7b13554eabbe07f40899a78708e71227041cfa39adcc5435d36"
+    },
+    {
+      "bytes": 229,
+      "executable": false,
+      "path": "conformance/toolchains.json",
+      "reasons": [
+        "repository-quality-contract"
+      ],
+      "sha256": "4f06029f7040f91440757bd7b44ac2105632ea48aae6b4ab768e9e004f5ff9a8"
     },
     {
       "bytes": 252053,
@@ -13481,40 +13546,40 @@
       "sha256": "25b158bfa3db0766919bba20ac46c64b4cb397bf04f2295802fdd2839fec0ead"
     },
     {
-      "bytes": 161575,
+      "bytes": 162194,
       "executable": false,
       "path": "packages/browser/package-lock.json",
       "reasons": [
         "maintained-native-browser-delivery"
       ],
-      "sha256": "6c99b9f8f0834d1bafc57ed619bcd8fee9389ab2e4edd444addb3da0b2d18b2c"
+      "sha256": "36bb1cf19568ef00953a37cfc0f2e60b60078019e1b339288bcbd57db5e55519"
     },
     {
-      "bytes": 952,
+      "bytes": 985,
       "executable": false,
       "path": "packages/browser/package.json",
       "reasons": [
         "maintained-native-browser-delivery"
       ],
-      "sha256": "95250cd4833604a214abadbddbab7dc65f20e0d399f94f2d5fec207fbe5ff332"
+      "sha256": "a88fbd7777665e878825e628cd9c93d0fb02ec312782ef58402d47dd7e691e76"
     },
     {
-      "bytes": 961,
+      "bytes": 1080,
       "executable": false,
       "path": "packages/browser/scripts/build-examples.mjs",
       "reasons": [
         "maintained-native-browser-delivery"
       ],
-      "sha256": "461e3eea9b53cea1b43729feda1225d4aee9120111e813fc3332e9d5d063e493"
+      "sha256": "1fc38389ff099553ed9f61fe919956d9eba1805f1146b96c04d1605284f90f23"
     },
     {
-      "bytes": 1819,
+      "bytes": 1953,
       "executable": false,
       "path": "packages/browser/scripts/build.mjs",
       "reasons": [
         "maintained-native-browser-delivery"
       ],
-      "sha256": "446582bd4c2e08e5266fea4abcf8ec90a19c96abd9ada4fd9bc45c75c55d8128"
+      "sha256": "593a424209dff55866f6e5089588210a0ab6a05510437a0db4256ab25a414acc"
     },
     {
       "bytes": 4975,
@@ -28060,13 +28125,13 @@
       "sha256": "37155c9f70bfe0825cbf927f9553b4e329f8d9811abc70be3065a7263b94af89"
     },
     {
-      "bytes": 4685,
+      "bytes": 6730,
       "executable": false,
       "path": "scripts/build-delivery.py",
       "reasons": [
         "maintained-native-browser-delivery"
       ],
-      "sha256": "6dcad3f6715fdd7afeab0236b0c9991377a22e1b6b8261d5a12d0f7fd1269b30"
+      "sha256": "5a1d76a28aef5e4fb9cfaf79517710eb93904b3ede85aecf011ae82213cebb97"
     },
     {
       "bytes": 7004,
@@ -28078,6 +28143,33 @@
         "existing-full-verifier-input"
       ],
       "sha256": "8c89ff7e020f5e4e4e3478850edbbc6b8d964161941827a1868ed1209315caeb"
+    },
+    {
+      "bytes": 9782,
+      "executable": false,
+      "path": "scripts/check-changelog.py",
+      "reasons": [
+        "repository-quality-contract"
+      ],
+      "sha256": "4fa19d71af62ff6868477d4a0133dcba65b01db5cacf95bce35dc0c8f5ef0da4"
+    },
+    {
+      "bytes": 5764,
+      "executable": false,
+      "path": "scripts/delivery_inputs.py",
+      "reasons": [
+        "repository-quality-contract"
+      ],
+      "sha256": "03525a2df5d95bfa44cf0efcb92deccf42dddc95eb2d91f4ea90185f177e3e30"
+    },
+    {
+      "bytes": 6504,
+      "executable": false,
+      "path": "scripts/evidence.py",
+      "reasons": [
+        "repository-quality-contract"
+      ],
+      "sha256": "f59b5eb3ff8648859dadbe433043e7fa9464ccf23f153331b12244e4430f1f8c"
     },
     {
       "bytes": 13487,
@@ -28100,13 +28192,13 @@
       "sha256": "6e637a81902e9ef4bdef284886e85106c7a2cbe363dcee36ee33469b31457d82"
     },
     {
-      "bytes": 186,
+      "bytes": 717,
       "executable": true,
       "path": "scripts/playwright-cli.sh",
       "reasons": [
         "current-first-party-tree"
       ],
-      "sha256": "3e3a43f46e0919926add0f46a3637b544b3542161088d812c87e4ab5a005266e"
+      "sha256": "0b597f0a7deb5b22dcc32de268ba9289da813597d7d3f0e829e740e9f736e5a4"
     },
     {
       "bytes": 13783,
@@ -28116,6 +28208,15 @@
         "current-first-party-tree"
       ],
       "sha256": "a2889b230098ce930bf0fc223c1001b55c1ac33c7bbd104938151ddf1bd40c4e"
+    },
+    {
+      "bytes": 23446,
+      "executable": false,
+      "path": "scripts/quality.py",
+      "reasons": [
+        "repository-quality-contract"
+      ],
+      "sha256": "76485b50e76640f7610b96d0fcad8d64a6baa5a507c16202a6f9e00bbb623856"
     },
     {
       "bytes": 755,
@@ -28146,13 +28247,13 @@
       "sha256": "c5ef20231ad111b71a46776ebd16e2c2feb68a6492573e279a2a6911d13097e6"
     },
     {
-      "bytes": 7059,
+      "bytes": 10552,
       "executable": false,
       "path": "scripts/verify-browser-sdk.py",
       "reasons": [
         "maintained-native-browser-delivery"
       ],
-      "sha256": "b270ba376bcaf3bb738cd6ba0cb6cec6701adf64bc91cf62d91bc461bde5aa7a"
+      "sha256": "a42ee345f530af7435de5000ce4387d43092249fa2d440e75efac23ccb619c64"
     },
     {
       "bytes": 7785,
@@ -28163,6 +28264,15 @@
         "existing-full-verifier-input"
       ],
       "sha256": "14f5c33454c49205c69d6160fc606ce322e6d04e1b2d5a5fd85e92307a752ac7"
+    },
+    {
+      "bytes": 5532,
+      "executable": false,
+      "path": "scripts/verify-candidate.py",
+      "reasons": [
+        "repository-quality-contract"
+      ],
+      "sha256": "b0f75d1ab315c9c868355781de69d39eb2f471800e6d83a8319a2abb8c4a4270"
     },
     {
       "bytes": 13081,
@@ -28210,13 +28320,13 @@
       "sha256": "2fa21c0852a13adaad09b92a9e27a1230db6883bd13d9ad0d572e77215919f1c"
     },
     {
-      "bytes": 2840,
+      "bytes": 2933,
       "executable": false,
       "path": "scripts/verify-extensions.py",
       "reasons": [
         "maintained-native-browser-delivery"
       ],
-      "sha256": "8b4c81026c4fafaa7aeb3024c8c47176d86e4a027c892da0f7c9898cb26eaac7"
+      "sha256": "dc95cc9e2dd6ada1e10f23b98b916487ec49dfa5274307d223ebb7e04ca52097"
     },
     {
       "bytes": 11885,
@@ -28281,14 +28391,14 @@
       "sha256": "212a50c122c5b05553eb471954d0b2424d48f7a91d3934ddeecb0d9693900008"
     },
     {
-      "bytes": 79701,
+      "bytes": 84334,
       "executable": true,
       "path": "scripts/verify-vault.py",
       "reasons": [
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "1ff65e9f6663360794d43e0fc9956276dce5d21886432879d65de6cac83a5d1a"
+      "sha256": "182e844c1c8edf94d09d178cb8965cba7a3988e94913c6b6cd031a88c88e4d98"
     },
     {
       "bytes": 40119,
@@ -28313,14 +28423,50 @@
       "sha256": "9f40a3ec42ea7ee87d2c72f6cdd257435a2ffa44595aaebd79eeead39cd392b5"
     },
     {
-      "bytes": 57525,
+      "bytes": 13713,
+      "executable": false,
+      "path": "tests/test_changelog.py",
+      "reasons": [
+        "repository-quality-contract"
+      ],
+      "sha256": "385366a0ddc55b4e1c0195dc4a2e6a52ef654ecfdc7a9b82e9e465bb87a24464"
+    },
+    {
+      "bytes": 12215,
+      "executable": false,
+      "path": "tests/test_delivery.py",
+      "reasons": [
+        "repository-quality-contract"
+      ],
+      "sha256": "2c2fc0f3e6783d5187c866847693c5f08e15ea308c0cc73ef493b83e90e87a41"
+    },
+    {
+      "bytes": 7594,
+      "executable": false,
+      "path": "tests/test_evidence.py",
+      "reasons": [
+        "repository-quality-contract"
+      ],
+      "sha256": "502006e463b811d5c178319e6c29cd2f23a525842c797e769e93b2bc6aeb31b6"
+    },
+    {
+      "bytes": 9313,
+      "executable": false,
+      "path": "tests/test_quality.py",
+      "reasons": [
+        "repository-quality-contract"
+      ],
+      "sha256": "307e495602c9b101042400ed9ee1cf8cf0cf9d0dd9b99569c02346cf8dadfccd"
+    },
+    {
+      "bytes": 65566,
       "executable": false,
       "path": "tests/verifier_checks.py",
       "reasons": [
         "current-first-party-tree",
         "existing-full-verifier-input"
       ],
-      "sha256": "be8fb49b680dca7508252e342fcab784ff59aad91212f75dda18222713c06415"
+      "sha256": "22a9e658ddff574718dcaa0c70beb24a9094852bd83a51665101b03cb64b7ae2"
     },
     {
       "bytes": 117351,
@@ -34012,12 +34158,12 @@
     }
   ],
   "notes": [
-    "Captured public source tree excludes this self-referential manifest, build output, local tools, reviewer attachments and private research.",
-    "The baseline report passed all 35 required stages; changed_baseline_input_paths explicitly records subsequent edits.",
-    "Historical evidence never substitutes for fresh execution. Platform CI and production qualification are separate claims.",
+    "This source inventory excludes itself and ignored build, private and evidence state.",
+    "The baseline report is historical; changed_baseline_input_paths records subsequent edits. Required PR checks execute the current source and installed candidates.",
+    "Shared quality profiles and the complete full-host verifier produce fresh source/tool/artifact evidence.",
     "MIT applies to first-party code. Third-party redistribution and dependency scope are documented separately."
   ],
-  "previous_capture_sha256": "c11ab158e71a28272a78517ed9c02c4a876ee6f2cb82860b399b39324381b7bf",
+  "previous_capture_sha256": "ddaf263d898437c2ba49f3a61fd48aed1c9e43d8d4c099d80a5861941560ad9d",
   "required_reference_checkout": {
     "git_metadata_copied": false,
     "path": "research/review-dependencies/advisory-db",
@@ -34027,5 +34173,5 @@
   },
   "schema": "fogvault-public-candidate-inputs/v1",
   "status": "maintained-candidate-not-production-qualified",
-  "total_bytes": 83637722
+  "total_bytes": 83769291
 }

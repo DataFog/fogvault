@@ -39,7 +39,7 @@ not product runtime binaries.
 
 ```sh
 python3 scripts/bootstrap-reference-db.py
-CARGO_PROFILE_TEST_OPT_LEVEL=2 python3 -u scripts/verify-vault.py --with-feasibility
+CARGO_PROFILE_TEST_OPT_LEVEL=2 python3 scripts/quality.py check --profile full
 ```
 
 The explicit bootstrap fetches the pinned public RustSec commit into ignored
@@ -52,6 +52,23 @@ Named case inventories and before/after source identities guard behavior drift.
 Fresh executed reports are the proof for their exact inputs; historical audit
 snapshots are inputs, not substitutes for execution. An unavailable mandatory
 host/tool fails the declared profile.
+
+The same `scripts/quality.py` interface supplies portable `contract`, `native`,
+`browser` and `extensions` profiles for local use and CI. These are explicit
+supported scopes, not substitutes for the full host qualification. Shared
+version pins and `doctor` provide prerequisite checks without installing tools.
+Browser tools are locked npm development dependencies installed by the explicit
+`npm ci --ignore-scripts --prefix packages/browser` setup step.
+
+Each CI profile retains structured source/tool/command/artifact evidence and logs
+on both outcomes. A missing required report fails evidence capture. The stable
+`FogVault quality` gate handles docs-only changes deliberately; `Changelog policy`
+checks the entire PR against its actual target, including metadata changes.
+See [contribution rules](CONTRIBUTING.md). PR evidence uses the repository's
+configured Actions retention (currently 90 days), covering review and normal
+post-merge diagnosis without adding an unrelated retention policy. Preserve any
+evidence needed longer before expiry; release qualification must retain its
+candidate proof separately when registry publication is introduced.
 
 The [CI workflow](.github/workflows/maintained.yml) separately names the native
 and browser targets. Windows/macOS/Linux native and Chrome/Firefox/Edge browser
