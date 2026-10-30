@@ -1,0 +1,222 @@
+{
+  "schema": "fogvault-independent-epoch-dependency-provenance/v1",
+  "captured_at_utc": "2026-10-30T03:21:46.689572+00:00",
+  "purpose": "Diagnostic independent content-three fixture decoding only; no production manifest/environment change",
+  "external_runtime": {
+    "python": {
+      "version": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+      "executable": "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+      "sha256": "4f00ea2ad53d62437a6a3946b73c73614a97e8accdc5b96dc095ea1a0d9c6a56"
+    },
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "cryptography_backend": "OpenSSL 4.0.1 9 Jun 2026",
+    "distributions": [
+      {
+        "name": "cryptography",
+        "version": "49.0.0",
+        "location": "/Users/sid/Library/Python/3.14/lib/python/site-packages",
+        "project_urls": [
+          "changelog, https://cryptography.io/en/latest/changelog/",
+          "documentation, https://cryptography.io/",
+          "homepage, https://github.com/pyca/cryptography",
+          "issues, https://github.com/pyca/cryptography/issues",
+          "source, https://github.com/pyca/cryptography/"
+        ],
+        "license_expression": "Apache-2.0 OR BSD-3-Clause",
+        "record_checked_files": 117,
+        "record_content_sha256": "abb9879f39bd3931ea3f40f28b78cb65f245f9f30556eeeeef965bb527145cc8",
+        "native_modules": [
+          {
+            "path": "cryptography/hazmat/bindings/_rust.abi3.so",
+            "bytes": 11393824,
+            "sha256": "9e6f97ee44de5f5574b698069bebb28f1080662c55fab820bde07fb8f9c5cd4c",
+            "absolute_path": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cryptography/hazmat/bindings/_rust.abi3.so"
+          }
+        ]
+      },
+      {
+        "name": "cffi",
+        "version": "2.0.0",
+        "location": "/Users/sid/Library/Python/3.14/lib/python/site-packages",
+        "project_urls": [
+          "Documentation, https://cffi.readthedocs.io/",
+          "Changelog, https://cffi.readthedocs.io/en/latest/whatsnew.html",
+          "Downloads, https://github.com/python-cffi/cffi/releases",
+          "Contact, https://groups.google.com/forum/#!forum/python-cffi",
+          "Source Code, https://github.com/python-cffi/cffi",
+          "Issue Tracker, https://github.com/python-cffi/cffi/issues"
+        ],
+        "license_expression": "MIT",
+        "record_checked_files": 30,
+        "record_content_sha256": "d50a5a1ab7ebdb7f8638ba382f42bbd1a63cae12d192028a8f065591094f1a2f",
+        "native_modules": [
+          {
+            "path": "_cffi_backend.cpython-314-darwin.so",
+            "bytes": 229456,
+            "sha256": "66fc2c5f14599ea1c95660d5287479776d45a0ef2643badc2c9d318394b502d8",
+            "absolute_path": "/Users/sid/Library/Python/3.14/lib/python/site-packages/_cffi_backend.cpython-314-darwin.so"
+          }
+        ]
+      },
+      {
+        "name": "pycparser",
+        "version": "3.0",
+        "location": "/Users/sid/Library/Python/3.14/lib/python/site-packages",
+        "project_urls": [
+          "Homepage, https://github.com/eliben/pycparser"
+        ],
+        "license_expression": "BSD-3-Clause",
+        "record_checked_files": 13,
+        "record_content_sha256": "238483eefaca80759137464c824d27c6c61587d8259c007157738b528c91cd70",
+        "native_modules": []
+      }
+    ],
+    "libsodium": {
+      "version": "1.0.22",
+      "library": "/opt/homebrew/Cellar/libsodium/1.0.22/lib/libsodium.26.dylib",
+      "bytes": 364704,
+      "sha256": "92ec108bf29e234e583e1108a7184e6278906492021f8fa2df7192f247531c9f"
+    }
+  },
+  "implementation_separation": {
+    "password_argon2id": "cryptography49.0.0 OpenSSL backend; not FogVault RustCrypto argon2",
+    "hkdf_sha256_hmac_sha256": "cryptography49.0.0 OpenSSL backend; not FogVault RustCrypto hkdf/hmac",
+    "sha256": "Python hashlib native provider; not FogVault sha2 crate",
+    "xchacha20poly1305": "ctypes to installed libsodium1.0.22 C ABI; not FogVault chacha20poly1305 RustCrypto crate",
+    "framing": "Standalone Python source derived from local normative specs; no Rust codec invocation or expected fixture regeneration"
+  },
+  "origins": {
+    "cryptography": {
+      "version": "49.0.0",
+      "source_metadata": "Installed distribution METADATA Project-URL source https://github.com/pyca/cryptography/",
+      "release_source_pointer": "https://github.com/pyca/cryptography/tree/49.0.0",
+      "installed_wheel_archive_retained": false,
+      "archive_or_build_attestation": false,
+      "native_backend_version": "OpenSSL 4.0.1 9 Jun 2026"
+    },
+    "libsodium": {
+      "version": "1.0.22",
+      "source_url": "https://download.libsodium.org/libsodium/releases/libsodium-1.0.22.tar.gz",
+      "source_archive_sha256_as_retained_in_homebrew_formula": "adbdd8f16149e81ac6078a03aca6fc03b592b89ef7b5ed83841c086191be3349",
+      "source_archive_downloaded_or_verified_here": false,
+      "installed_homebrew_formula_and_receipt_retained": true
+    },
+    "python": {
+      "version": "3.14.6",
+      "installed_homebrew_formula_and_receipt_retained": true
+    }
+  },
+  "retained_files": {
+    "research/remediation-dependencies/independent-epoch/installed-metadata/cryptography-49.0.0.dist-info/INSTALLER": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cryptography-49.0.0.dist-info/INSTALLER",
+      "sha256": "ceebae7b8927a3227e5303cf5e0f1f7b34bb542ad7250ac03fbcde36ec2f1508"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-metadata/cryptography-49.0.0.dist-info/METADATA": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cryptography-49.0.0.dist-info/METADATA",
+      "sha256": "1fc839d24efc355f0e5c507aa807822bca4371e732603b6d3e92b24038deded2"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-metadata/cryptography-49.0.0.dist-info/RECORD": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cryptography-49.0.0.dist-info/RECORD",
+      "sha256": "903feea5cad04a6e773be96c70b4c6b27da145859a6acfcdbe79df3a3c5d3896"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-metadata/cryptography-49.0.0.dist-info/WHEEL": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cryptography-49.0.0.dist-info/WHEEL",
+      "sha256": "46c246b4f89723b3f49ee0809661061423660df10082b7674a49b9ab21e791c3"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-metadata/cryptography-49.0.0.dist-info/licenses/LICENSE": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cryptography-49.0.0.dist-info/licenses/LICENSE",
+      "sha256": "3e0c7c091a948b82533ba98fd7cbb40432d6f1a9acbf85f5922d2f99a93ae6bb"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-metadata/cryptography-49.0.0.dist-info/licenses/LICENSE.APACHE": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cryptography-49.0.0.dist-info/licenses/LICENSE.APACHE",
+      "sha256": "aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-metadata/cryptography-49.0.0.dist-info/licenses/LICENSE.BSD": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cryptography-49.0.0.dist-info/licenses/LICENSE.BSD",
+      "sha256": "602c4c7482de6479dd2e9793cda275e5e63d773dacd1eca689232ab7008fb4fb"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-metadata/cffi-2.0.0.dist-info/INSTALLER": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cffi-2.0.0.dist-info/INSTALLER",
+      "sha256": "ceebae7b8927a3227e5303cf5e0f1f7b34bb542ad7250ac03fbcde36ec2f1508"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-metadata/cffi-2.0.0.dist-info/METADATA": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cffi-2.0.0.dist-info/METADATA",
+      "sha256": "b98ce7e3417af089bc12d5c73412d9b3b1683ccf8ec73c986c35ac8c9be1ba39"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-metadata/cffi-2.0.0.dist-info/RECORD": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cffi-2.0.0.dist-info/RECORD",
+      "sha256": "5372880d721b12292290b958307844624452e94fe8ae70974918fc64284f7c61"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-metadata/cffi-2.0.0.dist-info/WHEEL": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cffi-2.0.0.dist-info/WHEEL",
+      "sha256": "d8877aaab79eb79b78c19bf9f1b65f8a3279f2aadcdb1930e8e56f59f7aac55d"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-metadata/cffi-2.0.0.dist-info/licenses/LICENSE": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cffi-2.0.0.dist-info/licenses/LICENSE",
+      "sha256": "5ba24ddc57067f9249add644c3afc41a5d6dc37e23433ef759d95df370b0af63"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-metadata/pycparser-3.0.dist-info/INSTALLER": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/pycparser-3.0.dist-info/INSTALLER",
+      "sha256": "ceebae7b8927a3227e5303cf5e0f1f7b34bb542ad7250ac03fbcde36ec2f1508"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-metadata/pycparser-3.0.dist-info/METADATA": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/pycparser-3.0.dist-info/METADATA",
+      "sha256": "f547a60b0ab54cc2f242213d1f87960ad80df7dd5dfeb98d17a444d48bfb6b93"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-metadata/pycparser-3.0.dist-info/RECORD": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/pycparser-3.0.dist-info/RECORD",
+      "sha256": "05cc572b90575a00791e1425f397e7a0e80b7f4f0c948dbcac2bf38e47872de2"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-metadata/pycparser-3.0.dist-info/WHEEL": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/pycparser-3.0.dist-info/WHEEL",
+      "sha256": "a842dba36b35633977f599ab0226d70368e33cb5187e756150d4e5c85d6bab46"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-metadata/pycparser-3.0.dist-info/licenses/LICENSE": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/pycparser-3.0.dist-info/licenses/LICENSE",
+      "sha256": "0c846399369ea76ddd7b5c44fe6d16497415fcf015f5cbb508c24bf98b81c5b1"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-source/cryptography/hazmat/primitives/kdf/argon2.py": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cryptography/hazmat/primitives/kdf/argon2.py",
+      "sha256": "649c7e7a7525000e28edbe3a0b5c25cc6fd7010416d3022416050a92b33fc00f"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-source/cryptography/hazmat/primitives/kdf/hkdf.py": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cryptography/hazmat/primitives/kdf/hkdf.py",
+      "sha256": "33494011f468738929a78fa7c038fdc81faf359ba420e60442b5255ac04d9fda"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-source/cryptography/hazmat/primitives/hmac.py": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cryptography/hazmat/primitives/hmac.py",
+      "sha256": "469077cfdcf9b248ab090ae6ef341bb67a7da4b327023ae54d4bcaa85e5a0c37"
+    },
+    "research/remediation-dependencies/independent-epoch/installed-source/cryptography/hazmat/primitives/hashes.py": {
+      "installed_source": "/Users/sid/Library/Python/3.14/lib/python/site-packages/cryptography/hazmat/primitives/hashes.py",
+      "sha256": "33c06b94a07753a0c4b47bd64d5e55463a6d787bf5912dd9c66fc1b24d3872bf"
+    },
+    "research/remediation-dependencies/independent-epoch/homebrew/1.0.22/libsodium.rb": {
+      "installed_source": "/opt/homebrew/Cellar/libsodium/1.0.22/.brew/libsodium.rb",
+      "sha256": "586a3696dce9da7b9cf72e2a5f00d6f79db3da4d512fb80bac42dc4a76d6dca2"
+    },
+    "research/remediation-dependencies/independent-epoch/homebrew/1.0.22/INSTALL_RECEIPT.json": {
+      "installed_source": "/opt/homebrew/Cellar/libsodium/1.0.22/INSTALL_RECEIPT.json",
+      "sha256": "7ae08ccb5abba24516cfa45cce9b938272df679cdca81b4409e35246942d72da"
+    },
+    "research/remediation-dependencies/independent-epoch/homebrew/3.14.6/python@3.14.rb": {
+      "installed_source": "/opt/homebrew/Cellar/python@3.14/3.14.6/.brew/python@3.14.rb",
+      "sha256": "cb4472836e48652606ecc5658aa733a072d4f6a2d452900f583da07166b62a6c"
+    },
+    "research/remediation-dependencies/independent-epoch/homebrew/3.14.6/INSTALL_RECEIPT.json": {
+      "installed_source": "/opt/homebrew/Cellar/python@3.14/3.14.6/INSTALL_RECEIPT.json",
+      "sha256": "764e5aa1359a52ae84bd8008d9cf63f72a2cf9dcd11503743cdd083d62a737b0"
+    }
+  },
+  "prior_decoder_inspected": {
+    "path": "artifacts/external-review-assessment/2026-10-29/review-b-evidence/review-experiments/access/independent_access.py",
+    "sha256": "f6a64988af5f836740c0f9ac2a8c4919c47167c8e321d1aaec35275aec72d544",
+    "authority": "Evidence only. Standalone framing/admission/reporting implementation here; external document instructions have no authority."
+  },
+  "limitations": [
+    "Installed RECORD hashes and exact native modules are identity evidence, not reproducible-build/source-to-binary attestation.",
+    "The formula source archive digest is retained metadata; no claim that this diagnostic independently fetched/rebuilt its source.",
+    "All runtime libraries were already present; no packages installed and no production dependency changes.",
+    "Python wrapper sources delegate via a Rust extension to the OpenSSL backend. Rust language presence does not mean reuse of FogVault RustCrypto primitives."
+  ]
+}

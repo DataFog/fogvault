@@ -1,0 +1,422 @@
+{
+  "schema": "fogvault-host-feasibility-contract/v1",
+  "profile": "disposable-vault-host-feasibility",
+  "scope": "Native/portable and mobile/resource scopes retained, plus desktop Chromium/WebKit streaming IndexedDB startup, the foreground transaction contract, and explicit-policy password/KDF header rewraps. This is not production or real-device qualification.",
+  "resources": {
+    "command": [
+      "{python}",
+      "scripts/measure-resources.py",
+      "--output",
+      "{output}"
+    ],
+    "repetitions": 3,
+    "payload_bytes": [
+      0,
+      4096,
+      1048576,
+      16777216
+    ],
+    "consumer_payload_bytes": 16777216,
+    "kdf": {
+      "memory_kib": 65536,
+      "passes": 3,
+      "lanes": 1
+    },
+    "kdf_operations": [
+      "kdf",
+      "kdf_concurrent",
+      "kdf_rejected"
+    ],
+    "payload_operations": [
+      "create",
+      "unlock_empty",
+      "save",
+      "read",
+      "update",
+      "audit",
+      "unlock",
+      "payload_rejected"
+    ],
+    "derivation": "16MiB is the exact pinned beta.3 MAX_BUNDLE_BYTES; smaller payloads are explicit empty/page/MiB workload inputs. Three is a small odd repeated observation workload, not statistical qualification or a product quota. Simultaneous two KDFs is the smallest workload above serial execution. All timings and RSS are observations, not acceptance SLOs."
+  },
+  "browser": {
+    "command": [
+      "{python}",
+      "scripts/verify-browser.py",
+      "--output",
+      "{output}"
+    ],
+    "engines": [
+      "chromium",
+      "webkit"
+    ],
+    "cases": [
+      "worker_kdf_keeps_main_event_loop_running",
+      "indexeddb_create_save_lock_worker_reopen_read",
+      "wrong_password_does_not_publish_authority",
+      "indexeddb_abort_preserves_previous_commit",
+      "lock_revokes_prepared_delayed_publication",
+      "lock_revokes_delayed_unlock_authority",
+      "worker_termination_discards_inflight_unlock_result",
+      "core_16mib_opaque_payload_roundtrip",
+      "u64_revision_crossing_preserves_all_bits",
+      "oversized_input_rejected_before_wasm_copy",
+      "ciphertext_tamper_rejects_before_plaintext",
+      "streaming_startup_inventory_is_bounded",
+      "startup_readonly_snapshot_orders_concurrent_writer",
+      "point_read_snapshot_survives_concurrent_path_retirement",
+      "two_writers_use_accepted_head_compare_and_swap",
+      "exclusive_create_and_missing_open_are_non_destructive",
+      "unsupported_browser_schema_is_not_migrated",
+      "latest_retry_is_zero_write_and_reused_id_rejects_changes",
+      "uncertain_commit_blocks_use_until_metadata_reconciliation",
+      "uncertain_reconciliation_rejects_missing_committed_content",
+      "reopen_recovers_latest_receipt_and_superseded_receipts_reject",
+      "synchronous_storage_fault_rolls_back_all_stores",
+      "lock_revokes_precommit_publication",
+      "streaming_startup_detects_missing_extra_and_corrupt_membership",
+      "versionchange_revokes_session_and_closes_connection",
+      "password_change_rewraps_only_header_and_revokes_old_password",
+      "kdf_upgrade_requires_explicit_policy_and_preserves_ciphertext",
+      "credential_abort_and_unknown_outcome_preserve_publication_contract",
+      "credential_precommit_lock_and_competing_writers_are_fenced",
+      "credential_worker_loss_reopens_new_header_and_latest_receipt",
+      "password_text_vectors_are_exact_and_malformed_text_rejects",
+      "password_bytes_boundary_rejects_coercion_without_mutation",
+      "password_unicode_nul_roundtrip_and_change_preserve_exact_bytes",
+      "delete_retries_empty_root_and_reinsertion_rejects_selective_replay",
+      "delete_abort_unknown_lock_and_stale_intent_preserve_atomicity",
+      "delete_authenticates_promoted_sibling_and_predecessor_cas",
+      "delete_worker_loss_reopens_exact_latest_receipt",
+      "delete_source_head_rejects_revision_aba_for_queued_intent",
+      "paged_inventory_streams_verified_bounded_snapshot_and_orders_writer",
+      "paged_inventory_errors_cancel_cursor_and_never_skip_corrupt_members",
+      "save_source_head_rejects_revision_aba_for_queued_intent",
+      "save_source_head_preserves_unknown_and_exact_latest_retry",
+      "current_format_epoch_zero_is_used_by_browser_storage"
+    ],
+    "payload_bytes": 16777216,
+    "storage_profiles": {
+      "chromium": "blob",
+      "webkit": "arraybuffer"
+    },
+    "storage_profile_note": "Physical storage schema2 stores small node ArrayBuffers in both engines for synchronous request callbacks; envelope profiles remain Chromium Blob / WebKit ArrayBuffer. Previous WebKit Blob failure stays historical evidence. ArrayBuffer cloning precedes JS admission; hostile-store process allocation is not qualified.",
+    "streaming_startup": {
+      "record_populations": [
+        1,
+        16,
+        256,
+        4096
+      ],
+      "key_bits": 128,
+      "head_bytes": 129,
+      "storage_schema_version": 2,
+      "derivation": "Existing synthetic geometric populations exercise growth. Each full binary tree has 2N-1 canonical nodes. A 128-bit index bounds traversal stack by129 frames. Startup must use one consistent read-only transaction, no getAll, and retain at most one fetched node and one record row in application code. WebKit ArrayBuffer cloning and browser GC/RSS remain separately disclosed."
+    },
+    "required_evidence": {
+      "latest_retry_is_zero_write_and_reused_id_rejects_changes": [
+        "receipt_equal",
+        "persistent_bytes_unchanged",
+        "stale_retry_publish_rejected",
+        "missing_target_retry_publish_rejected"
+      ],
+      "exclusive_create_and_missing_open_are_non_destructive": [
+        "existing_bytes_preserved",
+        "missing_database_not_created",
+        "occupied_incomplete_not_initialized"
+      ],
+      "synchronous_storage_fault_rolls_back_all_stores": [
+        "same_length_tamper_after_prepare_rejected"
+      ],
+      "uncertain_reconciliation_rejects_missing_committed_content": [
+        "same_worker_recovery_after_failed_audit"
+      ],
+      "reopen_recovers_latest_receipt_and_superseded_receipts_reject": [
+        "postcommit_worker_loss_reconciled"
+      ],
+      "u64_revision_crossing_preserves_all_bits": [
+        "direct_binding_range_rejection",
+        "out_of_range_revision_inputs_rejected"
+      ],
+      "password_change_rewraps_only_header_and_revokes_old_password": [
+        "record_and_index_bytes_unchanged",
+        "old_password_rejected",
+        "new_password_reopened",
+        "wrong_old_password_preserves_authority",
+        "latest_retry_zero_writes"
+      ],
+      "kdf_upgrade_requires_explicit_policy_and_preserves_ciphertext": [
+        "explicit_host_policy",
+        "unadmitted_target_rejected_before_work",
+        "rejected_target_wasm_extent_unchanged",
+        "downgrade_and_noop_rejected",
+        "record_and_index_bytes_unchanged",
+        "baseline_open_rejects_upgrade",
+        "latest_retry_zero_writes"
+      ],
+      "credential_abort_and_unknown_outcome_preserve_publication_contract": [
+        "precommit_abort_preserved_all_stores",
+        "synchronous_storage_faults_preserved_all_stores",
+        "password_and_kdf_unknown_outcomes_blocked",
+        "new_descriptor_reconciliation_succeeded",
+        "record_and_index_bytes_unchanged",
+        "postcommit_confirmation_failure_reconciled"
+      ],
+      "credential_precommit_lock_and_competing_writers_are_fenced": [
+        "stale_writer_rejected",
+        "precommit_lock_revoked",
+        "locked_change_persistent_bytes_unchanged"
+      ],
+      "credential_worker_loss_reopens_new_header_and_latest_receipt": [
+        "actual_postcommit_worker_termination",
+        "transport_request_id_preserved",
+        "new_descriptor_reopened",
+        "latest_receipt_recovered",
+        "replay_zero_writes"
+      ],
+      "password_text_vectors_are_exact_and_malformed_text_rejects": [
+        "all_credential_fields_checked",
+        "malformed_text_not_transported",
+        "invalid_input_errors"
+      ],
+      "password_bytes_boundary_rejects_coercion_without_mutation": [
+        "invalid_input_errors",
+        "rejected_before_database_create",
+        "persistent_bytes_unchanged",
+        "accepted_session_preserved",
+        "detached_binding_rejected"
+      ],
+      "password_unicode_nul_roundtrip_and_change_preserve_exact_bytes": [
+        "unicode_nul_reopened",
+        "no_normalization",
+        "text_to_raw_and_raw_to_text_interoperate",
+        "record_and_index_bytes_unchanged",
+        "latest_text_retry_zero_writes",
+        "kdf_upgrade_uses_same_text_contract",
+        "raw_binary_subarray_reopened",
+        "empty_text_equals_empty_bytes"
+      ],
+      "delete_retries_empty_root_and_reinsertion_rejects_selective_replay": [
+        "canonical_empty_root",
+        "empty_reopen_and_complete_inventory",
+        "latest_retry_zero_writes",
+        "receipt_equal",
+        "changed_operation_rejected",
+        "selective_old_ciphertext_replay_rejected"
+      ],
+      "delete_abort_unknown_lock_and_stale_intent_preserve_atomicity": [
+        "known_aborts_preserved_all_stores",
+        "unknown_blocks_use_until_reconciliation",
+        "latest_retry_zero_writes",
+        "postcommit_confirmation_failure_reconciled",
+        "precommit_lock_preserved_all_stores",
+        "old_prepared_delete_rejected_after_reinsertion",
+        "paired_descriptor_head_cas"
+      ],
+      "delete_authenticates_promoted_sibling_and_predecessor_cas": [
+        "promoted_sibling_authenticated",
+        "sibling_changed_after_prepare_rejected",
+        "same_length_predecessor_changed_after_prepare_rejected",
+        "rollback_preserved_all_stores",
+        "canonical_promotion_and_empty_root"
+      ],
+      "delete_worker_loss_reopens_exact_latest_receipt": [
+        "actual_postcommit_worker_termination",
+        "transport_request_id_preserved",
+        "empty_snapshot_reopened",
+        "latest_receipt_recovered",
+        "replay_zero_writes"
+      ],
+      "delete_source_head_rejects_revision_aba_for_queued_intent": [
+        "source_head_checked_before_preparation",
+        "freshly_reopened_revision_aba_rejected",
+        "stale_intent_preserved_all_stores",
+        "unknown_reconciled_by_operation_id",
+        "submitted_source_cannot_be_replayed_after_commit",
+        "explicit_current_head_latest_retry_zero_writes"
+      ],
+      "paged_inventory_streams_verified_bounded_snapshot_and_orders_writer": [
+        "complete_only_after_finality",
+        "exact_independent_inventory",
+        "readonly_snapshot_orders_writer",
+        "changed_head_rejects_next_page",
+        "no_full_inventory_cache"
+      ],
+      "paged_inventory_errors_cancel_cursor_and_never_skip_corrupt_members": [
+        "ciphertext_corruption_rejected",
+        "missing_node_rejected",
+        "orphan_record_rejected",
+        "orphan_node_rejected",
+        "error_poisoned_cursor",
+        "same_session_head_change_rejected",
+        "lock_after_transaction_revokes_page_publication",
+        "unlocked_session_cannot_reuse_old_cursor",
+        "fresh_inventory_completes_after_repairs"
+      ],
+      "save_source_head_rejects_revision_aba_for_queued_intent": [
+        "direct_binding_did_not_prepare_mutation",
+        "owner_and_worker_admission",
+        "implicit_revision_only_aliases_absent",
+        "caller_head_copied_before_transport_wait",
+        "delayed_transport_revision_aba_rejected",
+        "freshly_reopened_revision_aba_rejected",
+        "stale_intent_preserved_all_stores"
+      ],
+      "save_source_head_preserves_unknown_and_exact_latest_retry": [
+        "unknown_blocks_further_use",
+        "unknown_reconciled_by_operation_id",
+        "submitted_source_cannot_be_replayed_after_commit",
+        "changed_content_rejected",
+        "explicit_current_head_latest_retry_zero_writes",
+        "reopened_latest_retry_zero_writes"
+      ]
+    },
+    "required_counts": {
+      "password_change_rewraps_only_header_and_revokes_old_password": {
+        "record_and_index_write_calls": 0
+      },
+      "kdf_upgrade_requires_explicit_policy_and_preserves_ciphertext": {
+        "record_and_index_write_calls": 0,
+        "invalid_numeric_profiles_rejected": 4
+      },
+      "credential_precommit_lock_and_competing_writers_are_fenced": {
+        "successful_credential_writers": 1
+      },
+      "password_text_vectors_are_exact_and_malformed_text_rejects": {
+        "distinct_pairs_checked": 6,
+        "text_type_rejections": 7
+      },
+      "password_bytes_boundary_rejects_coercion_without_mutation": {
+        "direct_binding_rejections": 63,
+        "worker_type_rejections": 64
+      },
+      "delete_retries_empty_root_and_reinsertion_rejects_selective_replay": {
+        "reinsertion_revision": 1
+      },
+      "delete_abort_unknown_lock_and_stale_intent_preserve_atomicity": {
+        "known_abort_variants": 3
+      },
+      "delete_authenticates_promoted_sibling_and_predecessor_cas": {
+        "captured_nodes": 3
+      },
+      "delete_source_head_rejects_revision_aba_for_queued_intent": {
+        "invalid_source_width_or_type_rejections": 3
+      },
+      "paged_inventory_streams_verified_bounded_snapshot_and_orders_writer": {
+        "page_size": 2,
+        "source_records": 5,
+        "source_nodes": 9
+      },
+      "paged_inventory_errors_cancel_cursor_and_never_skip_corrupt_members": {
+        "page_size": 2,
+        "invalid_page_sizes_rejected": 6
+      },
+      "save_source_head_rejects_revision_aba_for_queued_intent": {
+        "invalid_source_width_or_type_rejections": 5,
+        "direct_binding_invalid_source_head_rejections": 7
+      }
+    },
+    "credential_change_note": "Password change and KDF upgrade replace only descriptor/head in one CAS transaction. Existing record/index bytes and record revisions stay unchanged; latest retries write nothing but reauthenticate the supplied new credential through the current admitted KDF. Credential operation tags cover public operation metadata and the encrypted descriptor hash, never password guesses. Unadmitted/invalid/no-op/downgrade targets reject; unknown outcomes block use until exact new-header reconciliation. The explicit 65536KiB/4-pass upgrade is the smallest pass-count increase over the baseline experiment, not a new production default. Four numeric rejection inputs are negative fixture variants; one successful writer and zero content writes are required transaction invariants.",
+    "password_vector_cases": {
+      "fixture": "conformance/password-vectors.json",
+      "text_case": "password_text_vectors_are_exact_and_malformed_text_rejects",
+      "byte_boundary_case": "password_bytes_boundary_rejects_coercion_without_mutation",
+      "lifecycle_case": "password_unicode_nul_roundtrip_and_change_preserve_exact_bytes",
+      "scope": "Strict Unicode-scalar text adapter rejects malformed UTF-16 before Worker transport; raw WASM and Worker APIs require Uint8Array and preserve arbitrary octets. Golden text output, malformed IDs and lifecycle IDs must match the shared fixture."
+    },
+    "password_adapter_node": {
+      "schema": "fogvault-browser-password-adapter-node/v1",
+      "scope": "node-helper-only-no-browser-SAB-qualification",
+      "cases": [
+        "shared_buffer_rejected_without_wipe",
+        "detached_buffer_rejected_as_distinct_from_empty",
+        "owned_text_buffers_cleared"
+      ],
+      "source_files": [
+        "experiments/browser-prototype/web/password.mjs",
+        "experiments/browser-prototype/web/password-contract-node.mjs"
+      ]
+    },
+    "record_operations": {
+      "page_case": "paged_inventory_streams_verified_bounded_snapshot_and_orders_writer",
+      "page_size": 2,
+      "source_records": 5,
+      "source_nodes": 9,
+      "page_lengths": [
+        2,
+        2,
+        1
+      ],
+      "key_bits": 128,
+      "maximum_frontier_nodes": 129,
+      "delete_maximum_captured_nodes": 130,
+      "derivation": "Two is the explicit caller page-size fixture. Five records produce two full pages and a partial final page; the canonical binary tree has nine nodes. Frontier129 and selected delete path129 plus one promoted sibling130 derive from the128-bit key format. None is a newly selected product page/population/latency quota.",
+      "contract": "Opaque Engine cursor and pending proof stay in Rust; JS fetches one requested node/row inside one IndexedDB readonly snapshot per page. Each physical row is envelope-digest verified before publication. Complete requires traversal/count finality, while each prefix proves only its members. Changed descriptor/head, lock or any failed page cancels continuation; no historical-root pin or cross-transaction snapshot promise.",
+      "mutation_contract": "Maintained save_at/prepare_save_at and delete_at/prepare_delete_at require caller original head digest plus record revision before draft preparation, followed by transaction CAS. Caller head is captured/copied before transport waits. Revision-only fixture methods/actions are explicitly diagnostic. Unknown outcomes remain unknown and reconcile by operation ID; exact current-head latest retry is zero-write.",
+      "access_profile": "P2 only; strict130-byte descriptor admission remains. P3 recovery/provider and root-rotation browser bridges remain unsupported and are qualified only in their separately named native/synthetic experiments."
+    }
+  },
+  "mobile": {
+    "command": [
+      "{python}",
+      "scripts/verify-mobile.py",
+      "--output",
+      "{output}"
+    ],
+    "targets": [
+      "native-abi-runtime",
+      "ios-simulator-abi-runtime",
+      "ios-device-static-library",
+      "android-rust-check"
+    ],
+    "runtime_cases": [
+      "p2-create-with-caller-owned-inputs",
+      "locked-read-rejects-without-output",
+      "p2-unlock",
+      "short-buffer-leaves-output-unchanged",
+      "p2-read-byte-equality",
+      "wrong-password-revokes-session",
+      "old-session-after-failed-unlock-rejects",
+      "reunlock",
+      "stale-session-after-reunlock-rejects",
+      "null-zero-capacity-is-short-buffer",
+      "null-nonzero-output-rejects",
+      "null-token-rejects",
+      "overflow-capacity-rejects",
+      "tamper-rejects-before-plaintext-copy",
+      "lock-revokes-session",
+      "release-live-handle",
+      "released-handle-rejects",
+      "double-release-rejects",
+      "password-utf8-golden-vectors",
+      "password-invalid-utf8-rejects-without-output",
+      "password-text-boundary-argument-and-buffer-errors",
+      "password-unicode-nul-create-unlock-read",
+      "password-raw-binary-create-unlock-read",
+      "password-empty-create-unlock-read",
+      "password-invalid-text-preserves-active-authority"
+    ],
+    "password_vector_cases": {
+      "fixture": "conformance/password-vectors.json",
+      "groups": {
+        "password-utf8-golden-vectors": "text",
+        "password-invalid-utf8-rejects-without-output": "invalid_utf8",
+        "password-raw-binary-create-unlock-read": "raw_bytes"
+      },
+      "scope": "Strict UTF-8 text validation/copy and exact raw-byte C ABI inputs; malformed UTF-16 is browser-only. Both native and iOS simulator probes execute the shared vectors. No Swift/JNI application or device/provider qualification."
+    },
+    "checks": [
+      "mobile-format",
+      "mobile-clippy",
+      "source-stability"
+    ]
+  },
+  "unqualified_scopes": [
+    "production cryptographic or security audit and supported release artifacts",
+    "real iOS/Android hardware, Keychain/Keystore/biometric providers, background/suspension lifecycle, lowest-device memory budgets",
+    "Android NDK link, JNI/Kotlin runtime, Swift application integration, device installation and signing",
+    "Firefox, shipped Safari/iOS WKWebView, packaged extension/MV3 runtime, quota exhaustion/eviction and browser power-loss durability",
+    "complete old-store rollback detection without an external freshness anchor",
+    "P3 recovery/device access and root-rotation browser/mobile bridges; maintained export/import/migration, actual providers and historical receipt/root retention"
+  ]
+}

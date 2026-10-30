@@ -1,0 +1,100 @@
+{
+  "schema": "fogvault-age-tool-notices/v1",
+  "basis": "go version -m of pinned age and age-keygen; module zip h1 verified against binary build information",
+  "components": [
+    {
+      "module": "filippo.io/edwards25519",
+      "version": "v1.2.0",
+      "h1": "h1:crnVqOiS4jqYleHd9vaKZ+HKtHfllngJIiOpNpoJsjo=",
+      "zip_sha256": "98f2d3ca9b88daa031b0fb2fb521b7ea386af1fed61b6f445a20bef7fa381c17",
+      "source_url": "https://proxy.golang.org/filippo.io/edwards25519/@v/v1.2.0.zip",
+      "files": [
+        {
+          "path": "age-v1.3.2/go-modules/filippo.io__edwards25519@v1.2.0/edwards25519@v1.2.0/LICENSE",
+          "source_url": "https://proxy.golang.org/filippo.io/edwards25519/@v/v1.2.0.zip#filippo.io/edwards25519@v1.2.0/LICENSE",
+          "sha256": "2d36597f7117c38b006835ae7f537487207d8ec407aa9d9980794b2030cbc067"
+        }
+      ]
+    },
+    {
+      "module": "filippo.io/hpke",
+      "version": "v0.4.0",
+      "h1": "h1:p575VVQ6ted4pL+it6M00V/f2qTZITO0zgmdKCkd5+A=",
+      "zip_sha256": "2048be40875f1d70262251d784b28315d9a5af6a3a71d6606c272423c88c7439",
+      "source_url": "https://proxy.golang.org/filippo.io/hpke/@v/v0.4.0.zip",
+      "files": [
+        {
+          "path": "age-v1.3.2/go-modules/filippo.io__hpke@v0.4.0/hpke@v0.4.0/LICENSE",
+          "source_url": "https://proxy.golang.org/filippo.io/hpke/@v/v0.4.0.zip#filippo.io/hpke@v0.4.0/LICENSE",
+          "sha256": "911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad"
+        }
+      ]
+    },
+    {
+      "module": "filippo.io/nistec",
+      "version": "v0.0.4",
+      "h1": "h1:F14ZHT5htWlMnQVPndX9ro9arf56cBhQxq4LnDI491s=",
+      "zip_sha256": "f3020dbc50113d6781815c1cafbbf6f97b266d55c8a4597ce4c61a7c1100c78f",
+      "source_url": "https://proxy.golang.org/filippo.io/nistec/@v/v0.0.4.zip",
+      "files": [
+        {
+          "path": "age-v1.3.2/go-modules/filippo.io__nistec@v0.0.4/nistec@v0.0.4/LICENSE",
+          "source_url": "https://proxy.golang.org/filippo.io/nistec/@v/v0.0.4.zip#filippo.io/nistec@v0.0.4/LICENSE",
+          "sha256": "911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad"
+        }
+      ]
+    },
+    {
+      "module": "golang.org/x/crypto",
+      "version": "v0.55.0",
+      "h1": "h1:+KWHjbgOaAQ66dh/YlkZKHlz9ZUlq61AFirAR9ntP8M=",
+      "zip_sha256": "0660bba47b3643fe1beb1b97af93b6a4d2bf2ed069d9e52a2b1bdf6f17cf3e79",
+      "source_url": "https://proxy.golang.org/golang.org/x/crypto/@v/v0.55.0.zip",
+      "files": [
+        {
+          "path": "age-v1.3.2/go-modules/golang.org__x__crypto@v0.55.0/x/crypto@v0.55.0/LICENSE",
+          "source_url": "https://proxy.golang.org/golang.org/x/crypto/@v/v0.55.0.zip#golang.org/x/crypto@v0.55.0/LICENSE",
+          "sha256": "911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad"
+        }
+      ]
+    },
+    {
+      "module": "golang.org/x/sys",
+      "version": "v0.47.0",
+      "h1": "h1:o7XGOvZQCADBQQ4Y7VNq2dRWQR7JmOUW8Kxx4ZsNgWs=",
+      "zip_sha256": "cdac013ddced0262926ec29ffcda645da39670e61c7e5b761e572b6b1809bb1b",
+      "source_url": "https://proxy.golang.org/golang.org/x/sys/@v/v0.47.0.zip",
+      "files": [
+        {
+          "path": "age-v1.3.2/go-modules/golang.org__x__sys@v0.47.0/x/sys@v0.47.0/LICENSE",
+          "source_url": "https://proxy.golang.org/golang.org/x/sys/@v/v0.47.0.zip#golang.org/x/sys@v0.47.0/LICENSE",
+          "sha256": "911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad"
+        }
+      ]
+    },
+    {
+      "module": "golang.org/x/term",
+      "version": "v0.45.0",
+      "h1": "h1:NwWyBmoJCbfTHpxrWoZ9C6/VxOf7ic219I8xZZFdrf0=",
+      "zip_sha256": "b3a3af689728b43012ae1b21482571a35c033c545e98e021606bd4fcf1f79108",
+      "source_url": "https://proxy.golang.org/golang.org/x/term/@v/v0.45.0.zip",
+      "files": [
+        {
+          "path": "age-v1.3.2/go-modules/golang.org__x__term@v0.45.0/x/term@v0.45.0/LICENSE",
+          "source_url": "https://proxy.golang.org/golang.org/x/term/@v/v0.45.0.zip#golang.org/x/term@v0.45.0/LICENSE",
+          "sha256": "911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad"
+        }
+      ]
+    },
+    {
+      "toolchain": "Go1.27.0",
+      "files": [
+        {
+          "path": "age-v1.3.2/go-toolchain/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/golang/go/go1.27.0/LICENSE",
+          "sha256": "911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad"
+        }
+      ]
+    }
+  ]
+}

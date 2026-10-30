@@ -1,0 +1,114 @@
+[
+  {
+    "package": "abscissa_core-0.9.0",
+    "upstream_repository": "iqlusioninc/abscissa",
+    "vcs_revision": "4bc14dee9827f8cef7ea270456536a73faae1525",
+    "files": [
+      {
+        "path": "cargo-audit/packages/abscissa_core-0.9.0/LICENSE",
+        "source_url": "https://raw.githubusercontent.com/iqlusioninc/abscissa/4bc14dee9827f8cef7ea270456536a73faae1525/LICENSE",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      }
+    ]
+  },
+  {
+    "package": "abscissa_derive-0.9.0",
+    "upstream_repository": "iqlusioninc/abscissa",
+    "vcs_revision": "4bc14dee9827f8cef7ea270456536a73faae1525",
+    "files": [
+      {
+        "path": "cargo-audit/packages/abscissa_derive-0.9.0/LICENSE",
+        "source_url": "https://raw.githubusercontent.com/iqlusioninc/abscissa/4bc14dee9827f8cef7ea270456536a73faae1525/LICENSE",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      }
+    ]
+  },
+  {
+    "package": "auditable-extract-0.3.5",
+    "upstream_repository": "rust-secure-code/cargo-auditable",
+    "vcs_revision": "4ccbc7276a6708561de827467475faec3c75b213",
+    "files": [
+      {
+        "path": "cargo-audit/packages/auditable-extract-0.3.5/LICENSE-APACHE",
+        "source_url": "https://raw.githubusercontent.com/rust-secure-code/cargo-auditable/4ccbc7276a6708561de827467475faec3c75b213/LICENSE-APACHE",
+        "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+      },
+      {
+        "path": "cargo-audit/packages/auditable-extract-0.3.5/LICENSE-MIT",
+        "source_url": "https://raw.githubusercontent.com/rust-secure-code/cargo-auditable/4ccbc7276a6708561de827467475faec3c75b213/LICENSE-MIT",
+        "sha256": "e3a8938c0304a5d418b6f7453c2f60fd6b590d486c798879063373e3acc94bf1"
+      }
+    ]
+  },
+  {
+    "package": "auditable-info-0.10.0",
+    "upstream_repository": "rust-secure-code/cargo-auditable",
+    "vcs_revision": "65266184d1f37b3a04db5423108323c6e75fbe01",
+    "files": [
+      {
+        "path": "cargo-audit/packages/auditable-info-0.10.0/LICENSE-APACHE",
+        "source_url": "https://raw.githubusercontent.com/rust-secure-code/cargo-auditable/65266184d1f37b3a04db5423108323c6e75fbe01/LICENSE-APACHE",
+        "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+      },
+      {
+        "path": "cargo-audit/packages/auditable-info-0.10.0/LICENSE-MIT",
+        "source_url": "https://raw.githubusercontent.com/rust-secure-code/cargo-auditable/65266184d1f37b3a04db5423108323c6e75fbe01/LICENSE-MIT",
+        "sha256": "e3a8938c0304a5d418b6f7453c2f60fd6b590d486c798879063373e3acc94bf1"
+      }
+    ]
+  },
+  {
+    "package": "auditable-serde-0.9.0",
+    "upstream_repository": "rust-secure-code/cargo-auditable",
+    "vcs_revision": "65266184d1f37b3a04db5423108323c6e75fbe01",
+    "files": [
+      {
+        "path": "cargo-audit/packages/auditable-serde-0.9.0/LICENSE-APACHE",
+        "source_url": "https://raw.githubusercontent.com/rust-secure-code/cargo-auditable/65266184d1f37b3a04db5423108323c6e75fbe01/LICENSE-APACHE",
+        "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+      },
+      {
+        "path": "cargo-audit/packages/auditable-serde-0.9.0/LICENSE-MIT",
+        "source_url": "https://raw.githubusercontent.com/rust-secure-code/cargo-auditable/65266184d1f37b3a04db5423108323c6e75fbe01/LICENSE-MIT",
+        "sha256": "e3a8938c0304a5d418b6f7453c2f60fd6b590d486c798879063373e3acc94bf1"
+      }
+    ]
+  },
+  {
+    "package": "canonical-path-2.0.2",
+    "upstream_repository": "iqlusioninc/crates",
+    "vcs_revision": "cb5fbc5b1b2e0b658d45965fed2ee3f85401286c",
+    "files": [
+      {
+        "path": "cargo-audit/packages/canonical-path-2.0.2/LICENSE",
+        "source_url": "https://raw.githubusercontent.com/iqlusioninc/crates/cb5fbc5b1b2e0b658d45965fed2ee3f85401286c/LICENSE",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      }
+    ]
+  },
+  {
+    "package": "quitters-0.1.0",
+    "upstream_repository": "rustsec/rustsec",
+    "vcs_revision": "5c458487b2df2c9afefccd91b2813959e1da88d2",
+    "files": [
+      {
+        "path": "cargo-audit/packages/quitters-0.1.0/LICENSE-APACHE",
+        "source_url": "https://raw.githubusercontent.com/rustsec/rustsec/5c458487b2df2c9afefccd91b2813959e1da88d2/cargo-audit/LICENSE-APACHE",
+        "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+      }
+    ],
+    "license_selection_note": "Published quitters metadata declares MIT OR Apache-2.0 but omits license files. Apache alternative selected for tool-notice inventory; standard Apache text retained from same upstream revision, sibling cargo-audit package. Original package metadata retained."
+  },
+  {
+    "package": "wasmparser-0.207.0",
+    "upstream_repository": "bytecodealliance/wasm-tools",
+    "vcs_revision": "1064f69c45a7b8a4d05ed1045713d6470be92236",
+    "files": [
+      {
+        "path": "cargo-audit/packages/wasmparser-0.207.0/LICENSE",
+        "source_url": "https://raw.githubusercontent.com/bytecodealliance/wasm-tools/1064f69c45a7b8a4d05ed1045713d6470be92236/LICENSE",
+        "sha256": "268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5"
+      }
+    ]
+  }
+]

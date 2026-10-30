@@ -1,0 +1,74 @@
+[
+  {
+    "name": "core",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/crates/fogvault/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "package_count": 30,
+    "manifest_sha256": "e26b64cb708d70f86534d0ef10e366c7bf94641e873a3695199fe604f1d264c5",
+    "lock_sha256": "1baba4cbf4ae96ba5d966b0add00a1e0283fb36b6708c8da52ad044769d9532d",
+    "metadata_sha256": "52d6ac27a36e570d337f15759da6c1a3495ea0878d7f15fcd0b7b39446a94d99"
+  },
+  {
+    "name": "native",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/experiments/vault-prototype/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "package_count": 77,
+    "manifest_sha256": "8122991ae9747752e8f42fded65ca17c3dc25f4907bd9b2b2076b0ad9a941357",
+    "lock_sha256": "cfc53e7bbea4926053d8a8058a287289708858be2b894ae6363881454ca6b31a",
+    "metadata_sha256": "2b832ee32eff4e591a8c9af265f25979eeecf4f661f639c7170ebc51134971a3"
+  },
+  {
+    "name": "browser",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/experiments/browser-prototype/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "package_count": 48,
+    "manifest_sha256": "ed258a81a0f79cba7a910dfc26ff33756f0684b6dbb006a23a1bef2398eea90d",
+    "lock_sha256": "95a942cc2d996550137e726cccfdef1cd260eb800c875effb63c512ad20ccb6a",
+    "metadata_sha256": "10ba0203910f1091a281048f5a8fcb86594233fcedf2530510c87e40ed7af28c"
+  },
+  {
+    "name": "mobile",
+    "command": [
+      "cargo",
+      "metadata",
+      "--offline",
+      "--locked",
+      "--format-version",
+      "1",
+      "--manifest-path",
+      "/Users/sid/projects/datafog/fogvault/experiments/mobile-prototype/Cargo.toml"
+    ],
+    "exit_code": 0,
+    "package_count": 31,
+    "manifest_sha256": "935ef36e57e3cd4d2f6d1cb3352897f282c241ab43f53e4bb7dbede950639e18",
+    "lock_sha256": "6fc19c5c74dcd1abfadf2abb6c26c6ae19925957f69aa24d99a37fef2e516bd5",
+    "metadata_sha256": "84b01d4a3d02aca5e90cd5a644aac833779c3ca07ee8f1753c7a8ad0f730c08c"
+  }
+]

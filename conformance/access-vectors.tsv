@@ -1,0 +1,27 @@
+# id	descriptor	head	recovery	provider_key	mode	expected_boundary
+valid/portable/password	access-vectors/portable-descriptor.bin	access-vectors/portable-head.bin	access-vectors/portable-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	password	accept
+valid/portable/recovery	access-vectors/portable-descriptor.bin	access-vectors/portable-head.bin	access-vectors/portable-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	recovery	accept
+valid/convenience/password	access-vectors/convenience-descriptor.bin	access-vectors/convenience-head.bin	access-vectors/convenience-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	password	accept
+valid/convenience/device	access-vectors/convenience-descriptor.bin	access-vectors/convenience-head.bin	access-vectors/convenience-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	device	accept
+valid/convenience/recovery	access-vectors/convenience-descriptor.bin	access-vectors/convenience-head.bin	access-vectors/convenience-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	recovery	accept
+valid/strict/device	access-vectors/strict-descriptor.bin	access-vectors/strict-head.bin	access-vectors/strict-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	device	accept
+valid/strict/recovery	access-vectors/strict-descriptor.bin	access-vectors/strict-head.bin	access-vectors/strict-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	recovery	accept
+reject/strict/password-only	access-vectors/strict-descriptor.bin	access-vectors/strict-head.bin	access-vectors/strict-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	password	unlock
+reject/strict/device-only	access-vectors/strict-descriptor.bin	access-vectors/strict-head.bin	access-vectors/strict-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	device_without_password	unlock
+reject/portable/wrong-password	access-vectors/portable-descriptor.bin	access-vectors/portable-head.bin	access-vectors/portable-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	wrong_password	unlock
+invalid/truncated	access-vectors/truncated.bin	access-vectors/strict-head.bin	access-vectors/strict-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	device	parse
+invalid/trailing	access-vectors/trailing.bin	access-vectors/strict-head.bin	access-vectors/strict-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	device	parse
+invalid/unknown-version	access-vectors/unknown-version.bin	access-vectors/strict-head.bin	access-vectors/strict-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	device	parse
+invalid/unknown-suite	access-vectors/unknown-suite.bin	access-vectors/strict-head.bin	access-vectors/strict-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	device	parse
+invalid/unknown-profile	access-vectors/unknown-profile.bin	access-vectors/strict-head.bin	access-vectors/strict-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	device	parse
+invalid/unadmitted-kdf	access-vectors/unadmitted-kdf.bin	access-vectors/strict-head.bin	access-vectors/strict-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	device	parse
+invalid/zero-password-revision	access-vectors/zero-password-revision.bin	access-vectors/strict-head.bin	access-vectors/strict-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	device	parse
+invalid/invalid-provider-flags	access-vectors/invalid-provider-flags.bin	access-vectors/strict-head.bin	access-vectors/strict-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	device	parse
+invalid/duplicate-slot	access-vectors/duplicate-slot.bin	access-vectors/strict-head.bin	access-vectors/strict-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	device	parse
+invalid/wrong-content-context	access-vectors/wrong-content-context.bin	access-vectors/strict-head.bin	access-vectors/strict-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	device	parse
+tamper/unused-recovery	access-vectors/unused-recovery-tamper.bin	access-vectors/portable-head.bin	access-vectors/portable-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	password	audit
+tamper/head-tag	access-vectors/portable-descriptor.bin	access-vectors/head-tag-tamper.bin	access-vectors/portable-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	password	audit
+tamper/device-outer	access-vectors/device-outer-tamper.bin	access-vectors/strict-head.bin	access-vectors/strict-recovery.bin	access-vectors/SYNTHETIC-provider-key.bin	device	unlock
+reject/recovery-secret	access-vectors/portable-descriptor.bin	access-vectors/portable-head.bin	access-vectors/wrong-recovery-secret.bin	access-vectors/SYNTHETIC-provider-key.bin	recovery	unlock
+reject/recovery-vault	access-vectors/portable-descriptor.bin	access-vectors/portable-head.bin	access-vectors/foreign-recovery-vault.bin	access-vectors/SYNTHETIC-provider-key.bin	recovery	unlock
+reject/provider-key	access-vectors/strict-descriptor.bin	access-vectors/strict-head.bin	access-vectors/strict-recovery.bin	access-vectors/wrong-provider-key.bin	device	unlock

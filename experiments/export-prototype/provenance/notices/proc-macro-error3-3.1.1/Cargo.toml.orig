@@ -1,0 +1,56 @@
+[workspace]
+members = ["test-crate", "proc-macro-error-attr"]
+
+[package]
+name = "proc-macro-error3"
+authors = [
+  "CreepySkeleton <creepy-skeleton@yandex.ru>",
+  "GnomedDev <david2005thomas@gmail.com>",
+  "gamma0987 <gamma0987@posteo.de>",
+]
+version = "3.1.1"
+description = "Almost drop-in replacement to panics in proc-macros"
+repository = "https://github.com/gamma0987/proc-macro-error3"
+rust-version = "1.61"
+keywords = ["proc-macro", "error", "errors"]
+categories = ["development-tools::procedural-macro-helpers"]
+license = "MIT OR Apache-2.0"
+edition = "2021"
+exclude = [
+  "/.bumpversion/",
+  "/cspell.json",
+  "/deny.toml",
+  "/.dicts/",
+  "/.editorconfig",
+  "/.github/",
+  "/.gitignore",
+  "/Justfile",
+  "/.markdownlint.json",
+  "/.prettierrc.toml",
+  "/renovate.json",
+  "/.taplo.toml",
+]
+
+[dependencies]
+proc-macro-error-attr3 = { path = "./proc-macro-error-attr", version = "=3.1.1" }
+proc-macro2 = "1.0.91"
+quote = "1.0.35"
+syn2 = { package = "syn", version = "2.0.46", optional = true, default-features = false }
+syn3 = { package = "syn", version = "3", optional = true, default-features = false }
+
+[dev-dependencies]
+syn3 = { package = "syn", version = "3", features = ["full"] }
+test-crate = { path = "./test-crate" }
+trybuild = { version = "1.0.99", features = ["diff"] }
+
+[features]
+__ui_tests = []
+default = ["syn3-error"]
+nightly = []
+syn-error = ["syn3-error"]
+syn2-error = ["dep:syn2"]
+syn3-error = ["dep:syn3"]
+
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+module_name_repetitions = { level = "allow" }

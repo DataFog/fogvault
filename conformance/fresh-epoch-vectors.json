@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "status": "candidate-engineering-baseline-not-security-approval",
+  "credential_format": 3,
+  "content_format": 3,
+  "suite": 1,
+  "root_epoch": 0,
+  "policy_epoch": 1,
+  "generation": 1,
+  "record_revision": 1,
+  "record_id_hex": "73737373737373737373737373737373",
+  "password_utf8": "SYNTHETIC-fresh-epoch-zero-password",
+  "metadata_utf8": "fresh epoch metadata",
+  "payload_utf8": "first record from current default creation",
+  "node_file": "node-b7c7a9fe6746edcfe13624e749aaba248b2511ecee740e96f910196251e3b178.bin",
+  "capture_recipe": "artifacts/current-format/fresh-epoch-capture.rs.txt",
+  "capture_provenance": "artifacts/current-format/fresh-epoch-capture-inputs.json",
+  "capture_kind": "One-time actual default Rust Engine creation and first save with OS-random keys/nonces; no automatic regeneration",
+  "scope": "All material is intentionally synthetic and decryptable using the public fixture password; no real vault data",
+  "files": {
+    "descriptor.bin": {
+      "bytes": 180,
+      "sha256": "c4dae48da95057f56e52e6f68ff950451a8582af4fcc9169015f5b510ef0c9f1"
+    },
+    "head.bin": {
+      "bytes": 129,
+      "sha256": "5df8ac6b10d9a47b48fcb1da4b7d3c63580d3433d84712b6b8db89a1e92f9d49"
+    },
+    "initial-head.bin": {
+      "bytes": 129,
+      "sha256": "711bb6ac43a671ef5b566ae11fba40c5eda88530f55bc85cb7c6a57b13a2d3bb"
+    },
+    "node-b7c7a9fe6746edcfe13624e749aaba248b2511ecee740e96f910196251e3b178.bin": {
+      "bytes": 57,
+      "sha256": "cc1a9dc0b297956392097004f07f887bd82fc327f9d935b704878fb6156baaab"
+    },
+    "record.bin": {
+      "bytes": 238,
+      "sha256": "674934b9bc31895be9d4966b49c23f4511c6771bdf03fd4ed23fbc0b2576e25f"
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schema": "fogvault-access-path-contract/v1",
+  "scope": "symbolic-policy-only",
+  "status": "proposed-definition-not-production-implementation",
+  "materials": ["P", "D_A", "D_B", "R"],
+  "profiles": {
+    "portable": {
+      "normal_paths": [{"id": "password", "requires": ["P"]}]
+    },
+    "password_or_device": {
+      "normal_paths": [
+        {"id": "password", "requires": ["P"]},
+        {"id": "device_a", "requires": ["D_A"]},
+        {"id": "device_b", "requires": ["D_B"]}
+      ]
+    },
+    "password_and_device": {
+      "normal_paths": [
+        {"id": "password_device_a", "requires": ["P", "D_A"]},
+        {"id": "password_device_b", "requires": ["P", "D_B"]}
+      ]
+    }
+  },
+  "recovery_path": {
+    "id": "recovery",
+    "requires": ["R"],
+    "output": "restricted_recovery_candidate",
+    "cryptographic_authority": "root",
+    "independent_of_normal_credentials": true
+  },
+  "slots": {
+    "P": {"id": "password-slot", "role": "passphrase"},
+    "D_A": {
+      "id": "device-slot-a",
+      "role": "device-factor",
+      "provider_id": "provider-a",
+      "key_id": "device-key-a",
+      "required_capabilities": ["device-local", "nonexportable-operation"]
+    },
+    "D_B": {
+      "id": "device-slot-b",
+      "role": "device-factor",
+      "provider_id": "provider-b",
+      "key_id": "device-key-b",
+      "required_capabilities": ["device-local", "nonexportable-operation"]
+    },
+    "R": {"id": "recovery-slot", "role": "owner-recovery"}
+  },
+  "prohibited_implicit_paths": ["session-cache", "root-cache", "export", "vendor-reset"],
+  "archives": {
+    "native_backup": "retains-original-native-access-policy",
+    "age_native_ciphertext": "age-policy-and-original-native-access-policy",
+    "age_decoded_records": "separate-data-access-policy-no-native-root-authority"
+  },
+  "freshness": {
+    "unanchored": "authenticated-snapshot-may-be-old",
+    "external_anchor": "reject-snapshot-that-does-not-match-trusted-anchor"
+  },
+  "limitations": [
+    "All factors, authentication results, capabilities and transaction outcomes are symbolic fixtures, not real cryptography or provider evidence.",
+    "Recovery is an alternative root access path. Choosing new credentials after recovery is not another independently held factor.",
+    "Removing or rewrapping a credential cannot revoke a retained root key, old wrappers, plaintext, exports or old encrypted backups.",
+    "Matching a snapshot's epochs does not establish that it is the latest snapshot. Freshness needs separately trusted state.",
+    "The deployed prototype remains password-only. This definition does not implement device providers, recovery, combiners or a new wire format.",
+    "Enrollment proof inputs are assumed qualified abstract results. This small model does not execute last-device removal, whole target-graph transitions or provider qualification."
+  ]
+}

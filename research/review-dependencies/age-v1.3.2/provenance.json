@@ -1,0 +1,40 @@
+{
+  "schema": "fogvault-review-tool-provenance/v1",
+  "recorded_at_utc": "2026-10-29T23:43:35.620735+00:00",
+  "tool": "FiloSottile/age",
+  "version": "v1.3.2",
+  "release_url": "https://github.com/FiloSottile/age/releases/tag/v1.3.2",
+  "archive": {
+    "url": "https://github.com/FiloSottile/age/releases/download/v1.3.2/age-v1.3.2-darwin-arm64.tar.gz",
+    "path": "research/review-dependencies/age-v1.3.2/age-v1.3.2-darwin-arm64.tar.gz",
+    "bytes": 18106798,
+    "sha256": "e2020b073c44f692685a24d6abc378817eb81ffaaf49fd0531ef8565f767f2f5",
+    "expected_sha256": "e2020b073c44f692685a24d6abc378817eb81ffaaf49fd0531ef8565f767f2f5",
+    "digest_checked_before_execution": true,
+    "http_headers": {
+      "Content-Length": "18106798",
+      "Last-Modified": "Sat, 29 Aug 2026 17:56:54 GMT",
+      "ETag": "\"0x8DF05F6E94C2A96\"",
+      "Content-Type": "application/octet-stream"
+    }
+  },
+  "executables": [
+    {
+      "path": "research/review-dependencies/age-v1.3.2/bin/age",
+      "bytes": 6502258,
+      "sha256": "4012dfc2725883beafb710894af4f599b7a94f8c8e0f51f02cc96ab8df33915e"
+    },
+    {
+      "path": "research/review-dependencies/age-v1.3.2/bin/age-keygen",
+      "bytes": 3806562,
+      "sha256": "c16e229245123d0ad27442317461d63915416cad0294395cd19ca93feb3211ea"
+    }
+  ],
+  "license": {
+    "url": "https://raw.githubusercontent.com/FiloSottile/age/v1.3.2/LICENSE",
+    "path": "research/review-dependencies/age-v1.3.2/LICENSE",
+    "sha256": "c5d65279d02955c0fc2294ae417c3add650d228f4f5c82bd6d531fc26c89cd96"
+  },
+  "scope": "Pinned official macOS arm64 CLI tool for synthetic age/v1 X25519 interoperability proof only; not a Rust backend, product dependency, global install or provider qualification",
+  "excluded_archive_members": "Only age and age-keygen extracted; compatibility plugins are not enabled or extracted."
+}

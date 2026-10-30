@@ -1,0 +1,1294 @@
+{
+  "schema": "fogvault-support-manifest/v1",
+  "as_of": "2026-10-29",
+  "status": "candidate-unqualified",
+  "scope": "first-review-entry-not-freeze-or-release",
+  "architectural_host_classes": [
+    "native",
+    "browser",
+    "extension",
+    "mobile",
+    "server"
+  ],
+  "baseline_evidence": {
+    "report": "experiments/vault-prototype/evidence/verifier-runs/20261029T232239Z-74rejhfb/report.json",
+    "meaning": "Historical accepted baseline only; final entry checker requires a fresh current complete full report.",
+    "beta3_version": "0.5.0-beta.3",
+    "beta3_checksum": "509259f36e4229fac2c5e254da49539dd44d4aa3ce0f3b0898ba8949752c7bed"
+  },
+  "artifacts": [
+    {
+      "id": "native-macos-sqlite",
+      "host_class": "native",
+      "target": "aarch64-apple-darwin",
+      "profile": "P2 password; explicit KDF allowlist; scratch SQLite",
+      "states": {
+        "designed": true,
+        "implemented": true,
+        "executed": true,
+        "qualified": false
+      },
+      "build_checked": true,
+      "evidence_scope": "Physical Mac runtime; macOS 26.6.2, Rust/Cargo 1.94.1; actual beta.3 consumer/core/native/resource/index cases; current host metadata Mac17,8 / 48 GiB, not a minimum floor",
+      "evidence_reports": [
+        "experiments/vault-prototype/evidence/verifier-runs/20261029T232239Z-74rejhfb/report.json"
+      ],
+      "limitations": [
+        "No minimum physical native host selected",
+        "No power-cut/filesystem-wide or Windows/Linux qualification",
+        "Unpublished disposable adapter"
+      ]
+    },
+    {
+      "id": "browser-chromium-blob",
+      "host_class": "browser",
+      "target": "wasm32-unknown-unknown",
+      "profile": "Foreground Worker; IndexedDB Blob envelope/ArrayBuffer nodes",
+      "states": {
+        "designed": true,
+        "implemented": true,
+        "executed": true,
+        "qualified": false
+      },
+      "build_checked": true,
+      "evidence_scope": "Desktop Chromium reporting HeadlessChrome 156; existing real-engine fixture",
+      "evidence_reports": [
+        "experiments/vault-prototype/evidence/verifier-runs/20261029T232239Z-74rejhfb/report.json"
+      ],
+      "limitations": [
+        "No packaged extension or lowest-host budget",
+        "No quota/eviction/power-loss qualification",
+        "Shared-buffer constructor unavailable in recorded browser profile; Node helper is separate"
+      ]
+    },
+    {
+      "id": "browser-webkit-arraybuffer",
+      "host_class": "browser",
+      "target": "wasm32-unknown-unknown",
+      "profile": "Foreground Worker; IndexedDB ArrayBuffer envelope/nodes",
+      "states": {
+        "designed": true,
+        "implemented": true,
+        "executed": true,
+        "qualified": false
+      },
+      "build_checked": true,
+      "evidence_scope": "Desktop Playwright WebKit reporting 26.6; existing regression fixture",
+      "evidence_reports": [
+        "experiments/vault-prototype/evidence/verifier-runs/20261029T232239Z-74rejhfb/report.json"
+      ],
+      "limitations": [
+        "Additional WebKit qualification deferred",
+        "No shipped Safari/iOS WKWebView qualification",
+        "Browser-managed ArrayBuffer cloning cost precedes JS admission"
+      ]
+    },
+    {
+      "id": "ios-simulator-c-probe",
+      "host_class": "mobile",
+      "target": "aarch64-apple-ios-sim",
+      "profile": "In-memory C ABI probe; exact pointer/length and UTF-8 adapter",
+      "states": {
+        "designed": true,
+        "implemented": true,
+        "executed": true,
+        "qualified": false
+      },
+      "build_checked": true,
+      "evidence_scope": "Actual iOS 26.5 simulator ABI runtime; iPhone 17 Pro simulator type",
+      "evidence_reports": [
+        "experiments/vault-prototype/evidence/verifier-runs/20261029T232239Z-74rejhfb/report.json"
+      ],
+      "limitations": [
+        "No physical-device budget",
+        "No Swift app, durable storage or provider/background qualification"
+      ]
+    },
+    {
+      "id": "ios-device-static-library",
+      "host_class": "mobile",
+      "target": "aarch64-apple-ios",
+      "profile": "Reusable Rust static library / C probe surface",
+      "states": {
+        "designed": true,
+        "implemented": true,
+        "executed": false,
+        "qualified": false
+      },
+      "build_checked": true,
+      "evidence_scope": "Release static-library build and architecture check only",
+      "evidence_reports": [
+        "experiments/vault-prototype/evidence/verifier-runs/20261029T232239Z-74rejhfb/report.json"
+      ],
+      "limitations": [
+        "No device install/signing/execution",
+        "No minimum iOS/device or OS-provider qualification"
+      ]
+    },
+    {
+      "id": "android-rust-check",
+      "host_class": "mobile",
+      "target": "aarch64-linux-android",
+      "profile": "Reusable Rust library type check",
+      "states": {
+        "designed": true,
+        "implemented": true,
+        "executed": false,
+        "qualified": false
+      },
+      "build_checked": true,
+      "evidence_scope": "Rust target check only",
+      "evidence_reports": [
+        "experiments/vault-prototype/evidence/verifier-runs/20261029T232239Z-74rejhfb/report.json"
+      ],
+      "limitations": [
+        "No NDK final link, JNI/Kotlin runtime or physical-device execution",
+        "No minimum Android/device or Keystore qualification"
+      ]
+    },
+    {
+      "id": "native-windows-linux",
+      "host_class": "native",
+      "target": null,
+      "profile": "Proposed native adapters",
+      "states": {
+        "designed": true,
+        "implemented": false,
+        "executed": false,
+        "qualified": false
+      },
+      "build_checked": false,
+      "evidence_scope": "Architecture scope only",
+      "evidence_reports": [],
+      "limitations": [
+        "Concrete artifacts, OS/architecture floors and runtime qualification unresolved"
+      ]
+    },
+    {
+      "id": "packaged-browser-extension",
+      "host_class": "extension",
+      "target": null,
+      "profile": "Proposed trusted origin/message and service-worker adapter",
+      "states": {
+        "designed": true,
+        "implemented": false,
+        "executed": false,
+        "qualified": false
+      },
+      "build_checked": false,
+      "evidence_scope": "Architecture scope only",
+      "evidence_reports": [],
+      "limitations": [
+        "No packaged MV3 or other extension runtime",
+        "Permissions/origin/lifetime/provider qualification unresolved"
+      ]
+    },
+    {
+      "id": "server-embedding",
+      "host_class": "server",
+      "target": null,
+      "profile": "Proposed noninteractive embedding/storage",
+      "states": {
+        "designed": true,
+        "implemented": false,
+        "executed": false,
+        "qualified": false
+      },
+      "build_checked": false,
+      "evidence_scope": "Architecture scope only",
+      "evidence_reports": [],
+      "limitations": [
+        "No qualified server adapter/example/shutdown or tenant-boundary workload",
+        "No network service, SSO or hosted vault control plane assumed"
+      ]
+    },
+    {
+      "id": "synthetic-access-provider",
+      "host_class": "provider",
+      "target": null,
+      "profile": "Candidate operation provider fixture",
+      "states": {
+        "designed": true,
+        "implemented": false,
+        "executed": false,
+        "qualified": false
+      },
+      "build_checked": false,
+      "evidence_scope": "Construction/prototype work in progress; root owner must attach final evidence",
+      "evidence_reports": [],
+      "limitations": [
+        "Synthetic operations do not establish real device binding, nonexportability, hardware, OS-provider or certification claims"
+      ]
+    }
+  ],
+  "workloads": {
+    "consumer_bundle_bytes": {
+      "value": 16777216,
+      "authority": "research/consumer/datafog-core-0.5.0-beta.3/published-source/src/workspace.rs:50",
+      "meaning": "Exact consumer payload requirement; not a universal vault limit or peak-memory budget"
+    },
+    "observed_payload_bytes": [
+      0,
+      4096,
+      1048576,
+      16777216
+    ],
+    "observed_index_records": [
+      1,
+      16,
+      256,
+      4096
+    ],
+    "kdf_baseline": {
+      "algorithm": "Argon2id",
+      "version": 19,
+      "memory_kib": 65536,
+      "passes": 3,
+      "lanes": 1,
+      "output_bytes": 32,
+      "authority": "spec/candidate-crypto.md; consumer-backed experiment, not a universal weakest-device budget"
+    },
+    "kdf_upgrade_fixture": {
+      "memory_kib": 65536,
+      "passes": 4,
+      "lanes": 1,
+      "meaning": "Explicit admitted proof input, not a new default"
+    },
+    "production_limits": {
+      "payload_bytes": null,
+      "metadata_bytes": null,
+      "records": null,
+      "batch": null,
+      "attachments": null,
+      "queue": null,
+      "memory": null,
+      "concurrency": null,
+      "latency_slo": null
+    },
+    "limit_policy": "Host must supply explicit finite admitted policy; no untrusted header chooses resource work or silently weakens settings. Experiment populations are not production capacities."
+  },
+  "physical_measurements": {
+    "available": [
+      "Physical arm64 Mac native allocation/RSS/operation observations",
+      "Desktop browser runtime observations on that Mac"
+    ],
+    "not_established": [
+      "Lowest-supported iOS physical device",
+      "Lowest-supported Android physical device",
+      "Minimum supported native machines/OSes",
+      "Minimum supported browser hardware/runtime floor"
+    ],
+    "simulator_and_build_only": [
+      "iOS simulator ABI runtime",
+      "iOS device static-library build",
+      "Android Rust target check"
+    ],
+    "qualified_physical_floors": false,
+    "current_host_metadata": {
+      "model": "Mac17,8",
+      "memory_bytes": 51539607552,
+      "hypervisor_guest_reported": false,
+      "method": "Read-only sysctl hw.model, hw.memsize and kern.hv_vmm_present on 2026-10-29",
+      "meaning": "Current native host metadata; not a minimum device, workload allowance or capacity promise"
+    }
+  },
+  "review_entry": {
+    "scope": "first-review-entry-not-freeze",
+    "external_specialist_review_complete": false,
+    "design_frozen": false,
+    "repository_or_commits_authorized": false,
+    "must_remain_open": [
+      "FVW-048",
+      "FVW-061",
+      "G-CRYPTO",
+      "G-FORMAT",
+      "G-INDEX",
+      "G-BUDGET",
+      "G-ADAPTER",
+      "G-BINDING"
+    ],
+    "required_documents": [
+      "spec/review-start.md",
+      "spec/review-entry.md",
+      "spec/adapter-contract.md",
+      "spec/support-manifest.md",
+      "spec/requirements.md",
+      "spec/technical-specification.md",
+      "spec/threat-model.md",
+      "spec/decisions.md",
+      "spec/verification-plan.md",
+      "spec/candidate-crypto.md",
+      "spec/candidate-format.md",
+      "spec/candidate-index.md",
+      "spec/access-paths.md",
+      "spec/credential-changes.md",
+      "spec/password-bytes.md",
+      "spec/public-api.md",
+      "spec/format-profile-review.md",
+      "spec/record-snapshots.md",
+      "spec/rotation-staging.md",
+      "spec/export-payload.md",
+      "spec/access-construction.md",
+      "spec/protective-transition.md",
+      "spec/shared-admission.md",
+      "spec/trusted-control-state.md",
+      "spec/rust-export-backend.md",
+      "spec/registered-native.md",
+      "spec/current-format.md"
+    ],
+    "required_fixtures": [
+      "conformance/vault-contract.json",
+      "conformance/host-feasibility-contract.json",
+      "conformance/format-vectors.json",
+      "conformance/access-paths.json",
+      "conformance/password-vectors.json",
+      "conformance/password-vectors.tsv",
+      "conformance/access-vectors.json",
+      "conformance/access-vectors.tsv",
+      "conformance/export-vectors.json",
+      "conformance/access-vectors/SYNTHETIC-provider-key.bin",
+      "conformance/access-vectors/convenience-descriptor.bin",
+      "conformance/access-vectors/convenience-head.bin",
+      "conformance/access-vectors/convenience-recovery.bin",
+      "conformance/access-vectors/device-outer-tamper.bin",
+      "conformance/access-vectors/duplicate-slot.bin",
+      "conformance/access-vectors/foreign-recovery-vault.bin",
+      "conformance/access-vectors/head-tag-tamper.bin",
+      "conformance/access-vectors/invalid-provider-flags.bin",
+      "conformance/access-vectors/portable-descriptor.bin",
+      "conformance/access-vectors/portable-head.bin",
+      "conformance/access-vectors/portable-recovery.bin",
+      "conformance/access-vectors/strict-descriptor.bin",
+      "conformance/access-vectors/strict-head.bin",
+      "conformance/access-vectors/strict-recovery.bin",
+      "conformance/access-vectors/trailing.bin",
+      "conformance/access-vectors/truncated.bin",
+      "conformance/access-vectors/unadmitted-kdf.bin",
+      "conformance/access-vectors/unknown-profile.bin",
+      "conformance/access-vectors/unknown-suite.bin",
+      "conformance/access-vectors/unknown-version.bin",
+      "conformance/access-vectors/unused-recovery-tamper.bin",
+      "conformance/access-vectors/wrong-content-context.bin",
+      "conformance/access-vectors/wrong-provider-key.bin",
+      "conformance/access-vectors/wrong-recovery-secret.bin",
+      "conformance/access-vectors/zero-password-revision.bin",
+      "conformance/vectors/descriptor-p1.bin",
+      "conformance/vectors/descriptor-p2.bin",
+      "conformance/vectors/index-branch-root.bin",
+      "conformance/vectors/index-branch-root.nodehash",
+      "conformance/vectors/index-head-empty.bin",
+      "conformance/vectors/index-head-populated.bin",
+      "conformance/vectors/index-leaf-left.bin",
+      "conformance/vectors/index-leaf-left.nodehash",
+      "conformance/vectors/index-leaf-right.bin",
+      "conformance/vectors/index-leaf-right.nodehash",
+      "conformance/export-vectors-empty.bin",
+      "conformance/export-vectors-invalid-duplicate-id.bin",
+      "conformance/export-vectors-invalid-footer-count-mismatch.bin",
+      "conformance/export-vectors-invalid-header-count-mismatch.bin",
+      "conformance/export-vectors-invalid-out-of-order.bin",
+      "conformance/export-vectors-invalid-oversized-payload-length.bin",
+      "conformance/export-vectors-invalid-trailing-byte.bin",
+      "conformance/export-vectors-invalid-unknown-record-tag.bin",
+      "conformance/export-vectors-invalid-unknown-version.bin",
+      "conformance/export-vectors-invalid-wrong-transcript-digest.bin",
+      "conformance/export-vectors-invalid-zero-revision.bin",
+      "conformance/export-vectors-records.bin",
+      "conformance/epoch-vectors.json",
+      "conformance/epoch-vectors/content-key.bin",
+      "conformance/epoch-vectors/descriptor.bin",
+      "conformance/epoch-vectors/head.bin",
+      "conformance/epoch-vectors/node-37e851f52a18f40dbabf045525f4122bdcddb0dbd685d89f541c6c17b2e8ef8c.bin",
+      "conformance/epoch-vectors/record.bin",
+      "conformance/epoch-vectors/recovery-kit.bin",
+      "conformance/epoch-vectors/root-key.bin",
+      "conformance/fresh-epoch-vectors.json",
+      "conformance/fresh-epoch-vectors/descriptor.bin",
+      "conformance/fresh-epoch-vectors/head.bin",
+      "conformance/fresh-epoch-vectors/initial-head.bin",
+      "conformance/fresh-epoch-vectors/node-b7c7a9fe6746edcfe13624e749aaba248b2511ecee740e96f910196251e3b178.bin",
+      "conformance/fresh-epoch-vectors/record.bin"
+    ],
+    "work_packages": [
+      {
+        "id": "access_recovery",
+        "fvwork_ids": [
+          "FVW-015",
+          "FVW-016",
+          "FVW-020"
+        ],
+        "entry_status": "ready",
+        "documents": [
+          "spec/access-paths.md",
+          "spec/format-profile-review.md",
+          "spec/public-api.md",
+          "spec/adapter-contract.md",
+          "spec/access-construction.md",
+          "spec/current-format.md"
+        ],
+        "fixtures": [
+          "conformance/access-paths.json",
+          "conformance/access-vectors.json",
+          "conformance/access-vectors.tsv"
+        ],
+        "required_checks": [
+          "access-path-model",
+          "access-format-fixtures",
+          "core-tests",
+          "native-tests"
+        ],
+        "required_cases": [
+          {
+            "stage": "core-tests",
+            "case": "access_profiles_require_exact_paths_and_recovery_is_restricted"
+          },
+          {
+            "stage": "core-tests",
+            "case": "access_enrollment_removal_and_recovery_policy_use_paired_commits"
+          },
+          {
+            "stage": "core-tests",
+            "case": "access_provider_errors_revocation_and_unadmitted_profiles_never_publish"
+          },
+          {
+            "stage": "core-tests",
+            "case": "access_strict_password_changes_keep_other_devices_offline"
+          },
+          {
+            "stage": "core-tests",
+            "case": "access_p2_promotion_preserves_content_context_and_authenticates_whole_policy"
+          },
+          {
+            "stage": "core-tests",
+            "case": "access_uncertain_recovery_requires_audited_reconciliation"
+          },
+          {
+            "stage": "core-tests",
+            "case": "fixed_access_vectors_enforce_parse_unlock_and_audit_boundaries"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_access_recovery_preserves_exact_beta3_workspace_and_content"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_p2_access_promotion_enrollment_and_removal_are_header_only"
+          },
+          {
+            "stage": "core-tests",
+            "case": "access_device_password_change_retry_binds_replacement_password"
+          },
+          {
+            "stage": "core-tests",
+            "case": "access_profile_change_retry_binds_replacement_password"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_credential_commit_rejects_mismatched_request_before_storage_changes"
+          },
+          {
+            "stage": "core-tests",
+            "case": "access_enrollment_retry_binds_provider_capabilities"
+          },
+          {
+            "stage": "core-tests",
+            "case": "access_profile_transition_proves_every_retained_device_before_publication"
+          },
+          {
+            "stage": "core-tests",
+            "case": "access_profile_transition_rejects_late_or_invalid_target_device_proof"
+          },
+          {
+            "stage": "core-tests",
+            "case": "access_setup_admission_is_installed_only_with_confirmed_or_reconciled_target"
+          },
+          {
+            "stage": "core-tests",
+            "case": "access_reconcile_source_keeps_policy_and_repair_outcomes_unknown"
+          },
+          {
+            "stage": "core-tests",
+            "case": "access_provider_classification_is_explicit_and_non_operation_kinds_are_rejected"
+          },
+          {
+            "stage": "core-tests",
+            "case": "access_removal_requires_explicit_maintenance_and_reports_preserved_keys"
+          },
+          {
+            "stage": "core-tests",
+            "case": "recovery_repair_requires_explicit_maintenance_or_protective_replacement"
+          },
+          {
+            "stage": "core-tests",
+            "case": "device_replacement_excludes_lost_key_before_provider_work"
+          },
+          {
+            "stage": "core-tests",
+            "case": "generic_setup_replay_preserves_effect_without_authorizing_new_route_removal"
+          },
+          {
+            "stage": "core-tests",
+            "case": "lifecycle::protective::tests::lost_device_replacement_changes_root_and_content_keys_but_preserves_historical_access"
+          },
+          {
+            "stage": "core-tests",
+            "case": "lifecycle::protective::tests::named_recovery_replacement_requires_fresh_keys_and_a_new_recovery_secret"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_current_format_password_and_kdf_maintenance_preserve_content"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_current_format_all_access_profiles_reopen_maximum_records_at_epoch_zero"
+          }
+        ],
+        "scope_note": "Exact P3 candidate and native synthetic-provider/recovery proof; independent construction/provider review and P3 browser/mobile bridges remain open. Final full report must execute every listed check/case. Typed key effects distinguish explicitly selected unchanged-key credential maintenance from fresh-root/content protective replacement; replay cannot silently authorize new route removal."
+      },
+      {
+        "id": "rotation_compromise",
+        "fvwork_ids": [
+          "FVW-017",
+          "FVW-019"
+        ],
+        "entry_status": "ready",
+        "documents": [
+          "spec/rotation-staging.md",
+          "spec/format-profile-review.md",
+          "spec/public-api.md",
+          "spec/current-format.md"
+        ],
+        "fixtures": [
+          "conformance/vault-contract.json"
+        ],
+        "required_checks": [
+          "core-tests",
+          "native-tests",
+          "trusted-control-host"
+        ],
+        "required_cases": [
+          {
+            "stage": "core-tests",
+            "case": "format::rotation::tests::wrapping_rotation_and_full_rotation_have_distinct_retained_key_effects"
+          },
+          {
+            "stage": "native-tests",
+            "case": "p2_rotation_checkpoint_resumes_every_record_and_commits_atomic_shadow_state"
+          },
+          {
+            "stage": "native-tests",
+            "case": "p2_rotation_checkpoints_reject_wrong_credentials_context_and_authenticated_bad_progress"
+          },
+          {
+            "stage": "native-tests",
+            "case": "p2_rotation_cas_and_orphan_cleanup_never_promote_incomplete_or_stale_stage"
+          },
+          {
+            "stage": "native-tests",
+            "case": "p2_restore_authentication_and_external_anchor_policy_are_distinct"
+          },
+          {
+            "stage": "native-tests",
+            "case": "p2_rotation_owner_receipt_rejects_old_root_target_substitution_with_same_password"
+          },
+          {
+            "stage": "core-tests",
+            "case": "lifecycle::protective::tests::protective_full_transition_rejects_retained_root_content_keys_and_old_routes"
+          },
+          {
+            "stage": "core-tests",
+            "case": "lifecycle::protective::tests::protective_resume_requires_original_independent_target_commitment_and_intact_stage"
+          },
+          {
+            "stage": "core-tests",
+            "case": "lifecycle::protective::tests::protective_source_conflict_duplicate_and_revocation_never_publish"
+          },
+          {
+            "stage": "core-tests",
+            "case": "lifecycle::protective::tests::protective_recovery_reencrypts_without_publishing_source_plaintext_authority"
+          },
+          {
+            "stage": "core-tests",
+            "case": "lifecycle::protective::tests::protective_confirmation_rejects_another_draft_with_same_source_and_request"
+          },
+          {
+            "stage": "trusted-control-host",
+            "case": "control_store_p3_full_transition_resumes_after_death_and_rejects_old_snapshot"
+          },
+          {
+            "stage": "trusted-control-host",
+            "case": "control_store_stale_prepared_writer_cannot_overwrite_after_completed_B_and_later_C"
+          },
+          {
+            "stage": "core-tests",
+            "case": "lifecycle::protective::tests::lost_device_replacement_changes_root_and_content_keys_but_preserves_historical_access"
+          },
+          {
+            "stage": "core-tests",
+            "case": "lifecycle::protective::tests::named_recovery_replacement_requires_fresh_keys_and_a_new_recovery_secret"
+          }
+        ],
+        "scope_note": "Exact rotation/compromise semantics and focused encrypted P2 SQLite checkpoint proof; maintained resumable API and P3 factor rotation are not implemented or qualified."
+      },
+      {
+        "id": "format_profile",
+        "fvwork_ids": [
+          "FVW-023",
+          "FVW-025",
+          "FVW-027"
+        ],
+        "entry_status": "ready",
+        "documents": [
+          "spec/format-profile-review.md",
+          "spec/candidate-crypto.md",
+          "spec/candidate-format.md",
+          "spec/candidate-index.md",
+          "spec/technical-specification.md",
+          "spec/current-format.md"
+        ],
+        "fixtures": [
+          "conformance/format-vectors.json",
+          "conformance/access-vectors.json",
+          "artifacts/remediation/dependency-audit-20261029/inventory.json",
+          "conformance/fresh-epoch-vectors.json",
+          "conformance/fresh-epoch-vectors/descriptor.bin",
+          "conformance/fresh-epoch-vectors/head.bin",
+          "conformance/fresh-epoch-vectors/initial-head.bin",
+          "conformance/fresh-epoch-vectors/node-b7c7a9fe6746edcfe13624e749aaba248b2511ecee740e96f910196251e3b178.bin",
+          "conformance/fresh-epoch-vectors/record.bin"
+        ],
+        "required_checks": [
+          "format-fixtures",
+          "access-format-fixtures",
+          "password-vectors",
+          "dependency-audit",
+          "core-tests",
+          "native-tests",
+          "epoch-format-fixtures",
+          "independent-epoch-decoder",
+          "fresh-epoch-decoder"
+        ],
+        "required_cases": [
+          {
+            "stage": "native-tests",
+            "case": "committed_format_vectors_match_implementation"
+          },
+          {
+            "stage": "core-tests",
+            "case": "fixed_access_vectors_enforce_parse_unlock_and_audit_boundaries"
+          },
+          {
+            "stage": "core-tests",
+            "case": "crypto::tests::key_derivation_binds_vault_and_purpose"
+          },
+          {
+            "stage": "core-tests",
+            "case": "format::tests::record_format_consumes_all_bytes_and_authenticates_identity_and_revision"
+          },
+          {
+            "stage": "dependency-audit",
+            "case": "dependency-current-locks-and-manifests"
+          },
+          {
+            "stage": "dependency-audit",
+            "case": "dependency-core-fresh-audit"
+          },
+          {
+            "stage": "dependency-audit",
+            "case": "dependency-native-fresh-audit"
+          },
+          {
+            "stage": "dependency-audit",
+            "case": "dependency-browser-fresh-audit"
+          },
+          {
+            "stage": "dependency-audit",
+            "case": "dependency-mobile-fresh-audit"
+          },
+          {
+            "stage": "dependency-audit",
+            "case": "dependency-input-stability"
+          },
+          {
+            "stage": "core-tests",
+            "case": "lifecycle::protective::tests::fixed_epoch_vectors_pin_bytes_and_reject_epoch_magic_truncation_and_context_changes"
+          },
+          {
+            "stage": "fresh-epoch-decoder",
+            "case": "fresh_fixed_fixture_identity_and_zero_epoch_admission"
+          },
+          {
+            "stage": "fresh-epoch-decoder",
+            "case": "fresh_portable_password_unwrap_without_device_provider"
+          },
+          {
+            "stage": "fresh-epoch-decoder",
+            "case": "fresh_initial_empty_head_authentication"
+          },
+          {
+            "stage": "fresh-epoch-decoder",
+            "case": "fresh_first_save_head_and_leaf_authentication"
+          },
+          {
+            "stage": "fresh-epoch-decoder",
+            "case": "fresh_epoch_zero_record_wrap_and_body_decode"
+          },
+          {
+            "stage": "fresh-epoch-decoder",
+            "case": "fresh_wrong_password_rejected"
+          },
+          {
+            "stage": "fresh-epoch-decoder",
+            "case": "fresh_record_epoch_mismatch_rejected_before_work"
+          },
+          {
+            "stage": "fresh-epoch-decoder",
+            "case": "fresh_changed_descriptor_epoch_rejects_password_wrapper"
+          },
+          {
+            "stage": "fresh-epoch-decoder",
+            "case": "fresh_zero_to_one_same_key_rejects_record_wrap"
+          },
+          {
+            "stage": "fresh-epoch-decoder",
+            "case": "fresh_wrong_version_lengths_and_trailing_bytes_rejected_before_work"
+          },
+          {
+            "stage": "fresh-epoch-decoder",
+            "case": "fresh_record_head_and_leaf_byte_tampering_rejected"
+          },
+          {
+            "stage": "fresh-epoch-decoder",
+            "case": "fresh_runtime_dependency_identity"
+          },
+          {
+            "stage": "fresh-epoch-decoder",
+            "case": "fresh_source_stability"
+          },
+          {
+            "stage": "core-tests",
+            "case": "maintained_creators_share_epoch_zero_content_three_across_profiles"
+          },
+          {
+            "stage": "core-tests",
+            "case": "maintained_default_creation_and_reader_refuse_legacy_content"
+          },
+          {
+            "stage": "core-tests",
+            "case": "current_epoch_and_size_admission_precede_provider_or_password_work"
+          },
+          {
+            "stage": "core-tests",
+            "case": "maintained_rebinding_cannot_enter_a_legacy_writable_profile"
+          },
+          {
+            "stage": "core-tests",
+            "case": "fixed_fresh_epoch_zero_vectors_unlock_empty_and_first_save_states"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_current_format_maximum_record_survives_all_read_paths_and_reopen"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_current_format_preserves_exact_beta3_bundle_and_head"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_current_format_password_and_kdf_maintenance_preserve_content"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_current_format_refuses_legacy_enrollment_without_modifying_input"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_current_format_all_access_profiles_reopen_maximum_records_at_epoch_zero"
+          }
+        ],
+        "scope_note": "Exact public authenticated P2 index/latest head and P3 access construction, fixed fixture provenance, conditional usage bounds, current lock audit and explicit specialist questions. G-CRYPTO/G-FORMAT and independent review remain open. Current creators use one P3/content3 profile at epoch zero; historical vectors remain diagnostic and unchanged. The independent fresh corpus covers actual default creation separately from the prior epoch-seven corpus. Engineering baseline evidence is separate from later physical/provider and specialist qualification."
+      },
+      {
+        "id": "record_membership",
+        "fvwork_ids": [
+          "FVW-029",
+          "FVW-030"
+        ],
+        "entry_status": "ready",
+        "documents": [
+          "spec/record-snapshots.md",
+          "spec/candidate-index.md",
+          "spec/public-api.md",
+          "spec/adapter-contract.md",
+          "spec/index-growth-results.md"
+        ],
+        "fixtures": [
+          "conformance/vault-contract.json",
+          "conformance/host-feasibility-contract.json"
+        ],
+        "required_checks": [
+          "core-tests",
+          "native-tests",
+          "browser-feasibility",
+          "index-growth"
+        ],
+        "required_cases": [
+          {
+            "stage": "core-tests",
+            "case": "portable_delete_authenticates_membership_retries_and_the_empty_root"
+          },
+          {
+            "stage": "core-tests",
+            "case": "portable_delete_unknown_reconciliation_and_lock_preserve_authority"
+          },
+          {
+            "stage": "core-tests",
+            "case": "portable_pages_are_bounded_complete_and_bound_to_the_current_head"
+          },
+          {
+            "stage": "core-tests",
+            "case": "portable_prepared_delete_rejects_reinserted_incarnation_and_record_replay"
+          },
+          {
+            "stage": "core-tests",
+            "case": "portable_async_inventory_uses_the_same_authenticated_cursor_and_finality"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_source_head_prevents_revision_aba_for_queued_intent"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_delete_retries_empty_root_and_retained_backups_have_exact_semantics"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_delete_abort_unknown_reconcile_and_stale_writers_are_safe"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_paged_inventory_is_exact_bounded_and_rejects_changed_snapshots"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_page_errors_cannot_skip_corrupt_members_or_report_false_completion"
+          },
+          {
+            "stage": "browser-feasibility",
+            "case": "delete_source_head_rejects_revision_aba_for_queued_intent"
+          },
+          {
+            "stage": "browser-feasibility",
+            "case": "paged_inventory_streams_verified_bounded_snapshot_and_orders_writer"
+          },
+          {
+            "stage": "browser-feasibility",
+            "case": "paged_inventory_errors_cancel_cursor_and_never_skip_corrupt_members"
+          },
+          {
+            "stage": "browser-feasibility",
+            "case": "save_source_head_rejects_revision_aba_for_queued_intent"
+          },
+          {
+            "stage": "browser-feasibility",
+            "case": "save_source_head_preserves_unknown_and_exact_latest_retry"
+          }
+        ],
+        "scope_note": "Authenticated delete and bounded pages execute in core/native and current browser regression profiles. Exact source-head intent prevents revision ABA. No historical pins, tombstone ledger, global monotonic-ID history or physical-device capacity is claimed."
+      },
+      {
+        "id": "snapshot_restore_staging",
+        "fvwork_ids": [
+          "FVW-031",
+          "FVW-032",
+          "FVW-040",
+          "FVW-043"
+        ],
+        "entry_status": "ready",
+        "documents": [
+          "spec/record-snapshots.md",
+          "spec/rotation-staging.md",
+          "spec/export-payload.md",
+          "spec/adapter-contract.md",
+          "spec/format-profile-review.md"
+        ],
+        "fixtures": [
+          "conformance/export-vectors.json",
+          "conformance/format-vectors.json"
+        ],
+        "required_checks": [
+          "native-tests",
+          "browser-feasibility",
+          "export-payload",
+          "export-backend-screening"
+        ],
+        "required_cases": [
+          {
+            "stage": "native-tests",
+            "case": "p2_restore_authentication_and_external_anchor_policy_are_distinct"
+          },
+          {
+            "stage": "native-tests",
+            "case": "p2_rotation_cas_and_orphan_cleanup_never_promote_incomplete_or_stale_stage"
+          },
+          {
+            "stage": "native-tests",
+            "case": "consumer_neutral_export_payload_has_independent_rust_framing_proof"
+          },
+          {
+            "stage": "browser-feasibility",
+            "case": "point_read_snapshot_survives_concurrent_path_retirement"
+          },
+          {
+            "stage": "browser-feasibility",
+            "case": "paged_inventory_errors_cancel_cursor_and_never_skip_corrupt_members"
+          },
+          {
+            "stage": "export-payload",
+            "case": "payload-every-truncation-rejects"
+          },
+          {
+            "stage": "export-payload",
+            "case": "snapshot-page-head-and-completion"
+          },
+          {
+            "stage": "export-payload",
+            "case": "age-incomplete-outer-even-if-inner-completes"
+          },
+          {
+            "stage": "export-payload",
+            "case": "age-trusted-receipt-rejects-valid-replacement"
+          }
+        ],
+        "scope_note": "Transaction-scoped readers, explicit root lifetime/cleanup, focused P2 staging/freshness proof and exact age/payload/container tool proof are review inputs. Maintained export041/import042/restore044 and Rust age backend qualification remain later; adjacent checksum is not trusted origin/freshness."
+      },
+      {
+        "id": "lifecycle_adapters",
+        "fvwork_ids": [
+          "FVW-005",
+          "FVW-007",
+          "FVW-008",
+          "FVW-010",
+          "FVW-033",
+          "FVW-034"
+        ],
+        "entry_status": "ready",
+        "documents": [
+          "spec/public-api.md",
+          "spec/adapter-contract.md",
+          "spec/portable-core.md",
+          "spec/browser-transaction-candidate.md",
+          "spec/record-snapshots.md",
+          "spec/registered-native.md",
+          "spec/current-format.md"
+        ],
+        "fixtures": [
+          "conformance/vault-contract.json",
+          "conformance/host-feasibility-contract.json"
+        ],
+        "required_checks": [
+          "core-boundary",
+          "core-public-api",
+          "core-tests",
+          "native-tests",
+          "browser-feasibility",
+          "mobile-feasibility",
+          "trusted-control-host"
+        ],
+        "required_cases": [
+          {
+            "stage": "core-tests",
+            "case": "portable_create_unlock_save_lock_reopen_read"
+          },
+          {
+            "stage": "core-tests",
+            "case": "portable_revocation_precedes_delayed_work_and_cleanup"
+          },
+          {
+            "stage": "core-tests",
+            "case": "portable_pending_cleanup_is_generation_scoped"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_prepared_creation_is_exclusive_and_unknown_outcomes_reconcile"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_prepared_creators_race_and_orphan_cleanup_is_explicit"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_real_process_death_releases_writer_and_stale_process_cannot_commit"
+          },
+          {
+            "stage": "browser-feasibility",
+            "case": "two_writers_use_accepted_head_compare_and_swap"
+          },
+          {
+            "stage": "browser-feasibility",
+            "case": "uncertain_commit_blocks_use_until_metadata_reconciliation"
+          },
+          {
+            "stage": "browser-feasibility",
+            "case": "lock_revokes_precommit_publication"
+          },
+          {
+            "stage": "mobile-feasibility",
+            "case": "lock-revokes-session"
+          },
+          {
+            "stage": "mobile-feasibility",
+            "case": "released-handle-rejects"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native::capacity_tests::sqlite_capacity_failure_rolls_back_and_preserves_accepted_state"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_schema_rejects_trigger_false_save_success_without_mutation"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_schema_rechecks_every_operation_after_external_schema_change"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_credential_rolled_back_lost_reply_preserves_typed_uncertainty"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_access_and_recovery_rolled_back_lost_reply_are_not_corruption"
+          },
+          {
+            "stage": "native-tests",
+            "case": "exact_beta3_bundle_and_complete_head_survive_protective_transition_and_reopen"
+          },
+          {
+            "stage": "core-tests",
+            "case": "control::tests::ordinary_owner_canonical_vectors_and_strict_decoder"
+          },
+          {
+            "stage": "core-tests",
+            "case": "control::tests::ordinary_control_rejects_each_owner_field_substitution"
+          },
+          {
+            "stage": "core-tests",
+            "case": "control::tests::ordinary_control_rejects_foreign_source_and_unsupported_roles"
+          },
+          {
+            "stage": "core-tests",
+            "case": "engine_control_save_rejects_mutated_public_plan_fields"
+          },
+          {
+            "stage": "core-tests",
+            "case": "engine_control_delete_and_credentials_bind_exact_pending_operations"
+          },
+          {
+            "stage": "core-tests",
+            "case": "engine_control_rejects_replayed_unknown_and_revoked_work"
+          },
+          {
+            "stage": "core-tests",
+            "case": "engine_reopen_locked_retains_identity_and_revokes_before_failed_parse"
+          },
+          {
+            "stage": "core-tests",
+            "case": "engine_reopen_locked_retains_kdf_admission_and_shared_work_budget"
+          },
+          {
+            "stage": "core-tests",
+            "case": "engine_reopen_locked_preserves_explicit_epoch_profile_admission"
+          },
+          {
+            "stage": "core-tests",
+            "case": "engine_reopen_locked_uses_exact_pending_admission_but_does_not_invent_restart_policy"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native::registered::tests::registered_host_pins_path_and_identity_and_never_recreates_missing_control"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native::registered::tests::registered_target_codec_rejects_partial_oversized_and_mismatched_targets"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native::registered::tests::registered_submitted_target_survives_failed_cleanup_and_reopen"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native::registered::tests::registered_completed_stage_cleanup_is_fenced_and_next_prepared_target_is_retained"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native::registered::tests::registered_delete_rejects_retained_recipe_that_reclaims_promoted_sibling"
+          },
+          {
+            "stage": "native-tests",
+            "case": "registered_native_save_delete_and_reopen_track_exact_anchor"
+          },
+          {
+            "stage": "native-tests",
+            "case": "registered_native_password_and_kdf_changes_preserve_record_bytes"
+          },
+          {
+            "stage": "native-tests",
+            "case": "registered_native_access_setup_and_recovery_repair_are_anchored"
+          },
+          {
+            "stage": "native-tests",
+            "case": "registered_native_beta3_bundle_survives_lock_reopen"
+          },
+          {
+            "stage": "native-tests",
+            "case": "registered_native_unknown_outcomes_retain_exact_target_and_recover"
+          },
+          {
+            "stage": "native-tests",
+            "case": "registered_native_credential_unknown_restarts_use_exact_admitted_target"
+          },
+          {
+            "stage": "native-tests",
+            "case": "registered_native_point_update_stays_path_local_at_existing_growth_populations"
+          },
+          {
+            "stage": "native-tests",
+            "case": "registered_native_real_process_stale_save_at_rejects_replayed_source_before_writes"
+          },
+          {
+            "stage": "native-tests",
+            "case": "registered_native_required_registration_refuses_diagnostic_and_missing_control"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native::registered_process_tests::registered_native_real_parent_death_preserves_submission_and_recovers_exact_target"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native::registered_process_tests::registered_native_real_process_competitors_have_one_authorized_successor"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native::registered_process_tests::registered_native_same_request_competitors_cannot_claim_or_clear_other_target"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native::registered::tests::registered_control_revision_ceiling_reserves_complete_publication_before_writes"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native::registered::tests::registered_native_sql_revision_ceiling_preserves_last_readable_record"
+          },
+          {
+            "stage": "core-tests",
+            "case": "reconcile_unrelated_request_preserves_exact_pending_operation"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_current_format_maximum_record_survives_all_read_paths_and_reopen"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_current_format_preserves_exact_beta3_bundle_and_head"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_current_format_password_and_kdf_maintenance_preserve_content"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_current_format_refuses_legacy_enrollment_without_modifying_input"
+          },
+          {
+            "stage": "native-tests",
+            "case": "native_current_format_all_access_profiles_reopen_maximum_records_at_epoch_zero"
+          },
+          {
+            "stage": "browser-feasibility",
+            "case": "current_format_epoch_zero_is_used_by_browser_storage"
+          }
+        ],
+        "scope_note": "Exact portable authority and transaction/CAS/creation/unknown/reader contract. Registered native ordinary mutations now use independently selected registration, canonical operation commitments, retained encrypted targets and the shared publication coordinator; named ordinary, process-loss, competing-writer and growth cases are required. Explicit legacy diagnostic adapters, other host realizations and binding probes are not maintained production artifacts or qualified hardware/physical-floor evidence. All freeze and qualification flags remain open."
+      },
+      {
+        "id": "support_enterprise",
+        "fvwork_ids": [
+          "FVW-047",
+          "FVW-070"
+        ],
+        "entry_status": "ready",
+        "documents": [
+          "spec/support-manifest.md",
+          "spec/resource-budgets.md",
+          "spec/host-feasibility.md",
+          "spec/mobile-feasibility.md",
+          "spec/format-profile-review.md"
+        ],
+        "fixtures": [
+          "conformance/support-manifest.json",
+          "conformance/host-feasibility-contract.json",
+          "artifacts/remediation/dependency-audit-20261029/inventory.json"
+        ],
+        "required_checks": [
+          "resource-budgets",
+          "browser-feasibility",
+          "mobile-feasibility",
+          "dependency-audit"
+        ],
+        "required_cases": [
+          {
+            "stage": "mobile-feasibility",
+            "case": "password-utf8-golden-vectors"
+          },
+          {
+            "stage": "mobile-feasibility",
+            "case": "password-raw-binary-create-unlock-read"
+          },
+          {
+            "stage": "dependency-audit",
+            "case": "dependency-tool-identity"
+          },
+          {
+            "stage": "dependency-audit",
+            "case": "dependency-reference-database-identity"
+          },
+          {
+            "stage": "core-tests",
+            "case": "shared_kdf_admission_precedes_work_across_create_and_unlock"
+          }
+        ],
+        "scope_note": "States remain designed/implemented/executed/qualified per artifact, with actual desktop observations versus simulator/build gaps. Physical floors048, independent review061 and all six freeze gates remain open; no enterprise certification or unmeasured production limits are inferred."
+      }
+    ]
+  },
+  "enterprise": {
+    "single_owner": true,
+    "mandatory_vendor_service": false,
+    "mandatory_remote_audit": false,
+    "raw_root_getter": false,
+    "closed_crypto_registry": true,
+    "operation_based_providers": true,
+    "sanitized_nonsecret_events": "Proposed host boundary only; no network delivery or plaintext/secret/capability logging",
+    "provenance": "Exact locks/features/source/artifact/fixture/report hashes; licensing and public history require later review",
+    "deferred": [
+      "Organization roles and SSO control plane",
+      "Administrator reset or mandatory escrow",
+      "Hosted vault service",
+      "Named certification program without buyer/operating-environment scope"
+    ]
+  },
+  "post_review_revision": {
+    "state": "current-format and explicit-maintenance candidate implementation; engineering baseline evidence is separate from later physical/specialist qualification",
+    "public_repository_or_commits_authorized": false,
+    "qualified_rust_age_backend_selected": false,
+    "external_review_disposition": "artifacts/external-review-assessment/2026-10-29/DECISION.md",
+    "notes": [
+      "Original handoff evidence is historical. Fresh stable integrated evidence is required for revised inputs.",
+      "Export screening pass means correct rejection of a failed backend, never approval.",
+      "No physical phone was connected; FVW-048 remains open.",
+      "Current maintained creators use P3/content3 at root epoch zero; old P2/P3-content2 vectors and explicit diagnostic paths remain historical compatibility fixtures.",
+      "Physical device/provider qualification and qualified specialist review remain open later milestones; no design-frozen or production-qualified flag is set by engineering baseline evidence."
+    ]
+  }
+}

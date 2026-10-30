@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "status": "candidate-for-review-not-frozen",
+  "content_format": 3,
+  "credential_format": 3,
+  "suite": 1,
+  "root_epoch": 7,
+  "record_id_hex": "42424242424242424242424242424242",
+  "record_revision": 3,
+  "generation": 11,
+  "password_utf8": "SYNTHETIC-PROTECTIVE-PASSWORD",
+  "metadata_utf8": "fixed metadata",
+  "payload_utf8": "epoch profile fixture",
+  "node_file": "node-37e851f52a18f40dbabf045525f4122bdcddb0dbd685d89f541c6c17b2e8ef8c.bin",
+  "scope": "All keys and credentials intentionally public synthetic fixture material; no real vault data.",
+  "capture_recipe": "artifacts/remediation/epoch-fixture-capture.rs.txt",
+  "files": {
+    "content-key.bin": {
+      "bytes": 32,
+      "sha256": "4d4713ba96f4dd179f46ffacd66daa3c5fa83631073018f08746c85b1d47955c"
+    },
+    "descriptor.bin": {
+      "bytes": 276,
+      "sha256": "5ad0820847f1ade4bbd379698841e0e7c8294594cea8ad62e1ac9ff55efaae5a"
+    },
+    "head.bin": {
+      "bytes": 129,
+      "sha256": "040abd17d0a8b2e8bc233e7bd60910d49d393cab165d3de7f4b74f9e9f95b52c"
+    },
+    "node-37e851f52a18f40dbabf045525f4122bdcddb0dbd685d89f541c6c17b2e8ef8c.bin": {
+      "bytes": 57,
+      "sha256": "0ec12ba7c04146b2173ec21fb8d7a34b82334495c50aa2696ccb68afe85327a7"
+    },
+    "record.bin": {
+      "bytes": 211,
+      "sha256": "0c160cf70ecf9df1f72d808782322a611eef15387687d2fbf7776610e1155291"
+    },
+    "recovery-kit.bin": {
+      "bytes": 80,
+      "sha256": "69477007d9bbfded2db92c6b20b370c26e66cfed455640f3f26a63358eb6e09b"
+    },
+    "root-key.bin": {
+      "bytes": 32,
+      "sha256": "02d449a31fbb267c8f352e9968a79e3e5fc95c1bbeaa502fd6454ebde5a4bedc"
+    }
+  }
+}

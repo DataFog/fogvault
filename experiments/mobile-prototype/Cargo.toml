@@ -1,0 +1,14 @@
+[package]
+name = "fogvault-mobile-feasibility"
+version = "0.0.0"
+edition = "2021"
+publish = false
+license = "MIT"
+description = "Disposable mobile ABI feasibility probe, not a supported binding"
+
+[lib]
+crate-type = ["staticlib", "rlib"]
+
+[dependencies]
+fogvault = { path = "../../crates/fogvault", default-features = false }
+zeroize = "=1.9.1"

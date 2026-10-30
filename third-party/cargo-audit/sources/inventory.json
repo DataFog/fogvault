@@ -1,0 +1,11 @@
+[
+  {
+    "package": "uluru",
+    "version": "3.1.0",
+    "license": "MPL-2.0",
+    "archive": "uluru-3.1.0.crate",
+    "sha256": "7c8a2469e56e6e5095c82ccd3afb98dad95f7af7929aab6d8ba8d6e0f73657da",
+    "source_url": "https://static.crates.io/crates/uluru/uluru-3.1.0.crate",
+    "purpose": "Corresponding crate source for MPL component in cargo-audit source dependency graph; copied unmodified from checksum-matching registry archive."
+  }
+]

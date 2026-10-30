@@ -1,0 +1,57 @@
+[package]
+authors = ["Luke Frisken <l.frisken@gmail.com>"]
+categories = ["localization", "internationalization", "development-tools::build-utils", "wasm"]
+description = "Traits and macros to conveniently embed localization assets into your application binary or library in order to localize it at runtime."
+edition = "2018"
+exclude = ["i18n/", "i18n.toml"]
+keywords = ["embed", "macro", "i18n", "gettext", "fluent"]
+license = "MIT"
+name = "i18n-embed"
+readme = "README.md"
+repository = "https://github.com/kellpossible/cargo-i18n/tree/master/i18n-embed"
+version = "0.16.0"
+
+[package.metadata.docs.rs]
+all-features = true
+
+[badges]
+maintenance = { status = "actively-developed" }
+
+[dependencies]
+fluent = { workspace = true, optional = true }
+arc-swap = { version = "1", optional = true }
+fluent-langneg = { workspace = true }
+fluent-syntax = { workspace = true, optional = true }
+gettext = { workspace = true, optional = true }
+i18n-embed-impl = { workspace = true, optional = true }
+intl-memoizer = "0.5"
+sys-locale = { version = "0.3", optional = true }
+log = { workspace = true }
+notify = { version = "8.0.0", optional = true }
+parking_lot = { version = "0.12", optional = true }
+rust-embed = { workspace = true, optional = true }
+thiserror = { workspace = true }
+tr = { version = "0.1", default-features = false, optional = true }
+unic-langid = { workspace = true }
+walkdir = { workspace = true, optional = true }
+web-sys = { version = "0.3", features = ["Window", "Navigator"], optional = true }
+
+[dev-dependencies]
+doc-comment = { workspace = true } 
+env_logger = { workspace = true }
+maplit = "1.0"
+pretty_assertions = { workspace = true }
+serial_test = "3.0"
+
+[features]
+default = ["rust-embed"]
+
+gettext-system = ["tr", "tr/gettext", "dep:gettext", "parking_lot", "i18n-embed-impl", "i18n-embed-impl/gettext-system"]
+fluent-system = ["fluent", "fluent-syntax", "parking_lot", "i18n-embed-impl", "i18n-embed-impl/fluent-system", "arc-swap"]
+
+desktop-requester = ["sys-locale"]
+web-sys-requester = ["web-sys"]
+
+filesystem-assets = ["walkdir"]
+
+autoreload = ["notify"]

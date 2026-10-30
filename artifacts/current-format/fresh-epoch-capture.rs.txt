@@ -1,0 +1,60 @@
+//! Manual, one-time capture recipe. This file is not part of a maintained build.
+//! Copy into crates/fogvault/examples only for the recorded capture command.
+//! OS randomness makes a NEW corpus; this never regenerates expected bytes.
+use fogvault::{Engine, Error, Limits, NodeHash, NodeStore, Result};
+use std::{collections::BTreeMap, io::Write, path::PathBuf};
+
+#[derive(Default)]
+struct Memory(BTreeMap<NodeHash, Vec<u8>>);
+impl NodeStore for Memory {
+    fn get(&mut self, hash: &NodeHash) -> Result<Option<Vec<u8>>> {
+        Ok(self.0.get(hash).cloned())
+    }
+    fn put(&mut self, hash: NodeHash, bytes: &[u8]) -> Result<()> {
+        if self.0.get(&hash).is_some_and(|old| old != bytes) { return Err(Error::Integrity); }
+        self.0.insert(hash, bytes.to_vec());
+        Ok(())
+    }
+}
+fn write(path: PathBuf, bytes: &[u8]) -> std::io::Result<()> {
+    let mut file = std::fs::OpenOptions::new().write(true).create_new(true).open(path)?;
+    file.write_all(bytes)?;
+    file.sync_all()
+}
+fn main() -> std::result::Result<(), Box<dyn std::error::Error>> {
+    let destination = PathBuf::from(std::env::args_os().nth(1).ok_or("new capture directory required")?);
+    let limits = Limits { max_payload_bytes: 1280, max_metadata_bytes: 256, max_records: 1 };
+    let mut engine = Engine::create(b"SYNTHETIC-fresh-epoch-zero-password", limits)?;
+    let descriptor = engine.descriptor_bytes().to_vec();
+    assert_eq!(descriptor.len(), 180);
+    assert_eq!(&descriptor[..8], b"FGVP0003");
+    assert_eq!(&descriptor[12..14], &3u16.to_be_bytes());
+    assert_eq!(&descriptor[30..38], &0u64.to_be_bytes());
+    let initial_head = engine.head_bytes().to_vec();
+    engine.activate_created()?;
+    let mut memory = Memory::default();
+    let plan = engine.prepare_save(
+        &mut memory, [0x73; 16], None,
+        b"fresh epoch metadata", b"first record from current default creation",
+        [0x74; 16], None,
+    )?;
+    let envelope = plan.envelope;
+    engine.confirm_commit(&plan.head_bytes)?;
+    assert_eq!(&envelope[..8], b"FGVR0003");
+    assert_eq!(&envelope[32..40], &0u64.to_be_bytes());
+    assert_eq!(memory.0.len(), 1);
+    // All construction and admission succeed before reserving a fresh directory.
+    std::fs::create_dir(&destination)?;
+    for (name, bytes) in [
+        ("descriptor.bin", descriptor.as_slice()),
+        ("initial-head.bin", initial_head.as_slice()),
+        ("head.bin", engine.head_bytes()),
+        ("record.bin", envelope.as_slice()),
+    ] { write(destination.join(name), bytes)?; }
+    for (hash, bytes) in memory.0 {
+        let name = hash.iter().map(|byte| format!("{byte:02x}")).collect::<String>();
+        write(destination.join(format!("node-{name}.bin")), &bytes)?;
+    }
+    println!("Captured public synthetic current-creation bytes in {}", destination.display());
+    Ok(())
+}

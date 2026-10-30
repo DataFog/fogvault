@@ -1,0 +1,62 @@
+    #[test]
+    fn capture_epoch_vectors_once() {
+        let policy = KdfPolicy::baseline();
+        let (descriptor, recovery) = epoch_descriptor(&[0x11; 32], 7, &policy);
+        let wrapping =
+            crypto::derive(&[0x11; 32], &descriptor.vault_id, b"record-key-wrapping").unwrap();
+        let head_key =
+            crypto::derive(&[0x11; 32], &descriptor.vault_id, b"head-authentication").unwrap();
+        let id = [0x42; 16];
+        let body = format::encrypt_record(
+            &descriptor,
+            &wrapping,
+            &id,
+            3,
+            b"fixed metadata",
+            b"epoch profile fixture",
+            limits(),
+        )
+        .unwrap();
+        let cek = crypto::open(
+            &wrapping,
+            &aad(&descriptor, &id, 3, b"fogvault/prototype/record-wrap/v1"),
+            &body[40..112],
+        )
+        .unwrap();
+        let mut stage = Memory::default();
+        let root = index::upsert(
+            &mut stage,
+            None,
+            id,
+            Entry {
+                revision: 3,
+                digest: crypto::digest(&body),
+            },
+        )
+        .unwrap()
+        .root;
+        let head = IndexHead {
+            generation: 11,
+            request_id: [0x55; 16],
+            operation_digest: [0x66; 32],
+            count: 1,
+            root: Some(root),
+        }
+        .encode(&descriptor, &head_key);
+        let destination = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../../conformance/epoch-vectors");
+        std::fs::create_dir_all(&destination).unwrap();
+        for (name, value) in [
+            ("descriptor.bin", descriptor.bytes()),
+            ("head.bin", head.as_slice()),
+            ("record.bin", body.as_slice()),
+            ("root-key.bin", &[0x11; 32]),
+            ("content-key.bin", cek.as_slice()),
+            ("recovery-kit.bin", recovery.export().as_slice()),
+        ] {
+            std::fs::write(destination.join(name), value).unwrap();
+        }
+        for (hash, bytes) in stage.nodes {
+            std::fs::write(destination.join(format!("node-{}.bin", hex(&hash))), bytes).unwrap();
+        }
+    }

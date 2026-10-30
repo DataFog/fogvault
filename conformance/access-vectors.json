@@ -1,0 +1,461 @@
+{
+  "schema": "fogvault-access-format-vectors/v1",
+  "scope": "Fixed synthetic P3 candidate fixtures, not production or device-provider qualification",
+  "capture": {
+    "example": "crates/fogvault/examples/capture_access_vectors.rs",
+    "command": [
+      "cargo",
+      "run",
+      "--locked",
+      "--manifest-path",
+      "crates/fogvault/Cargo.toml",
+      "--example",
+      "capture_access_vectors",
+      "--",
+      "FRESH_DIRECTORY"
+    ],
+    "never_auto_regenerate": true,
+    "provider_note": "SYNTHETIC-provider-key.bin is intentionally public test key material for an XChaCha20-Poly1305 seed-wrapping fixture; no provider key export or hardware assertion is part of the product API."
+  },
+  "password_hex": "53594e5448455449432061636365737320666978747572652070617373776f7264",
+  "admission": {
+    "max_descriptor_bytes": 700,
+    "max_device_slots": 2,
+    "max_provider_blob_bytes": 72,
+    "derivation": "strict two-device+recovery maximum108+2*(64+72+112)+96=700; portable/POR maximum692"
+  },
+  "files": [
+    {
+      "path": "access-vectors/SYNTHETIC-provider-key.bin",
+      "length": 32,
+      "sha256_hex": "fc8b64001c5fdd0f2f40fb67dae4a865a2c5bd17836676d6d5b58b7917e33717"
+    },
+    {
+      "path": "access-vectors/convenience-descriptor.bin",
+      "length": 484,
+      "sha256_hex": "011bf38070ce636d412b9b7638acccbfa1e447b491eabb219c309e133fc2323d"
+    },
+    {
+      "path": "access-vectors/convenience-head.bin",
+      "length": 129,
+      "sha256_hex": "0eee3728a218bf1ae1902b17065384264047ff5a0e00bbd82c6b8ae28a188f1a"
+    },
+    {
+      "path": "access-vectors/convenience-recovery.bin",
+      "length": 80,
+      "sha256_hex": "a957313f831d321b015c069d8a86cc1ca84745f030924762180d9d71f81f2a68"
+    },
+    {
+      "path": "access-vectors/device-outer-tamper.bin",
+      "length": 700,
+      "sha256_hex": "0fa502b22ac23b6d92ee16932efbba5d8930f355ebe0b1ad8d61243ac1fca2a4"
+    },
+    {
+      "path": "access-vectors/duplicate-slot.bin",
+      "length": 700,
+      "sha256_hex": "e457a7ddc8d3cd3fa489d844356d40ec8ec223498b7a02cdcc6a3072062d80d6"
+    },
+    {
+      "path": "access-vectors/foreign-recovery-vault.bin",
+      "length": 80,
+      "sha256_hex": "0ed473e2be3e1d08eb877b1cde8d5c76d0a5f04cc06a313957f0b1874f73497f"
+    },
+    {
+      "path": "access-vectors/head-tag-tamper.bin",
+      "length": 129,
+      "sha256_hex": "64ecfbcd677fd7789fa8dae8c6cec9dfe72a69a672eb63852fe3ef5a92610efb"
+    },
+    {
+      "path": "access-vectors/invalid-provider-flags.bin",
+      "length": 700,
+      "sha256_hex": "dbeb74c37d7886b0e7fb8f916747ef3e24ab1cebaddba28d3ea12c7f93db6a7e"
+    },
+    {
+      "path": "access-vectors/portable-descriptor.bin",
+      "length": 276,
+      "sha256_hex": "fb3c3ec941d6ab3cd8360337b8504991abba48fa9f8c2c461083832b74920b51"
+    },
+    {
+      "path": "access-vectors/portable-head.bin",
+      "length": 129,
+      "sha256_hex": "e94e1b46fd768ae05463be3622949d92174d6967dfa06bf47d5183a8a1d1d4ba"
+    },
+    {
+      "path": "access-vectors/portable-recovery.bin",
+      "length": 80,
+      "sha256_hex": "5b5bbbc3c18c25de4dffedfeff473ccd91314320b12ffe1a6fa1684cb445944f"
+    },
+    {
+      "path": "access-vectors/strict-descriptor.bin",
+      "length": 700,
+      "sha256_hex": "14987aab94e58e24e7fab5e2cb88cd12603297fff348ceac8c001b35d5052033"
+    },
+    {
+      "path": "access-vectors/strict-head.bin",
+      "length": 129,
+      "sha256_hex": "8d4c97df2772d1d59817b49c82d5c7824e01c4101d46a4de60eff49051d459e9"
+    },
+    {
+      "path": "access-vectors/strict-recovery.bin",
+      "length": 80,
+      "sha256_hex": "ce5918a6202637bc27b4fff822638fdc3546fc61dea654648e42e0b764e1b6b8"
+    },
+    {
+      "path": "access-vectors/trailing.bin",
+      "length": 701,
+      "sha256_hex": "9cc4f7083499501f0b38c76a1e5acc5843f3d1a36d5ea4af78cfd0da0ac6e2e8"
+    },
+    {
+      "path": "access-vectors/truncated.bin",
+      "length": 106,
+      "sha256_hex": "4a43de1baf8b69abc20b459d17fc5a54d843aa0398b8e2bc93428479fbb3ec0a"
+    },
+    {
+      "path": "access-vectors/unadmitted-kdf.bin",
+      "length": 700,
+      "sha256_hex": "acf7d71aa5524b4b41ecc94069c1f56c7b1f927bbd2158415ddbd74d1de58996"
+    },
+    {
+      "path": "access-vectors/unknown-profile.bin",
+      "length": 700,
+      "sha256_hex": "f08990c6e9c93920cba6cdd3756699b0a34ee299676e8b1fe8e751b5f70eaa51"
+    },
+    {
+      "path": "access-vectors/unknown-suite.bin",
+      "length": 700,
+      "sha256_hex": "a3b548935a6d326329ccd0b582956510f6fad4f02464fd83dff5b827c48e7f6d"
+    },
+    {
+      "path": "access-vectors/unknown-version.bin",
+      "length": 700,
+      "sha256_hex": "c42e84b39548777604d6a3aa92206fcc6951194e7c9ae532456dea84aec7fb1d"
+    },
+    {
+      "path": "access-vectors/unused-recovery-tamper.bin",
+      "length": 276,
+      "sha256_hex": "8346b92c9433e57a7098fe4562f5a18870ac6e76010964399e90f18d1fdb372f"
+    },
+    {
+      "path": "access-vectors/wrong-content-context.bin",
+      "length": 700,
+      "sha256_hex": "f61f20988092e2deb53a07c64ce789351b0ba1e77164da05142894e6aab65c21"
+    },
+    {
+      "path": "access-vectors/wrong-provider-key.bin",
+      "length": 32,
+      "sha256_hex": "c7d0ec3237897e7eab8098d6522529abf31bd168497895e2e27eab65fe8c7935"
+    },
+    {
+      "path": "access-vectors/wrong-recovery-secret.bin",
+      "length": 80,
+      "sha256_hex": "b3887a2fc272b92e8d3887c73c2c723f135fa10de373263947c9db51f591de2b"
+    },
+    {
+      "path": "access-vectors/zero-password-revision.bin",
+      "length": 700,
+      "sha256_hex": "e593937bc13c42349b5636c3c4d3a8ac249fa7e7e3553ca56e115d55664e8858"
+    }
+  ],
+  "mutations": {
+    "truncated.bin": {
+      "source": "strict-descriptor.bin",
+      "recipe": "keep first106 bytes"
+    },
+    "trailing.bin": {
+      "source": "strict-descriptor.bin",
+      "recipe": "append00"
+    },
+    "unknown-version.bin": {
+      "source": "strict-descriptor.bin",
+      "recipe": "set credential version9"
+    },
+    "unknown-suite.bin": {
+      "source": "strict-descriptor.bin",
+      "recipe": "set suite255"
+    },
+    "unknown-profile.bin": {
+      "source": "strict-descriptor.bin",
+      "recipe": "set profile byte255"
+    },
+    "unadmitted-kdf.bin": {
+      "source": "strict-descriptor.bin",
+      "recipe": "set memory u32MAX"
+    },
+    "zero-password-revision.bin": {
+      "source": "strict-descriptor.bin",
+      "recipe": "zero password slot revision"
+    },
+    "invalid-provider-flags.bin": {
+      "source": "strict-descriptor.bin",
+      "recipe": "set first device-bound flag2"
+    },
+    "duplicate-slot.bin": {
+      "source": "strict-descriptor.bin",
+      "recipe": "copy first16-byte slotID over second slotID"
+    },
+    "wrong-content-context.bin": {
+      "source": "strict-descriptor.bin",
+      "recipe": "set content context3 instead of2"
+    },
+    "unused-recovery-tamper.bin": {
+      "source": "portable-descriptor.bin",
+      "recipe": "xor last recovery ciphertext byte01"
+    },
+    "head-tag-tamper.bin": {
+      "source": "portable-head.bin",
+      "recipe": "xor last head MAC byte01"
+    },
+    "device-outer-tamper.bin": {
+      "source": "strict-descriptor.bin",
+      "recipe": "xor first device password-outer nonce byte01"
+    },
+    "wrong-recovery-secret.bin": {
+      "source": "portable-recovery.bin",
+      "recipe": "xor last secret byte01"
+    },
+    "foreign-recovery-vault.bin": {
+      "source": "portable-recovery.bin",
+      "recipe": "xor first vault identity byte01"
+    },
+    "wrong-provider-key.bin": {
+      "source": "SYNTHETIC-provider-key.bin",
+      "recipe": "xor first synthetic provider-key byte01"
+    }
+  },
+  "cases": [
+    {
+      "id": "valid/portable/password",
+      "descriptor": "access-vectors/portable-descriptor.bin",
+      "head": "access-vectors/portable-head.bin",
+      "recovery": "access-vectors/portable-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "password",
+      "expected_boundary": "accept"
+    },
+    {
+      "id": "valid/portable/recovery",
+      "descriptor": "access-vectors/portable-descriptor.bin",
+      "head": "access-vectors/portable-head.bin",
+      "recovery": "access-vectors/portable-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "recovery",
+      "expected_boundary": "accept"
+    },
+    {
+      "id": "valid/convenience/password",
+      "descriptor": "access-vectors/convenience-descriptor.bin",
+      "head": "access-vectors/convenience-head.bin",
+      "recovery": "access-vectors/convenience-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "password",
+      "expected_boundary": "accept"
+    },
+    {
+      "id": "valid/convenience/device",
+      "descriptor": "access-vectors/convenience-descriptor.bin",
+      "head": "access-vectors/convenience-head.bin",
+      "recovery": "access-vectors/convenience-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "device",
+      "expected_boundary": "accept"
+    },
+    {
+      "id": "valid/convenience/recovery",
+      "descriptor": "access-vectors/convenience-descriptor.bin",
+      "head": "access-vectors/convenience-head.bin",
+      "recovery": "access-vectors/convenience-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "recovery",
+      "expected_boundary": "accept"
+    },
+    {
+      "id": "valid/strict/device",
+      "descriptor": "access-vectors/strict-descriptor.bin",
+      "head": "access-vectors/strict-head.bin",
+      "recovery": "access-vectors/strict-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "device",
+      "expected_boundary": "accept"
+    },
+    {
+      "id": "valid/strict/recovery",
+      "descriptor": "access-vectors/strict-descriptor.bin",
+      "head": "access-vectors/strict-head.bin",
+      "recovery": "access-vectors/strict-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "recovery",
+      "expected_boundary": "accept"
+    },
+    {
+      "id": "reject/strict/password-only",
+      "descriptor": "access-vectors/strict-descriptor.bin",
+      "head": "access-vectors/strict-head.bin",
+      "recovery": "access-vectors/strict-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "password",
+      "expected_boundary": "unlock"
+    },
+    {
+      "id": "reject/strict/device-only",
+      "descriptor": "access-vectors/strict-descriptor.bin",
+      "head": "access-vectors/strict-head.bin",
+      "recovery": "access-vectors/strict-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "device_without_password",
+      "expected_boundary": "unlock"
+    },
+    {
+      "id": "reject/portable/wrong-password",
+      "descriptor": "access-vectors/portable-descriptor.bin",
+      "head": "access-vectors/portable-head.bin",
+      "recovery": "access-vectors/portable-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "wrong_password",
+      "expected_boundary": "unlock"
+    },
+    {
+      "id": "invalid/truncated",
+      "descriptor": "access-vectors/truncated.bin",
+      "head": "access-vectors/strict-head.bin",
+      "recovery": "access-vectors/strict-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "device",
+      "expected_boundary": "parse"
+    },
+    {
+      "id": "invalid/trailing",
+      "descriptor": "access-vectors/trailing.bin",
+      "head": "access-vectors/strict-head.bin",
+      "recovery": "access-vectors/strict-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "device",
+      "expected_boundary": "parse"
+    },
+    {
+      "id": "invalid/unknown-version",
+      "descriptor": "access-vectors/unknown-version.bin",
+      "head": "access-vectors/strict-head.bin",
+      "recovery": "access-vectors/strict-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "device",
+      "expected_boundary": "parse"
+    },
+    {
+      "id": "invalid/unknown-suite",
+      "descriptor": "access-vectors/unknown-suite.bin",
+      "head": "access-vectors/strict-head.bin",
+      "recovery": "access-vectors/strict-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "device",
+      "expected_boundary": "parse"
+    },
+    {
+      "id": "invalid/unknown-profile",
+      "descriptor": "access-vectors/unknown-profile.bin",
+      "head": "access-vectors/strict-head.bin",
+      "recovery": "access-vectors/strict-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "device",
+      "expected_boundary": "parse"
+    },
+    {
+      "id": "invalid/unadmitted-kdf",
+      "descriptor": "access-vectors/unadmitted-kdf.bin",
+      "head": "access-vectors/strict-head.bin",
+      "recovery": "access-vectors/strict-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "device",
+      "expected_boundary": "parse"
+    },
+    {
+      "id": "invalid/zero-password-revision",
+      "descriptor": "access-vectors/zero-password-revision.bin",
+      "head": "access-vectors/strict-head.bin",
+      "recovery": "access-vectors/strict-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "device",
+      "expected_boundary": "parse"
+    },
+    {
+      "id": "invalid/invalid-provider-flags",
+      "descriptor": "access-vectors/invalid-provider-flags.bin",
+      "head": "access-vectors/strict-head.bin",
+      "recovery": "access-vectors/strict-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "device",
+      "expected_boundary": "parse"
+    },
+    {
+      "id": "invalid/duplicate-slot",
+      "descriptor": "access-vectors/duplicate-slot.bin",
+      "head": "access-vectors/strict-head.bin",
+      "recovery": "access-vectors/strict-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "device",
+      "expected_boundary": "parse"
+    },
+    {
+      "id": "invalid/wrong-content-context",
+      "descriptor": "access-vectors/wrong-content-context.bin",
+      "head": "access-vectors/strict-head.bin",
+      "recovery": "access-vectors/strict-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "device",
+      "expected_boundary": "parse"
+    },
+    {
+      "id": "tamper/unused-recovery",
+      "descriptor": "access-vectors/unused-recovery-tamper.bin",
+      "head": "access-vectors/portable-head.bin",
+      "recovery": "access-vectors/portable-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "password",
+      "expected_boundary": "audit"
+    },
+    {
+      "id": "tamper/head-tag",
+      "descriptor": "access-vectors/portable-descriptor.bin",
+      "head": "access-vectors/head-tag-tamper.bin",
+      "recovery": "access-vectors/portable-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "password",
+      "expected_boundary": "audit"
+    },
+    {
+      "id": "tamper/device-outer",
+      "descriptor": "access-vectors/device-outer-tamper.bin",
+      "head": "access-vectors/strict-head.bin",
+      "recovery": "access-vectors/strict-recovery.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "device",
+      "expected_boundary": "unlock"
+    },
+    {
+      "id": "reject/recovery-secret",
+      "descriptor": "access-vectors/portable-descriptor.bin",
+      "head": "access-vectors/portable-head.bin",
+      "recovery": "access-vectors/wrong-recovery-secret.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "recovery",
+      "expected_boundary": "unlock"
+    },
+    {
+      "id": "reject/recovery-vault",
+      "descriptor": "access-vectors/portable-descriptor.bin",
+      "head": "access-vectors/portable-head.bin",
+      "recovery": "access-vectors/foreign-recovery-vault.bin",
+      "provider_key": "access-vectors/SYNTHETIC-provider-key.bin",
+      "mode": "recovery",
+      "expected_boundary": "unlock"
+    },
+    {
+      "id": "reject/provider-key",
+      "descriptor": "access-vectors/strict-descriptor.bin",
+      "head": "access-vectors/strict-head.bin",
+      "recovery": "access-vectors/strict-recovery.bin",
+      "provider_key": "access-vectors/wrong-provider-key.bin",
+      "mode": "device",
+      "expected_boundary": "unlock"
+    }
+  ]
+}
