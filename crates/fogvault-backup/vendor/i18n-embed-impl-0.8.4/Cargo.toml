@@ -10,8 +10,10 @@
 # See Cargo.toml.orig for the original contents.
 
 [package]
+exclude = ["Cargo.toml.orig"]
+publish = ["crates-io"]
 edition = "2018"
-name = "i18n-embed-impl"
+name = "fogvault-i18n-embed-impl"
 version = "0.8.4"
 authors = ["Luke Frisken <l.frisken@gmail.com>"]
 build = false
@@ -19,8 +21,8 @@ autobins = false
 autoexamples = false
 autotests = false
 autobenches = false
-description = "Macro implementations for i18n-embed"
-readme = "README.md"
+description = "FogVault backend-only fork of i18n-embed-impl; limited supported feature closure"
+readme = "FOGVAULT-FORK.md"
 keywords = [
     "build",
     "i18n",
@@ -33,7 +35,7 @@ categories = [
     "internationalization",
 ]
 license = "MIT"
-repository = "https://github.com/kellpossible/cargo-i18n/tree/master/i18n-embed"
+repository = "https://github.com/DataFog/fogvault"
 
 [lib]
 name = "i18n_embed_impl"
@@ -45,8 +47,9 @@ version = "0.6"
 optional = true
 
 [dependencies.i18n-config]
+package = "fogvault-i18n-config"
 path = "../i18n-config-0.4.8"
-version = "0.4.7"
+version = "=0.4.8"
 optional = true
 
 [dependencies.proc-macro2]
@@ -66,21 +69,17 @@ features = [
     "extra-traits",
 ]
 
-[dev-dependencies.rust-embed]
-version = "8.0"
-
 [features]
 default = []
-fluent-system = [
-    "i18n-config",
-    "find-crate",
-    "quote",
-]
-gettext-system = [
-    "i18n-config",
-    "find-crate",
-    "quote",
-]
+fluent-system = ["i18n-config", "find-crate", "quote"]
 
 [badges.maintenance]
 status = "actively-developed"
+
+[package.metadata.fogvault-upstream]
+name = "i18n-embed-impl"
+version = "0.8.4"
+repository = "https://github.com/kellpossible/cargo-i18n"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ["cfg(fuzzing)", "cfg(feature, values(\"default\", \"find-crate\", \"fluent-system\", \"gettext-system\", \"i18n-config\", \"quote\"))"] }

@@ -4,7 +4,7 @@
 Worker. Its storage adapter uses IndexedDB. The caller supplies finite resource
 and KDF policies; saved files cannot raise them.
 
-This package remains an unpublished engineering baseline (`0.0.0`). It does not
+This package remains an unpublished `0.1.0` packaging candidate. It does not
 claim independent cryptographic approval or qualified physical-device budgets.
 Original FogVault code uses MIT; bundled dependencies retain their own licenses.
 

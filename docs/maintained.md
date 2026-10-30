@@ -2,7 +2,7 @@
 
 FogVault provides two equal-priority developer packages: a native Rust adapter
 and a TypeScript/WASM browser SDK. Both use the same Rust engine. The current
-unpublished `0.0.0` implementation is available through a repository checkout
+unpublished `0.1.0` packaging candidate is available through a repository checkout
 and a locally packed browser tarball; registry publication and production
 qualification are separate milestones.
 
@@ -153,16 +153,17 @@ published beta.3 regression pin. It is a test consumer, not a runtime dependency
 or a version ceiling. Core v1 must gain separate verified coverage.
 
 Use Git/path dependencies for Rust and `npm pack` output for the browser while
-packages remain unpublished. For crates.io, the localized dependency corrections
-must first be upstreamed or published as distinct fork packages: versioned path
-overrides alone do not preserve this corrected graph in a registry publication.
+packages remain unpublished. The crates.io candidate uses five distinctly named forks to retain the localized
+dependency corrections. The [packaging preflight](packaging.md) builds all eight
+crate archives and runs a registry-only offline consumer before any publication.
+Versioned path overrides alone do not preserve the corrected graph in a registry publication.
 See [dependency scope](dependency-scope.md) and the package guides for exact build
 and application integration commands.
 
 ## Repository verification
 
 Developers, agents and CI use `python3 scripts/quality.py` with explicit profiles.
-The portable contract, native, installed-browser and extension checks are the
+The portable contract, native, installed-browser, extension and packaging checks are the
 required supported CI scopes. The full macOS/Xcode profile remains the complete
 construction and host qualification check; a passing portable subset does not
 replace it. Additional Safari qualification stays deferred.

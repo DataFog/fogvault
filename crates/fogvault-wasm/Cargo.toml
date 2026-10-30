@@ -1,6 +1,7 @@
 [package]
+repository = "https://github.com/DataFog/fogvault"
 name = "fogvault-wasm"
-version = "0.0.0"
+version = "0.1.0"
 edition = "2021"
 publish = false
 license = "MIT"
@@ -14,9 +15,9 @@ diagnostics = []
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-fogvault = { path = "../fogvault", default-features = false, features = ["web"] }
+fogvault = { path = "../fogvault", version = "=0.1.0", default-features = false, features = ["web"] }
 wasm-bindgen = "=0.2.127"
 js-sys = "=0.3.104"
 zeroize = "=1.9.1"
 sha2 = "=0.11.1"
-fogvault-backup = { path = "../fogvault-backup" }
+fogvault-backup = { path = "../fogvault-backup", version = "=0.1.0" }

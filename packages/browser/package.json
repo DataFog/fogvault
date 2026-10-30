@@ -1,7 +1,7 @@
 {
   "name": "@datafog/fogvault-browser",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0",
+  "private": false,
   "description": "FogVault Rust/WASM SDK with owned Workers and IndexedDB storage",
   "license": "MIT",
   "type": "module",
@@ -31,5 +31,8 @@
     "@playwright/test": "1.64.0-alpha-1790635538000",
     "typescript": "7.0.2",
     "@playwright/cli": "0.1.22"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

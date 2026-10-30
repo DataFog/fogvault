@@ -1,13 +1,15 @@
 [package]
+readme = "README.md"
+repository = "https://github.com/DataFog/fogvault"
 name = "fogvault-backup"
-version = "0.0.0"
+version = "0.1.0"
 edition = "2021"
-publish = false
+publish = ["crates-io"]
 license = "MIT"
 description = "Bounded streaming age/v1 FogVault snapshot export and encrypted import staging"
 
 [dependencies]
-age = { path = "vendor/age-0.11.5", version = "=0.11.5", default-features = false }
+age = { package = "fogvault-age", path = "vendor/age-0.11.5", version = "=0.11.5", default-features = false }
 sha2 = "=0.11.1"
 zeroize = "=1.9.1"
 

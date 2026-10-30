@@ -36,7 +36,8 @@ class QualityChecks(unittest.TestCase):
     def test_gate_requires_every_profile_and_deliberate_docs_scope(self):
         valid = {"plan": {"result": "success", "outputs": {"code": "true"}},
                  "contract": {"result": "success"}, "native": {"result": "success"},
-                 "browser": {"result": "success"}, "extensions": {"result": "success"}}
+                 "browser": {"result": "success"}, "extensions": {"result": "success"},
+                 "packaging": {"result": "success"}}
         self.assertTrue(q.gate(valid)["pass"])
         for name in valid:
             for outcome in ("failure", "cancelled", "skipped", None):
@@ -46,7 +47,7 @@ class QualityChecks(unittest.TestCase):
                     q.gate(broken)
         docs = copy.deepcopy(valid)
         docs["plan"]["outputs"]["code"] = "false"
-        for name in ("native", "browser", "extensions"):
+        for name in ("native", "browser", "extensions", "packaging"):
             docs[name]["result"] = "skipped"
         self.assertTrue(q.gate(docs)["pass"])
         self.assertFalse(q.gate(docs)["code"])
