@@ -1,6 +1,6 @@
-# FogVault
+# fogvault
 
-FogVault is an independent Rust vault for embedding in other software. Native
+fogvault is an independent Rust vault for embedding in other software. Native
 Rust and browser integrations are equal-priority deliverables and share one
 Rust engine for keys, sessions, authenticated records and vault state.
 
@@ -38,7 +38,7 @@ Run the standalone synthetic consumer from this repository:
 cargo run --locked --manifest-path crates/fogvault-native/Cargo.toml --example native_vault
 ```
 
-It proves create → unlock → save → lock → reopen → read without a DataFog
+It proves create → unlock → save → lock → reopen → read without a datafog
 dependency. Real applications must establish the independently protected native
 control namespace described in the [native guide](crates/fogvault-native/README.md).
 Pin a reviewed commit when using a Git dependency.
@@ -66,15 +66,15 @@ node packages/browser/scripts/build-examples.mjs chrome
 node packages/browser/scripts/build-examples.mjs firefox
 ```
 
-The browser adapter uses IndexedDB behind FogVault's API. It is an explicit
+The browser adapter uses IndexedDB behind fogvault's API. It is an explicit
 offline **unanchored** profile: detecting replacement of the entire vault by an
 older valid copy requires separately trusted state.
 
 ## Compatibility and checks
 
-DataFog Core **`0.5.0-beta.3` is the minimum integration baseline**. The exact
+datafog core **`0.5.0-beta.3` is the minimum integration baseline**. The exact
 published `=0.5.0-beta.3` test pin preserves that floor; it is neither a runtime
-dependency nor an upper version limit. DataFog Core v1 will be verified separately.
+dependency nor an upper version limit. datafog core v1 will be verified separately.
 
 Native Windows/macOS/Linux, website Chrome/Edge/Firefox and packaged Chromium/
 Firefox extension checks have passed. The [delivery record](docs/maintained.md)
@@ -115,7 +115,7 @@ universal CI command. See [checkout notes](PUBLIC-CHECKOUT-NOTES.md).
 Report suspected vulnerabilities through this repository's private vulnerability
 reporting feature. Examples use synthetic credentials and data.
 
-FogVault's original code, documentation and tests use the [MIT License](LICENSE).
+fogvault's original code, documentation and tests use the [MIT License](LICENSE).
 Third-party material retains its own terms. See [dependency scope](docs/dependency-scope.md),
 [retained tool notices](third-party/THIRD_PARTY_NOTICES.md), and the browser
 artifact's bundled notices. The dated audit and passing tests do not establish
