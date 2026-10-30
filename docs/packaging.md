@@ -1,7 +1,7 @@
 # Registry packaging candidate
 
 FogVault's initial package candidate is **0.1.0**, independently versioned from
-DataFog Core. This is unpublished metadata and local build evidence. It does not
+DataFog Core. Packaging checks establish local build evidence; they do not
 claim security approval or platform qualification. Core's published
 `=0.5.0-beta.3` regression remains unchanged; v1 coverage belongs in Core's own
 release checks.
@@ -87,9 +87,11 @@ used only to read official dependency archives/index metadata as needed; no toke
 registry upload, tag or publish command is used. This preflight is required on
 product PRs and never publishes from CI.
 
-## Eventual release order
+## Release procedure
 
-Once release authorization and namespace ownership are established, publish the
+Release authorization for FogVault 0.1.0 and the five named dependency forks was
+given on October 30, 2026. Verify registry namespace ownership before uploading.
+Publish the
 leaf forks first (`fogvault-i18n-config`, `fogvault-i18n-embed-impl`), then
 `fogvault-i18n-embed`, `fogvault-i18n-embed-fl`, `fogvault-age`, and
 `fogvault-backup`; `fogvault` is independent of the backup chain. Publish
@@ -97,4 +99,53 @@ leaf forks first (`fogvault-i18n-config`, `fogvault-i18n-embed-impl`), then
 SDK has its own artifact and authorization. Before uploads, run registry dry runs
 against the now-available dependencies and confirm every archive matches the
 reviewed candidate. The local preflight cannot reserve names or prove future
-registry authorization. No packages have been uploaded by this work.
+registry authorization. A successful packaging report alone never means that a
+package has been published.
+
+
+Use the release commit from `main`, a clean checkout, the pinned Rust toolchain,
+and the fresh successful `packaging` report for that source. Record the report,
+commit, package checksums and registry responses outside shipped source. The
+release notes are in [0.1.0](releases/0.1.0.md). The normal publication order is:
+
+| Order | Registry package | Version | Manifest |
+| --- | --- | --- | --- |
+| 1 | `fogvault-i18n-config` | 0.4.8 | `crates/fogvault-backup/vendor/i18n-config-0.4.8/Cargo.toml` |
+| 2 | `fogvault-i18n-embed-impl` | 0.8.4 | `crates/fogvault-backup/vendor/i18n-embed-impl-0.8.4/Cargo.toml` |
+| 3 | `fogvault-i18n-embed` | 0.16.0 | `crates/fogvault-backup/vendor/i18n-embed-0.16.0/Cargo.toml` |
+| 4 | `fogvault-i18n-embed-fl` | 0.10.1 | `crates/fogvault-backup/vendor/i18n-embed-fl-0.10.1/Cargo.toml` |
+| 5 | `fogvault-age` | 0.11.5 | `crates/fogvault-backup/vendor/age-0.11.5/Cargo.toml` |
+| 6 | `fogvault` | 0.1.0 | `crates/fogvault/Cargo.toml` |
+| 7 | `fogvault-backup` | 0.1.0 | `crates/fogvault-backup/Cargo.toml` |
+| 8 | `fogvault-native` | 0.1.0 | `crates/fogvault-native/Cargo.toml` |
+
+For each Rust row, wait for its dependencies to appear in the public index, run
+`cargo publish --manifest-path <manifest> --locked --dry-run`, inspect the
+resulting archive against the qualified package's member bytes and approved
+dependency identities, then run the same command without `--dry-run`. Keep
+ordinary Cargo archive verification enabled. Do not add `--no-verify`, path
+patches, alternate backend substitutions or a regenerated unreviewed dependency
+graph to get publication through. Release-only Git metadata can change archive
+checksums, so retain both archive identities and explicitly review any difference.
+
+The browser archive is the actual tarball produced by the fresh packaging
+preflight. First run `npm publish <qualified-tarball> --access public --dry-run
+--ignore-scripts`, then publish that same tarball with `--access public
+--ignore-scripts`. This uploads the reviewed Worker/WASM bundle, not an npm
+lifecycle rebuild. Registry credentials belong in the approved credential store or
+CI environment, never a release log, command argument or tracked file.
+
+Publication across registries is not atomic. After any error, inspect the public
+registry before retrying. If a version already exists, download and compare it to
+the recorded uploaded candidate; continue only when that exact version is the
+intended release. Never overwrite or repoint an existing version/tag. If the
+content differs, stop and resolve the version conflict rather than treating an
+HTTP error as permission to skip it.
+
+After uploads, use a fresh Cargo home and npm project to install the explicit
+public versions. Run the native save/lock/reopen/read and exact published Core
+beta.3 interoperability checks, and the installed browser Worker/IndexedDB
+consumer checks. Record public archive checksums alongside the executed results.
+Only then mark the registry release complete and create the immutable `v0.1.0`
+release tag and GitHub release for the tested source. Keep unpublished/failed
+channels explicit if a partial release needs recovery.

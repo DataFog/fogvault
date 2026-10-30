@@ -128,10 +128,11 @@ A checker cannot prove that an entry or reason is truthful; reviewers assess it.
 
 ## Publication
 
-The current `0.1.0` packages are unpublished candidates. The nonpublishing
-[packaging preflight](docs/packaging.md) proves the complete dependency graph
+The `0.1.0` packages use the nonpublishing
+[packaging preflight](docs/packaging.md) to prove the complete dependency graph
 through locally verified crate archives, a registry-only consumer and the actual
-browser tarball. Public registry availability and authorization remain unproven.
+browser tarball. Public registry availability and authorization require separate checks during
+the [release procedure](docs/packaging.md#release-procedure).
 This contribution setup does not upload a release or approve production use.
 Independent security review, physical-device/provider and power-loss qualification,
 and final compatibility approval remain separate release work. Preserve immutable
