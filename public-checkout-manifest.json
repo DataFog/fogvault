@@ -12,7 +12,7 @@
     "scripts/verify-vault.py",
     "tests/verifier_checks.py"
   ],
-  "content_identity_sha256": "a54ea7e4c490a808ace9479d6b1eaddb7f758871001087dc7cb2302a3eb55251",
+  "content_identity_sha256": "9d773d637737361620e32a0719427c1156bb16d2f5e3c170804e8c9c70f27530",
   "declared_public_overlays": [
     {
       "path": ".gitignore",
@@ -28247,13 +28247,13 @@
       "sha256": "c5ef20231ad111b71a46776ebd16e2c2feb68a6492573e279a2a6911d13097e6"
     },
     {
-      "bytes": 10398,
+      "bytes": 10552,
       "executable": false,
       "path": "scripts/verify-browser-sdk.py",
       "reasons": [
         "maintained-native-browser-delivery"
       ],
-      "sha256": "e1953a91acf14e486d35854478f6e2989b8ad5ccb60ef75989b9ab7ef0cf1c3d"
+      "sha256": "a42ee345f530af7435de5000ce4387d43092249fa2d440e75efac23ccb619c64"
     },
     {
       "bytes": 7785,
@@ -28432,13 +28432,13 @@
       "sha256": "385366a0ddc55b4e1c0195dc4a2e6a52ef654ecfdc7a9b82e9e465bb87a24464"
     },
     {
-      "bytes": 9574,
+      "bytes": 12215,
       "executable": false,
       "path": "tests/test_delivery.py",
       "reasons": [
         "repository-quality-contract"
       ],
-      "sha256": "ece25e7c2d59b6a96cf155a701fec39e242c64830eb104e2da3615cb14ae8fe8"
+      "sha256": "2c2fc0f3e6783d5187c866847693c5f08e15ea308c0cc73ef493b83e90e87a41"
     },
     {
       "bytes": 7594,
@@ -34173,5 +34173,5 @@
   },
   "schema": "fogvault-public-candidate-inputs/v1",
   "status": "maintained-candidate-not-production-qualified",
-  "total_bytes": 83766496
+  "total_bytes": 83769291
 }

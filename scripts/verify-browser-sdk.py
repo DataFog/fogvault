@@ -48,15 +48,15 @@ def prepare_consumer(work: Path, package: Path, run):
     consumer = work / "consumer"
     consumer.mkdir()
     (consumer / "package.json").write_text(json.dumps({"name": "fogvault-synthetic-installed-consumer",
-                                                      "private": True, "type": "module"}) + "\n")
+                                                      "private": True, "type": "module"}) + "\n", encoding="utf-8")
     run("candidate-install", ["npm", "install", "--ignore-scripts", "--no-audit", "--no-fund", str(package)], cwd=consumer)
     installed = consumer / "node_modules/@datafog/fogvault-browser"
     for name, expected in files.items():
         path = installed / name
         if path.is_symlink() or not path.is_file() or path.read_bytes() != expected:
             raise ValueError("installed candidate differs from packed bytes: " + name)
-    fixture = (ROOT / "packages/browser/test/browser.mjs").read_text()
-    (consumer / "browser.mjs").write_text(fixture.replace("../dist/", "./node_modules/@datafog/fogvault-browser/dist/"))
+    fixture = (ROOT / "packages/browser/test/browser.mjs").read_text(encoding="utf-8")
+    (consumer / "browser.mjs").write_text(fixture.replace("../dist/", "./node_modules/@datafog/fogvault-browser/dist/"), encoding="utf-8")
     (consumer / "browser.html").write_bytes((ROOT / "packages/browser/test/browser.html").read_bytes())
     (consumer / "types.ts").write_bytes((ROOT / "packages/browser/test/types.ts").read_bytes())
     run("type-consumer", ["node", str(ROOT / "packages/browser/node_modules/typescript/bin/tsc"),
@@ -65,7 +65,7 @@ def prepare_consumer(work: Path, package: Path, run):
     (consumer / "import-smoke.mjs").write_text(
         "import {FogVault, FogVaultError, randomId, passwordTextToBytes, clearRecord} from '@datafog/fogvault-browser';\n"
         "if (typeof FogVault !== 'function' || typeof FogVaultError !== 'function' || randomId().length !== 16 || "
-        "passwordTextToBytes('SYNTHETIC').length !== 9 || typeof clearRecord !== 'function') throw Error('invalid packaged exports');\n")
+        "passwordTextToBytes('SYNTHETIC').length !== 9 || typeof clearRecord !== 'function') throw Error('invalid packaged exports');\n", encoding="utf-8")
     run("candidate-import", ["node", "import-smoke.mjs"], cwd=consumer)
     return consumer, {"schema": "fogvault-installed-browser-candidate/v1",
                       "package": artifact_identity(package, ROOT if package.resolve().is_relative_to(ROOT.resolve()) else None),
@@ -86,8 +86,8 @@ def main():
     logs, work = args.output.with_suffix(".logs"), args.output.with_suffix(".candidate")
     logs.mkdir(exist_ok=False)
     work.mkdir(exist_ok=False)
-    contract = json.loads((ROOT / "conformance/maintained-contract.json").read_text())["browser_sdk"]
-    pins = json.loads((ROOT / "conformance/toolchains.json").read_text())
+    contract = json.loads((ROOT / "conformance/maintained-contract.json").read_text(encoding="utf-8"))["browser_sdk"]
+    pins = json.loads((ROOT / "conformance/toolchains.json").read_text(encoding="utf-8"))
     before, source = identity(), git_identity(ROOT)
     commands, engines, sessions = [], [], []
     server, candidate = None, None
@@ -97,7 +97,7 @@ def main():
         command = npm_command([str(x) for x in command])
         result = subprocess.run(command, cwd=cwd, stdin=subprocess.DEVNULL, capture_output=True, text=True, encoding="utf-8")
         log = logs / (name + ".log")
-        log.write_text(result.stdout + result.stderr)
+        log.write_text(result.stdout + result.stderr, encoding="utf-8")
         commands.append({"id": name, "command": command, "cwd": str(cwd),
                          "exit_code": result.returncode, "log": str(log)})
         if result.returncode:
@@ -107,7 +107,7 @@ def main():
     failure = None
     try:
         installed_cli = ROOT / "packages/browser/node_modules/@playwright/cli/package.json"
-        if not installed_cli.is_file() or json.loads(installed_cli.read_text()).get("version") != pins["playwright_cli"]:
+        if not installed_cli.is_file() or json.loads(installed_cli.read_text(encoding="utf-8")).get("version") != pins["playwright_cli"]:
             raise ValueError("required locked Playwright CLI missing/incompatible; run npm ci --ignore-scripts --prefix packages/browser")
         if run("playwright-cli-version", [*cli, "--version"]).strip() != pins["playwright_cli"]:
             raise ValueError("Playwright CLI executable does not match the repository pin")
@@ -166,7 +166,7 @@ def main():
               "error": failure, "independent_control": "unanchored",
               "limitations": ["Desktop installed SDK execution; not hardware-provider or physical power-loss qualification.",
                               "Extension packaging/lifecycle has a separate acceptance profile."]}
-    args.output.write_text(json.dumps(report, indent=2) + "\n")
+    args.output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"pass": report["pass"], "output": str(args.output), "error": failure}))
     return 0 if report["pass"] else 1
 

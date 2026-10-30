@@ -172,6 +172,43 @@ class DeliveryTests(unittest.TestCase):
             self.assertIn("npm ci", report["error"])
             self.assertEqual(report["commands"], [])
 
+    def test_sdk_cli_preserves_unicode_logs_with_windows_default_encoding(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "conformance").mkdir()
+            for name in ("toolchains.json", "maintained-contract.json"):
+                shutil.copyfile(ROOT / "conformance" / name, root / "conformance" / name)
+            pins = json.loads((root / "conformance/toolchains.json").read_text(encoding="utf-8"))
+            cli = root / "packages/browser/node_modules/@playwright/cli/package.json"
+            cli.parent.mkdir(parents=True)
+            cli.write_text(json.dumps({"version": pins["playwright_cli"]}), encoding="utf-8")
+            output = root / "proof.json"
+            original = Path.write_text
+
+            def windows_default_write(path, text, encoding=None, errors=None, newline=None):
+                # Model the observed Windows cp1252 failure, independent of the host locale.
+                return original(path, text, encoding=encoding or "cp1252", errors=errors, newline=newline)
+
+            def child(command, **_):
+                if "--version" in command:
+                    return subprocess.CompletedProcess(command, 0, pins["playwright_cli"] + "\n", "")
+                if "test" in command:
+                    return subprocess.CompletedProcess(command, 0, "\u2714 SYNTHETIC node tests passed\n", "")
+                raise OSError("SYNTHETIC follow-up stop \u2714")
+
+            with mock.patch.object(sdk, "ROOT", root), mock.patch.object(sdk, "identity", return_value={}), \
+                    mock.patch.object(sdk, "git_identity", return_value={"input_tree_sha256": "synthetic"}), \
+                    mock.patch.object(sdk, "tool_versions", return_value={}), \
+                    mock.patch.object(sdk.subprocess, "run", side_effect=child), \
+                    mock.patch.object(Path, "write_text", windows_default_write), \
+                    mock.patch.object(sys, "argv", ["verify-browser-sdk.py", "--output", str(output)]), redirect_stdout(io.StringIO()):
+                self.assertEqual(sdk.main(), 1)  # The deliberately stopped next step stays a failure.
+            self.assertEqual((root / "proof.logs/node-tests.log").read_bytes(), "\u2714 SYNTHETIC node tests passed\n".encode("utf-8"))
+            report = json.loads(output.read_text(encoding="utf-8"))
+            self.assertIn("SYNTHETIC follow-up stop \u2714", report["error"])
+            self.assertNotIn("charmap", report["error"])
+            self.assertEqual([command["id"] for command in report["commands"]], ["playwright-cli-version", "node-tests"])
+
 
 if __name__ == "__main__":
     unittest.main()
