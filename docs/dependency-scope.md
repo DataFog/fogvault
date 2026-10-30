@@ -75,6 +75,15 @@ signed store installation, physical hardware or every future browser version.
 
 ## Distributed notices
 
+A standalone public Git consumer was tested at the exact implementation revision
+`f16c4f0bda91fc3a31c0f12b717f8d2f5932c226` with Rust/Cargo 1.94.1. Cargo emits
+duplicate-package discovery warnings for historical `Cargo.toml` notice snapshots;
+resolved metadata confirms it selected the maintained vendor manifests, with no
+working-checkout path overrides. The independently tested native source archive
+omits those historical snapshots. Cleaning up Git discovery warnings remains a
+repository hygiene follow-up; registry publication still needs the dependency
+distribution work described above.
+
 The [retained tool notices](../third-party/THIRD_PARTY_NOTICES.md) cover their
 listed audit/interoperability tools, database data and consumer excerpt. They do
 not replace the maintained backup's vendored notices or the browser artifact's

@@ -112,14 +112,23 @@ replacement is a different workflow and retains existing record revisions.
 
 ## Target and evidence matrix
 
-| Delivery target | Current evidence | Pending acceptance |
+| Delivery target | Verified engineering evidence | Remaining qualification |
 | --- | --- | --- |
-| Native macOS | Local maintained/consumer/restart tests execute on macOS. | Final frozen full report and the named CI profile. |
-| Native Windows and Linux | Maintained code and explicit CI jobs exist; platform review includes Windows file-flush access. | Actual runtime CI results. |
-| Website SDK: Chrome and Firefox | Real browser runs exercise the maintained Worker/WASM/IndexedDB API. | Final frozen integrated report and CI results. |
-| Website SDK: Edge | Explicit Windows/Edge CI job. | Actual Edge execution. |
-| Chromium MV3 and Firefox extensions | Actual unpacked/temporary-extension SDK tests, with privileged page ownership. | Final frozen integrated report and CI results; store installation is a separate claim. |
+| Native Windows, macOS and Linux | All three [native CI jobs passed](https://github.com/DataFog/fogvault/actions/runs/41035670849): Core, maintained/retained adapter tests, backup and private-API probes. | Physical-device/provider and power-loss qualification. |
+| Website SDK: Chrome, Firefox and Edge | All three [browser CI jobs passed](https://github.com/DataFog/fogvault/actions/runs/41036629415), with every one of the 22 required SDK cases and matching source hashes. | Physical-device budgets and supported-version floors. |
+| Chromium MV3 and Firefox extensions | Both actual unpacked/temporary-extension CI tests passed with zero skips/flakes. | Signed store installation is a separate claim. |
 | Safari/WebKit | Existing regression profile retained. | Additional qualification is deferred. |
+
+The complete local verifier passed all 35 required stages and 226 named required
+behavior cases on commit `fbfd2be36469b76367cdb093f443d278e7a219e5`.
+Native CI evidence above uses `f16c4f0bda91fc3a31c0f12b717f8d2f5932c226`;
+the intervening commit changes only test HTTP serving, CI triggers and the source
+inventory, with no vault/package implementation changes. The browser reports
+capture source hashes and actual browser user agents. Edge testing confirmed
+Windows' default `.mjs` media type was `text/plain`; the test server now sets
+explicit JavaScript/WASM media types rather than inheriting registry settings.
+The complete verifier report SHA256 is
+`db388f89b2af86672dcbcaeb07bc26519029e9c47bd323b47009638aabafb6e4`.
 
 The [workflow](../.github/workflows/maintained.yml) names the exact CI images and
 toolchain. A local pass cannot substitute for another OS/browser. Supported

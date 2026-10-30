@@ -1,9 +1,7 @@
 {
-  "baseline_report_sha256": "30b5eb147a1d6692d6b0cfb1a2eb909a561c81f72a09ce62f029353519cc978c",
-  "changed_baseline_input_paths": [
-    "scripts/verify-browser-sdk.py"
-  ],
-  "content_identity_sha256": "4d3fb755a6755c92db671712276fb482d086d575cf1d6f61ea1b454231ccbbf5",
+  "baseline_report_sha256": "db388f89b2af86672dcbcaeb07bc26519029e9c47bd323b47009638aabafb6e4",
+  "changed_baseline_input_paths": [],
+  "content_identity_sha256": "235b06e3766ec90eb07b3ad1b4b5cda8ba861d650ced6b146620f8420fc8d841",
   "declared_public_overlays": [
     {
       "path": ".gitignore",
@@ -75,13 +73,13 @@
       "sha256": "ce1ff3fa2e2167f504b4c9b6ca3875cecc7e69ce072b4e1dcf61028781fa75bc"
     },
     {
-      "bytes": 3862,
+      "bytes": 3995,
       "executable": false,
       "path": "PUBLIC-CHECKOUT-NOTES.md",
       "reasons": [
         "public-presentation"
       ],
-      "sha256": "705183be1ff7ce28c8215e3987fdfc1bebcd1b81e0ed797da22d5e84aa50e2b3"
+      "sha256": "5d9aa7c842b56e563e9a872014c20f9e8dac90923fe9f40926a5c937b7f27827"
     },
     {
       "bytes": 5031,
@@ -4488,22 +4486,22 @@
       "sha256": "0f376a54549947bdd6baf197746c0b46423f2a4158db591d3556022f0e6fb7a8"
     },
     {
-      "bytes": 4459,
+      "bytes": 5055,
       "executable": false,
       "path": "docs/dependency-scope.md",
       "reasons": [
         "maintained-native-browser-delivery"
       ],
-      "sha256": "a9faad1efcca152bc876aa6cc9e3b8b749d6db4eaf0d38d5616dbb1b72101fd7"
+      "sha256": "9a93ce2965326ff631da1872fe7d91c452463174c2359b635e760c767c301621"
     },
     {
-      "bytes": 8959,
+      "bytes": 9677,
       "executable": false,
       "path": "docs/maintained.md",
       "reasons": [
         "maintained-native-browser-delivery"
       ],
-      "sha256": "88075a4085492004e3c351c0944a747626af44f548eb4b5216e2133c50390ee5"
+      "sha256": "3dca0eda3701b52c31456d214ae1bc72662d0eb4dc31c0fdef5e326f24f72a41"
     },
     {
       "bytes": 37957,
@@ -34019,7 +34017,7 @@
     "Historical evidence never substitutes for fresh execution. Platform CI and production qualification are separate claims.",
     "MIT applies to first-party code. Third-party redistribution and dependency scope are documented separately."
   ],
-  "previous_capture_sha256": "f8322d09abb12cd321dae6545b0368eb09cb22d6d941ff24c694acd3e5f00ea8",
+  "previous_capture_sha256": "02bef3ed9f93fa27b54ff93cca65b5b0eadc9ae50a21f2f95f4574a469e96388",
   "required_reference_checkout": {
     "git_metadata_copied": false,
     "path": "research/review-dependencies/advisory-db",
@@ -34029,5 +34027,5 @@
   },
   "schema": "fogvault-public-candidate-inputs/v1",
   "status": "maintained-candidate-not-production-qualified",
-  "total_bytes": 83635952
+  "total_bytes": 83637399
 }

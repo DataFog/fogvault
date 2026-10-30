@@ -54,8 +54,9 @@ snapshots are inputs, not substitutes for execution. An unavailable mandatory
 host/tool fails the declared profile.
 
 The [CI workflow](.github/workflows/maintained.yml) separately names the native
-and browser targets. Windows/Linux/Edge results remain pending until those jobs
-execute successfully. Packaged extension automation uses bundled Chromium and
+and browser targets. Windows/macOS/Linux native and Chrome/Firefox/Edge browser
+execution have passed; [the delivery record](docs/maintained.md#target-and-evidence-matrix)
+links the exact runs and distinguishes their source revisions. Packaged extension automation uses bundled Chromium and
 a temporary Firefox add-on; it does not prove signed store-install behavior.
 Additional WebKit qualification remains deferred while existing regressions run.
 
