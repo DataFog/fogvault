@@ -12,7 +12,7 @@
     "scripts/verify-vault.py",
     "tests/verifier_checks.py"
   ],
-  "content_identity_sha256": "9d773d637737361620e32a0719427c1156bb16d2f5e3c170804e8c9c70f27530",
+  "content_identity_sha256": "98795de9d3c2e289b3ffd0a151a64a1cc0f1cf0a751c31c7406935cc26b1d1b1",
   "declared_public_overlays": [
     {
       "path": ".gitignore",
@@ -111,13 +111,13 @@
       "sha256": "e7398d70e9843e8f212fff18e6f7c46d1d3fffe7bfd182f28d633a33ed33ef7e"
     },
     {
-      "bytes": 6276,
+      "bytes": 6581,
       "executable": false,
       "path": "CONTRIBUTING.md",
       "reasons": [
         "repository-quality-contract"
       ],
-      "sha256": "937c80f409bd5f8990c97a8947796723546fd11310b146053f8a195abfa51a29"
+      "sha256": "850d3559486cd1e55931da6595385c56b3a649592e029e2af963ec7658ba1e14"
     },
     {
       "bytes": 1064,
@@ -4560,13 +4560,13 @@
       "sha256": "9a93ce2965326ff631da1872fe7d91c452463174c2359b635e760c767c301621"
     },
     {
-      "bytes": 10000,
+      "bytes": 11383,
       "executable": false,
       "path": "docs/maintained.md",
       "reasons": [
         "maintained-native-browser-delivery"
       ],
-      "sha256": "8d312b5785053a076ca16dacee82528bca05de20bc9ac606ba98a6b281faeed7"
+      "sha256": "d33ea6af3a459f20a871c9d54faf6a4329e9e69dd485197ff6472eb8188e1f8a"
     },
     {
       "bytes": 37957,
@@ -34173,5 +34173,5 @@
   },
   "schema": "fogvault-public-candidate-inputs/v1",
   "status": "maintained-candidate-not-production-qualified",
-  "total_bytes": 83769291
+  "total_bytes": 83770979
 }
