@@ -129,7 +129,7 @@ A checker cannot prove that an entry or reason is truthful; reviewers assess it.
 ## Publication
 
 The `0.1.0` packages use the nonpublishing
-[packaging preflight](docs/packaging.md) proves the complete dependency graph
+[packaging preflight](docs/packaging.md) to prove the complete dependency graph
 through locally verified crate archives, a registry-only consumer and the actual
 browser tarball. Public registry availability and authorization require separate checks during
 the [release procedure](docs/packaging.md#release-procedure).
