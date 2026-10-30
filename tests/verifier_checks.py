@@ -1,9 +1,11 @@
 """Verifier-contract checks. No Cargo commands or vault operations run here."""
 
 import importlib.util
+import io
 import json
 from pathlib import Path
 import sys
+import tarfile
 import tempfile
 import unittest
 from unittest import mock
@@ -22,6 +24,122 @@ SCREEN_SPEC.loader.exec_module(export_screening)
 
 
 class VerifierChecks(unittest.TestCase):
+    def maintained_sdk_fixture(self, directory):
+        settings = json.loads((ROOT / "conformance/maintained-contract.json").read_text())["browser_sdk"]
+        assets = {name: ("SYNTHETIC " + name).encode() for name in (
+            "dist/client.mjs", "dist/worker.mjs", "dist/index.d.ts",
+            "dist/wasm/fogvault_wasm.js", "dist/wasm/fogvault_wasm_bg.wasm")}
+        package = Path(directory) / "candidate.tgz"
+        with tarfile.open(package, "w:gz") as archive:
+            for name, data in assets.items():
+                member = tarfile.TarInfo("package/" + name)
+                member.size = len(data)
+                archive.addfile(member, io.BytesIO(data))
+        identity = verifier.artifact_identity(package)
+        report = {"schema": "fogvault-browser-sdk-proof/v1", "pass": True, "executed": True,
+                  "source_identity": {p.relative_to(ROOT).as_posix(): verifier.sha256(p)
+                                      for p in verifier.maintained_sources(ROOT)},
+                  "engines": [{"name": engine, "result": {
+                      "schema": settings["result_schema"], "pass": True,
+                      "cases": [{"id": name, "status": "pass", "executed": True}
+                                for name in settings["required_cases"]]}}
+                              for engine in settings["required_engines"]],
+                  "candidate": {"schema": "fogvault-installed-browser-candidate/v1",
+                                "package": identity, "package_sha256": identity["sha256"],
+                                "installed_assets": {name: verifier.hashlib.sha256(data).hexdigest()
+                                                     for name, data in assets.items()},
+                                "typecheck_executed": True, "import_smoke_executed": True}}
+        return report, package
+
+    def test_maintained_sdk_requires_executed_cases_and_consistent_nested_results(self):
+        with tempfile.TemporaryDirectory() as directory:
+            good, _ = self.maintained_sdk_fixture(directory)
+            path = Path(directory) / "sdk.json"
+            path.write_text(json.dumps(good))
+            self.assertIn("candidate", verifier.validate_sdk_file(path))
+            mutations = [lambda r: r["engines"][0]["result"]["cases"][0].update(status="fail"),
+                         lambda r: r["engines"][0]["result"]["cases"][0].update(status="skipped"),
+                         lambda r: r["engines"][0]["result"]["cases"][0].update(executed=False),
+                         lambda r: r["engines"][0]["result"].update(schema="wrong/v1"),
+                         lambda r: r["engines"][0]["result"].update(error="SYNTHETIC failure"),
+                         lambda r: r["engines"][0]["result"]["cases"].pop(),
+                         lambda r: r["engines"][0]["result"]["cases"].append(
+                             r["engines"][0]["result"]["cases"][0]),
+                         lambda r: r.update(engines=[None]),
+                         lambda r: r.update(engines=None)]
+            for mutate in mutations:
+                changed = json.loads(json.dumps(good))
+                mutate(changed)
+                path.write_text(json.dumps(changed))
+                with self.subTest(mutate=mutate), self.assertRaises(ValueError):
+                    verifier.validate_sdk_file(path)
+            for malformed in [None, [], True, "pass"]:
+                path.write_text(json.dumps(malformed))
+                with self.subTest(malformed=malformed), self.assertRaises(ValueError):
+                    verifier.validate_sdk_file(path)
+
+    def test_maintained_sdk_requires_matching_packed_assets_and_actual_consumer_proof(self):
+        with tempfile.TemporaryDirectory() as directory:
+            good, package = self.maintained_sdk_fixture(directory)
+            path = Path(directory) / "sdk.json"
+            mutations = [lambda r: r.pop("candidate"),
+                         lambda r: r["candidate"].update(typecheck_executed=False),
+                         lambda r: r["candidate"].update(import_smoke_executed=False),
+                         lambda r: r["candidate"]["package"].update(sha256="0" * 64),
+                         lambda r: r["candidate"].update(package_sha256="0" * 64),
+                         lambda r: r["candidate"]["installed_assets"].pop("dist/worker.mjs"),
+                         lambda r: r["candidate"]["installed_assets"].update({"dist/client.mjs": "0" * 64})]
+            for mutate in mutations:
+                changed = json.loads(json.dumps(good))
+                mutate(changed)
+                path.write_text(json.dumps(changed))
+                with self.subTest(mutate=mutate), self.assertRaises(ValueError):
+                    verifier.validate_sdk_file(path)
+            path.write_text(json.dumps(good))
+            package.write_bytes(package.read_bytes() + b"SYNTHETIC substitution")
+            with self.assertRaises(ValueError):
+                verifier.validate_sdk_file(path)
+            package.write_bytes(b"\x1f\x8b\x08")
+            changed = json.loads(json.dumps(good))
+            changed["candidate"]["package"] = verifier.artifact_identity(package)
+            changed["candidate"]["package_sha256"] = changed["candidate"]["package"]["sha256"]
+            path.write_text(json.dumps(changed))
+            with self.assertRaises(ValueError):
+                verifier.validate_sdk_file(path)
+            package.unlink()
+            with self.assertRaises(ValueError):
+                verifier.validate_sdk_file(path)
+
+    def test_maintained_sdk_matrix_profiles_cannot_omit_or_invent_engines(self):
+        with tempfile.TemporaryDirectory() as directory:
+            report, _ = self.maintained_sdk_fixture(directory)
+            path = Path(directory) / "sdk.json"
+            result = report["engines"][0]["result"]
+            for name in ["chrome", "firefox", "msedge"]:
+                report["engines"] = [{"name": name, "result": result}]
+                path.write_text(json.dumps(report))
+                self.assertEqual(verifier.validate_sdk_file(path, engines=[name])["engines"], [name])
+                with self.assertRaises(ValueError):
+                    verifier.validate_sdk_file(path)
+            for engines in [[], ["unknown"], ["chrome", "chrome"], "chrome", [None]]:
+                with self.subTest(engines=engines), self.assertRaises(ValueError):
+                    verifier.validate_sdk_file(path, engines=engines)
+
+    def test_parent_and_runner_share_the_complete_required_stage_inventory(self):
+        base, full = verifier.required_checks(), verifier.required_checks(True)
+        self.assertEqual(len(base), len(set(base)))
+        self.assertEqual(len(full), len(set(full)))
+        self.assertLessEqual(set(base), set(full))
+        self.assertEqual(set(full) - set(base), {"resource-budgets", "browser-feasibility", "browser-sdk",
+                                              "browser-extensions", "mobile-feasibility", "trusted-control-host"})
+        self.assertLessEqual({"maintained-backup-format", "maintained-backup-clippy",
+                              "maintained-wasm-format", "maintained-wasm-clippy"}, set(base))
+        passing = [{"id": name, "required": True, "status": "pass", "executed": True} for name in full]
+        self.assertTrue(verifier.complete_results(passing, full))
+        for index in range(len(passing)):
+            with self.subTest(missing=passing[index]["id"]):
+                self.assertFalse(verifier.complete_results(passing[:index] + passing[index + 1:], full))
+
     def test_fresh_epoch_corpus_and_complete_decoder_case_inventory_are_required(self):
         import ast
         settings = verifier.load_contract()["fresh_epoch"]
@@ -351,6 +469,12 @@ class VerifierChecks(unittest.TestCase):
         self.assertFalse(verifier.complete_results([first, first], ["native", "wasm"]))
         for changed in [{**second, "status": "not-run"}, {**second, "status": "unavailable"}, {**second, "executed": False}, {**second, "required": False}]:
             self.assertFalse(verifier.complete_results([first, changed], ["native", "wasm"]))
+        for malformed in [None, {}, "pass", [None], [{}], [{"id": []}], [{"id": ""}]]:
+            with self.subTest(malformed=malformed):
+                self.assertFalse(verifier.complete_results(malformed, ["native", "wasm"]))
+        for malformed in [None, {}, [], [None], ["native", "native"]]:
+            with self.subTest(expected=malformed):
+                self.assertFalse(verifier.complete_results([first], malformed))
 
     def test_nonzero_command_is_failure_and_retains_its_log(self):
         with tempfile.TemporaryDirectory() as directory:

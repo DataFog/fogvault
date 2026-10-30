@@ -158,3 +158,30 @@ must first be upstreamed or published as distinct fork packages: versioned path
 overrides alone do not preserve this corrected graph in a registry publication.
 See [dependency scope](dependency-scope.md) and the package guides for exact build
 and application integration commands.
+
+## Repository verification
+
+Developers, agents and CI use `python3 scripts/quality.py` with explicit profiles.
+The portable contract, native, installed-browser and extension checks are the
+required supported CI scopes. The full macOS/Xcode profile remains the complete
+construction and host qualification check; a passing portable subset does not
+replace it. Additional Safari qualification stays deferred.
+
+The full profile passed all **39 stages and 226 required behavior cases** on clean
+implementation commit `61d3a27617801d1b6a8fd8a5e35df7191447302d`. Its report SHA256 is
+`3def61aacbdb3a417d110761501e3ad31805bbc0267ca2e70796c95cc9297e2f`.
+The [quality CI run](https://github.com/DataFog/fogvault/actions/runs/41088752918)
+and [changelog check](https://github.com/DataFog/fogvault/actions/runs/41088752899)
+passed on that same commit. The earlier delivery evidence above remains historical.
+
+The [active branch rules](https://github.com/DataFog/fogvault/rules/26219423) require
+PRs and resolved review conversations on
+both `staging` and `main`. Each target also requires its own `FogVault quality /
+<target>` and `Changelog policy / <target>` checks from GitHub Actions. See the
+[staging check rules](https://github.com/DataFog/fogvault/rules/26221577) and
+[main check rules](https://github.com/DataFog/fogvault/rules/26221579). Push/manual
+runs have a distinct `Post-merge quality` context, so a narrower push result cannot
+stand in for the PR target scope. Independent approval is optional under the current owner
+policy; no bypass actors are configured. Docs-only changes still run the contract
+and changelog checks and produce a deliberate stable gate result. They do not
+need unrelated platform jobs. See [CONTRIBUTING.md](../CONTRIBUTING.md).

@@ -11,6 +11,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from source_inputs import maintained_sources
+from delivery_inputs import npm_command
 
 
 def identity():
@@ -27,7 +28,8 @@ def main():
     args.output.parent.mkdir(parents=True, exist_ok=True)
     before = identity()
     command = ["npm", "run", "--silent", "test:extensions", "--prefix", "packages/browser", "--", "--reporter=json"]
-    result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
+    command = npm_command(command)
+    result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
     raw = args.output.with_suffix(".playwright.json")
     raw.write_text(result.stdout)
     args.output.with_suffix(".stderr.log").write_text(result.stderr)

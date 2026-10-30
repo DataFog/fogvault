@@ -1,23 +1,83 @@
-name: Maintained native and browser packages
+name: FogVault quality
 on:
   push:
     branches: [main, staging]
-    paths-ignore:
-      - README.md
-      - PUBLIC-CHECKOUT-NOTES.md
-      - docs/**
-      - public-checkout-manifest.json
   pull_request:
-    paths-ignore:
-      - README.md
-      - PUBLIC-CHECKOUT-NOTES.md
-      - docs/**
-      - public-checkout-manifest.json
+    types: [opened, synchronize, reopened, ready_for_review, edited]
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      code: ${{ steps.plan.outputs.code }}
+      rust: ${{ steps.pins.outputs.rust }}
+      node: ${{ steps.pins.outputs.node }}
+      python: ${{ steps.pins.outputs.python_ci }}
+      bindgen: ${{ steps.pins.outputs.wasm_bindgen }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - id: pins
+        run: node -e 'const fs=require("fs"); const p=JSON.parse(fs.readFileSync("conformance/toolchains.json")); fs.appendFileSync(process.env.GITHUB_OUTPUT,Object.entries(p).map(([k,v])=>k+"="+v+"\n").join(""));'
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: ${{ steps.pins.outputs.python_ci }}
+      - id: plan
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          python - <<'PYCODE'
+          import json, os, subprocess, sys
+          from pathlib import Path
+          event=json.loads(Path(os.environ['GITHUB_EVENT_PATH']).read_text())
+          output=Path('local-only/ci/plan.json'); output.parent.mkdir(parents=True)
+          if os.environ['EVENT_NAME']=='workflow_dispatch':
+              result={'code':True,'reason':'explicit full product CI request'}
+              output.write_text(json.dumps(result))
+          else:
+              base=event['pull_request']['base']['sha'] if 'pull_request' in event else event['before']
+              head=event['pull_request']['head']['sha'] if 'pull_request' in event else event['after']
+              subprocess.run([sys.executable,'scripts/quality.py','plan','--base',base,'--head',head,'--output',str(output)],check=True)
+              result=json.loads(output.read_text())
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+              f.write('code='+str(result['code']).lower()+'\n')
+          PYCODE
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: quality-plan
+          path: local-only/ci/plan.json
+          if-no-files-found: error
+  contract:
+    needs: plan
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: ${{ needs.plan.outputs.python }}
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: ${{ needs.plan.outputs.node }}
+      - run: python scripts/quality.py check --profile contract --output-dir local-only/ci/contract
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: quality-contract
+          path: local-only/ci/contract/
+          if-no-files-found: error
   native:
+    needs: plan
+    if: needs.plan.outputs.code == 'true'
     name: Native / ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -26,24 +86,30 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       CARGO_PROFILE_TEST_OPT_LEVEL: '2'
+      CARGO_TARGET_DIR: ${{ github.workspace }}/local-only/quality-cache/native-build
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
           persist-credentials: false
       - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8
         with:
-          toolchain: 1.94.1
+          toolchain: ${{ needs.plan.outputs.rust }}
           components: rustfmt, clippy
-      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
         with:
-          python-version: '3.14'
-      - run: cargo fmt --manifest-path crates/fogvault-native/Cargo.toml --check
-      - run: cargo clippy --locked --manifest-path crates/fogvault-native/Cargo.toml --all-targets --all-features -- -D warnings
-      - run: cargo test --locked --manifest-path crates/fogvault/Cargo.toml --no-default-features
-      - run: python scripts/run-native-tests.py
-      - run: cargo test --locked --manifest-path crates/fogvault-backup/Cargo.toml
-      - run: python scripts/verify-maintained-api.py
+          python-version: ${{ needs.plan.outputs.python }}
+      - run: python scripts/quality.py check --profile native --output-dir local-only/ci/native
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: quality-native-${{ matrix.os }}
+          path: local-only/ci/native/
+          if-no-files-found: error
   browser:
+    needs: plan
+    if: needs.plan.outputs.code == 'true'
     name: Browser / ${{ matrix.browser }}
     strategy:
       fail-fast: false
@@ -57,61 +123,85 @@ jobs:
             browser: msedge
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
           persist-credentials: false
       - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8
         with:
-          toolchain: 1.94.1
+          toolchain: ${{ needs.plan.outputs.rust }}
+          components: rustfmt, clippy
           targets: wasm32-unknown-unknown
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         with:
-          node-version: '25.8.2'
-      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+          node-version: ${{ needs.plan.outputs.node }}
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
         with:
-          python-version: '3.14'
-      - run: cargo install wasm-bindgen-cli --version 0.2.127 --locked
+          python-version: ${{ needs.plan.outputs.python }}
+      - run: cargo install wasm-bindgen-cli --version ${{ needs.plan.outputs.bindgen }} --locked
       - run: npm ci --ignore-scripts
         working-directory: packages/browser
       - if: runner.os == 'Linux'
         run: npx --no-install playwright install --with-deps ${{ matrix.browser }}
         working-directory: packages/browser
-      - run: python scripts/verify-browser-sdk.py --engines ${{ matrix.browser }} --output local-only/ci/browser-sdk.json
-      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+      - run: python scripts/quality.py check --profile browser --engines ${{ matrix.browser }} --output-dir local-only/ci/browser
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()
         with:
-          name: browser-${{ matrix.browser }}
-          path: |
-            local-only/ci/browser-sdk.json
-            local-only/ci/browser-sdk.logs/
-
+          name: quality-browser-${{ matrix.browser }}
+          path: local-only/ci/browser/
+          if-no-files-found: error
   extensions:
+    needs: plan
+    if: needs.plan.outputs.code == 'true'
     name: Packaged browser extensions
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
           persist-credentials: false
       - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8
         with:
-          toolchain: 1.94.1
+          toolchain: ${{ needs.plan.outputs.rust }}
+          components: rustfmt, clippy
           targets: wasm32-unknown-unknown
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         with:
-          node-version: '25.8.2'
-      - run: cargo install wasm-bindgen-cli --version 0.2.127 --locked
+          node-version: ${{ needs.plan.outputs.node }}
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: ${{ needs.plan.outputs.python }}
+      - run: cargo install wasm-bindgen-cli --version ${{ needs.plan.outputs.bindgen }} --locked
       - run: npm ci --ignore-scripts
         working-directory: packages/browser
       - run: npx --no-install playwright install --with-deps chromium firefox
         working-directory: packages/browser
-      - run: npm run build
-        working-directory: packages/browser
-      - run: npm run --silent test:extensions -- --reporter=json > extension-results.json
-        working-directory: packages/browser
+      - run: python scripts/quality.py check --profile extensions --output-dir local-only/ci/extensions
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()
         with:
-          name: extension-results
-          path: |
-            packages/browser/extension-results.json
-            packages/browser/test-results/
+          name: quality-extensions
+          path: local-only/ci/extensions/
+          if-no-files-found: error
+  quality:
+    name: ${{ github.event_name == 'pull_request' && format('FogVault quality / {0}', github.base_ref) || 'Post-merge quality' }}
+    if: always()
+    needs: [plan, contract, native, browser, extensions]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - env:
+          FOGVAULT_QUALITY_RESULTS: ${{ toJSON(needs) }}
+        run: python scripts/quality.py gate --output local-only/ci/gate.json
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: quality-gate
+          path: local-only/ci/gate.json
+          if-no-files-found: error

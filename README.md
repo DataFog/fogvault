@@ -76,17 +76,32 @@ DataFog Core **`0.5.0-beta.3` is the minimum integration baseline**. The exact
 published `=0.5.0-beta.3` test pin preserves that floor; it is neither a runtime
 dependency nor an upper version limit. DataFog Core v1 will be verified separately.
 
-The [CI matrix](.github/workflows/maintained.yml) targets native Windows, macOS and
-Linux; website SDK execution in Chrome, Edge and Firefox; and packaged Chromium/
-Firefox extension tests. Windows/Linux/Edge acceptance is pending execution of
-that matrix. Additional Safari/WebKit qualification remains deferred; existing
-WebKit regressions remain required. Local test results do not qualify every host.
+Native Windows/macOS/Linux, website Chrome/Edge/Firefox and packaged Chromium/
+Firefox extension checks have passed. The [delivery record](docs/maintained.md)
+links the evidence and support limits. Additional Safari/WebKit qualification
+remains deferred; existing WebKit regressions remain required.
+
+Developers, agents and [CI](.github/workflows/maintained.yml) share one command:
+
+```sh
+python3 scripts/quality.py doctor --profile native
+python3 scripts/quality.py check --profile contract
+python3 scripts/quality.py check --profile native
+python3 scripts/quality.py check --profile browser
+```
+
+Tool versions come from [the shared pins](conformance/toolchains.json). Diagnosis
+does not install tools. Install the pinned Node toolchain and run `npm ci
+--ignore-scripts --prefix packages/browser` before the browser/extension profiles.
+Package checks build and consume fresh archives rather than importing checkout
+files. See [CONTRIBUTING.md](CONTRIBUTING.md) for supported profiles, PR/changelog
+rules and the protected `staging` → `main` path.
 
 Run the complete development-machine profile with its documented prerequisites:
 
 ```sh
 python3 scripts/bootstrap-reference-db.py
-CARGO_PROFILE_TEST_OPT_LEVEL=2 python3 -u scripts/verify-vault.py --with-feasibility
+CARGO_PROFILE_TEST_OPT_LEVEL=2 python3 scripts/quality.py check --profile full
 ```
 
 The verifier requires named behaviors, checks actual execution, and rejects
