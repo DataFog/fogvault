@@ -175,8 +175,13 @@ and [changelog check](https://github.com/DataFog/fogvault/actions/runs/410887528
 passed on that same commit. The earlier delivery evidence above remains historical.
 
 The [active branch rules](https://github.com/DataFog/fogvault/rules/26219423) require
-PRs, `FogVault quality`, `Changelog policy` and resolved review conversations on
-both `staging` and `main`. Independent approval is optional under the current owner
+PRs and resolved review conversations on
+both `staging` and `main`. Each target also requires its own `FogVault quality /
+<target>` and `Changelog policy / <target>` checks from GitHub Actions. See the
+[staging check rules](https://github.com/DataFog/fogvault/rules/26221577) and
+[main check rules](https://github.com/DataFog/fogvault/rules/26221579). Push/manual
+runs have a distinct `Post-merge quality` context, so a narrower push result cannot
+stand in for the PR target scope. Independent approval is optional under the current owner
 policy; no bypass actors are configured. Docs-only changes still run the contract
 and changelog checks and produce a deliberate stable gate result. They do not
 need unrelated platform jobs. See [CONTRIBUTING.md](../CONTRIBUTING.md).

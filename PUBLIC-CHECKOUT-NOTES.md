@@ -62,7 +62,8 @@ Browser tools are locked npm development dependencies installed by the explicit
 
 Each CI profile retains structured source/tool/command/artifact evidence and logs
 on both outcomes. A missing required report fails evidence capture. The stable
-`FogVault quality` gate handles docs-only changes deliberately; `Changelog policy`
+`FogVault quality / <target>` gate handles docs-only changes deliberately;
+`Changelog policy / <target>`
 checks the entire PR against its actual target, including metadata changes.
 See [contribution rules](CONTRIBUTING.md). PR evidence uses the repository's
 configured Actions retention (currently 90 days), covering review and normal
@@ -85,3 +86,8 @@ tool advisory. No passing profile is a production security or certification clai
 Its capture status is historical; Git history identifies publication. It must be
 regenerated for a new public tree. Generated evidence, builds, local tool state
 and `.git` files remain excluded from source publication.
+
+Required PR checks include their target branch in the name. Push/manual runs use
+`Post-merge quality` and cannot satisfy a PR requirement. A docs-only push to
+staging cannot stand in for a broader staging-to-main PR, and retargeting a PR
+requires the new target's check contexts.

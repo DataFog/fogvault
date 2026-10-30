@@ -187,7 +187,7 @@ jobs:
           path: local-only/ci/extensions/
           if-no-files-found: error
   quality:
-    name: FogVault quality
+    name: ${{ github.event_name == 'pull_request' && format('FogVault quality / {0}', github.base_ref) || 'Post-merge quality' }}
     if: always()
     needs: [plan, contract, native, browser, extensions]
     runs-on: ubuntu-24.04
