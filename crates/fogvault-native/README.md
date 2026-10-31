@@ -2,9 +2,10 @@
 
 `fogvault-native` owns the SQLite persistence adapter for the shared `fogvault`
 engine. It provides a maintained embedding surface for registered native vaults.
-The crate remains an unpublished `0.1.0` packaging candidate. The complete
-registry graph is verified locally; public registry availability, independent
-security review and physical-platform/power-loss qualification remain release work.
+The crate uses version `0.1.0`. The complete registry graph is verified by the
+packaging preflight; release completion additionally requires public-registry
+installation checks. Independent security review and physical-platform/power-loss
+qualification remain separate work.
 
 ## Public API
 

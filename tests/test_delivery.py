@@ -40,7 +40,8 @@ def make_tar(path, files, extra=()):
 
 
 def npm_files():
-    manifest = {"name": "@datafog/fogvault-browser", "exports": {
+    manifest = {"name": "@datafog/fogvault-browser",
+                "repository": {"type": "git", "url": "git+https://github.com/DataFog/fogvault.git"}, "exports": {
         ".": {"types": "./dist/index.d.ts", "import": "./dist/client.mjs"}, "./worker": "./dist/worker.mjs"}}
     return {**{name: b"SYNTHETIC admission fixture" for name in BROWSER_ASSETS},
             "package.json": json.dumps(manifest).encode(), "LICENSE": b"SYNTHETIC license"}
@@ -134,6 +135,23 @@ class DeliveryTests(unittest.TestCase):
             make_tar(root / "exports.tgz", [("package/" + n, d) for n, d in files.items()])
             with self.assertRaisesRegex(ValueError, "exports"):
                 browser_package(root / "exports.tgz")
+
+    def test_missing_or_foreign_repository_fails_before_install(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for repository in (None, {"type": "git", "url": "git+https://github.com/other/fogvault.git"}):
+                files = npm_files()
+                manifest = json.loads(files["package.json"])
+                if repository is None:
+                    del manifest["repository"]
+                else:
+                    manifest["repository"] = repository
+                files["package.json"] = json.dumps(manifest).encode()
+                make_tar(root / "repository.tgz", [("package/" + n, d) for n, d in files.items()])
+                run = mock.Mock()
+                with self.assertRaisesRegex(ValueError, "repository"):
+                    sdk.prepare_consumer(root, root / "repository.tgz", run)
+                run.assert_not_called()
 
     def test_example_rebuild_removes_stale_generated_files(self):
         with tempfile.TemporaryDirectory() as directory:
